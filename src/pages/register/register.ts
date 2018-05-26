@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { LoginPage } from "../login/login";
 import { RestProvider } from '../../providers/rest/rest';
-
+import sha256, {Hash,HMAC} from "fast-sha256";
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'demo-app',
@@ -53,11 +54,17 @@ export class AppComponent {
   templForm: any;
   templSubmitted: boolean = false;
   gender: string = '';
+  key = new Uint8Array([1, 2, 3, 4]);
 
   registerTempl() {
     this.templSubmitted = true;
     if (this.templForm && this.templForm.valid) {
       //this.thanksPopup.instance.show();
+      sha256(this.templForm.value.password);
+      const h = new HMAC(this.key);
+      const mac = h.update(this.templForm.value.password).digest();
+      Md5.hashStr(this.templForm.value.password);
+      console.log(Md5.hashStr(this.templForm.value.password));
       this.sentToast("Thank you for registering.\n You have successfully signed up as a user!");
       this.callSignup();
     }
@@ -120,7 +127,7 @@ export class AppComponent {
 
   callSignup(){
     var url = "https://rest-app.brandau.solutions/api/register";
-    var myData = { "user": [{"lastName": this.templForm.value.lastname},{"firstName":this.templForm.value.firstname},{"birthday":''},{"mailAddress":this.templForm.value.email},{"password":this.templForm.value.password}]};
+    var myData = { "user": [{"lastName": this.templForm.value.lastname},{"firstName":this.templForm.value.firstname},{"birthday":''},{"mailAddress":this.templForm.value.email},{"password": Md5.hashStr(this.templForm.value.password)}]};
     this.restProvider.submit(url,myData);
     this.navCtrl.push(LoginPage);
   }
