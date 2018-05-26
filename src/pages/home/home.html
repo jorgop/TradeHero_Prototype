@@ -20,4 +20,9 @@
 
   <img *ngIf="image"
        [src]="domSanitizer.bypassSecurityTrustUrl(image)" />
+
+  <p></p>
+  <button ion-button icon-right (click)="sentToast()">
+    Call REST to toast<ion-icon name="camera"></ion-icon>
+  </button>
 </ion-content>

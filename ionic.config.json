@@ -1,8 +1,14 @@
 {
   "name": "financeApp",
   "app_id": "c597698e",
-  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://rest-app.brandau.solutions"
+    }
+  ],
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular"
 }

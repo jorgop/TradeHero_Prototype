@@ -1,27 +1,27 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import { RestProvider } from '../../providers/rest/rest';
 
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
 export class HomePage {
-
     private image: string;
     private imgbase64: string;
     private newItem: string;
 
+    users: any;
+
     constructor(
-        public navCtrl: NavController,
         public toastCtrl: ToastController,
         private camera: Camera,
         public alertCtrl: AlertController,
-        private domSanitizer: DomSanitizer) {
-    }
+        public restProvider: RestProvider) {
+          this.getData();
+        }
 
     onTakePicture() {
         const options: CameraOptions = {
@@ -65,13 +65,12 @@ export class HomePage {
         }, (err) => {
             alert("Failed to capture image");
         });
-
     }
 
-
     sentToast() {
+        console.log(this.users.data[0].l_name);
         let toast = this.toastCtrl.create({
-            message: 'Hey im a toast!',
+            message: "Name: " + this.users.data[0].v_name +" "+ this.users.data[0].l_name,
             duration: 3000,
             position: 'top'
         });
@@ -79,4 +78,12 @@ export class HomePage {
         this.newItem =  this.imgbase64;
         toast.present();
     }
+
+    getData() {
+      this.restProvider.getData()
+        .then(data => {
+          this.users = data;
+          console.log(this.users);
+        });
+  }
 }
