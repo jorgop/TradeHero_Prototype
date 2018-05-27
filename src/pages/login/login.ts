@@ -1,59 +1,150 @@
-import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-import { DomSanitizer } from '@angular/platform-browser';
 import { RestProvider } from '../../providers/rest/rest';
-import { SignupPage } from '../signup/signup';
-import { AppComponent } from '../register/register';
+import { RegistrationPage } from '../registration/registration';
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { Md5 } from "ts-md5";
 
 @Component({
     selector: 'page-login',
     templateUrl: 'login.html'
 })
 export class LoginPage {
-    private image: string;
-    private imgbase64: string;
-    private newItem: string;
-
     users: any;
 
     constructor(
+        public fb: FormBuilder,
         public navCtrl: NavController,
         public toastCtrl: ToastController,
-        public alertCtrl: AlertController,
-        private domSanitizer: DomSanitizer,
         public restProvider: RestProvider) {
-          this.getData();
         }
 
+    /**
+    * Site navigation
+    * @param params
+    */
     goToSignup(params){
       if (!params) params = {};
-      this.navCtrl.push(AppComponent);
-    }goToCart(params){
+      this.navCtrl.push(RegistrationPage);
+    }goToLogin(params){
       if (!params) params = {};
       this.navCtrl.push(LoginPage);
     }
 
+    formSettings = {
+      lang: 'de',
+      theme: 'ios'
+    };
 
-    sentToast() {
-        console.log(this.users.data[0].l_name);
-        let toast = this.toastCtrl.create({
-            message: "Name: " + this.users.data[0].v_name +" "+ this.users.data[0].l_name,
-            duration: 3000,
-            position: 'top'
-        });
+    // Reactive Form
 
+    reactForm: FormGroup;
+    reactSubmitted: boolean = false;
 
-        this.newItem =  this.imgbase64;
-        toast.present();
+    getErrorState(field: string) {
+      var ctrl = this.reactForm.get(field);
+      return ctrl.invalid && this.reactSubmitted;
     }
 
+    //unused ?
+    registerReact() {
+      this.reactSubmitted = true;
+      if (this.reactForm.valid && this.thanksPopup) {
+        this.thanksPopup.instance.show();
+      }
+    };
 
-    getData() {
-      this.restProvider.getData()
-        .then(data => {
-          this.users = data;
-          console.log(this.users);
+
+    // Template Driven Form
+
+    @ViewChild('templForm')
+    templForm: any;
+    templSubmitted: boolean = false;
+    gender: string = '';
+    //key = new Uint8Array([1, 2, 3, 4]);
+    restResponse: any;
+
+  /**
+   * Check validation
+   */
+  registerTempl() {
+      this.templSubmitted = true;
+
+      if (this.templForm && this.templForm.valid) {
+
+        //password md5 encryption
+        Md5.hashStr(this.templForm.value.password);
+        console.log(Md5.hashStr(this.templForm.value.password));
+
+        /*
+        var restData = {"user": [{"mailAddress": this.templForm.value.email}, {"password": Md5.hashStr(this.templForm.value.password)}]};
+
+
+        this.restProvider.addUser(restData).then((result) => {
+          this.sentToast("Thank you for registering.\n You have successfully signed up as a user! ");
+          this.navCtrl.push(LoginPage);
+          console.log(result);
+        }, (err) => {
+          console.log('error2 ' + err);
+          this.sentToast("Oooops registration failed");
+          //this.navCtrl.push(LoginPage);
         });
-  }
+        */
+      }
+    };
+
+    getErrorMessage(field: string, form: string) {
+      var formCtrl = form === 'react' ? this.reactForm : this.templForm.control,
+        message = '';
+      if (formCtrl) {
+        var ctrl = formCtrl.get(field);
+        if (ctrl && ctrl.errors) {
+          for (var err in ctrl.errors) {
+            if (!message && ctrl.errors[err]) {
+              message = this.errorMessages[field][err];
+            }
+          }
+        }
+      }
+      return message;
+    }
+
+    errorMessages = {
+      email: {
+        required: 'Email address required',
+        email: 'Invalid email address'
+      },
+      password: {
+        required: 'Password required',
+        minlength: 'At least 6 characters required'
+      }
+    }
+
+    @ViewChild('thanks')
+    thanksPopup: any;
+
+    widgetSettings: any = {
+      theme: 'ios',
+      display: 'center',
+      focusOnClose: false,
+      buttons: [{
+        text: 'Log in',
+        handler: 'set'
+      }]
+    };
+
+
+  /**
+   * View a toast message
+   * @param message Toast Text
+   */
+  sentToast(message) {
+      let toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
 }

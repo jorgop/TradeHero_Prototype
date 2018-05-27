@@ -4,30 +4,23 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Cart
+      Login
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page2">
   <img src="assets/imgs/login_logo.jpg" style="display:block;width:70%;height:auto;margin-left:auto;margin-right:auto;" />
-  <form id="cart-form5">
-    <div id="cart-container4"></div>
-    <ion-item id="cart-input6">
-      <ion-label>
-        Mail
-      </ion-label>
-      <ion-input type="email" placeholder=""></ion-input>
-    </ion-item>
-    <ion-item id="cart-input7">
-      <ion-label>
-        Password
-      </ion-label>
-      <ion-input type="password" placeholder=""></ion-input>
-    </ion-item>
-  </form>
-  <button id="cart-button3" ion-button color="positive" block style="border-radius:0px -25px 0px 0px;">
-    Login
-  </button>
+  <mbsc-form [options]="formSettings">
+    <form novalidate #templForm="ngForm">
+      <div >
+        <mbsc-input name="email" [(ngModel)]="email" #mail="ngModel" type="email" placeholder="Email" required email icon="ion-ios7-email" [error]="mail.invalid && templSubmitted" [errorMessage]="getErrorMessage('email', 'templ')"></mbsc-input>
+        <mbsc-input name="password" [(ngModel)]="password" #pass="ngModel" type="password" placeholder="Password" minlength="6" required icon="lock2" password-toggle="true" [error]="pass.invalid && templSubmitted" [errorMessage]="getErrorMessage('password', 'templ')"></mbsc-input>
+      </div>
+      <div class="mbsc-form-group mbsc-btn-group-block">
+        <mbsc-button icon="checkmark" (click)="registerTempl()" [disabled]="templForm.invalid && templSubmitted">Sign Up</mbsc-button>
+      </div>
+    </form>
+  </mbsc-form>
   <div id="cart-container6"></div>
   <button id="cart-button4" ion-button clear color="positive" block small on-click="goToSignup()">
     Register Now!

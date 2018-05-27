@@ -20,7 +20,7 @@ export class HomePage {
         private camera: Camera,
         public alertCtrl: AlertController,
         public restProvider: RestProvider) {
-          this.getData();
+          //this.getData();
         }
 
     onTakePicture() {

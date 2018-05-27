@@ -1,20 +1,25 @@
 import { Component, ViewChild} from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { LoginPage } from "../login/login";
 import { RestProvider } from '../../providers/rest/rest';
-import sha256, {Hash,HMAC} from "fast-sha256";
-import {Md5} from 'ts-md5/dist/md5';
+import { RedditData } from '../../providers/reddit-data/reddit-data';
+import { Md5 } from 'ts-md5/dist/md5';
+
 
 @Component({
   selector: 'demo-app',
-  templateUrl: './register.html'
+  templateUrl: './registration.html'
 })
-export class AppComponent {
+export class RegistrationPage{
   // Place the code below into your own component or use the full template
+  response: any;
+//  countries: any;
+//  errorMessage: string;
+  users: any;
 
-  constructor(public fb: FormBuilder,public toastCtrl: ToastController,public restProvider: RestProvider,public navCtrl: NavController) {
+  constructor(public fb: FormBuilder,public toastCtrl: ToastController,public restProvider: RestProvider,public navCtrl: NavController,public rest: RedditData) {
     this.reactForm = fb.group({
       firstname: ['', [Validators.required, Validators.minLength(2)]],
       lastname: ['', [Validators.required, Validators.minLength(2)]],
@@ -23,6 +28,27 @@ export class AppComponent {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
+
+/**
+  ionViewDidLoad() {
+    this.getCountries();
+  }
+
+  getCountries() {
+    this.rest.getCountries()
+      .subscribe(
+        countries => this.countries = countries,
+        error =>  this.errorMessage = <any>error);
+  }
+
+  saveUser(myd) {
+    this.rest.addUser(myd).then((result) => {
+      console.log(result);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+**/
 
   formSettings = {
     lang: 'de',
@@ -39,6 +65,7 @@ export class AppComponent {
     return ctrl.invalid && this.reactSubmitted;
   }
 
+  //unused ?
   registerReact() {
     this.reactSubmitted = true;
     if (this.reactForm.valid && this.thanksPopup) {
@@ -47,26 +74,35 @@ export class AppComponent {
   };
 
 
-
   // Template Driven Form
 
   @ViewChild('templForm')
   templForm: any;
   templSubmitted: boolean = false;
   gender: string = '';
-  key = new Uint8Array([1, 2, 3, 4]);
+  //key = new Uint8Array([1, 2, 3, 4]);
+  restResponse: any;
 
   registerTempl() {
     this.templSubmitted = true;
+
     if (this.templForm && this.templForm.valid) {
-      //this.thanksPopup.instance.show();
-      sha256(this.templForm.value.password);
-      const h = new HMAC(this.key);
-      const mac = h.update(this.templForm.value.password).digest();
+
+      //password md5 encryption
       Md5.hashStr(this.templForm.value.password);
       console.log(Md5.hashStr(this.templForm.value.password));
-      this.sentToast("Thank you for registering.\n You have successfully signed up as a user!");
-      this.callSignup();
+
+      var restData = {"user": [{"lastName": this.templForm.value.lastname}, {"firstName": this.templForm.value.firstname}, {"birthday": ''}, {"mailAddress": this.templForm.value.email}, {"password": Md5.hashStr(this.templForm.value.password)}]};
+
+      this.restProvider.addUser(restData).then((result) => {
+        this.sentToast("Thank you for registering.\n You have successfully signed up as a user! ");
+        this.navCtrl.push(LoginPage);
+        console.log(result);
+      }, (err) => {
+        console.log('error2 ' + err);
+        this.sentToast("Oooops registration failed");
+        //this.navCtrl.push(LoginPage);
+      });
     }
   };
 
@@ -98,10 +134,6 @@ export class AppComponent {
     gender: {
       required: 'Gender required'
     },
-    bio: {
-      required: 'Bio required',
-      minlength: "Don't be shy, surely you can tell more"
-    },
     email: {
       required: 'Email address required',
       email: 'Invalid email address'
@@ -125,13 +157,11 @@ export class AppComponent {
     }]
   };
 
-  callSignup(){
-    var url = "https://rest-app.brandau.solutions/api/register";
-    var myData = { "user": [{"lastName": this.templForm.value.lastname},{"firstName":this.templForm.value.firstname},{"birthday":''},{"mailAddress":this.templForm.value.email},{"password": Md5.hashStr(this.templForm.value.password)}]};
-    this.restProvider.submit(url,myData);
-    this.navCtrl.push(LoginPage);
-  }
 
+  /**
+   * View a toast message
+   * @param message Toast Text
+   */
   sentToast(message) {
     let toast = this.toastCtrl.create({
       message: message,
