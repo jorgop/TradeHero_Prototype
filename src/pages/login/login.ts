@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-import { RestProvider } from '../../provider/rest/rest';
+import { RestProvider } from '../../providers/rest/rest';
 import { RegistrationPage } from '../registration/registration';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Md5 } from "ts-md5";

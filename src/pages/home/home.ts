@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { RestProvider } from '../../provider/rest/rest';
+import { RestProvider } from '../../providers/rest/rest';
 
 @Component({
     selector: 'page-home',
