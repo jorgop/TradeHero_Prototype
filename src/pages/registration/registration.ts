@@ -171,3 +171,4 @@ export class RegistrationPage{
     toast.present();
   }
 }
+

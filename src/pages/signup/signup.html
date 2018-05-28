@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Signup
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page7">
+  <form id="signup-form6">
+    <ion-list id="signup-list3">
+      <ion-item id="signup-input8">
+        <ion-label>
+          Firstname
+        </ion-label>
+        <ion-input type="text" required placeholder="" [(ngModel)]="signup.firstname" name="firstname"></ion-input>
+      </ion-item>
+      <ion-item id="signup-input12">
+        <ion-label>
+          Lastname
+        </ion-label>
+        <ion-input type="text" placeholder="" [(ngModel)]="signup.lastname" name="lastname"></ion-input>
+      </ion-item>
+      <ion-item id="signup-input11">
+        <ion-label>
+          Birthday
+        </ion-label>
+        <ion-input type="date" placeholder="" [(ngModel)]="signup.birthday" name="birthday"></ion-input>
+      </ion-item>
+      <ion-item id="signup-input9">
+        <ion-label>
+          Email
+        </ion-label>
+        <ion-input type="email" placeholder="" [(ngModel)]="signup.email" name="email"></ion-input>
+      </ion-item>
+      <ion-item id="signup-input10">
+        <ion-label>
+          Password
+        </ion-label>
+        <ion-input type="password" placeholder="" [(ngModel)]="signup.password" name="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button id="signup-button5" ion-button color="positive" block on-click="callSignup()">
+      Sign up
+    </button>
+  </form>
+  <div id="signup-container7"></div>
+  <button id="signup-button6" ion-button clear color="positive" block on-click="goToLogin()">
+    <ion-icon name="arrow-back"></ion-icon>
+    Back
+  </button>
+</ion-content>
