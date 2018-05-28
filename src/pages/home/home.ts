@@ -15,6 +15,10 @@ export class HomePage {
     private imgbase64: string;
     private newItem: string;
 
+    toastmessage = {
+        input:''
+    };
+
     constructor(
         public navCtrl: NavController,
         public toastCtrl: ToastController,
@@ -71,9 +75,10 @@ export class HomePage {
 
     sentToast() {
         let toast = this.toastCtrl.create({
-            message: 'Hey im a toast!',
-            duration: 3000,
-            position: 'top'
+            message: this.toastmessage.input,
+            position: 'top',
+            showCloseButton: true,
+            closeButtonText: "x"
         });
 
         this.newItem =  this.imgbase64;

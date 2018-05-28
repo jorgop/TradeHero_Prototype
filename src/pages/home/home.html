@@ -14,8 +14,14 @@
     Take a look at the <code>src/pages/</code> directory to add or change tabs,
     update any existing page or create new pages.
   </p>
+    <ion-label color="primary" fixed>Tell me</ion-label>
+    <ion-input type="text" [(ngModel)]="toastmessage.input" placeholder="..."></ion-input>
   <button ion-button icon-right (click)="openDeviceCamera()">
     Take Picture <ion-icon name="camera"></ion-icon>
+  </button>
+
+  <button ion-button icon-right (click)="sentToast()">
+    Surprise me  <ion-icon name="beer"></ion-icon>
   </button>
 
   <img *ngIf="image"
