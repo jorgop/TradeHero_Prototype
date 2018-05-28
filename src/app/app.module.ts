@@ -15,9 +15,9 @@ import { RegistrationPage } from '../pages/registration/registration';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { RestProvider } from '../providers/rest/rest';
+import { RestProvider } from '../provider/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
-import { RedditData } from '../providers/reddit-data/reddit-data';
+import { RedditData } from '../provider/reddit-data/reddit-data';
 //import { CameraMock } from './mocks/CameraMock';
 
 

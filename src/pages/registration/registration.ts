@@ -3,8 +3,8 @@ import { NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { LoginPage } from "../login/login";
-import { RestProvider } from '../../providers/rest/rest';
-import { RedditData } from '../../providers/reddit-data/reddit-data';
+import { RestProvider } from '../../provider/rest/rest';
+import { RedditData } from '../../provider/reddit-data/reddit-data';
 import { Md5 } from 'ts-md5/dist/md5';
 
 
