@@ -5,6 +5,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { RegistrationPage } from '../registration/registration';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Md5 } from "ts-md5";
+import { HomePage } from "../home/home";
 
 @Component({
     selector: 'page-login',
@@ -75,22 +76,22 @@ export class LoginPage {
 
         //password md5 encryption
         Md5.hashStr(this.templForm.value.password);
-        console.log(Md5.hashStr(this.templForm.value.password));
 
-        /*
-        var restData = {"user": [{"mailAddress": this.templForm.value.email}, {"password": Md5.hashStr(this.templForm.value.password)}]};
+        this.restProvider.checkLogin(this.templForm.value.email,Md5.hashStr(this.templForm.value.password)).then((result) => {
+          //convert result to type
+          let restResult = <any>{};
+          restResult = result;
 
-
-        this.restProvider.addUser(restData).then((result) => {
-          this.sentToast("Thank you for registering.\n You have successfully signed up as a user! ");
-          this.navCtrl.push(LoginPage);
-          console.log(result);
+          if(restResult.data[0].login == "true"){
+            this.navCtrl.push(HomePage);
+          }else{
+            this.sentToast("Wrong password!");
+          }
         }, (err) => {
-          console.log('error2 ' + err);
+          console.log('error2 ' + err.message);
           this.sentToast("Oooops registration failed");
           //this.navCtrl.push(LoginPage);
         });
-        */
       }
     };
 

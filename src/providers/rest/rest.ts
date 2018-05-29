@@ -49,6 +49,24 @@ export class RestProvider {
     });
   }
 
+  /**
+   * Check user authentication
+   * @param mail User mail
+   * @param password User password as MD5-Hash
+   * @param data
+   * @returns {Promise<any>}
+   */
+  checkLogin(mail,password) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl+'/api/login?mail='+mail+'&password='+password,{responseType: "json"})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 }
 
 

@@ -1,7 +1,4 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
@@ -14,15 +11,4 @@
     Take a look at the <code>src/pages/</code> directory to add or change tabs,
     update any existing page or create new pages.
   </p>
-  <button ion-button icon-right (click)="openDeviceCamera()">
-    Take Picture <ion-icon name="camera"></ion-icon>
-  </button>
-
-  <img *ngIf="image"
-       [src]="domSanitizer.bypassSecurityTrustUrl(image)" />
-
-  <p></p>
-  <button ion-button icon-right (click)="sentToast()">
-    Call REST to toast<ion-icon name="camera"></ion-icon>
-  </button>
 </ion-content>
