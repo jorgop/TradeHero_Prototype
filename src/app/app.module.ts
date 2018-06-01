@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-//import { MbscModule } from '@mobiscroll/angular-lite';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -10,6 +9,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegistrationPage } from '../pages/registration/registration';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,11 +25,12 @@ import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     MyApp,
-    LoginPage,
     AboutPage,
     ContactPage,
     HomePage,
-    RegistrationPage
+    RegistrationPage,
+    LoginPage
+
 
   ],
   imports: [
@@ -42,11 +43,12 @@ import { IonicStorageModule } from '@ionic/storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage,
+    RegistrationPage,
     AboutPage,
     ContactPage,
     HomePage,
-    RegistrationPage
+    LoginPage
+
 
   ],
   providers: [
