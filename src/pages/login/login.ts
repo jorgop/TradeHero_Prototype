@@ -6,6 +6,7 @@ import { RegistrationPage } from '../registration/registration';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Md5 } from "ts-md5";
 import { HomePage } from "../home/home";
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'page-login',
@@ -13,12 +14,13 @@ import { HomePage } from "../home/home";
 })
 export class LoginPage {
     users: any;
-
+    text : any;
     constructor(
         public fb: FormBuilder,
         public navCtrl: NavController,
         public toastCtrl: ToastController,
-        public restProvider: RestProvider) {
+        public restProvider: RestProvider,
+        private storage: Storage) {
         }
 
     /**
@@ -83,7 +85,21 @@ export class LoginPage {
           restResult = result;
 
           if(restResult.data[0].login == "true"){
+
+            // Test data for local storage
+            let myJsonTOStore = {"data":[{"f_name":"Max"},{"n_name":"Mustermann"},{"userID":"1234"}]};
+
+            this.storage.set('login', JSON.stringify(myJsonTOStore));
+            this.storage.get('login').then((val) => {
+              let result = JSON.parse(val);
+              this.sentToast(result.data[0].f_name);
+
+            });
+
             this.navCtrl.push(HomePage);
+
+
+
           }else{
             this.sentToast("Wrong password!");
           }

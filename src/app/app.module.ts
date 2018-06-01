@@ -18,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RedditData } from '../providers/reddit-data/reddit-data';
 //import { CameraMock } from './mocks/CameraMock';
 
+import { IonicStorageModule } from '@ionic/storage';
+
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { RedditData } from '../providers/reddit-data/reddit-data';
     MbscModule,
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
