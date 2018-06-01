@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Signup
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <mbsc-form [options]="formSettings">
+    <form novalidate #templForm="ngForm">
+      <div class="mbsc-form-group">
+        <div class="mbsc-form-group-title">Sign Up - Template driven form</div>
+        <mbsc-input name="firstname" [(ngModel)]="firstname" #user="ngModel" [error]="user.invalid && templSubmitted" [errorMessage]="getErrorMessage('firstname', 'templ')" placeholder="Firstname" minlength="2" required icon="line-user"></mbsc-input>
+        <mbsc-input name="lastname" [(ngModel)]="lastname" #user="ngModel" [error]="user.invalid && templSubmitted" [errorMessage]="getErrorMessage('lastname', 'templ')" placeholder="Lastname" minlength="2" required icon="line-user"></mbsc-input>
+        <mbsc-input name="email" [(ngModel)]="email" #mail="ngModel" type="email" placeholder="Email" required email icon="ion-ios7-email" [error]="mail.invalid && templSubmitted" [errorMessage]="getErrorMessage('email', 'templ')"></mbsc-input>
+        <mbsc-input name="password" [(ngModel)]="password" #pass="ngModel" type="password" placeholder="Password" minlength="6" required icon="lock2" password-toggle="true" [error]="pass.invalid && templSubmitted" [errorMessage]="getErrorMessage('password', 'templ')"></mbsc-input>
+        <mbsc-dropdown name="gender" [(ngModel)]="gender" #gen="ngModel" required icon="material-people" [error]="gen.invalid && templSubmitted" [errorMessage]="getErrorMessage('gender', 'templ')">
+          <option value="">Please select</option>
+          <option value="femail">Female</option>
+          <option value="male">Male</option>
+        </mbsc-dropdown>
+      </div>
+      <div class="mbsc-form-group mbsc-btn-group-block">
+        <mbsc-button icon="checkmark" (click)="registerTempl()" [disabled]="templForm.invalid && templSubmitted">Sign Up</mbsc-button>
+      </div>
+    </form>
+  </mbsc-form>
+</ion-content>
+

@@ -10,6 +10,7 @@
 </ion-header>
 <ion-content padding id="page2">
   <img src="assets/imgs/login_logo.jpg" style="display:block;width:70%;height:auto;margin-left:auto;margin-right:auto;" />
+
   <div [formGroup]="myForm">
     <ion-list id="signup-list3">
       <ion-item>
@@ -31,9 +32,6 @@
         <p>Mindestes 6 Buchstaben.</p>
       </ion-item>
     </ion-list>
-  </div>
-  <div style="text-align:center">
-    <button ion-button round icon="checkmark" (click)="authenticateUser()">Anmelden</button>
   </div>
   <div id="cart-container6"></div>
   <button id="cart-button4" ion-button clear color="positive" block small on-click="goToSignup()">
