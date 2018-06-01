@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { RegistrationPage } from '../registration/registration';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { Md5 } from "ts-md5";
 import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
@@ -13,16 +13,15 @@ import { Storage } from '@ionic/storage';
     templateUrl: 'login.html'
 })
 export class LoginPage {
-
-  submitAttempt: boolean = false;
-  private myForm : FormGroup;
-
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public restProvider: RestProvider, private storage: Storage,private formBuilder: FormBuilder) {
-    this.myForm = formBuilder.group({
-      email: ['',Validators.compose([Validators.required, Validators.email])],
-      password : ['', Validators.compose([Validators.minLength(6), Validators.required])],
-    });
-  }
+    users: any;
+    text : any;
+    constructor(
+        public fb: FormBuilder,
+        public navCtrl: NavController,
+        public toastCtrl: ToastController,
+        public restProvider: RestProvider,
+        private storage: Storage) {
+        }
 
     /**
     * Site navigation
@@ -36,51 +35,121 @@ export class LoginPage {
       this.navCtrl.push(LoginPage);
     }
 
+    formSettings = {
+      lang: 'de',
+      theme: 'ios'
+    };
+
+    // Reactive Form
+
+    reactForm: FormGroup;
+    reactSubmitted: boolean = false;
+
+    getErrorState(field: string) {
+      var ctrl = this.reactForm.get(field);
+      return ctrl.invalid && this.reactSubmitted;
+    }
+
+    //unused ?
+    registerReact() {
+      this.reactSubmitted = true;
+      if (this.reactForm.valid && this.thanksPopup) {
+        this.thanksPopup.instance.show();
+      }
+    };
+
+
+    // Template Driven Form
+
+    @ViewChild('templForm')
+    templForm: any;
+    templSubmitted: boolean = false;
+    gender: string = '';
+    //key = new Uint8Array([1, 2, 3, 4]);
+    restResponse: any;
 
   /**
-   * Authentication for login
+   * Check validation
    */
-  authenticateUser(){
-    this.submitAttempt = true;
+  registerTempl() {
+      this.templSubmitted = true;
 
-    if(!this.myForm.valid){
-      console.log(this.myForm);
-    }
-    else {
+      if (this.templForm && this.templForm.valid) {
 
-      this.restProvider.checkLogin(this.myForm.controls.email.value,Md5.hashStr(this.myForm.controls.password.value)).then((result) => {
-        //convert result to type
-        let restResult = <any>{};
-        restResult = result;
+        //password md5 encryption
+        Md5.hashStr(this.templForm.value.password);
 
-        if(restResult.data[0].login == "true"){
+        this.restProvider.checkLogin(this.templForm.value.email,Md5.hashStr(this.templForm.value.password)).then((result) => {
+          //convert result to type
+          let restResult = <any>{};
+          restResult = result;
 
-          // Test data for local storage
-          let myJsonTOStore =
-            {"data":
-                [
-                  {"f_name":"Max"},
-                  {"n_name":"Mustermann"},
-                  {"userID":"1234"}
-                ]
-            };
+          if(restResult.data[0].login == "true"){
 
-          this.storage.set('login', JSON.stringify(myJsonTOStore));
-          this.storage.get('login').then((val) => {
-            //let result = JSON.parse(val);
-          });
+            // Test data for local storage
+            let myJsonTOStore = {"data":[{"f_name":"Max"},{"n_name":"Mustermann"},{"userID":"1234"}]};
 
-          this.navCtrl.push(HomePage);
-        }else{
-          this.sentToast("Wrong password!");
+            this.storage.set('login', JSON.stringify(myJsonTOStore));
+            this.storage.get('login').then((val) => {
+              let result = JSON.parse(val);
+              this.sentToast(result.data[0].f_name);
+
+            });
+
+            this.navCtrl.push(HomePage);
+
+
+
+          }else{
+            this.sentToast("Wrong password!");
+          }
+        }, (err) => {
+          console.log('error2 ' + err.message);
+          this.sentToast("Oooops registration failed");
+          //this.navCtrl.push(LoginPage);
+        });
+      }
+    };
+
+    getErrorMessage(field: string, form: string) {
+      var formCtrl = form === 'react' ? this.reactForm : this.templForm.control,
+        message = '';
+      if (formCtrl) {
+        var ctrl = formCtrl.get(field);
+        if (ctrl && ctrl.errors) {
+          for (var err in ctrl.errors) {
+            if (!message && ctrl.errors[err]) {
+              message = this.errorMessages[field][err];
+            }
+          }
         }
-      }, (err) => {
-        console.log('error2 ' + err.message);
-        this.sentToast("Oooops registration failed");
-        //this.navCtrl.push(LoginPage);
-      });
+      }
+      return message;
     }
-  }
+
+    errorMessages = {
+      email: {
+        required: 'Email address required',
+        email: 'Invalid email address'
+      },
+      password: {
+        required: 'Password required',
+        minlength: 'At least 6 characters required'
+      }
+    }
+
+    @ViewChild('thanks')
+    thanksPopup: any;
+
+    widgetSettings: any = {
+      theme: 'ios',
+      display: 'center',
+      focusOnClose: false,
+      buttons: [{
+        text: 'Log in',
+        handler: 'set'
+      }]
+    };
 
 
   /**
