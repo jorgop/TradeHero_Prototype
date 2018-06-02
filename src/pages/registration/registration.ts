@@ -54,12 +54,23 @@ export class RegistrationPage {
           ]
         };
 
-      console.log(restData);
-
       this.restProvider.addUser(restData).then((result) => {
-        this.sentToast("Konto erfolgreich aktiviert! ");
-        this.navCtrl.push(LoginPage);
-        console.log(result);
+
+        let registration = <any>{};
+        registration = result;
+        registration = registration.registration[0];
+
+        if (registration["mail"] == "false"){
+            this.sentToast("Email nicht registriert!");
+        }else if (registration["token"]== "false"){
+            this.sentToast("Bitte Token prüfen!");
+        }else if (registration["activate"] == "false"){
+            this.sentToast("Konto bereits aktiviert!");
+            this.navCtrl.push(LoginPage);
+        }else{
+            this.sentToast("Konto erfolgreich aktiviert!");
+            this.navCtrl.push(LoginPage);
+        }
       }, (err) => {
         console.log('error2 ' + err);
         this.sentToast("Oooops registration failed");
