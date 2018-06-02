@@ -1,4 +1,5 @@
 import { FormsModule } from '@angular/forms';
+import { MbscModule } from '@mobiscroll/angular-lite';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -9,6 +10,8 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegistrationPage } from '../pages/registration/registration';
+import { ActivityPage } from '../pages/activity/activity';
+import { NewActivityPage } from '../pages/new-activity/new-activity';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -16,6 +19,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { RedditData } from '../providers/reddit-data/reddit-data';
+import { ActivityService } from '../services/activity.service';
+
 //import { CameraMock } from './mocks/CameraMock';
 
 import { IonicStorageModule } from '@ionic/storage';
@@ -25,16 +30,17 @@ import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
     AboutPage,
     ContactPage,
     HomePage,
     RegistrationPage,
-    LoginPage
-
-
+    ActivityPage,
+    NewActivityPage
   ],
   imports: [
     FormsModule,
+    MbscModule,
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
@@ -43,20 +49,21 @@ import { IonicStorageModule } from '@ionic/storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    RegistrationPage,
+    LoginPage,
     AboutPage,
     ContactPage,
     HomePage,
-    LoginPage
-
-
+    RegistrationPage,
+    ActivityPage,
+    NewActivityPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
     RestProvider,
-    RedditData //if running on device
+    RedditData,
+    ActivityService//if running on device
     //{ provide: Camera, useClass: CameraMock} //if running on browser
   ]
 })

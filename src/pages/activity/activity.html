@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons end>
+            <button ion-button icon-only on-click="goToAddActivity()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Activity</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h2>Welcome to Activity!</h2>
+    <p>
+        Here you can see your Activities.
+    </p>
+    <ion-list inset>
+        <ion-item *ngFor="let activity of activity">{{activity.title}}
+        </ion-item>
+    </ion-list>
+    </ion-content>
