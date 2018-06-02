@@ -1,25 +1,38 @@
 <ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2 style="text-align: center">Home</h2>
   <p></p>
-  <div id="cart-container4">
-    <div id="cart-container3">
+    <div class="leftcontainer">
       <ion-buttons>
         <button id="activity-button" ion-button icon-only color="royal" on-click="goToActivity()">
-          <ion-icon name="star"></ion-icon>
+          <ion-icon name="ios-list-outline"></ion-icon>
         </button>
       </ion-buttons>
       Activity
     </div>
-    <div id="cart-container2">
+    <div class="rightcontainer">
       <ion-buttons>
         <button ion-button icon-only color="royal">
-          <ion-icon name="star"></ion-icon>
+          <ion-icon name="ios-qr-scanner"></ion-icon>
         </button>
       </ion-buttons>
-      Scann
+      Scan
     </div>
-  </div>
+    <div class="leftcontainer">
+      <ion-buttons>
+        <button id="contact-button" ion-button icon-only color="royal" on-click="goToContact()">
+          <ion-icon name="md-call"></ion-icon>
+        </button>
+      </ion-buttons>
+      Contact
+    </div>
 </ion-content>
