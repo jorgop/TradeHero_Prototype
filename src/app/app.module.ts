@@ -19,10 +19,11 @@ import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { RedditData } from '../providers/reddit-data/reddit-data';
 import { ActivityService } from '../services/activity.service';
-
-//import { CameraMock } from './mocks/CameraMock';
+import {Camera} from "@ionic-native/camera";
+import { CameraMock } from './mocks/CameraMock';
 
 import { IonicStorageModule } from '@ionic/storage';
+import {ScannPage} from "../pages/scann/scann";
 
 
 
@@ -35,7 +36,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     RegistrationPage,
     ActivityPage,
-    NewActivityPage
+    NewActivityPage,
+    ScannPage
   ],
   imports: [
     FormsModule,
@@ -53,7 +55,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     RegistrationPage,
     ActivityPage,
-    NewActivityPage
+    NewActivityPage,
+    ScannPage
   ],
   providers: [
     StatusBar,
@@ -61,8 +64,10 @@ import { IonicStorageModule } from '@ionic/storage';
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
     RestProvider,
     RedditData,
-    ActivityService//if running on device
+    ActivityService,
+    Camera, //if running on device
     //{ provide: Camera, useClass: CameraMock} //if running on browser
+
   ]
 })
 export class AppModule {}
