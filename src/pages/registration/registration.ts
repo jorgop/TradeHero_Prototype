@@ -54,6 +54,8 @@ export class RegistrationPage {
           ]
         };
 
+      console.log(restData);
+
       this.restProvider.addUser(restData).then((result) => {
         this.sentToast("Konto erfolgreich aktiviert! ");
         this.navCtrl.push(LoginPage);

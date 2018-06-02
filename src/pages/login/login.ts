@@ -54,25 +54,91 @@ export class LoginPage {
         restResult = result;
 
         if(restResult.data[0].login == "true"){
-
-          // Test data for local storage
-          let myJsonTOStore =
-            {"data":
-                [
-                  {"f_name":"Max"},
-                  {"n_name":"Mustermann"},
-                  {"userID":"1234"}
-                ]
-            };
-
-          this.storage.set('login', JSON.stringify(myJsonTOStore));
-          this.storage.get('login').then((val) => {
-            //let result = JSON.parse(val);
-          });
-
           this.navCtrl.push(HomePage);
         }else{
           this.sentToast("Wrong password!");
+
+          // Test data for local storage
+          let myJsonTOStore = {"activityList": [
+              {
+                "ticketID": 1001,
+                "userID": 1,
+                "IBAN": "DE123123123123123123123",
+                "dateCreate": "2018-06-02",
+                "street": "Am Arzt Weg",
+                "houseNumber": "34",
+                "PLZ": "12345",
+                "place": "Frankfurt",
+                "accountName": "Praxis Super",
+                "bankName": "Deutsche Bank",
+                "refund": 450.23,
+                "imgFile": "0x2334",
+                "status": 0,
+                "history": [
+                  {
+                    "ticketID": 1001,
+                    "stateID": 1,
+                    "sateDate": "2018-06-01",
+                    "stateText": "Rechung wird gepüft",
+                    "status": "1"
+                  },
+                  {
+                    "ticketID": 1001,
+                    "stateID": 2,
+                    "sateDate": "2018-06-01",
+                    "stateText": "Rechung wird bearbeitet",
+                    "status": "1"
+                  },
+                  {
+                    "ticketID": 1001,
+                    "stateID": 3,
+                    "sateDate": "2018-06-02",
+                    "stateText": "Rechung wird überwiesen",
+                    "status": "0"
+                  }
+                ]
+              },
+              {
+                "ticketID": 1002,
+                "userID": 1,
+                "IBAN": "DE123123122342342355",
+                "dateCreate": "2018-06-02",
+                "street": "Am Graben",
+                "houseNumber": "322",
+                "PLZ": "12345",
+                "place": "Frankfurt",
+                "accountName": "Praxis Schlecht",
+                "bankName": "Frnakfurter Volksbank",
+                "refund": 50.23,
+                "imgFile": "0x2334",
+                "status": 0,
+                "history": [
+                  {
+                    "ticketID": 1002,
+                    "stateID": 1,
+                    "sateDate": "2018-06-01",
+                    "stateText": "Rechung wird gepüft",
+                    "status": "1"
+                  },
+                  {
+                    "ticketID": 1002,
+                    "stateID": 2,
+                    "sateDate": "2018-06-01",
+                    "stateText": "Rechung wird bearbeitet",
+                    "status": "0"
+                  }
+                ]
+              }
+            ]};
+
+          console.log(myJsonTOStore);
+          this.storage.set('login', JSON.stringify(myJsonTOStore));
+          this.storage.get('login').then((val) => {
+
+
+
+            //let result = JSON.parse(val);
+          });
         }
       }, (err) => {
         console.log('error2 ' + err.message);

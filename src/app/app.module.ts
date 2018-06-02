@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { MbscModule } from '@mobiscroll/angular-lite';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -40,7 +39,6 @@ import { IonicStorageModule } from '@ionic/storage';
   ],
   imports: [
     FormsModule,
-    MbscModule,
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
