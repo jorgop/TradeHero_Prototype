@@ -22,6 +22,9 @@ import { ActivityService } from '../services/activity.service';
 
 //import { CameraMock } from './mocks/CameraMock';
 
+import { IonicStorageModule } from '@ionic/storage';
+
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { ActivityService } from '../services/activity.service';
     MbscModule,
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
