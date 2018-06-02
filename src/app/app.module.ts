@@ -41,7 +41,7 @@ import { IonicStorageModule } from '@ionic/storage';
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, { swipeBackEnabled: true }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
