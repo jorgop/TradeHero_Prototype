@@ -77,37 +77,38 @@ export class LoginPage {
           "ticketID": 1001,
           "userID": 1,
           "IBAN": "DE123123123123123123123",
-          "dateCreate": "2018-06-02",
+          "createDate": "2018-06-02",
           "street": "Am Arzt Weg",
           "houseNumber": "34",
           "PLZ": "12345",
           "place": "Frankfurt",
+          "invoiceID":"VD123GHUZ8",
           "accountName": "Praxis Super",
           "bankName": "Deutsche Bank",
           "refund": 450.23,
           "imgFile": "0x2334",
-          "invoiceID":"AZ35b12",
+          "ticketStatus": 0,
           "history": [
             {
               "ticketID": 1001,
               "stateID": 1,
               "sateDate": "2018-06-01",
               "stateText": "Rechung wird gepüft",
-              "status": "1"
+              "stateStatus": "1"
             },
             {
               "ticketID": 1001,
               "stateID": 2,
               "sateDate": "2018-06-01",
               "stateText": "Rechung wird bearbeitet",
-              "status": "1"
+              "stateStatus": "1"
             },
             {
               "ticketID": 1001,
               "stateID": 3,
               "sateDate": "2018-06-02",
               "stateText": "Rechung wird überwiesen",
-              "status": "0"
+              "stateStatus": "0"
             }
           ]
         },
@@ -115,30 +116,31 @@ export class LoginPage {
           "ticketID": 1002,
           "userID": 1,
           "IBAN": "DE123123122342342355",
-          "dateCreate": "2018-06-02",
+          "createDate": "2018-06-02",
           "street": "Am Graben",
           "houseNumber": "322",
           "PLZ": "12345",
           "place": "Frankfurt",
+          "invoiceID":"VD123GHUZ8",
           "accountName": "Praxis Schlecht",
           "bankName": "Frnakfurter Volksbank",
           "refund": 50.23,
           "imgFile": "0x2334",
-          "invoiceID":"0023456",
+          "ticketStatus": 0,
           "history": [
             {
               "ticketID": 1002,
               "stateID": 1,
               "sateDate": "2018-06-01",
               "stateText": "Rechung wird gepüft",
-              "status": "1"
+              "stateStatus": "1"
             },
             {
               "ticketID": 1002,
               "stateID": 2,
               "sateDate": "2018-06-01",
               "stateText": "Rechung wird bearbeitet",
-              "status": "0"
+              "stateStatus": "0"
             }
           ]
         }
