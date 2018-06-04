@@ -13,7 +13,6 @@ import { HttpClient } from '@angular/common/http';
 export class RestProvider {
 
   apiUrl = 'https://rest-app.brandau.solutions';
-//  response:any;
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
@@ -67,6 +66,37 @@ export class RestProvider {
     });
   }
 
+  /**
+   * Get the actifities by userID
+   * @param userID User-ID
+   * @returns {Promise<any>} Return a list of the activities by the User-ID
+   */
+  getUserData(userID) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl+'/api/user?userID='+userID,{responseType: "json"})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  /**
+   * Get user user data by userID
+   * @param userID User-ID
+   * @returns {Promise<any>} Return the user data as JSON format
+   */
+  getActivityData(userID) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl+'/api/activity?userID='+userID,{responseType: "json"})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }
 
 

@@ -36,7 +36,6 @@ export class LoginPage {
       this.navCtrl.push(LoginPage);
     }
 
-
   /**
    * Authentication for login
    */
@@ -54,7 +53,10 @@ export class LoginPage {
         restResult = result;
 
         if(restResult.data[0].login == "true"){
-          this.addDummyDataToLS()
+          this.storage.clear();
+          this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
+
+          this.addDataToLocalStorage()
           this.navCtrl.push(HomePage);
         }else{
           this.sentToast("Wrong password!");
@@ -68,84 +70,25 @@ export class LoginPage {
   }
 
   /**
-   * Dummy data - will be replaced by rest call soon
+   * set data form rest to local storage
    */
-  addDummyDataToLS(){
-    this.storage.set('strActivities',JSON.stringify({
-      "acticityList": [
-        {
-          "ticketID": 1001,
-          "userID": 1,
-          "IBAN": "DE123123123123123123123",
-          "createDate": "2018-06-02",
-          "street": "Am Arzt Weg",
-          "houseNumber": "34",
-          "PLZ": "12345",
-          "place": "Frankfurt",
-          "invoiceID":"VD123GHUZ8",
-          "accountName": "Praxis Super",
-          "bankName": "Deutsche Bank",
-          "refund": 450.23,
-          "imgFile": "0x2334",
-          "ticketStatus": 0,
-          "history": [
-            {
-              "ticketID": 1001,
-              "stateID": 1,
-              "sateDate": "2018-06-01",
-              "stateText": "Rechung wird gepüft",
-              "stateStatus": "1"
-            },
-            {
-              "ticketID": 1001,
-              "stateID": 2,
-              "sateDate": "2018-06-01",
-              "stateText": "Rechung wird bearbeitet",
-              "stateStatus": "1"
-            },
-            {
-              "ticketID": 1001,
-              "stateID": 3,
-              "sateDate": "2018-06-02",
-              "stateText": "Rechung wird überwiesen",
-              "stateStatus": "0"
-            }
-          ]
-        },
-        {
-          "ticketID": 1002,
-          "userID": 1,
-          "IBAN": "DE123123122342342355",
-          "createDate": "2018-06-02",
-          "street": "Am Graben",
-          "houseNumber": "322",
-          "PLZ": "12345",
-          "place": "Frankfurt",
-          "invoiceID":"VD123GHUZ8",
-          "accountName": "Praxis Schlecht",
-          "bankName": "Frnakfurter Volksbank",
-          "refund": 50.23,
-          "imgFile": "0x2334",
-          "ticketStatus": 0,
-          "history": [
-            {
-              "ticketID": 1002,
-              "stateID": 1,
-              "sateDate": "2018-06-01",
-              "stateText": "Rechung wird gepüft",
-              "stateStatus": "1"
-            },
-            {
-              "ticketID": 1002,
-              "stateID": 2,
-              "sateDate": "2018-06-01",
-              "stateText": "Rechung wird bearbeitet",
-              "stateStatus": "0"
-            }
-          ]
-        }
-      ]
-    }));
+  addDataToLocalStorage(){
+
+    this.storage.get('identity').then((val) => {
+      let identity = <any>{};
+      identity = JSON.parse(val);
+      console.log(identity['userID']);
+
+      //get user data
+      this.restProvider.getUserData(identity['userID']).then((result) => {
+        this.storage.set('user',JSON.stringify(result));
+      })
+
+      //get activities
+      this.restProvider.getActivityData(identity['userID']).then((result) => {
+        this.storage.set('strActivities',JSON.stringify(result));
+      })
+    });
   }
 
   /**
