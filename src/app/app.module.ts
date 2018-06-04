@@ -19,6 +19,7 @@ import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { RedditData } from '../providers/reddit-data/reddit-data';
 import { ActivityService } from '../services/activity.service';
+import { CallNumber } from '@ionic-native/call-number';
 
 //import { CameraMock } from './mocks/CameraMock';
 
@@ -61,7 +62,9 @@ import { IonicStorageModule } from '@ionic/storage';
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
     RestProvider,
     RedditData,
-    ActivityService//if running on device
+    ActivityService,
+    CallNumber
+      //if running on device
     //{ provide: Camera, useClass: CameraMock} //if running on browser
   ]
 })
