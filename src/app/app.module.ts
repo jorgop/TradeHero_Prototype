@@ -68,9 +68,8 @@ import {ScannPage} from "../pages/scann/scann";
     RestProvider,
     RedditData,
     ActivityService,
-    CallNumber
+    CallNumber,
       //if running on device
-    ActivityService,
     Camera, //if running on device
     //{ provide: Camera, useClass: CameraMock} //if running on browser
   ]
