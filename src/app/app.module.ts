@@ -19,6 +19,9 @@ import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { RedditData } from '../providers/reddit-data/reddit-data';
 import { ActivityService } from '../services/activity.service';
+import { CallNumber } from '@ionic-native/call-number';
+
+//import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";
 import { CameraMock } from './mocks/CameraMock';
 
@@ -65,9 +68,10 @@ import {ScannPage} from "../pages/scann/scann";
     RestProvider,
     RedditData,
     ActivityService,
+    CallNumber,
+      //if running on device
     Camera, //if running on device
     //{ provide: Camera, useClass: CameraMock} //if running on browser
-
   ]
 })
 export class AppModule {}
