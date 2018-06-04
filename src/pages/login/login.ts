@@ -71,6 +71,23 @@ export class LoginPage {
    * Dummy data - will be replaced by rest call soon
    */
   addDummyDataToLS(){
+    this.storage.set('user', JSON.stringify({
+        "userData": [
+            {
+                "gender": "m",
+                "firstName": "Max",
+                "lastName": "Mustermann",
+                "birthdate": "1990-01-01",
+                "mail": "test@test.de",
+                "street": "Musterweg ",
+                "houseNumber": "12",
+                "place": "Frankfurt",
+                "PLZ": "12345",
+                "contractID": "V123PL29",
+                "contractName": "AOK Privat PLUS"
+            }
+        ]
+    }));
     this.storage.set('strActivities',JSON.stringify({
       "acticityList": [
         {
@@ -146,6 +163,15 @@ export class LoginPage {
         }
       ]
     }));
+      this.storage.get('strActivities').then((val) => {
+          //console.log('My JSON',JSON.parse(val) );
+      });
+      this.storage.get('user').then((val) => {
+        //Magie: erzeugt variable myLocalData als liste um danach die json daten als liste zu speichern
+        let myLocalData = <any>{};
+          myLocalData = JSON.parse(val);
+          //console.log(myLocalData.userData[0].firstName,myLocalData.userData[0].lastName);
+      });
   }
 
   /**
