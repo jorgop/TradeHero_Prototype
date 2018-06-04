@@ -22,8 +22,11 @@ import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
 
 //import { CameraMock } from './mocks/CameraMock';
+import {Camera} from "@ionic-native/camera";
+import { CameraMock } from './mocks/CameraMock';
 
 import { IonicStorageModule } from '@ionic/storage';
+import {ScannPage} from "../pages/scann/scann";
 
 
 
@@ -36,13 +39,14 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     RegistrationPage,
     ActivityPage,
-    NewActivityPage
+    NewActivityPage,
+    ScannPage
   ],
   imports: [
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, { swipeBackEnabled: true }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -54,7 +58,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     RegistrationPage,
     ActivityPage,
-    NewActivityPage
+    NewActivityPage,
+    ScannPage
   ],
   providers: [
     StatusBar,
@@ -65,6 +70,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ActivityService,
     CallNumber
       //if running on device
+    ActivityService,
+    Camera, //if running on device
     //{ provide: Camera, useClass: CameraMock} //if running on browser
   ]
 })
