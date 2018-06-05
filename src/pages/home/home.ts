@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {NavController} from "ionic-angular";
 import {ActivityPage} from "../activity/activity";
 import {ContactPage} from "../contact/contact";
-import {ScannPage} from "../scann/scann";
+import {ScanPage} from "../scan/scan";
 
 @Component({
     selector: 'page-home',
@@ -21,7 +21,7 @@ export class HomePage {
       this.navCtrl.push(ContactPage)
     }
     goToScann(params){
-      this.navCtrl.push(ScannPage)
+      this.navCtrl.push(ScanPage)
     }
 
 }

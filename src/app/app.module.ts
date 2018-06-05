@@ -26,9 +26,9 @@ import {Camera} from "@ionic-native/camera";
 import { CameraMock } from './mocks/CameraMock';
 
 import { IonicStorageModule } from '@ionic/storage';
-import {ScannPage} from "../pages/scann/scann";
-
-
+import {ScanPage} from "../pages/scan/scan";
+import {CameraPreview} from "@ionic-native/camera-preview";
+import {CameraPreviewOptions} from "@ionic-native/camera-preview";
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import {ScannPage} from "../pages/scann/scann";
     RegistrationPage,
     ActivityPage,
     NewActivityPage,
-    ScannPage
+    ScanPage
   ],
   imports: [
     FormsModule,
@@ -59,7 +59,7 @@ import {ScannPage} from "../pages/scann/scann";
     RegistrationPage,
     ActivityPage,
     NewActivityPage,
-    ScannPage
+    ScanPage
   ],
   providers: [
     StatusBar,
@@ -71,6 +71,7 @@ import {ScannPage} from "../pages/scann/scann";
     CallNumber,
       //if running on device
     Camera, //if running on device
+    CameraPreview
     //{ provide: Camera, useClass: CameraMock} //if running on browser
   ]
 })

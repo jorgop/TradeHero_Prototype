@@ -23,6 +23,7 @@
         "@angular/platform-browser-dynamic": "5.2.10",
         "@ionic-native/call-number": "^4.7.0",
         "@ionic-native/camera": "^4.7.0",
+        "@ionic-native/camera-preview": "^4.7.0",
         "@ionic-native/core": "^4.7.0",
         "@ionic-native/splash-screen": "4.7.0",
         "@ionic-native/status-bar": "4.7.0",
@@ -45,6 +46,7 @@
         "ionic-angular": "3.9.2",
         "ionicons": "3.0.0",
         "md5": "^2.2.1",
+        "mx.ferreyra.callnumber": "0.0.2",
         "rxjs": "5.5.10",
         "sw-toolbox": "3.6.0",
         "ts-md5": "^1.2.4",
@@ -70,7 +72,9 @@
                 "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app needs read/write-access photo library access"
             },
             "cordova-sqlite-storage": {},
-            "mx.ferreyra.callnumber": {}
+            "mx.ferreyra.callnumber": {},
+            "call-number": {},
+            "cordova-plugin-camera-preview": {}
         },
         "platforms": [
             "ios",

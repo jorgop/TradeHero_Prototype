@@ -1,0 +1,21 @@
+page-scan {
+  html, body, .ion-app, .ion-content {
+    background-color: transparent;
+  }
+
+  .leftcontainer {
+    float: left;
+    width:50%;
+    text-align: center;
+  }
+
+  .rightcontainer {
+    float: right;
+    width:50%;
+    text-align: center;
+  }
+
+  #scanFooter{
+    height: 61px;
+  }
+}
