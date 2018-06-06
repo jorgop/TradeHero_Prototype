@@ -97,6 +97,24 @@ export class RestProvider {
         });
     });
   }
+
+  /**
+   * Add a new activity
+   * @param data JSON with userID and Image
+   * @returns {Promise<any>} POST return
+   */
+  addActivity(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/api/activity', data)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+
 }
 
 

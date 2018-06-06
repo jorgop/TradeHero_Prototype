@@ -6,6 +6,10 @@ import { CameraPreview, CameraPreviewPictureOptions} from '@ionic-native/camera-
 import { Content } from 'ionic-angular';
 import {ActivityPage} from "../activity/activity";
 import {HomePage} from "../home/home";
+import { RestProvider } from '../../providers/rest/rest';
+import { ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-scan',
@@ -16,13 +20,24 @@ export class ScanPage {
 
   private photoStatus : any;
   private controllStatus :any;
+  private userID : any;
+
+  isenabled=true;
 
   imgbase64ImageFile: any;
 
   cameraActivitytext: any;
   controllActivitytext: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,platform: Platform,private cameraPreview: CameraPreview) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,platform: Platform,private cameraPreview: CameraPreview,public restProvider: RestProvider,public toastCtrl: ToastController,private storage: Storage,public loadingController: LoadingController) {
+
+    this.storage.get('identity').then((val) => {
+      let identity = <any>{};
+      identity = JSON.parse(val);
+      this.userID = identity['userID'];
+    });
+
+  }
 
   /**
    * Start on page load
@@ -32,6 +47,8 @@ export class ScanPage {
     this.photoStatus = false;
     this.controllActivitytext = "Cancel";
     this.controllStatus = false;
+
+    this.isenabled=true;
   }
 
   /**
@@ -44,6 +61,7 @@ export class ScanPage {
     this.controllActivitytext = "Cancel";
     this.controllStatus = false;
     this.startImagePreview();
+    this.isenabled=true;
   }
 
   /**
@@ -62,7 +80,38 @@ export class ScanPage {
         this.navCtrl.push(HomePage);
     }else{
 
-      this.navCtrl.push(ActivityPage);
+      var restData = <any>{};
+
+      restData = { "activity":[
+                                { "userID": this.userID ,
+                                  "imgFile": this.imgbase64ImageFile
+                                }
+                              ]
+      };
+
+      this.isenabled=false;
+
+      let loader = this.loadingController.create({
+        content: "Bild wird hochgeladen"
+      });
+
+      loader.present().then(() => {
+        this.restProvider.addActivity(restData).then((result) => {
+
+          if (result == true){
+            loader.dismiss().then(() => { this.navCtrl.push(ActivityPage); });
+          }else {
+            this.isenabled=true;
+            this.sentToast("Bild konnete nicht verarbeitet werden!")
+          }
+        }, (err) => {
+          loader.present();
+          loader.dismiss();
+          console.log('error2 ' + err);
+          this.sentToast("Oooops upload failed");
+          //this.navCtrl.push(LoginPage);
+        })
+      });
     }
   }
 
@@ -136,6 +185,19 @@ export class ScanPage {
        console.log(err);
       //this.imgbase64ImageFile = 'assets/img/test.jpg';
     });
+  }
+
+  /**
+   * View a toast message
+   * @param message Toast Text
+   */
+  sentToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }

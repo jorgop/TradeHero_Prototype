@@ -10,7 +10,7 @@
   <ion-toolbar id="scanFooter">
     <div class="leftcontainer">
       <ion-buttons>
-        <button ion-button on-click="controllActivty()">{{this.controllActivitytext}}</button>
+        <button ion-button [ngClass]="{class:isenabled,class2:!isenabled}" on-click="controllActivty()">{{this.controllActivitytext}}</button>
       </ion-buttons>
     </div>
     <div class="rightcontainer">
