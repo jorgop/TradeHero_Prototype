@@ -13,7 +13,7 @@ export class NewActivityPage {
         private activityService: ActivityService) {
     }
 
-    onAddNewActivity(value:{title: string}){
+    onAddNewActivity(value:{date: string,ticketID:string,ticketStatus: string}){
       this.activityService.addActivity(value);
       this.navCtrl.pop();
     }

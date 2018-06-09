@@ -10,12 +10,15 @@
 </ion-header>
 
 <ion-content padding>
-    <h2>Welcome to Activity!</h2>
+    <h2>Meine Rechnungen</h2>
     <p>
-        Here you can see your Activities.
     </p>
     <ion-list inset>
-        <ion-item *ngFor="let activity of activity">{{activity.title}}
+        <ion-item *ngFor="let activity of activity">
+          Bearbeitungs-ID: {{activity.ticketID}} <br>
+          Datum: {{activity.date | date: 'dd.MM.yyyy' }} <br>
+          Status: {{activity.ticketStatus}}
+          <button ion-button outline item-end (click)="goToHistoryPage(activity.ticketID)">Mehr Infos!</button>
         </ion-item>
     </ion-list>
-    </ion-content>
+</ion-content>

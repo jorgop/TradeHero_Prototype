@@ -1,7 +1,7 @@
 export class ActivityService{
-    private activity: {title: string} [] = [];
+    private activity: {date: string, ticketID:string, ticketStatus: string} [] = [];
 
-    addActivity(activity:{title: string}){
+    addActivity(activity:{date: string, ticketID:string, ticketStatus: string}){
         this.activity.push(activity);
     }
 
