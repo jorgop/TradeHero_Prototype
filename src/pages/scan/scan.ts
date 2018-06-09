@@ -21,6 +21,7 @@ export class ScanPage {
   private photoStatus : any;
   private controllStatus :any;
   private userID : any;
+  private token : boolean;
 
   isenabled=true;
 
@@ -96,21 +97,39 @@ export class ScanPage {
       });
 
       loader.present().then(() => {
+        let token;
         this.restProvider.addActivity(restData).then((result) => {
 
           if (result == true){
-            loader.dismiss().then(() => { this.navCtrl.push(ActivityPage); });
+
+            this.storage.get('identity').then((val) => {
+              let identity = <any>{};
+              identity = JSON.parse(val);
+              console.log(identity['userID']);
+
+
+              //get activities
+              this.restProvider.getActivityData(identity['userID']).then((result) => {
+                this.storage.set('strActivities',JSON.stringify(result));
+              })
+            });
           }else {
             this.isenabled=true;
             this.sentToast("Bild konnete nicht verarbeitet werden!")
           }
         }, (err) => {
+          setTimeout(() => {
           loader.present();
           loader.dismiss();
+          }, 5000);
           console.log('error2 ' + err);
           this.sentToast("Oooops upload failed");
           //this.navCtrl.push(LoginPage);
         })
+
+        setTimeout(() => {
+            loader.dismiss().then(() => { this.navCtrl.push(ActivityPage); });
+        }, 5000);
       });
     }
   }
@@ -173,9 +192,9 @@ export class ScanPage {
    */
   takePicture(){
     const pictureOpts: CameraPreviewPictureOptions = {
-      width: 1280,
-      height: 1280,
-      quality: 70
+      width: 500,
+      height: 1000,
+      quality: 100
     }
 
     this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
