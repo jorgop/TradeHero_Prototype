@@ -20,10 +20,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { RedditData } from '../providers/reddit-data/reddit-data';
 import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
+import {HistoryPage} from "../pages/history/history";
 
 //import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";
-import { CameraMock } from './mocks/CameraMock';
+
 
 import { IonicStorageModule } from '@ionic/storage';
 import {ScanPage} from "../pages/scan/scan";
@@ -40,7 +41,8 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     RegistrationPage,
     ActivityPage,
     NewActivityPage,
-    ScanPage
+    ScanPage,
+    HistoryPage
   ],
   imports: [
     FormsModule,
@@ -59,7 +61,8 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     RegistrationPage,
     ActivityPage,
     NewActivityPage,
-    ScanPage
+    ScanPage,
+    HistoryPage
   ],
   providers: [
     StatusBar,
