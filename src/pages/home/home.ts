@@ -23,5 +23,4 @@ export class HomePage {
     goToScann(params){
       this.navCtrl.push(ScanPage)
     }
-// hallo ich bins Nina.
 }
