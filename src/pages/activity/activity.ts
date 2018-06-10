@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {LoadingController, NavController} from 'ionic-angular';
-import { NewActivityPage } from "../new-activity/new-activity";
 import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import {HistoryPage} from "../history/history";
+import {HomePage} from "../home/home";
 
 @Component({
     selector: 'page-activity',
@@ -18,7 +18,6 @@ export class ActivityPage {
         private storage: Storage,
         public restProvider: RestProvider,
         public loadingController: LoadingController) {
-
     }
 
 
@@ -34,10 +33,8 @@ export class ActivityPage {
    * Cell function on enter the page
    */
   ionViewWillEnter(){
-
     this.activity = this.activityService.getActivity();
     this.updateLocalStorageAndPrepareData();
-
     }
 
   /**
@@ -185,10 +182,7 @@ export class ActivityPage {
       }
     }
 
-
-  //Navigate to NewActivityPage
-    goToAddActivity(){
-        this.navCtrl.push(NewActivityPage);
-    }
-
+  goToHome(){
+    this.navCtrl.popTo(HomePage);
+  }
 }

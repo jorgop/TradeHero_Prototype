@@ -10,8 +10,6 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegistrationPage } from '../pages/registration/registration';
 import { ActivityPage } from '../pages/activity/activity';
-import { NewActivityPage } from '../pages/new-activity/new-activity';
-
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -40,7 +38,6 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     HomePage,
     RegistrationPage,
     ActivityPage,
-    NewActivityPage,
     ScanPage,
     HistoryPage
   ],
@@ -48,7 +45,7 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp, { swipeBackEnabled: true }),
+    IonicModule.forRoot(MyApp, { swipeBackEnabled: false }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -60,7 +57,6 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     HomePage,
     RegistrationPage,
     ActivityPage,
-    NewActivityPage,
     ScanPage,
     HistoryPage
   ],
