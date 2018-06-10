@@ -105,7 +105,7 @@ export class ScanPage {
             this.storage.get('identity').then((val) => {
               let identity = <any>{};
               identity = JSON.parse(val);
-              console.log(identity['userID']);
+              //console.log(identity['userID']);
 
 
               //get activities

@@ -33,7 +33,7 @@ export class ActivityPage {
   /**
    * Cell function on enter the page
    */
-  ionViewDidEnter(){
+  ionViewWillEnter(){
 
     this.activity = this.activityService.getActivity();
     this.updateLocalStorageAndPrepareData();
