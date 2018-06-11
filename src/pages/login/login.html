@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -7,37 +7,50 @@
       Login
     </ion-title>
   </ion-navbar>
-</ion-header>
-<ion-content padding id="page2">
-  <img src="assets/imgs/login_logo.jpg" style="display:block;width:70%;height:auto;margin-left:auto;margin-right:auto;" />
+</ion-header> -->
+
+
+<ion-content padding id="page2" class="set-background">
+  <div class="square">Welcome</div>
+
+
   <div [formGroup]="myForm">
+
     <ion-list id="signup-list3">
-      <ion-item>
+      <ion-item class="set-transparency">
         <ion-label>
           <ion-icon name="md-mail"></ion-icon>
         </ion-label>
-        <ion-input formControlName="email" type="email" placeholder="Mail" name="email"></ion-input>
+        <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email"></ion-input>
       </ion-item>
-      <ion-item *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)">
-        <p>Bitte korrekte Mail-Adresse angeben.</p>
+
+
+      <ion-item class="set-transparency" *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)">
+        <p>Bitte korrekte E-Mail-Adresse eingeben.</p>
       </ion-item>
-      <ion-item>
-        <ion-label >
+
+
+      <ion-item class="set-transparency">
+        <ion-label>
           <ion-icon name="md-lock"></ion-icon>
         </ion-label>
-        <ion-input formControlName="password" type="password" placeholder="Passwort"  name="password"></ion-input>
+        <ion-input formControlName="password" type="password" placeholder="Passwort" name="password"></ion-input>
       </ion-item>
-      <ion-item *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)">
-        <p>Mindestes 6 Buchstaben.</p>
+
+
+      <ion-item class="set-transparency" *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)">
+        <p>Mindestens 6 Buchstaben.</p>
       </ion-item>
     </ion-list>
   </div>
   <div style="text-align:center">
-    <button ion-button round icon="checkmark" (click)="authenticateUser()">Anmelden</button>
+    <button class="anmelde-btn" ion-button round icon="checkmark" (click)="authenticateUser()">Los gehts!</button>
   </div>
   <div id="cart-container6"></div>
-  <button id="cart-button4" ion-button clear color="positive" block small on-click="goToSignup()">
-    Register Now!
+  <button id="cart-button4" style="text-decoration:underline; color:white" ion-button clear color="positive" block small on-click="goToSignup()">
+    Registrieren
   </button>
+
+
 </ion-content>
 
