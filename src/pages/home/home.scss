@@ -1,14 +1,20 @@
 page-home {
 
-  .leftcontainer {
-    float: left;
-    width:50%;
-    text-align: center;
+
+  .btn-size {
+    display: block;
+    height: 50px;
+    margin-bottom: 10px;
   }
 
-  .rightcontainer {
-    float: right;
-    width:50%;
-    text-align: center;
+  .cstmz-padding {
+    padding-top: 60px;
   }
+
+  .button {
+    font-family: "Avenir";
+    color: black;
+  }
+
+
 }

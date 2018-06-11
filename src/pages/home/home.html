@@ -1,37 +1,48 @@
 <ion-header>
   <ion-navbar hideBackButton>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button icon-only>
         <ion-icon name="md-menu"></ion-icon>
       </button>
-    </ion-buttons>
-    <ion-title>Home</ion-title>
+    </ion-buttons> -->
+    <ion-title style="font-family:'Avenir'">Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <p></p>
 
 
-  <button ion-button icon-left block outline on-click="goToScann()">
+<div class="cstmz-padding">
+
+  <ion-fab right top>
+    <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab><ion-icon name="power"></ion-icon></button>
+      <button ion-fab><ion-icon name="information-circle"></ion-icon></button>
+      <button ion-fab><ion-icon name="settings"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <button ion-button icon-left block outline class="btn-size" on-click="goToScann()">
     <ion-icon name="camera"></ion-icon>
     Scan
   </button>
 
-  <button ion-button icon-left block outline>
+  <button ion-button icon-left block outline class="btn-size">
     <ion-icon name="person"></ion-icon>
     Mein Profil
   </button>
 
-  <button ion-button icon-left block outline on-click="goToActivity()">
+  <button ion-button icon-left block outline class="btn-size" on-click="goToActivity()">
     <ion-icon name="paper"></ion-icon>
     Aktivitäten
   </button>
 
-  <button ion-button icon-left block outline on-click="goToContact()">
+  <button ion-button icon-left block outline class="btn-size" on-click="goToContact()">
     <ion-icon name="call"></ion-icon>
     Kontakt
   </button>
 
+</div>
 
 </ion-content>
