@@ -99,6 +99,22 @@ export class RestProvider {
   }
 
   /**
+   * Get ticket data by ticketID
+   * @param ticketID Ticket-ID
+   * @returns {Promise<any>} Return the user data as JSON format
+   */
+  getTicketData(ticketID) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl+'/api/ticket?ID='+ticketID,{responseType: "json"})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  /**
    * Add a new activity
    * @param data JSON with userID and Image
    * @returns {Promise<any>} POST return

@@ -113,23 +113,24 @@ export class ScanPage {
                 this.storage.set('strActivities',JSON.stringify(result));
               })
             });
+
+            setTimeout(() => {
+              loader.dismiss().then(() => { this.navCtrl.push(ActivityPage); });
+            }, 5000);
+
           }else {
             this.isenabled=true;
             this.sentToast("Bild konnete nicht verarbeitet werden!")
           }
         }, (err) => {
           setTimeout(() => {
-          loader.present();
+          //loader.present();
           loader.dismiss();
           }, 5000);
           console.log('error2 ' + err);
           this.sentToast("Oooops upload failed");
           //this.navCtrl.push(LoginPage);
         })
-
-        setTimeout(() => {
-            loader.dismiss().then(() => { this.navCtrl.push(ActivityPage); });
-        }, 5000);
       });
     }
   }
@@ -192,7 +193,7 @@ export class ScanPage {
    */
   takePicture(){
     const pictureOpts: CameraPreviewPictureOptions = {
-      width: 500,
+      width: 1000,
       height: 1000,
       quality: 100
     }
