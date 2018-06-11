@@ -19,6 +19,7 @@ import { RedditData } from '../providers/reddit-data/reddit-data';
 import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
 import {HistoryPage} from "../pages/history/history";
+import {HistoryService} from "../services/history.service";
 
 //import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";
@@ -67,6 +68,7 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     RestProvider,
     RedditData,
     ActivityService,
+    HistoryService,
     CallNumber,
       //if running on device
     Camera, //if running on device
