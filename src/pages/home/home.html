@@ -11,28 +11,27 @@
 
 <ion-content padding>
   <p></p>
-    <div class="leftcontainer">
-      <ion-buttons>
-        <button id="activity-button" ion-button icon-only color="royal" on-click="goToActivity()">
-          <ion-icon name="ios-list-outline"></ion-icon>
-        </button>
-      </ion-buttons>
-      Activity
-    </div>
-    <div class="rightcontainer">
-      <ion-buttons>
-        <button ion-button icon-only color="royal" on-click="goToScann()">
-          <ion-icon name="ios-qr-scanner"></ion-icon>
-        </button>
-      </ion-buttons>
-      Scan
-    </div>
-    <div class="leftcontainer">
-      <ion-buttons>
-        <button id="contact-button" ion-button icon-only color="royal" on-click="goToContact()">
-          <ion-icon name="md-call"></ion-icon>
-        </button>
-      </ion-buttons>
-      Contact
-    </div>
+
+
+  <button ion-button icon-left block outline on-click="goToScann()">
+    <ion-icon name="camera"></ion-icon>
+    Scan
+  </button>
+
+  <button ion-button icon-left block outline>
+    <ion-icon name="person"></ion-icon>
+    Mein Profil
+  </button>
+
+  <button ion-button icon-left block outline on-click="goToActivity()">
+    <ion-icon name="paper"></ion-icon>
+    Aktivitäten
+  </button>
+
+  <button ion-button icon-left block outline on-click="goToContact()">
+    <ion-icon name="call"></ion-icon>
+    Kontakt
+  </button>
+
+
 </ion-content>
