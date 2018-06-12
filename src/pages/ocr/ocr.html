@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar end>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="md-menu"></ion-icon>
+      </button>
+    </ion-buttons> -->
+    <ion-title>OCR</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card>
+      <img src="{{ scanedImage }}">
+      <div class="card-title"></div>
+      <div class="card-subtitle"></div>
+    </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" stacked>Arzt</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Strasse</ion-label>
+      <ion-input type="text" [(ngModel)]="street"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Ort</ion-label>
+      <ion-input type="text" [(ngModel)]="place"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Postleitzahl</ion-label>
+      <ion-input type="text" [(ngModel)]="plz"></ion-input>
+    </ion-item>
+    <ion-item>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Bank</ion-label>
+      <ion-input type="text" [(ngModel)]="bankName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>IBAN</ion-label>
+      <ion-input type="text" [(ngModel)]="IBAN"></ion-input>
+    </ion-item>
+    <ion-item>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Rechnungsnummer</ion-label>
+      <ion-input type="text" [(ngModel)]="invoiceNumber"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Rẹchnungsbetrag</ion-label>
+      <ion-input type="text" [(ngModel)]="cash"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer no-border>
+  <ion-toolbar id="scanFooter">
+    <div class="leftcontainer">
+      <ion-buttons>
+        <button ion-button on-click="presentConfirm()" >Einreichen</button>
+      </ion-buttons>
+    </div>
+    <div class="rightcontainer">
+      <ion-buttons>
+        <button ion-button >Abbrechen</button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+
+

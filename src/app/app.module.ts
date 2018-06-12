@@ -10,7 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegistrationPage } from '../pages/registration/registration';
 import { ActivityPage } from '../pages/activity/activity';
-
+import {OcrPage} from "../pages/ocr/ocr";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
@@ -40,7 +40,8 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     RegistrationPage,
     ActivityPage,
     ScanPage,
-    HistoryPage
+    HistoryPage,
+    OcrPage
   ],
   imports: [
     FormsModule,
@@ -59,7 +60,8 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     RegistrationPage,
     ActivityPage,
     ScanPage,
-    HistoryPage
+    HistoryPage,
+    OcrPage
   ],
   providers: [
     StatusBar,
