@@ -9,9 +9,8 @@
   </ion-navbar>
 </ion-header> -->
 
-
 <ion-content padding id="page2" class="set-background">
-  <div class="square">Welcome</div>
+  <div class="square">Willkommen</div>
 
 
   <div [formGroup]="myForm">
@@ -26,8 +25,9 @@
 
 
       <ion-item class="set-transparency" *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)">
-        <p>Bitte korrekte E-Mail-Adresse eingeben.</p>
+        <p style="color:white">Bitte korrekte E-Mail-Adresse eingeben.</p>
       </ion-item>
+
 
 
       <ion-item class="set-transparency">
@@ -39,12 +39,12 @@
 
 
       <ion-item class="set-transparency" *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)">
-        <p>Mindestens 6 Buchstaben.</p>
+        <p style="color:white">Mindestens 6 Buchstaben.</p>
       </ion-item>
     </ion-list>
   </div>
   <div style="text-align:center">
-    <button class="anmelde-btn" ion-button round icon="checkmark" (click)="authenticateUser()">Los gehts!</button>
+    <button class="anmelde-btn" ion-button round icon="checkmark" (click)="authenticateUser()">Los geht's!</button>
   </div>
   <div id="cart-container6"></div>
   <button id="cart-button4" style="text-decoration:underline; color:white" ion-button clear color="positive" block small on-click="goToSignup()">
