@@ -17,8 +17,6 @@ page-login {
   .set-background {
     background-image: url('../assets/imgs/test@3x.JPG');
     background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
     background-size: cover;
   }
 
@@ -43,7 +41,7 @@ page-login {
   }
 
   .item {
-    border-radius: 40px;
+    border-radius: 14px;
     padding-left: 30px;
     margin-bottom: 10px;
     border: 1px solid white;
