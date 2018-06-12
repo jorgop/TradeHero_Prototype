@@ -1,8 +1,8 @@
 page-login {
+
   html, body, .ion-app, .ion-content {
     background-color: transparent;
   }
-
 
   .square {
     height: 35%;
@@ -15,20 +15,16 @@ page-login {
   }
 
   .set-background {
-    background-image: url('../../assets/imgs/test@3x.JPG');
+    background-image: url('../assets/imgs/test@3x.JPG');
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
   }
 
-
-
-
   .icon {
     font-size: 15px;
   }
-
 
   .anmelde-btn {
     color: white;
@@ -47,13 +43,11 @@ page-login {
   }
 
   .item {
-    border-radius: 50px;
+    border-radius: 40px;
     padding-left: 30px;
     margin-bottom: 10px;
     border: 1px solid white;
   }
-
-
 
 }
 

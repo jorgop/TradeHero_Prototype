@@ -4,8 +4,22 @@ page-registration {
     font-family: "Avenir Next";
   }
 
-  .cstmz-padding {
-    padding-top: 20px;
+  .square {
+    height: 35%;
+    text-align: center;
+    padding: 70px 0;
+    font-size: 36px;
+    font-family: "Calibri Light";
+    color: white;
+    text-shadow: 1px 1px black;
+  }
+
+  .set-background {
+    background-image: url('../../assets/imgs/test@3x.JPG');
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
   }
 
 

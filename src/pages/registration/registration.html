@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -7,12 +7,12 @@
       Registrierung
     </ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
 
-<ion-content padding id="page7">
+<ion-content padding id="page7" class="set-background">
 
-  <div class="cstmz-padding">
+  <div class="square">Registrierung</div>
 
   <div [formGroup]="myForm">
     <ion-list id="signup-list3">
@@ -50,11 +50,11 @@
   </div>
 
 
-  <!-- <button id="signup-button6" ion-button clear color="positive" block on-click="goToLogin()">
+  <button id="signup-button6" ion-button style="text-decoration:underline; color:white" clear color="positive" block on-click="goToLogin()">
     <ion-icon name="arrow-back"></ion-icon>
-    Zurück
-  </button> -->
+    Zurück zum Login
+  </button>
 
-  </div>
+
 
 </ion-content>
