@@ -49,6 +49,22 @@ export class RestProvider {
   }
 
   /**
+   * Scan image
+   * @param data Image file to scan
+   * @returns {Promise<any>} POST return
+   */
+  scanImage(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/api/scan', data)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  /**
    * Check user authentication
    * @param mail User mail
    * @param password User password as MD5-Hash

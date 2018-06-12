@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {CallNumber} from "@ionic-native/call-number";
+import {e} from "@angular/core/src/render3";
 
 @Component({
   selector: 'page-contact',
@@ -10,12 +11,25 @@ export class ContactPage {
 
   constructor(
       public navCtrl: NavController,
-      private callNumber: CallNumber) {
-  }
+      private callSvc: CallNumber) {
+        }
 
-    callInsurance(){
-        this.callNumber.callNumber("01727709196", true)
-            .then(res => console.log('Launched dialer!', res))
-            .catch(err => console.log('Error launching dialer', err));
-    }
+    /*callInsurance(){
+        this.callSvc.callNumber("00491719760565",true).then(()=> {
+          console.log('number dialed');
+        }).catch((err)=>{
+          alert(JSON.stringify(err))
+        })
+  }*/
+   async callInsurance():Promise<any>{
+      try{
+      await this.callSvc.callNumber("00491719760565",true).then(()=> {
+          console.log('number dialed');
+      }).catch((err)=>{
+          alert(JSON.stringify(err))
+      })}finally {
+
+      }
+   }
 }
+
