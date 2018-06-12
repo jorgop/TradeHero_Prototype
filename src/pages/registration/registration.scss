@@ -17,9 +17,25 @@ page-registration {
   .set-background {
     background-image: url('../assets/imgs/test@3x.JPG');
     background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
     background-size: cover;
+  }
+
+  .set-transparency {
+    background-color: transparent;
+    color: white;
+  }
+
+  .item {
+    border-radius: 14px;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    border: 1px solid white;
+  }
+
+  .input {
+    input::placeholder {
+      color:white;
+    }
   }
 
 

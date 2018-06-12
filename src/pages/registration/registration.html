@@ -16,33 +16,43 @@
 
   <div [formGroup]="myForm">
     <ion-list id="signup-list3">
-      <ion-item>
+
+      <ion-item class="set-transparency">
         <ion-label>
           <ion-icon name="md-mail"></ion-icon>
         </ion-label>
+
         <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email"></ion-input>
       </ion-item>
-      <ion-item *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)">
-        <p>Bitte korrekte E-Mail-Adresse eingeben.</p>
+
+      <ion-item class="set-transparency" *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)">
+        <p style="color:white">Bitte korrekte E-Mail-Adresse eingeben.</p>
       </ion-item>
-      <ion-item>
+
+
+      <ion-item class="set-transparency">
         <ion-label>
           <ion-icon name="md-barcode"></ion-icon>
         </ion-label>
         <ion-input formControlName="token" type="token" placeholder="Token" name="token"></ion-input>
       </ion-item>
-      <ion-item *ngIf="!myForm.controls.token.valid  && (myForm.controls.token.dirty || submitAttempt)">
-        <p>Mindestens 6 Zeichen.</p>
+
+      <ion-item class="set-transparency" *ngIf="!myForm.controls.token.valid  && (myForm.controls.token.dirty || submitAttempt)">
+        <p style="color:white">Mindestens 6 Zeichen.</p>
       </ion-item>
-      <ion-item>
+
+      <ion-item class="set-transparency">
         <ion-label >
           <ion-icon name="md-lock"></ion-icon>
         </ion-label>
+
         <ion-input formControlName="password" type="password" placeholder="Passwort"  name="password"></ion-input>
       </ion-item>
-      <ion-item *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)">
-        <p>Mindestens 6 Buchstaben.</p>
+
+      <ion-item class="set-transparency" *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)">
+        <p style="color:white">Mindestens 6 Buchstaben.</p>
       </ion-item>
+
     </ion-list>
   </div>
   <div style="text-align:center">
