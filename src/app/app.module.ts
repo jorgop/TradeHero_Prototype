@@ -10,12 +10,12 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegistrationPage } from '../pages/registration/registration';
 import { ActivityPage } from '../pages/activity/activity';
-
+import {ProfilePage} from "../pages/profile/profile";
+import {OcrPage} from "../pages/ocr/ocr";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
-import { RedditData } from '../providers/reddit-data/reddit-data';
 import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
 import {HistoryPage} from "../pages/history/history";
@@ -24,11 +24,10 @@ import {HistoryService} from "../services/history.service";
 //import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";
 
-
 import { IonicStorageModule } from '@ionic/storage';
 import {ScanPage} from "../pages/scan/scan";
 import {CameraPreview} from "@ionic-native/camera-preview";
-import {CameraPreviewOptions} from "@ionic-native/camera-preview";
+
 
 @NgModule({
   declarations: [
@@ -40,7 +39,9 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     RegistrationPage,
     ActivityPage,
     ScanPage,
-    HistoryPage
+    HistoryPage,
+    ProfilePage,
+    OcrPage
   ],
   imports: [
     FormsModule,
@@ -59,14 +60,15 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     RegistrationPage,
     ActivityPage,
     ScanPage,
-    HistoryPage
+    ProfilePage,
+    HistoryPage,
+    OcrPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
     RestProvider,
-    RedditData,
     ActivityService,
     HistoryService,
     CallNumber,

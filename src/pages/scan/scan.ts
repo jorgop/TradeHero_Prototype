@@ -1,15 +1,15 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import {Platform} from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { CameraPreview, CameraPreviewPictureOptions} from '@ionic-native/camera-preview';
 import { Content } from 'ionic-angular';
-import {ActivityPage} from "../activity/activity";
-import {HomePage} from "../home/home";
+import { HomePage } from "../home/home";
 import { RestProvider } from '../../providers/rest/rest';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
+import { OcrPage } from "../ocr/ocr";
 
 @Component({
   selector: 'page-scan',
@@ -21,14 +21,12 @@ export class ScanPage {
   private photoStatus : any;
   private controllStatus :any;
   private userID : any;
-  private token : boolean;
-
-  isenabled=true;
-
-  imgbase64ImageFile: any;
-
-  cameraActivitytext: any;
-  controllActivitytext: any;
+  private loading: any;
+  private imgLoading: any;
+  private isenabled=true;
+  private imgbase64ImageFile: any;
+  private cameraActivitytext: any;
+  private controllActivitytext: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,platform: Platform,private cameraPreview: CameraPreview,public restProvider: RestProvider,public toastCtrl: ToastController,private storage: Storage,public loadingController: LoadingController) {
 
@@ -38,15 +36,24 @@ export class ScanPage {
       this.userID = identity['userID'];
     });
 
+    //loading
+    this.loading = this.loadingController.create({
+      content: 'Dokument wird erkannt...'
+    });
+
+    this.imgLoading = this.loadingController.create({
+      content: "Bild wird hochgeladen"
+    });
+
   }
 
   /**
    * Start on page load
    */
   ionViewDidLoad() {
-    this.cameraActivitytext = "Take Photo";
+    this.cameraActivitytext = "Scannen";
     this.photoStatus = false;
-    this.controllActivitytext = "Cancel";
+    this.controllActivitytext = "Abbrechen";
     this.controllStatus = false;
 
     this.isenabled=true;
@@ -57,9 +64,9 @@ export class ScanPage {
    */
   ionViewWillEnter(){
 
-    this.cameraActivitytext = "Take Photo";
+    this.cameraActivitytext = "Scannen";
     this.photoStatus = false;
-    this.controllActivitytext = "Cancel";
+    this.controllActivitytext = "Abbrechen";
     this.controllStatus = false;
     this.startImagePreview();
     this.isenabled=true;
@@ -76,63 +83,11 @@ export class ScanPage {
    * Action of the left button
    */
   controllActivty(){
-
     if(this.controllStatus == false){
         this.navCtrl.push(HomePage);
     }else{
-
-      var restData = <any>{};
-
-      restData = { "activity":[
-                                { "userID": this.userID ,
-                                  "imgFile": this.imgbase64ImageFile
-                                }
-                              ]
-      };
-
-      this.isenabled=false;
-
-      let loader = this.loadingController.create({
-        content: "Bild wird hochgeladen"
-      });
-
-      loader.present().then(() => {
-        let token;
-        this.restProvider.addActivity(restData).then((result) => {
-
-          if (result == true){
-
-            this.storage.get('identity').then((val) => {
-              let identity = <any>{};
-              identity = JSON.parse(val);
-              //console.log(identity['userID']);
-
-
-              //get activities
-              this.restProvider.getActivityData(identity['userID']).then((result) => {
-                this.storage.set('strActivities',JSON.stringify(result));
-              })
-            });
-
-            setTimeout(() => {
-              loader.dismiss().then(() => { this.navCtrl.push(ActivityPage); });
-            }, 5000);
-
-          }else {
-            this.isenabled=true;
-            this.sentToast("Bild konnete nicht verarbeitet werden!")
-          }
-        }, (err) => {
-          setTimeout(() => {
-          //loader.present();
-          loader.dismiss();
-          }, 5000);
-          console.log('error2 ' + err);
-          this.sentToast("Oooops upload failed");
-          //this.navCtrl.push(LoginPage);
-        })
-      });
-    }
+      this.navCtrl.push(OcrPage,{scanedImage:this.imgbase64ImageFile});
+    };
   }
 
   /**
@@ -170,18 +125,18 @@ export class ScanPage {
   cameraActivity(){
 
     if(this.photoStatus == false){
-      this.cameraActivitytext = "Retry?"
+      this.cameraActivitytext = "Neu Scannen?"
       this.photoStatus = true;
 
-      this.controllActivitytext = "Upload!"
+      this.controllActivitytext = "Weiter!"
       this.controllStatus = true;
 
       this.takePicture();
     }else{
-      this.cameraActivitytext = "Take Photo";
+      this.cameraActivitytext = "Scannen";
       this.photoStatus = false;
 
-      this.controllActivitytext = "Cancel";
+      this.controllActivitytext = "Abbrechen";
       this.controllStatus = false;
 
       this.cameraPreview.show();
@@ -189,18 +144,53 @@ export class ScanPage {
   }
 
   /**
+   * Send an image to the the server and scan it with openCV
+   * @param img Taken image
+   */
+  scanImage(img){
+
+    this.loading.present();
+
+    let myImage = { "imgFile": img };
+
+    this.restProvider.scanImage(myImage).then((result) => {
+
+      let scanFile = <any>{};
+      scanFile = result;
+      scanFile = scanFile['scanedFile'];
+
+      this.imgbase64ImageFile = scanFile;
+
+      this.loading.dismiss().then(() => {
+        console.log('Scan Success');
+      });
+    }, (err) => {
+      console.log('Scan failed ' + err);
+      this.loading.dismiss().then(() => {
+        console.log('Oooops Scan failed');
+        this.sentToast("Scan failed");
+      });
+      //this.navCtrl.push(LoginPage);
+    });
+  }
+
+  /**
    * Take a picture
    */
   takePicture(){
     const pictureOpts: CameraPreviewPictureOptions = {
-      width: 1000,
-      height: 1000,
+      width: 1920,
+      height: 1080,
       quality: 100
     }
 
     this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
-      this.imgbase64ImageFile = 'data:image/jpeg;base64,' + imageData;
+
+      var base64Image = 'data:image/jpeg;base64,' + imageData;
+
+      this.scanImage(base64Image);
       this.cameraPreview.hide();
+
     }, (err) => {
        console.log(err);
       //this.imgbase64ImageFile = 'assets/img/test.jpg';

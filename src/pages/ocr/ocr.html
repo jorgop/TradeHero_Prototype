@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar end>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="md-menu"></ion-icon>
+      </button>
+    </ion-buttons> -->
+    <ion-title>OCR</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<!--    <ion-card>
+      <img src="{{ scanedImage }}">
+      <div class="card-title"></div>
+      <div class="card-subtitle"></div>
+    </ion-card>
+-->
+  <div [formGroup]="myForm">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" stacked>Arzt</ion-label>
+        <ion-input formControlName="name" type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Strasse</ion-label>
+        <ion-input formControlName="street" type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Ort</ion-label>
+        <ion-input formControlName="place" type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Postleitzahl</ion-label>
+        <ion-input formControlName="plz" type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Bank</ion-label>
+        <ion-input formControlName="bankName" type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>IBAN</ion-label>
+        <ion-input formControlName="IBAN" type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Rechnungsnummer</ion-label>
+        <ion-input formControlName="invoiceNumber" type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Rẹchnungsbetrag</ion-label>
+        <ion-input formControlName="refund" type="text" ></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer no-border>
+  <ion-toolbar id="scanFooter">
+    <div class="leftcontainer">
+      <ion-buttons>
+        <button ion-button on-click="presentConfirm()" >Einreichen</button>
+      </ion-buttons>
+    </div>
+    <div class="rightcontainer">
+      <ion-buttons>
+        <button ion-button on-click="goToHome()">Abbrechen</button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+
+

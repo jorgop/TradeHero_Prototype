@@ -65,6 +65,22 @@ export class RestProvider {
   }
 
   /**
+   * Get text by ocr by an scaned document
+   * @param data Scaned document
+   * @returns {Promise<any>} POST return
+   */
+  getOcrData(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/api/ocr', data)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  /**
    * Check user authentication
    * @param mail User mail
    * @param password User password as MD5-Hash
