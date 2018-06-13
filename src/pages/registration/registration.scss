@@ -1,9 +1,14 @@
 page-registration {
+  p {
+    color: white;
+  }
 
   .title {
     font-family: "Avenir Next";
   }
-
+  .validatortxt{
+    border:none;
+  }
   .square {
     height: 35%;
     text-align: center;
@@ -36,6 +41,9 @@ page-registration {
     input::placeholder {
       color:white;
     }
+  }
+  ion-icon{
+    color:white;
   }
 
 

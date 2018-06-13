@@ -25,9 +25,7 @@
         <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email"></ion-input>
       </ion-item>
 
-      <ion-item class="set-transparency" *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)">
-        <p style="color:white">Bitte korrekte E-Mail-Adresse eingeben.</p>
-      </ion-item>
+        <p *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Bitte korrekte E-Mail-Adresse eingeben.</p>
 
 
       <ion-item class="set-transparency">
@@ -37,9 +35,7 @@
         <ion-input formControlName="token" type="token" placeholder="Token" name="token"></ion-input>
       </ion-item>
 
-      <ion-item class="set-transparency" *ngIf="!myForm.controls.token.valid  && (myForm.controls.token.dirty || submitAttempt)">
-        <p style="color:white">Mindestens 6 Zeichen.</p>
-      </ion-item>
+        <p *ngIf="!myForm.controls.token.valid  && (myForm.controls.token.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Mindestens 6 Zeichen.</p>
 
       <ion-item class="set-transparency">
         <ion-label >
@@ -49,9 +45,7 @@
         <ion-input formControlName="password" type="password" placeholder="Passwort"  name="password"></ion-input>
       </ion-item>
 
-      <ion-item class="set-transparency" *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)">
-        <p style="color:white">Mindestens 6 Buchstaben.</p>
-      </ion-item>
+        <p *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Mindestens 6 Buchstaben.</p>
 
     </ion-list>
   </div>
@@ -61,8 +55,8 @@
 
 
   <button id="signup-button6" ion-button style="text-decoration:underline; color:white" clear color="positive" block on-click="goToLogin()">
-    <ion-icon name="arrow-back"></ion-icon>
-    Zurück zum Login
+
+    <p><ion-icon name="arrow-back"></ion-icon>  Zurück zum Login</p>
   </button>
 
 

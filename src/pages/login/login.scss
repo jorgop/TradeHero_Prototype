@@ -1,5 +1,7 @@
 page-login {
-
+p{
+  color:white;
+}
   html, body, .ion-app, .ion-content {
     background-color: transparent;
   }
@@ -45,6 +47,9 @@ page-login {
     padding-left: 30px;
     margin-bottom: 10px;
     border: 1px solid white;
+  }
+  ion-icon{
+    color: white;
   }
 
 }
