@@ -1,17 +1,15 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import {Platform} from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { CameraPreview, CameraPreviewPictureOptions} from '@ionic-native/camera-preview';
 import { Content } from 'ionic-angular';
-import {ActivityPage} from "../activity/activity";
-import {HomePage} from "../home/home";
+import { HomePage } from "../home/home";
 import { RestProvider } from '../../providers/rest/rest';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
-import {LoginPage} from "../login/login";
-import {OcrPage} from "../ocr/ocr";
+import { OcrPage } from "../ocr/ocr";
 
 @Component({
   selector: 'page-scan',
@@ -23,16 +21,12 @@ export class ScanPage {
   private photoStatus : any;
   private controllStatus :any;
   private userID : any;
-  private token : boolean;
-
-  isenabled=true;
-
-  imgbase64ImageFile: any;
-
-  cameraActivitytext: any;
-  controllActivitytext: any;
-  loading: any;
-  imgLoading: any;
+  private loading: any;
+  private imgLoading: any;
+  private isenabled=true;
+  private imgbase64ImageFile: any;
+  private cameraActivitytext: any;
+  private controllActivitytext: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,platform: Platform,private cameraPreview: CameraPreview,public restProvider: RestProvider,public toastCtrl: ToastController,private storage: Storage,public loadingController: LoadingController) {
 
@@ -89,66 +83,11 @@ export class ScanPage {
    * Action of the left button
    */
   controllActivty(){
-
     if(this.controllStatus == false){
         this.navCtrl.push(HomePage);
     }else{
       this.navCtrl.push(OcrPage,{scanedImage:this.imgbase64ImageFile});
-
-
-
-      /*
-
-      var restData = <any>{};
-
-      restData = { "activity":[
-                                { "userID": this.userID ,
-                                  "imgFile": this.imgbase64ImageFile
-                                }
-                              ]
-      };
-
-      this.isenabled=false;
-
-
-
-      //start loader
-      this.imgLoading.present().then(() => {
-        let token;
-
-        this.restProvider.addActivity(restData).then((result) => {
-
-          if (result == true){
-
-            this.storage.get('identity').then((val) => {
-              let identity = <any>{};
-              identity = JSON.parse(val);
-              //console.log(identity['userID']);
-
-
-              //get activities
-              this.restProvider.getActivityData(identity['userID']).then((result) => {
-                this.storage.set('strActivities',JSON.stringify(result));
-              })
-            });
-
-            this.imgLoading.dismiss().then(() => {
-              this.navCtrl.push(ActivityPage);
-            });
-
-          }else {
-            this.isenabled=true;
-            this.sentToast("Bild konnete nicht verarbeitet werden!")
-          }
-        }, (err) => {
-          this.imgLoading.dismiss();
-          console.log('error2 ' + err);
-          this.sentToast("Oooops upload failed");
-          //this.navCtrl.push(LoginPage);
-        })
-      });
-      */
-    }
+    };
   }
 
   /**
@@ -224,7 +163,6 @@ export class ScanPage {
 
       this.loading.dismiss().then(() => {
         console.log('Scan Success');
-        this.sentToast("Scan Success");
       });
     }, (err) => {
       console.log('Scan failed ' + err);
@@ -241,8 +179,8 @@ export class ScanPage {
    */
   takePicture(){
     const pictureOpts: CameraPreviewPictureOptions = {
-      width: 1000,
-      height: 1000,
+      width: 1920,
+      height: 1080,
       quality: 100
     }
 

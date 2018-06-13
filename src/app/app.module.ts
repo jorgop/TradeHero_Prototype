@@ -16,7 +16,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
-import { RedditData } from '../providers/reddit-data/reddit-data';
 import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
 import {HistoryPage} from "../pages/history/history";
@@ -25,11 +24,10 @@ import {HistoryService} from "../services/history.service";
 //import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";
 
-
 import { IonicStorageModule } from '@ionic/storage';
 import {ScanPage} from "../pages/scan/scan";
 import {CameraPreview} from "@ionic-native/camera-preview";
-import {CameraPreviewOptions} from "@ionic-native/camera-preview";
+
 
 @NgModule({
   declarations: [
@@ -71,7 +69,6 @@ import {CameraPreviewOptions} from "@ionic-native/camera-preview";
     SplashScreen,
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
     RestProvider,
-    RedditData,
     ActivityService,
     HistoryService,
     CallNumber,
