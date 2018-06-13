@@ -4,20 +4,50 @@ page-home {
     font-family: "Avenir Next";
   }
 
-  .btn-size {
-    display: block;
-    height: 50px;
-    margin-bottom: 10px;
-  }
-
   .cstmz-padding {
-    padding-top: 60px;
+    padding-top: 75px;
   }
 
-  .button {
-    font-family: "Avenir";
-    color: black;
+
+  .btn-size {
+    height: 135px;
+    margin-bottom: 1px;
+    background-color: #1ab2ff;
+    border: none;
+  }
+
+  .button-bg-pg {
+
+    button {
+      position: relative;
+      text-align: center;
+    }
+
+    .button-icon {
+      position: absolute;
+      top: 17%;
+      font-size: 3.5em;
+      width: 100%;
+      font-weight: bold;
+      color: white;
+    }
+
+    .button-title {
+      font-size: 1.2em;
+      font-family: "Avenir";
+      position: absolute;
+      top: 60%;
+      width: 100%;
+      color: white;
+    }
+
+  }
+
+  .fab {
+    color: #0099e6;
   }
 
 
 }
+
+
