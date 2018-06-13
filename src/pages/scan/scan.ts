@@ -1,17 +1,15 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import {Platform} from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { CameraPreview, CameraPreviewPictureOptions} from '@ionic-native/camera-preview';
 import { Content } from 'ionic-angular';
-import {ActivityPage} from "../activity/activity";
-import {HomePage} from "../home/home";
+import { HomePage } from "../home/home";
 import { RestProvider } from '../../providers/rest/rest';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
-import {LoginPage} from "../login/login";
-import {OcrPage} from "../ocr/ocr";
+import { OcrPage } from "../ocr/ocr";
 
 @Component({
   selector: 'page-scan',
@@ -23,18 +21,12 @@ export class ScanPage {
   private photoStatus : any;
   private controllStatus :any;
   private userID : any;
-  private token : boolean;
-
   private loading: any;
   private imgLoading: any;
-
-  isenabled=true;
-
-  imgbase64ImageFile: any;
-
-  cameraActivitytext: any;
-  controllActivitytext: any;
-
+  private isenabled=true;
+  private imgbase64ImageFile: any;
+  private cameraActivitytext: any;
+  private controllActivitytext: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,platform: Platform,private cameraPreview: CameraPreview,public restProvider: RestProvider,public toastCtrl: ToastController,private storage: Storage,public loadingController: LoadingController) {
 
