@@ -1,3 +1,41 @@
 page-contact {
 
+  .square {
+    height: 35%;
+    text-align: center;
+    padding: 70px 0;
+    margin-bottom: 10%;
+    font-size: 36px;
+    font-family: "Calibri Light";
+    color: red;
+    text-shadow: 1px 1px black;
+    border: 1px solid blue;
+  }
+
+  .button-align {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10%;
+    width: 50%;
+    height: 10%;
+    font-size: 120%;
+  }
+
+  .info {
+    height: 43%;
+    margin-bottom: 10%;
+    font-size: 14px;
+    font-family: "Calibri Light";
+    color: black;
+    border: 1px solid blue;
+    padding-left: 5%;
+  }
+
+  .title {
+    font-size: 16px;
+    font-family: "Calibri";
+    color: #6f6f6f;
+  }
+
 }

@@ -9,14 +9,15 @@
   </ion-navbar>
 </ion-header> -->
 
-<ion-content padding id="page2" class="set-background">
+<ion-content id="page2" class="set-background">
   <div class="square">Willkommen</div>
 
 
   <div [formGroup]="myForm">
 
     <ion-list id="signup-list3">
-      <ion-item class="set-transparency">
+
+      <ion-item id="border" class="set-transparency">
         <ion-label>
           <ion-icon name="md-mail"></ion-icon>
         </ion-label>
@@ -28,7 +29,7 @@
 
 
 
-      <ion-item class="set-transparency">
+      <ion-item id="border1" class="set-transparency">
         <ion-label>
           <ion-icon name="md-lock"></ion-icon>
         </ion-label>
@@ -40,7 +41,7 @@
     </ion-list>
   </div>
   <div style="text-align:center">
-    <button class="anmelde-btn" ion-button round icon="checkmark" (click)="authenticateUser()">Los geht's!</button>
+    <button class="anmelde-btn" ion-button icon="checkmark" (click)="authenticateUser()">Los geht's!</button>
   </div>
   <div id="cart-container6"></div>
   <button id="cart-button4" style="text-decoration:underline; color:white" ion-button clear color="positive" block small on-click="goToSignup()">

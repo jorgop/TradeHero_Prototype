@@ -10,39 +10,60 @@
 </ion-header> -->
 
 
-<ion-content padding id="page7" class="set-background">
+<ion-content id="page7" class="set-background">
 
   <div class="square">Registrierung</div>
 
   <div [formGroup]="myForm">
+
     <ion-list id="signup-list3">
 
-      <ion-item class="set-transparency">
+      <ion-item id="border" class="set-transparency">
+
         <ion-label>
           <ion-icon name="md-mail"></ion-icon>
         </ion-label>
 
-        <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email"></ion-input>
+        <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email">
+        </ion-input>
+
+        <button clear ion-button item-right>
+          <ion-icon name="information-circle"></ion-icon>
+        </button>
+
       </ion-item>
 
         <p *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Bitte korrekte E-Mail-Adresse eingeben.</p>
 
 
       <ion-item class="set-transparency">
+
         <ion-label>
           <ion-icon name="md-barcode"></ion-icon>
         </ion-label>
+
         <ion-input formControlName="token" type="token" placeholder="Token" name="token"></ion-input>
+
+        <button clear ion-button item-right>
+          <ion-icon name="information-circle"></ion-icon>
+        </button>
+
       </ion-item>
 
         <p *ngIf="!myForm.controls.token.valid  && (myForm.controls.token.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Mindestens 6 Zeichen.</p>
 
-      <ion-item class="set-transparency">
+      <ion-item id="border1" class="set-transparency">
+
         <ion-label >
           <ion-icon name="md-lock"></ion-icon>
         </ion-label>
 
         <ion-input formControlName="password" type="password" placeholder="Passwort"  name="password"></ion-input>
+
+        <button clear ion-button item-right>
+          <ion-icon name="information-circle"></ion-icon>
+        </button>
+
       </ion-item>
 
         <p *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Mindestens 6 Buchstaben.</p>
@@ -50,7 +71,7 @@
     </ion-list>
   </div>
   <div style="text-align:center">
-    <button ion-button round icon="checkmark" (click)="activateUser()">Jetzt registrieren!</button>
+    <button ion-button icon="checkmark" (click)="activateUser()">Jetzt registrieren!</button>
   </div>
 
 

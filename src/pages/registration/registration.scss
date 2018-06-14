@@ -31,10 +31,9 @@ page-registration {
   }
 
   .item {
-    border-radius: 14px;
     padding-left: 30px;
-    margin-bottom: 10px;
-    border: 1px solid white;
+    border-left: none;
+    border-right: none;
   }
 
   .input {
@@ -42,8 +41,31 @@ page-registration {
       color:white;
     }
   }
+
+  .input-md {
+    padding-right: 15%;
+  }
+
   ion-icon{
     color:white;
+  }
+
+  .button {
+    box-shadow: none;
+  }
+
+  #border {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+  }
+
+  #border1 {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+  }
+
+  .padding-icon {
+    padding-left: 10%;
   }
 
 

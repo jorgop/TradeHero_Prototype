@@ -1,21 +1,32 @@
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title>Contact</ion-title>
   </ion-navbar>
 
-</ion-header>
+</ion-header> -->
 
 
 <ion-content padding>
-  <h2 align="center">Insuretech XY</h2>
-  <p>
-    In case of any problem feel free to call us
-  </p>
-  <p>
-    <button type="button" ion-button color="primary" (click)="callInsurance()">
-      Call Insurance
-    </button>
-  </p>
+
+  <div class="square">Name XYZ</div>
+
+  <button class="button-align" ion-button icon-start (click)="callInsurance()">
+    <ion-icon name="call"></ion-icon>
+    0123-456789
+  </button>
+
+  <div class="info">
+
+    <p class="title">Öffnungszeiten</p>
+    <p>Montag - Freitag 8-18 Uhr <br> Samstag - Sonntag 9-17 Uhr</p>
+    <p></p>
+    <p class="title">Adresse</p>
+    <p>Name der Versicherung XYZ <br> Beispielstr. 123 <br> 12345 Beispielstadt</p>
+    <p></p>
+    <p>Beispiel@Mail.de</p>
+
+  </div>
+
 
 </ion-content>
