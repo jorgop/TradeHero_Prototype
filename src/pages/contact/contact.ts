@@ -10,7 +10,7 @@ import {e} from "@angular/core/src/render3";
 })
 export class ContactPage {
 
-  constructor(
+  /* constructor(
       public navCtrl: NavController,
       private callSvc: CallNumber) {
         }
@@ -21,7 +21,7 @@ export class ContactPage {
         }).catch((err)=>{
           alert(JSON.stringify(err))
         })
-  }
+  } */ /*
    async callInsurance():Promise<any>{
       try{
       await this.callSvc.callNumber("00491719760565",true).then(()=> {
@@ -31,9 +31,9 @@ export class ContactPage {
       })}finally {
 
       }
-   }
+   } */
 
-   /* constructor(public alertCtrl: AlertController) {}
+   constructor(public alertCtrl: AlertController) {}
 
    callInsurance () {
        const confirm = this.alertCtrl.create({
@@ -54,6 +54,6 @@ export class ContactPage {
            ]
        });
        confirm.present();
-   } */
+   }
 }
 
