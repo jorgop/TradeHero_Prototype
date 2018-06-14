@@ -1,22 +1,5 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Scan Invoice</ion-title>
-  </ion-navbar>
 </ion-header>
-<ion-content>
-  <img src="{{ imgbase64ImageFile }}">
+<ion-content class="set-background">
 </ion-content>
-<ion-footer no-border>
-  <ion-toolbar id="scanFooter">
-    <div class="leftcontainer">
-      <ion-buttons>
-        <button ion-button [ngClass]="{class:isenabled,class2:!isenabled}" on-click="controllActivty()">{{this.controllActivitytext}}</button>
-      </ion-buttons>
-    </div>
-    <div class="rightcontainer">
-      <ion-buttons>
-        <button ion-button on-click="cameraActivity()">{{this.cameraActivitytext}}</button>
-      </ion-buttons>
-    </div>
-  </ion-toolbar>
-</ion-footer>
+
