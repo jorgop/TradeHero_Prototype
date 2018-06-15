@@ -1,3 +1,22 @@
 page-history {
+  .cl-open {
+    color: darkorange;
+  }
+  .cl-closed {
+    color: green;
+  }
+  .card-closed {
+    background-color: #dddddd;
+    border: 2px solid #aaaaaa;
+    border-radius: 35px;
+    margin-bottom: 10px;
 
+  }
+
+  .card-open {
+    border: 2px solid #aaaaaa;
+    border-radius: 35px;
+    margin-bottom: 10px;
+
+  }
 }
