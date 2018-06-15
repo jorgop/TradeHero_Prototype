@@ -18,12 +18,12 @@ page-home {
 
   .btn-size {
     height: 24%;
-    border: none;
+    border: 0px;
   }
 
 
   #img1 {
-    background-image: url('../assets/imgs/kamera.JPG');
+    background: radial-gradient(#F0F8FF 2%, #e6f7ff 10%, #cceeff 60%, #b3e6ff 90%);
     background-size: 100%;
     background-repeat: no-repeat;
   }
@@ -38,9 +38,18 @@ page-home {
     color: white;
   }
 
+  #bg-image1 {
+    position: relative;
+    height: auto;
+    width: 70%;
+    overflow: hidden;
+    right: 20%;
+  }
+
+
 
   #img2 {
-    background-image: url('../assets/imgs/profil.JPG');
+    background: radial-gradient(#E0FFFF 1%, #B0E0E6 30%, #48D1CC 90%);
     background-size: 100%;
     background-repeat: no-repeat;
   }
@@ -55,9 +64,17 @@ page-home {
     color: white;
   }
 
+  #bg-image2 {
+    position: relative;
+    height: auto;
+    width: 60%;
+    overflow: hidden;
+    left: 10%;
+  }
+
 
   #img3 {
-    background-image: url('../assets/imgs/docs.JPG');
+    background: radial-gradient(#F0F8FF 2%, #e6f7ff 10%, #cceeff 60%, #b3e6ff 90%);
     background-size: 100%;
     background-repeat: no-repeat;
   }
@@ -67,14 +84,23 @@ page-home {
     font-family: "Bangla MN";
     position: absolute;
     top: 30%;
-    left: 15%;
+    left: 20%;
     width: 100%;
     color: white;
   }
 
+  #bg-image3 {
+    position: relative;
+    height: auto;
+    width: 65%;
+    overflow: hidden;
+    right: 40%;
+    bottom: 1%;
+  }
+
 
   #img4 {
-    background-image: url('../assets/imgs/contact.JPG');
+    background: radial-gradient(#E0FFFF 1%, #B0E0E6 30%, #48D1CC 90%);
     background-size: 100%;
     background-repeat: no-repeat;
   }
@@ -84,9 +110,18 @@ page-home {
     font-family: "Bangla MN";
     position: absolute;
     top: 30%;
-    right: 20%;
+    right: 25%;
     width: 100%;
     color: white;
+  }
+
+  #bg-image4 {
+    position: relative;
+    height: auto;
+    width: 90%;
+    overflow: hidden;
+    left: 40%;
+    bottom: 22%;
   }
 
 
