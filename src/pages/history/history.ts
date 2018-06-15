@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController} from "ionic-angular";
+import {LoadingController, NavController, ToastController} from "ionic-angular";
 import {NavParams} from "ionic-angular";
 import {HistoryService} from "../../services/history.service";
 import {ActivityService} from "../../services/activity.service";
@@ -12,18 +12,27 @@ import {RestProvider} from "../../providers/rest/rest";
 })
 export class HistoryPage {
 
-    ticketID : any;
-    history: {head:string,body:string}[] = [];
+    private ticketID : any;
+    history: {head:string,body:string,imgFile:string,cardClass: string}[] = [];
+
+    private historyLoading : any;
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         private historyService: HistoryService,
         private storage: Storage,
-        public restProvider: RestProvider) {
+        public restProvider: RestProvider,
+        public loadingController: LoadingController,
+        public toastCtrl: ToastController) {
 
         this.ticketID = this.navParams.get('ticketID');
         console.log("ticket: " + this.ticketID);
+
+      //loading for sending data
+      this.historyLoading = this.loadingController.create({
+        content: 'Bild wird verarbeitet'
+      });
     }
 
   ionViewWillEnter(){
@@ -35,6 +44,9 @@ export class HistoryPage {
    * Update local storage if the REST-Service can be reached, prepare data into JSON
    */
   updateLocalStorageAndPrepareData(){
+
+    this.historyLoading.present();
+
     //get user ID from storage
     this.storage.get('identity').then((val) => {
       let identity = <any>{};
@@ -42,6 +54,7 @@ export class HistoryPage {
 
       //get activities from REST - set to soratge and push to list
       this.restProvider.getTicketData(this.ticketID).then((result) => {
+
         //set activities to Storage
         this.storage.set(this.ticketID,JSON.stringify(result));
 
@@ -50,6 +63,10 @@ export class HistoryPage {
           let history = <any>{};
           history = JSON.parse(val);
           this.addCards(history);
+
+          this.historyLoading.dismiss().then(() => {
+            console.log('History loaded');
+          });
         });
       }, (err) => {
 
@@ -58,6 +75,11 @@ export class HistoryPage {
           let history = <any>{};
           history = JSON.parse(val);
           this.addCards(history);
+
+          this.historyLoading.dismiss().then(() => {
+            console.log('Verlauf konnte nicht geladen werden ;( ');
+            this.sentToast("Scan failed");
+          });
         });
       });
     });
@@ -65,46 +87,48 @@ export class HistoryPage {
 
   addCards(data) {
 
+
     //loop through the activityList
     for (let i in data.activityList) {
       let currentObject = data.activityList[i];
 
+      //console.log(currentObject);
+
       if (currentObject['ticketID'] == this.ticketID){
-        this.history.push({head: 'Title',body: currentObject.imgFile});
-      }
+
+      for (let j in currentObject['history']) {
 
 
-      /*
-      //get values from a current activity
-      Object.keys(currentObject).forEach(key => {
-        var historyCurrentObject = currentObject;
-        var currentTicketID = currentObject["ticketID"]
 
-        /**
-        var name = currentObject["ticketID"];
-        var date = currentObject["createDate"];
-        var status = currentObject["ticketStatus"];
-        var statusText = "";
-
-
-        if (status == 0) {
-          statusText = "Offen";
-        } else if (status == 1) {
-          statusText = "Abgeschlossen";
-        } else {
-          statusText = "Abgelehnt";
-        }
-
-
-        // Add activity to list
-        if (key == this.ticketID) {
-          this.history.push({ticketID: currentTicketID.toString()});
-          console.log("myObj",historyCurrentObject);
-
-
-        }
-      });
-      */
+        let currentHistory = currentObject['history'][j];
+          var statusText;
+          var statusClass;
+          var historyClass;
+          if (currentHistory['stateStatus'] == 0){
+            statusText = "Offen";
+            statusClass = "cl-open";
+            historyClass = "card-open";
+          }else {
+            statusText = "Abgeschlossen";
+            statusClass = "cl-closed";
+            historyClass = "card-closed";
+          };
+          this.history.push({head: 'Status: ' + '<b>' + statusText +'</b>',body: '<div class='+statusClass+'>' + currentHistory['stateText'] + '</div>', imgFile: currentObject.imgFile,cardClass: historyClass  });
+        };
+      };
     }
+  }
+
+  /**
+   * View a toast message
+   * @param message Toast Text
+   */
+  sentToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

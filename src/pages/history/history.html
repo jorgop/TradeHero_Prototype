@@ -4,16 +4,29 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-
-  <ion-card *ngFor="let history of history">
-
+  <ion-card>
     <ion-card-header>
-      <!-- <img src="assets/imgs/lp.png"/> -->
-      <img src="{{ history.body }}">
+      Ticket-ID: {{ticketID}}
+      <!-- <img src="{{ history.body }}"> -->
+    </ion-card-header>
+    <ion-card-content>
+      <p>Erstellt am:
+      <br>
+      Abgesclossen am:
+      <br><br>
+      Rechungsbetrag:
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor="let history of history " class={{history.cardClass}} >
+    <ion-card-header>
+     <!-- <img src="{{ history.body }}"> -->
       <div [innerHtml]=history.head></div>
     </ion-card-header>
     <ion-card-content>
-      <!-- <div [innerHtml]=history.body></div> -->
+      <div [innerHtml]=history.body></div>
     </ion-card-content>
   </ion-card>
+
 </ion-content>
