@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import {CallNumber} from "@ionic-native/call-number";
 import {AlertController} from 'ionic-angular';
 import {e} from "@angular/core/src/render3";
+import {ActivityPage} from "../activity/activity";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-contact',
@@ -33,7 +35,10 @@ export class ContactPage {
       }
    } */
 
-   constructor(public alertCtrl: AlertController) {}
+   constructor(
+       public alertCtrl: AlertController,
+       public navCtrl: NavController) {
+   }
 
    callInsurance () {
        const confirm = this.alertCtrl.create({
@@ -55,5 +60,9 @@ export class ContactPage {
        });
        confirm.present();
    }
+
+    goToHome(params){
+        this.navCtrl.push(HomePage);
+    }
 }
 
