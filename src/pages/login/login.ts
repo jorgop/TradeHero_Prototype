@@ -51,10 +51,12 @@ export class LoginPage {
         //convert result to type
         let restResult = <any>{};
         restResult = result;
-
+          console.log(result);
         if(restResult.data[0].login == "true"){
-          this.storage.clear();
+
+          //this.storage.clear();
           this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
+
 
           this.addDataToLocalStorage()
           this.navCtrl.push(HomePage);
@@ -77,7 +79,7 @@ export class LoginPage {
     this.storage.get('identity').then((val) => {
       let identity = <any>{};
       identity = JSON.parse(val);
-      console.log(identity['userID']);
+      //console.log(identity['userID']);
 
       //get user data
       this.restProvider.getUserData(identity['userID']).then((result) => {
