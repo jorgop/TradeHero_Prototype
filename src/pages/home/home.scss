@@ -1,19 +1,15 @@
 page-home {
 
-  .title {
-    font-family: "Avenir Next";
-  }
-
   .cstmz-padding {
     padding-top: 22%;
     height: 100%;
 
   }
 
+
   .button-md {
     margin: 0px;
   }
-
 
 
   .btn-size {
@@ -30,7 +26,7 @@ page-home {
 
   #title1 {
     font-size: 200%;
-    font-family: "Bangla MN";
+    font-family: "Century Gothic";
     position: absolute;
     top: 30%;
     left: 20%;
@@ -47,7 +43,6 @@ page-home {
   }
 
 
-
   #img2 {
     background: radial-gradient(#E0FFFF 1%, #B0E0E6 30%, #48D1CC 90%);
     background-size: 100%;
@@ -56,7 +51,7 @@ page-home {
 
   #title2 {
     font-size: 2.0em;
-    font-family: "Bangla MN";
+    font-family: "Century Gothic";
     position: absolute;
     top: 30%;
     right: 20%;
@@ -81,7 +76,7 @@ page-home {
 
   #title3 {
     font-size: 2.0em;
-    font-family: "Bangla MN";
+    font-family: "Century Gothic";
     position: absolute;
     top: 30%;
     left: 20%;
@@ -107,7 +102,7 @@ page-home {
 
   #title4 {
     font-size: 2.0em;
-    font-family: "Bangla MN";
+    font-family: "Century Gothic";
     position: absolute;
     top: 30%;
     right: 25%;
@@ -124,27 +119,6 @@ page-home {
     bottom: 22%;
   }
 
-
-
-
-  .button-bg-pg {
-
-    button {
-      position: relative;
-      text-align: center;
-    }
-
-
-    .button-title {
-      font-size: 3.0em;
-      font-family: "Bangla MN";
-      position: absolute;
-      top: 30%;
-      width: 100%;
-      color: white;
-    }
-
-  }
 
   .fab {
     color: #0099e6;
