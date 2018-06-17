@@ -134,7 +134,9 @@ export class HistoryPage {
     hisRefresh(refresher) {
         console.log('Begin async operation', refresher);
         this.history = [];
-        this.updateLocalStorageAndPrepareData();
+        //TODO: refresh histroy items
+        //this.updateLocalStorageAndPrepareData();
+
         console.log('Async operation has ended');
         refresher.complete();
     }
