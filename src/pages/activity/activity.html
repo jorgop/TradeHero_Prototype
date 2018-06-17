@@ -9,6 +9,35 @@
             <ion-title>Activity</ion-title>
         </ion-navbar>
     </div>
+</ion-header>
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="actRefresh($event)">
+        <ion-refresher-content pullingText="arrow-dropdown"
+                               pullingText="Aktualisieren"
+                               refreshingSpinner="circles"
+                               refreshingText="wird aktualisiert...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <div>
+    <ion-card>
+        <ion-card-header>
+            <section class="container">
+                <div class="left-half">
+                    <article>
+                        <p>Offen: </p>
+                    </article>
+                </div>
+                <div class="right-half">
+                    <article>
+                        <p>Bezahlt: </p>
+                    </article>
+                </div>
+            </section>
+        </ion-card-header>
+    </ion-card>
+    </div>
+    <h2 align="center">Meine Rechnungen</h2>
     <div>
         <ion-segment color="royal">
             <ion-segment-button value="all" (click)="setStatus('all')">
@@ -25,17 +54,6 @@
             </ion-segment-button>
         </ion-segment>
     </div>
-</ion-header>
-
-<ion-content padding>
-    <ion-refresher (ionRefresh)="actRefresh($event)">
-        <ion-refresher-content pullingText="arrow-dropdown"
-                               pullingText="Aktualisieren"
-                               refreshingSpinner="circles"
-                               refreshingText="wird aktualisiert...">
-        </ion-refresher-content>
-    </ion-refresher>
-    <h2>Meine Rechnungen</h2>
     <div >
         <ion-list  inset>
             <ion-item *ngFor="let activity of activity">
