@@ -44,19 +44,27 @@ export class ProfilePage {
   ionViewWillEnter() {
 
 
+    this.storage.get('identity').then((val) => {
+      let identity = <any>{};
+      identity = JSON.parse(val);
 
 
-      this.restProvider.getUserData(this.userID).then((result) => {
-          //set activities to Storage
-          this.storage.set('user',JSON.stringify(result));
+      this.restProvider.getUserData(identity['userID']).then((result) => {
+        //set activities to Storage
+        this.storage.set('user',JSON.stringify(result));
 
-         this.updateUserDataInputfields();
+        this.updateUserDataInputfields();
 
       }, (err) => {
 
-          this.updateUserDataInputfields()
-          // daten ins html aus storage wenn rest nicht geht
+        this.updateUserDataInputfields()
+        // daten ins html aus storage wenn rest nicht geht
       });
+
+
+    });
+
+
 
 
   }
