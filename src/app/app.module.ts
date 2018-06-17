@@ -18,9 +18,9 @@ import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
-import {HistoryPage} from "../pages/history/history";
-import {HistoryService} from "../services/history.service";
-import {PhotoViewer} from "@ionic-native/photo-viewer";
+import { HistoryPage } from "../pages/history/history";
+import { HistoryService } from "../services/history.service";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 //import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";

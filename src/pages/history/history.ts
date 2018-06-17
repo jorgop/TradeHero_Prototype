@@ -131,4 +131,11 @@ export class HistoryPage {
     });
     toast.present();
   }
+    hisRefresh(refresher) {
+        console.log('Begin async operation', refresher);
+        this.history = [];
+        this.updateLocalStorageAndPrepareData();
+        console.log('Async operation has ended');
+        refresher.complete();
+    }
 }
