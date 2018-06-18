@@ -44,6 +44,7 @@ export class ActivityPage {
         this.activity=[];
         this.updateLocalStorageAndPrepareData();
         this.status = param;
+
     }
 
     /**
