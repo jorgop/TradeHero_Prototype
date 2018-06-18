@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import { AlertController } from 'ionic-angular';
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the ProfilePage page.
@@ -115,6 +116,8 @@ export class ProfilePage {
       });
   }
 
-
+    goToHome(params){
+        this.navCtrl.push(HomePage);
+    }
 
 }

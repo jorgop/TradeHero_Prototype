@@ -3,67 +3,25 @@ page-profile {
   hr{
     margin:0px;
   }
-  .headerimg{
-    background-image: url('../assets/imgs/bluewater.JPG');
-    height:150px;
+  .square {
+    position: relative;
+    text-align: center;
+    padding: 10%;
+    margin-bottom: 10%;
+    font-size: 40px;
+    font-family: "Calibri Light";
+    color: white;
+    background: #15B2A2;
+    text-shadow: 1px 1px black;
     width: 100%;
-    position:relative;
-    z-index:10;
+  }
+  .color-header {
+    background: #15B2A2;
   }
 
-  .profileimg{
-    border-radius:50%;
-    height:10em;
-    width:10em;
-    background-position:center;
-    position:absolute;
-    z-index: 12;
-    margin-left:auto;
-    margin-right:auto;
-    left:0;
-    right:0;
-    margin-top:80px;
+  .color-btn-header {
+    color: white;
   }
-
-  .description{
-    margin-top:7em;
-  }
-
-  .email, .social, .description{
-    position:relative;
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .email{
-    margin-top:50px;
-    margin-bottom:40px;
-  }
-
-  .email p{
-    text-align:center;
-  }
-  /*-------social icons-------*/
-  .social{
-    margin-top:50px;
-    margin-left:auto;
-    margin-right:auto;
-    width:300px;
-  }
-  .socialicon{
-    height:50px;
-    padding:10px;
-  }
-  /*------fun font stuff----------*/
-  h1{
-    padding-top: 1em;
-    text-align:center;
-    margin-bottom:0;
-    margin-top:0;
-    font-weight:100;
-    color:white;
-  }
-
   ion-icon{
     color:#424242;
     font-size: 1em;
