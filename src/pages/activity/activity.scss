@@ -1,3 +1,46 @@
 page-activity {
+  .container {
+    display: grid;
+  }
 
+  .left-half {
+    grid-column: 1;
+  }
+
+  .right-half {
+    grid-column: 2;
+  }
+  .cl-open {
+    color: darkorange;
+  }
+  .cl-closed {
+    color: green;
+  }
+  .actList{
+    grid-column: 2;
+  }
+  .actOpen{
+    grid-column: 1;
+    margin: auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background: gold;
+  }
+  .actPaid{
+    grid-column: 1;
+    margin: auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background: green;
+  }
+  .actDenied{
+    grid-column: 1;
+    margin: auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background: red;
+  }
 }

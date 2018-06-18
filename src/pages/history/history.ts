@@ -37,15 +37,17 @@ export class HistoryPage {
 
   ionViewWillEnter(){
     this.history = this.historyService.getCard();
-    this.updateLocalStorageAndPrepareData();
+    this.updateLocalStorageAndPrepareData(true);
   }
 
   /**
    * Update local storage if the REST-Service can be reached, prepare data into JSON
    */
-  updateLocalStorageAndPrepareData(){
+  updateLocalStorageAndPrepareData(loadRequired){
 
-    this.historyLoading.present();
+    if(loadRequired == true){
+      this.historyLoading.present();
+    };
 
     //get user ID from storage
     this.storage.get('identity').then((val) => {
@@ -64,9 +66,11 @@ export class HistoryPage {
           history = JSON.parse(val);
           this.addCards(history);
 
-          this.historyLoading.dismiss().then(() => {
-            console.log('History loaded');
-          });
+          if(loadRequired == true) {
+            this.historyLoading.dismiss().then(() => {
+              console.log('History loaded');
+            });
+          };
         });
       }, (err) => {
 
@@ -75,11 +79,12 @@ export class HistoryPage {
           let history = <any>{};
           history = JSON.parse(val);
           this.addCards(history);
-
-          this.historyLoading.dismiss().then(() => {
-            console.log('Verlauf konnte nicht geladen werden ;( ');
-            this.sentToast("Scan failed");
-          });
+          if(loadRequired == true) {
+            this.historyLoading.dismiss().then(() => {
+              console.log('Verlauf konnte nicht geladen werden ;( ');
+              this.sentToast("Scan failed");
+            });
+          };
         });
       });
     });
@@ -131,4 +136,16 @@ export class HistoryPage {
     });
     toast.present();
   }
+
+  /**
+   * History refresh by pull down
+   * @param refresher
+   */
+  hisRefresh(refresher) {
+        console.log('Begin async operation', refresher);
+        this.history = [];
+        this.updateLocalStorageAndPrepareData(false);
+        console.log('Async operation has ended');
+        refresher.complete();
+    }
 }
