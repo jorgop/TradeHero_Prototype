@@ -17,14 +17,7 @@ export class LoginPage {
   submitAttempt: boolean = false;
   private myForm : FormGroup;
 
-  constructor(public navCtrl: NavController,
-              public toastCtrl: ToastController,
-              public restProvider: RestProvider,
-              private storage: Storage,
-              private formBuilder: FormBuilder) {
-
-    //this.storage.clear();
-
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public restProvider: RestProvider, private storage: Storage,private formBuilder: FormBuilder) {
     this.myForm = formBuilder.group({
       email: ['',Validators.compose([Validators.required, Validators.email])],
       password : ['', Validators.compose([Validators.minLength(6), Validators.required])],
@@ -58,11 +51,13 @@ export class LoginPage {
         //convert result to type
         let restResult = <any>{};
         restResult = result;
-          //console.log(result);
-        if(restResult.data[0].login == "true"){
 
+        if(restResult.data[0].login == "true"){
+          this.storage.clear();
           this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
-          this.navCtrl.push(HomePage,{userID: restResult.data[0].userID});
+
+          this.addDataToLocalStorage()
+          this.navCtrl.push(HomePage);
         }else{
           this.sentToast("Wrong password!");
         }
@@ -71,7 +66,29 @@ export class LoginPage {
         this.sentToast("Oooops registration failed");
         //this.navCtrl.push(LoginPage);
       });
-    };
+    }
+  }
+
+  /**
+   * set data form rest to local storage
+   */
+  addDataToLocalStorage(){
+
+    this.storage.get('identity').then((val) => {
+      let identity = <any>{};
+      identity = JSON.parse(val);
+      console.log(identity['userID']);
+
+      //get user data
+      this.restProvider.getUserData(identity['userID']).then((result) => {
+        this.storage.set('user',JSON.stringify(result));
+      })
+
+      //get activities
+      this.restProvider.getActivityData(identity['userID']).then((result) => {
+        this.storage.set('strActivities',JSON.stringify(result));
+      })
+    });
   }
 
   /**
