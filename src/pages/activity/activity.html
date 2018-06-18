@@ -1,50 +1,24 @@
 <ion-header>
-    <div>
-        <ion-navbar hideBackButton>
-            <ion-buttons left>
-                <button ion-button (click)="goToHome()">
-                    Home
-                </button>
-            </ion-buttons>
-            <ion-title>Activity</ion-title>
-        </ion-navbar>
-    </div>
-    <div>
-        <ion-segment color="royal">
-            <ion-segment-button value="all" (click)="setStatus('all')">
-                Alle
-            </ion-segment-button>
-            <ion-segment-button value="open" (click)="setStatus('open')">
-                Offen
-            </ion-segment-button>
-            <ion-segment-button value="paid" (click)="setStatus('paid')">
-                Bezahlt
-            </ion-segment-button>
-            <ion-segment-button value="denied" (click)="setStatus('denied')">
-                Abgelehnt
-            </ion-segment-button>
-        </ion-segment>
-    </div>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button (click)="goToHome()">
+          Home
+        </button>
+      </ion-buttons>
+        <ion-title>Activity</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-refresher (ionRefresh)="actRefresh($event)">
-        <ion-refresher-content pullingText="arrow-dropdown"
-                               pullingText="Aktualisieren"
-                               refreshingSpinner="circles"
-                               refreshingText="wird aktualisiert...">
-        </ion-refresher-content>
-    </ion-refresher>
     <h2>Meine Rechnungen</h2>
-    <div >
-        <ion-list  inset>
-            <ion-item *ngFor="let activity of activity">
-                Bearbeitungs-ID: {{activity.ticketID}} <br>
-                Datum: {{activity.date | date: 'dd.MM.yyyy' }} <br>
-                Status: {{activity.ticketStatus}}
-                <button ion-button outline item-end (click)="goToHistoryPage(activity.ticketID)">Mehr Infos!</button>
-            </ion-item>
-        </ion-list>
-
-    </div>
+    <p>
+    </p>
+    <ion-list inset>
+        <ion-item *ngFor="let activity of activity">
+          Bearbeitungs-ID: {{activity.ticketID}} <br>
+          Datum: {{activity.date | date: 'dd.MM.yyyy' }} <br>
+          Status: {{activity.ticketStatus}}
+          <button ion-button outline item-end (click)="goToHistoryPage(activity.ticketID)">Mehr Infos!</button>
+        </ion-item>
+    </ion-list>
 </ion-content>

@@ -21,15 +21,7 @@
     </div>
 
     <div class="description">
-      <h2>Stammdaten von {{fname}} </h2>
-        <div [formGroup]="stammdatenForm">
-        <ion-label color="primary" stacked>Name</ion-label>
-        <ion-input formControlName="firstName" type="text" ></ion-input>
-        <hr>
-        <ion-label color="primary" stacked>Nachname</ion-label >
-        <ion-input formControlName="lastName" type="text" disabled="true"></ion-input>
-        </div>
-        <button ion-button on-click="sendUserData()">Daten abschicken</button>
+      <h2>Stammdaten</h2>
       <hr>
       <p>This is a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget eros aliquam, rutrum nisl et, pharetra eros. Cras dapibus urna eu ullamcorper dapibus. Aenean at lacus dictum, vulputate lacus eget, mattis libero. Aliquam erat volutpat. Aliquam consequat venenatis turpis.</p>
       <h2>Kontakt<a><ion-icon ios="ios-build" md="ios-build"></ion-icon></a></h2>
