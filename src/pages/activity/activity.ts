@@ -11,7 +11,7 @@ import {HomePage} from "../home/home";
     templateUrl: 'activity.html'
 })
 export class ActivityPage {
-    activity: {date: string, ticketID:string,ticketStatus: string}[] = [];
+    activity: {date: string, ticketID:string,ticketStatus: string, iconName: String, cssClass: String}[] = [];
     // Erstes Segment default wählen
     status : string;
 
@@ -95,63 +95,65 @@ export class ActivityPage {
                 var name = currentObject["ticketID"];
                 var date = currentObject["createDate"];
                 var status = currentObject["ticketStatus"];
+                var iconName = "";
                 var statusText = "";
+                var cssClass = "";
 
                 if (status == 0) {
                     statusText = "Offen";
+                    iconName = "ios-disc";
+                    cssClass = "actOpen";
                 } else if (status == 1) {
                     statusText = "Bezahlt";
+                    iconName = "ios-checkmark-circle";
+                    cssClass = "actPaid";
                 } else if (status == 2) {
                     statusText = "Abgelehnt";
+                    iconName = "ios-close-circle";
+                    cssClass = "actDenied";
                 }
 
                 // Add activity to list
 
                 // Add Value to segment all
-                if (key == "ticketID") {
-                    if (this.status == "all") {
-                        this.activity.push({
-                            date: date.toString(),
-                            ticketID: name.toString(),
-                            ticketStatus: statusText
-                        });
-                    }
+                if (key == "ticketID" && this.status == "all") {
+                    this.activity.push({
+                        date: date.toString(),
+                        ticketID: name.toString(),
+                        ticketStatus: statusText,
+                        iconName: iconName,
+                        cssClass: cssClass
+                    });
                 }
                 // Add value to segment offen
-                if (key == "ticketID") {
-                    if (this.status == "open") {
-                        if (statusText == "Offen") {
-                            this.activity.push({
-                                date: date.toString(),
-                                ticketID: name.toString(),
-                                ticketStatus: statusText
-                            });
-                        }
-                    }
+                if (key == "ticketID" && this.status == "open" && statusText == "Offen") {
+                    this.activity.push({
+                        date: date.toString(),
+                        ticketID: name.toString(),
+                        ticketStatus: statusText,
+                        iconName: iconName,
+                        cssClass: cssClass
+                    });
                 }
                 // Add Value to segment paid
-                if (key == "ticketID") {
-                    if (this.status == "paid") {
-                        if (statusText == "Bezahlt") {
-                            this.activity.push({
-                                date: date.toString(),
-                                ticketID: name.toString(),
-                                ticketStatus: statusText
-                            });
-                        }
-                    }
+                if (key == "ticketID"&& this.status == "paid" && statusText == "Bezahlt") {
+                    this.activity.push({
+                        date: date.toString(),
+                        ticketID: name.toString(),
+                        ticketStatus: statusText,
+                        iconName: iconName,
+                        cssClass: cssClass
+                    });
                 }
                 // Add Value to segment denied
-                if (key == "ticketID") {
-                    if (this.status == "denied") {
-                        if (statusText == "Abgelehnt") {
-                            this.activity.push({
-                                date: date.toString(),
-                                ticketID: name.toString(),
-                                ticketStatus: statusText
-                            });
-                        }
-                    }
+                if (key == "ticketID" && this.status == "denied" && statusText == "Abgelehnt") {
+                    this.activity.push({
+                        date: date.toString(),
+                        ticketID: name.toString(),
+                        ticketStatus: statusText,
+                        iconName: iconName,
+                        cssClass: cssClass
+                    });
                 }
             });
         }
