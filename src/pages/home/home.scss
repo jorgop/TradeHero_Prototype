@@ -9,22 +9,26 @@ page-home {
     background: white;
   }
 
+  .shadow {
+    box-shadow: 2px 2px 5px lightgray;
+  }
+
   .square {
     height: 35%;
     text-align: center;
     padding: 70px 0;
     margin-bottom: 10%;
     font-size: 30px;
-    font-family: "Calibri Light";
+    font-family: "Comic Sans MS";
     color: red;
-    text-shadow: 1px 1px black;
     border: 1px solid blue;
   }
 
   /*buttons */
 
   .fab {
-    color: #0099e6;
+    color: white;
+    background: #FFB623;
   }
 
   .wrapper {
@@ -72,6 +76,7 @@ page-home {
             position: absolute;
             font-size: 1.5em;
             padding-top: 55px;
+            font-family: "Comic Sans MS";
           }
 
           .place-icon2 {

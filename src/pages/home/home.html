@@ -9,84 +9,104 @@
 
 
 
-<div class="cstmz-padding">
+  <div class="cstmz-padding">
 
-  <ion-fab right top>
-    <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
-    <ion-fab-list side="left">
-      <button ion-fab><ion-icon name="power"></ion-icon></button>
-      <button ion-fab><ion-icon name="information-circle"></ion-icon></button>
-      <button ion-fab><ion-icon name="settings"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
+    <ion-fab right top>
+      <button class="shadow" ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
+      <ion-fab-list side="left">
+        <button class="shadow" ion-fab><ion-icon name="power"></ion-icon></button>
+        <button class="shadow" ion-fab><ion-icon name="information-circle"></ion-icon></button>
+        <button class="shadow" ion-fab><ion-icon name="settings"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>
 
 
-  <div class="square">Name XYZ</div>
+    <div class="square">Name XYZ</div>
 
-  <div class="wrapper">
+    <div class="wrapper">
 
-    <div class="left-container">
+      <div class="left-container">
 
-      <div class="btn-size">
-        <button clear class="cstmz-btn" ion-button icon-only on-click="goToScann()">
-          <ion-icon class="place-icon" name="camera"></ion-icon>
-          <div class="place-title">Scan</div>
-         </button>
+        <div class="btn-size">
+          <button clear class="cstmz-btn" ion-button icon-only on-click="goToScann()">
+            <ion-icon class="place-icon" name="camera"></ion-icon>
+            <div class="place-title">Scan</div>
+          </button>
+        </div>
+
+        <div class="btn-size">
+          <button clear class="cstmz-btn" ion-button icon-only on-click="goToProfile()">
+            <ion-icon class="place-icon" name="person"></ion-icon>
+            <div class="place-title">Profil</div>
+          </button>
+        </div>
+
       </div>
 
-      <div class="btn-size">
-        <button clear class="cstmz-btn" ion-button icon-only on-click="goToProfile()">
-          <ion-icon class="place-icon" name="person"></ion-icon>
-          <div class="place-title">Profil</div>
-        </button>
+      <div class="right-container">
+
+        <div class="btn-size">
+          <button clear class="cstmz-btn" ion-button icon-only on-click="goToActivity()">
+            <ion-icon class="place-icon2" name="paper"></ion-icon>
+            <div class="place-title">Übersicht</div>
+          </button>
+        </div>
+
+        <div class="btn-size">
+          <button clear class="cstmz-btn" ion-button icon-only on-click="goToContact()">
+            <ion-icon class="place-icon2" name="call"></ion-icon>
+            <div class="place-title">Kontakt</div>
+          </button>
+        </div>
+
       </div>
 
     </div>
 
-    <div class="right-container">
+    <!--
 
-      <div class="btn-size">
-        <button clear class="cstmz-btn" ion-button icon-only on-click="goToActivity()">
-          <ion-icon class="place-icon2" name="paper"></ion-icon>
-          <div class="place-title">Übersicht</div>
-        </button>
-      </div>
 
-      <div class="btn-size">
-        <button clear class="cstmz-btn" ion-button icon-only on-click="goToContact()">
-          <ion-icon class="place-icon2" name="call"></ion-icon>
-          <div class="place-title">Kontakt</div>
-        </button>
-      </div>
+      <button ion-button full outline class="btn-size" on-click="goToScann()">
+        <div class="card-title">Scan</div>
+      </button>
 
-    </div>
+      <button ion-button icon-left full outline class="btn-size" on-click="goToProfile()">
+        <div class="card-title">Profil</div>
+      </button>
+
+      <button ion-button icon-left full outline class="btn-size" on-click="goToActivity()">
+        <div class="card-title">Übersicht</div>
+      </button>
+
+      <button ion-button icon-left full outline class="btn-size" on-click="goToContact()">
+        <div class="card-title">Kontakt</div>
+    =======
+      <button id="img1" ion-button full outline class="btn-size" on-click="goToScann()">
+        <div id="title1">Scan</div>
+        <img id="bg-image1" src="assets/imgs/camera.png"/>
+      </button>
+
+      <button id ="img2" ion-button icon-left full outline class="btn-size" on-click="goToProfile()">
+        <div id="title2">Mein Profil</div>
+        <img id="bg-image2" src="assets/imgs/profil.png"/>
+      </button>
+
+      <button id ="img3" ion-button icon-left full outline class="btn-size" on-click="goToActivity()">
+        <div id="title3">Aktivitäten</div>
+        <img id="bg-image3" src="assets/imgs/docs.png"/>
+      </button>
+
+      <button id ="img4" ion-button icon-left full outline class="btn-size" on-click="goToContact()">
+        <div id="title4">Kontakt</div>
+        <img id="bg-image4" src="assets/imgs/contact.png"/>
+    >>>>>>> origin/master
+      </button>
+
+      -->
+
+
+
 
   </div>
-
-<!--
-
-
-  <button ion-button full outline class="btn-size" on-click="goToScann()">
-    <div class="card-title">Scan</div>
-  </button>
-
-  <button ion-button icon-left full outline class="btn-size" on-click="goToProfile()">
-    <div class="card-title">Profil</div>
-  </button>
-
-  <button ion-button icon-left full outline class="btn-size" on-click="goToActivity()">
-    <div class="card-title">Übersicht</div>
-  </button>
-
-  <button ion-button icon-left full outline class="btn-size" on-click="goToContact()">
-    <div class="card-title">Kontakt</div>
-  </button>
-
-  -->
-
-
-
-
-</div>
 
 </ion-content>

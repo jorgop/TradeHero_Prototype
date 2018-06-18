@@ -1,15 +1,51 @@
 page-contact {
 
+  .color-header {
+    background: #15B2A2;
+  }
+
+  .color-btn-header {
+    color: white;
+  }
+
   .square {
-    height: 35%;
+    position: relative;
     text-align: center;
-    padding: 70px 0;
+    padding: 10%;
     margin-bottom: 10%;
-    font-size: 36px;
+    font-size: 40px;
     font-family: "Calibri Light";
-    color: red;
+    color: white;
+    background: #15B2A2;
     text-shadow: 1px 1px black;
-    border: 1px solid blue;
+    width: 100%;
+  }
+
+  .shadow {
+    box-shadow: 2px 2px 5px lightgray;
+  }
+
+  .fab {
+    color: white;
+    background: #FFB623;
+    width: 3.5em;
+    height: 3.5em;
+  }
+
+  .fab-in-list {
+    margin: 8px 0;
+    width: 2.2em;
+    height: 2.2em;
+  }
+
+  .fab ion-icon {
+    font-size: 1.3em;
+  }
+
+  .position {
+    position: absolute;
+    size: 50px;
+    top: 85%;
   }
 
   .button-align {
@@ -25,17 +61,18 @@ page-contact {
   .info {
     height: 43%;
     margin-bottom: 10%;
+    margin-top: 20%;
     font-size: 14px;
     font-family: "Calibri Light";
-    color: black;
-    border: 1px solid blue;
-    padding-left: 5%;
+    color: #404040;
+    padding-left: 11%;
   }
 
   .title {
     font-size: 16px;
     font-family: "Calibri";
-    color: #6f6f6f;
+    color: #15B2A2;
+    text-transform: uppercase;
   }
 
 }
