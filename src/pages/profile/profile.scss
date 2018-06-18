@@ -1,4 +1,8 @@
 page-profile {
+
+  hr{
+    margin:0px;
+  }
   .headerimg{
     background-image: url('../assets/imgs/bluewater.JPG');
     height:150px;
@@ -59,9 +63,7 @@ page-profile {
     font-weight:100;
     color:white;
   }
-  h2, h3{
 
-  }
   ion-icon{
     color:#424242;
     font-size: 1em;
@@ -73,4 +75,9 @@ page-profile {
     font-size:14px;
     color:#424242;
   }
+  .form{
+    padding: 1em;
+  }
 }
+
+

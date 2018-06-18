@@ -25,6 +25,6 @@ export class HomePage {
       this.navCtrl.push(ScanPage)
     }
     goToProfile(params){
-        this.navCtrl.push(ProfilePage)
+      this.navCtrl.push(ProfilePage)
     }
 }
