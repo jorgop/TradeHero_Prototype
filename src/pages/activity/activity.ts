@@ -76,15 +76,43 @@ export class ActivityPage {
                     this.pushDataIntoList(activity);
                 });
             });
+
+            //get Aggregation data from REST - set to soratge and push to view
+            this.restProvider.getAggregationData(identity['userID']).then((result) => {
+              //set activities to Storage
+              this.storage.set('strAggregation',JSON.stringify(result));
+
+              //get refreshed aggregation data from storage
+              this.storage.get('strAggregation').then((val) => {
+                let aggregationData = <any>{};
+                aggregationData = JSON.parse(val);
+                this.pushDataIntoView(aggregationData);
+              });
+            }, (err) => {
+
+              //get aggregation data from storage if rest failed - no internet connection
+              this.storage.get('strAggregation').then((val) => {
+                let aggregationData = <any>{};
+                aggregationData = JSON.parse(val);
+                this.pushDataIntoView(aggregationData);
+              });
+            });
         });
     }
 
-    /**
-     * Get activites from the activityList an push the items into the list
-     * @param data
-     */
+  /**
+   * Push data into view
+   * @param data
+   */
+  pushDataIntoView(data){
+    console.log(data);
+  }
 
-    pushDataIntoList(data){
+  /**
+   * Get activites from the activityList an push the items into the list
+   * @param data
+   */
+  pushDataIntoList(data){
         //loop through the activityList
 
         for (let i in data.activityList) {
