@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {CallNumber} from "@ionic-native/call-number";
 import {AlertController} from 'ionic-angular';
 import {e} from "@angular/core/src/render3";
 import {ActivityPage} from "../activity/activity";
 import {HomePage} from "../home/home";
+import {ProfilePage} from "../profile/profile";
+import {ScanPage} from "../scan/scan";
 
 @Component({
   selector: 'page-contact',
@@ -37,6 +39,7 @@ export class ContactPage {
 
    constructor(
        public alertCtrl: AlertController,
+       public navParams: NavParams,
        public navCtrl: NavController) {
    }
 
@@ -63,6 +66,18 @@ export class ContactPage {
 
     goToHome(params){
         this.navCtrl.push(HomePage);
+    }
+
+    goToProfile(params){
+        this.navCtrl.push(ProfilePage);
+    }
+
+    goToScann(params){
+        this.navCtrl.push(ScanPage);
+    }
+
+    goToActivity(params){
+        this.navCtrl.push(ActivityPage);
     }
 }
 

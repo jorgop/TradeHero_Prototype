@@ -12,7 +12,6 @@ page-contact {
     position: relative;
     text-align: center;
     padding: 10%;
-    margin-bottom: 10%;
     font-size: 40px;
     font-family: "Calibri Light";
     color: white;
@@ -45,7 +44,7 @@ page-contact {
   .position {
     position: absolute;
     size: 50px;
-    top: 85%;
+    right: 0;
   }
 
   .button-align {
@@ -53,6 +52,7 @@ page-contact {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10%;
+    margin-top: 10%;
     width: 50%;
     height: 10%;
     font-size: 120%;

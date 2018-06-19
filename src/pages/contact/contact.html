@@ -1,10 +1,10 @@
 
-    <ion-header>
-      <ion-navbar class="color-header" transparent hideBackButton>
-        <button class="color-btn-header" clear ion-button icon-start on-click="goToHome()">
-          <ion-icon name="arrow-back"></ion-icon>
-          Zurück
-        </button>
+<ion-header>
+  <ion-navbar class="color-header" transparent hideBackButton>
+    <button class="color-btn-header" clear ion-button icon-start on-click="goToHome()">
+      <ion-icon name="arrow-back"></ion-icon>
+      Zurück
+    </button>
   </ion-navbar>
 </ion-header>
 
@@ -16,21 +16,21 @@
 
   <div class="square">Kontakt
 
-  <ion-fab class="position" right top>
+  <div class="position">
+  <ion-fab right>
     <button class="shadow" ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
     <ion-fab-list side="left">
       <button class="shadow" ion-fab><ion-icon name="power"></ion-icon></button>
       <button class="shadow" ion-fab><ion-icon name="information-circle"></ion-icon></button>
       <button class="shadow" ion-fab><ion-icon name="settings"></ion-icon></button>
-      <button class="shadow" ion-fab><ion-icon name="paper"></ion-icon></button>
-      <button class="shadow" ion-fab><ion-icon name="person"></ion-icon></button>
-      <button class="shadow" ion-fab><ion-icon name="camera"></ion-icon></button>
+      <button class="shadow" ion-fab><ion-icon name="paper" on-click="goToActivity()"></ion-icon></button>
+      <button class="shadow" ion-fab><ion-icon name="person" on-click="goToProfile()"></ion-icon></button>
+      <button class="shadow" ion-fab><ion-icon name="camera" on-click="goToScann()"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
-
   </div>
 
-
+  </div>
 
 
 
