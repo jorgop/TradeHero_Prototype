@@ -6,6 +6,7 @@ import {LoginPage} from "../pages/login/login";
 import {HomePage} from "../pages/home/home";
 import {RegistrationPage} from "../pages/registration/registration";
 import {ContactPage} from "../pages/contact/contact";
+import {ActivityPage} from "../pages/activity/activity";
 
 
 
@@ -13,7 +14,7 @@ import {ContactPage} from "../pages/contact/contact";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
