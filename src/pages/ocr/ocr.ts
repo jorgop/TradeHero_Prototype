@@ -66,53 +66,64 @@ export class OcrPage {
 
     this.osrLoading.present();
 
-    let myScanedImage = this.scanedImage;
+    //json structure for ocr data call
+    let myScanedImage = {"imgFile": this.scanedImage};
 
     this.restProvider.getOcrData(myScanedImage).then((result) => {
 
       let ocrDataFile = <any>{};
       ocrDataFile = result;
-      ocrDataFile = ocrDataFile['data'][0];
 
-      //get values from a current activity
-      Object.keys(ocrDataFile).forEach(key => {
+      let docData = <any>{};
+      docData = ocrDataFile['ocrTextJson']['Doc'];
+
+      //set data from doc
+      Object.keys(docData).forEach(key => {
         console.log(key);
 
         switch(key){
-          case "name":{
-            this.myForm.patchValue({name:ocrDataFile[key]});
+          case "Name":{
+            this.myForm.patchValue({name:docData[key]});
             break;
           }
-          case "street":{
-            this.myForm.patchValue({street:ocrDataFile[key]});
+          case "Street":{
+            this.myForm.patchValue({street:docData[key]});
             break;
           }
-          case "place":{
-            this.myForm.patchValue({place:ocrDataFile[key]});
+          case "City":{
+            this.myForm.patchValue({place:docData[key]});
             break;
           }
           case "plz":{
-            this.myForm.patchValue({plz:ocrDataFile[key]});
+            this.myForm.patchValue({plz:docData[key]});
             break;
           }
           case "bankName":{
-            this.myForm.patchValue({bankName:ocrDataFile[key]});
+            this.myForm.patchValue({bankName:docData[key]});
             break;
           }
           case "IBAN":{
-            this.myForm.patchValue({IBAN:ocrDataFile[key]});
+            this.myForm.patchValue({IBAN:docData[key]});
             break;
           }
           case "invoiceNumber":{
-            this.myForm.patchValue({invoiceNumber:ocrDataFile[key]});
+            this.myForm.patchValue({invoiceNumber:docData[key]});
             break;
           }
           case "refund":{
-            this.myForm.patchValue({refund:ocrDataFile[key]});
+            this.myForm.patchValue({refund:docData[key]});
             break;
           }
         };
       });
+
+      //remove , and € from amount
+      let refund = ocrDataFile['ocrTextJson']['Amount'];
+      refund = refund.replace(',','.');
+      refund = refund.substring(0, refund.length - 1);
+
+      //set amount
+      this.myForm.patchValue({refund:refund});
 
       this.osrLoading.dismiss().then(() => {
         console.log('OCR Success');
@@ -123,6 +134,7 @@ export class OcrPage {
         console.log('Oooops OCR failed');
         this.sentToast("Scan failed");
       });
+
       //this.navCtrl.push(LoginPage);
     });
   }
