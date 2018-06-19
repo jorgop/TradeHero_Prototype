@@ -45,12 +45,12 @@ export class OcrPage {
 
       //loading for ocr request
       this.osrLoading = this.loadingController.create({
-        content: 'Bild wird verarbeitet'
+        content: 'Text wird erkannt'
       });
 
       //loading for sending data
       this.sendLoading = this.loadingController.create({
-        content: 'Bild wird verarbeitet'
+        content: 'Rechung wird eingereicht'
       });
     }
 
@@ -132,6 +132,8 @@ export class OcrPage {
    * Send formula data to the server and create a actvity
    */
   sendDataAndCreateActivity(){
+
+    this.sendLoading.present();
 
     var restData = <any>{};
 
