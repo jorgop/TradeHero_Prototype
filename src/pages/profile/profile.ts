@@ -26,6 +26,7 @@ export class ProfilePage {
   public editInfo: string = "true";  //toggle Variable for editing the personal data
   public borderStyle: string = ''; // Variable for Border Style
   public buttonStyle: string = 'none';
+  public iconToggle: boolean = true;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -45,6 +46,8 @@ export class ProfilePage {
           firstName: ['', Validators.required],
           lastName : [''],
           mail : [''],
+          street: [''],
+          houseNumber: ['']
       });
 
   }
@@ -53,13 +56,15 @@ export class ProfilePage {
     public toggleediting(): void {
         if(this.editInfo === 'true') {
             this.editInfo = 'false';
-            this.borderStyle = '2px solid green';
+            this.borderStyle = '2px solid #15B2A2';
             this.buttonStyle = '';
+            this.iconToggle = false;
             //console.log("first toggle: ", this.editInfo);
         } else if(this.editInfo === 'false'){
             this.editInfo = 'true';
             this.borderStyle = '';
             this.buttonStyle = 'none';
+            this.iconToggle = true;
 
         }
     }
@@ -85,7 +90,9 @@ export class ProfilePage {
       var myData = <any>{};
       myData = {'firstName': this.stammdatenForm.controls.firstName.value,
                 'lastName': this.stammdatenForm.controls.lastName.value,
-                'mail': this.stammdatenForm.controls.mail.value,};
+                'mail': this.stammdatenForm.controls.mail.value,
+                'street': this.stammdatenForm.controls.street.value,
+                'houseNumber': this.stammdatenForm.controls.houseNumber.value,};
       console.log(myData);
   }
 
@@ -105,12 +112,17 @@ export class ProfilePage {
               if(key == "firstName"){
                   this.stammdatenForm.patchValue({firstName:userData['firstName']});
               }
-
               else if(key == "lastName"){
                   this.stammdatenForm.patchValue({lastName:userData['lastName']});
               }
               else if(key == "mail"){
                   this.stammdatenForm.patchValue({mail:userData['mail']});
+              }
+              else if(key == "street"){
+                  this.stammdatenForm.patchValue({street:userData['street']});
+              }
+              else if(key == "houseNumber"){
+                  this.stammdatenForm.patchValue({houseNumber:userData['houseNumber']});
               };
           });
       });
