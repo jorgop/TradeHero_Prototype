@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController} from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
@@ -12,8 +12,9 @@ import {HomePage} from "../home/home";
 })
 export class ActivityPage {
     activity: {date: string, ticketID:string,ticketStatus: string, iconName: String, cssClass: String}[] = [];
+    aggregate: {contClosed: number, countAll: number, countOpen: number, sumAll: number, sumOpen: number, summClosed: number}[] = [];
     // Erstes Segment default wählen
-    status : string;
+    status = "all";
 
     constructor(public navCtrl: NavController,
                 private activityService: ActivityService,
@@ -21,7 +22,6 @@ export class ActivityPage {
                 public restProvider: RestProvider,
                 public loadingController: LoadingController) {
     }
-
 
     /**
      * Navigate to HistoryPage
@@ -35,16 +35,17 @@ export class ActivityPage {
      * Cell function on enter the page
      */
     ionViewWillEnter(){
+        this.aggregate = [];
         this.activity = this.activityService.getActivity();
         this.updateLocalStorageAndPrepareData();
         this.status = "all";
     }
 
     setStatus(param){
-        this.activity=[];
+        this.activity = [];
+        this.aggregate = [];
         this.updateLocalStorageAndPrepareData();
         this.status = param;
-
     }
 
     /**
@@ -105,7 +106,19 @@ export class ActivityPage {
    * @param data
    */
   pushDataIntoView(data){
-    console.log(data);
+      var contClosed = data["contClosed"];
+      var countAll = data["countAll"];
+      var countOpen= data["countOpen"];
+      var sumClosed = data["summClosed"];
+      var sumAll = data["sumAll"];
+      var sumOpen = data["sumOpen"];
+    this.aggregate.push({
+        contClosed: contClosed,
+        countAll: countAll,
+        countOpen: countOpen,
+        sumAll: sumAll,
+        sumOpen: sumOpen,
+        summClosed: sumClosed});
   }
 
   /**
@@ -194,7 +207,8 @@ export class ActivityPage {
 
     actRefresh(refresher) {
         console.log('Begin async operation', refresher);
-        this.activity=[];
+        this.activity = [];
+        this.aggregate = [];
         this.updateLocalStorageAndPrepareData();
         console.log('Async operation has ended');
         refresher.complete();
