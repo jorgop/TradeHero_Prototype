@@ -5,6 +5,9 @@ import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import {HistoryPage} from "../history/history";
 import {HomePage} from "../home/home";
+import {ScanPage} from "../scan/scan";
+import {ProfilePage} from "../profile/profile";
+import {ContactPage} from "../contact/contact";
 
 @Component({
     selector: 'page-activity',
@@ -17,6 +20,7 @@ export class ActivityPage {
     status = "all";
 
     constructor(public navCtrl: NavController,
+                public navParams: NavParams,
                 private activityService: ActivityService,
                 private storage: Storage,
                 public restProvider: RestProvider,
@@ -203,6 +207,18 @@ export class ActivityPage {
 
     goToHome(){
         this.navCtrl.popTo(HomePage);
+    }
+
+    goToProfile(params){
+        this.navCtrl.push(ProfilePage);
+    }
+
+    goToScann(params){
+        this.navCtrl.push(ScanPage);
+    }
+
+    goToContact(params){
+        this.navCtrl.push(ContactPage);
     }
 
     actRefresh(refresher) {
