@@ -5,6 +5,16 @@
       <ion-icon name="arrow-back"></ion-icon>
       Zurück
     </button>
+
+    <button class="logout-btn" round ion-button>
+      <ion-icon name="power"></ion-icon>
+    </button>
+    <button class="fixed-header-btn" ion-button>
+      <ion-icon name="information-circle"></ion-icon>
+    </button>
+    <button class="fixed-header-btn" ion-button>
+      <ion-icon name="settings"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 
@@ -19,17 +29,14 @@
     <div class="top-container">Kontakt
     </div>
     <div class="bottom-container">
-      <ion-fab right>
+      <ion-fab left>
         <button ion-fab color="light" class="shadow">
-          <ion-icon name="arrow-dropleft"></ion-icon>
+          <ion-icon name="arrow-dropright"></ion-icon>
         </button>
-        <ion-fab-list side="left">
-          <button class="shadow" ion-fab><ion-icon name="power"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="information-circle"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="settings"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="paper" on-click="goToActivity()"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="person" on-click="goToProfile()"></ion-icon></button>
+        <ion-fab-list side="right">
           <button class="shadow" ion-fab><ion-icon name="camera" on-click="goToScann()"></ion-icon></button>
+          <button class="shadow" ion-fab><ion-icon name="person" on-click="goToProfile()"></ion-icon></button>
+          <button class="shadow" ion-fab><ion-icon name="paper" on-click="goToActivity()"></ion-icon></button>
         </ion-fab-list>
       </ion-fab>
     </div>

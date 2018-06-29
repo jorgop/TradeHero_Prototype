@@ -39,7 +39,6 @@ export class ContactPage {
 
    constructor(
        public alertCtrl: AlertController,
-       public navParams: NavParams,
        public navCtrl: NavController) {
    }
 

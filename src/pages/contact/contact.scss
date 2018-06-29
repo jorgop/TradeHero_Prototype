@@ -1,16 +1,32 @@
 page-contact {
 
-  /* Header-Bar */
+  /* Header-Bar with Buttons */
 
   .color-header {
-    background: #15B2A2;
-  }
+       background: #15B2A2;
+     }
 
   .color-btn-header {
     color: white;
   }
 
-  /* Header */
+  .logout-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+  }
+
+  .fixed-header-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+    border-radius: 100px;
+    margin-right: 1%;
+  }
+
+  /* Header-Logo */
 
   .square {
     position: relative;
@@ -51,18 +67,8 @@ page-contact {
     height: 3.5em;
   }
 
-  .fab-in-list {
-    margin: 8px 0;
-    width: 2.2em;
-    height: 2.2em;
-  }
-
-  .fab ion-icon {
-    font-size: 1.3em;
-  }
-
   .shadow {
-    box-shadow: 2px 2px 5px lightgray;
+    box-shadow: 2px 2px 5px gray;
   }
 
 
