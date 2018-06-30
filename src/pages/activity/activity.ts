@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, App} from 'ionic-angular';
 import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
+import {ViewChild} from "@angular/core";
+import {Navbar} from "ionic-angular";
 import {RestProvider} from "../../providers/rest/rest";
 import {HistoryPage} from "../history/history";
 import {HomePage} from "../home/home";
 import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
 import {ContactPage} from "../contact/contact";
+import {LoginPage} from "../login/login";
 
 @Component({
     selector: 'page-activity',
@@ -15,18 +18,24 @@ import {ContactPage} from "../contact/contact";
 })
 export class ActivityPage {
     activity: {date: string, ticketID:string,ticketStatus: string, iconName: String, cssClass: String}[] = [];
-    aggregate: {contClosed: number, countAll: number, countOpen: number, sumAll: number, sumOpen: number, summClosed: number}[] = [];
+    aggregate: {countClosed: number, countAll: number, countOpen: number, countDenied: number, sumAll: number, sumOpen: number, sumClosed: number, sumDenied: number}[] = [];
     // Erstes Segment default wählen
     status = "all";
 
+    @ViewChild(Navbar) navBar: Navbar;
     constructor(public navCtrl: NavController,
-                public navParams: NavParams,
+                public app: App,
                 private activityService: ActivityService,
                 private storage: Storage,
                 public restProvider: RestProvider,
                 public loadingController: LoadingController) {
     }
 
+    ionViewDidLoad() {
+        this.navBar.backButtonClick = (e:UIEvent)=>{
+            this.navCtrl.push(HomePage);
+        }
+    }
     /**
      * Navigate to HistoryPage
      * @param id TicketID from activity
@@ -110,19 +119,23 @@ export class ActivityPage {
    * @param data
    */
   pushDataIntoView(data){
-      var contClosed = data["contClosed"];
+      var countClosed = data["countClosed"];
       var countAll = data["countAll"];
-      var countOpen= data["countOpen"];
-      var sumClosed = data["summClosed"];
+      var countOpen = data["countOpen"];
+      var countDenied = data["countDenied"];
+      var sumDenied = data["sumDenied"]
+      var sumClosed = data["sumClosed"];
       var sumAll = data["sumAll"];
       var sumOpen = data["sumOpen"];
     this.aggregate.push({
-        contClosed: contClosed,
+        countClosed: countClosed,
         countAll: countAll,
         countOpen: countOpen,
+        countDenied: countDenied,
         sumAll: sumAll,
         sumOpen: sumOpen,
-        summClosed: sumClosed});
+        sumClosed: sumClosed,
+        sumDenied: sumDenied});
   }
 
   /**
@@ -221,6 +234,8 @@ export class ActivityPage {
         this.navCtrl.push(ContactPage);
     }
 
+
+
     actRefresh(refresher) {
         console.log('Begin async operation', refresher);
         this.activity = [];
@@ -229,5 +244,11 @@ export class ActivityPage {
         console.log('Async operation has ended');
         refresher.complete();
 
+    }
+
+    logout() {
+        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.popToRoot();
+        this.storage.clear();
     }
 }

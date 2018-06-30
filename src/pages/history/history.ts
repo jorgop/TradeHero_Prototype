@@ -5,6 +5,7 @@ import {HistoryService} from "../../services/history.service";
 import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
+import {HomePage} from "../home/home";
 
 @Component({
     selector: 'page-history',
@@ -14,6 +15,7 @@ export class HistoryPage {
 
     private ticketID : any;
     history: {head:string,body:string,imgFile:string,cardClass: string}[] = [];
+    hisStatus: {submitDate: string, endDate: String}[] = [];
 
     private historyLoading : any;
 
@@ -29,16 +31,16 @@ export class HistoryPage {
         this.ticketID = this.navParams.get('ticketID');
         console.log("ticket: " + this.ticketID);
 
-      //loading for sending data
-      this.historyLoading = this.loadingController.create({
-        content: 'Bild wird verarbeitet'
-      });
-    }
+        //loading for sending data
+            this.historyLoading = this.loadingController.create({
+            content: 'Bild wird verarbeitet'
+            });
 
-  ionViewWillEnter(){
-    this.history = this.historyService.getCard();
-    this.updateLocalStorageAndPrepareData(true);
-  }
+    }
+    ionViewWillEnter(){
+        this.history = this.historyService.getCard();
+        this.updateLocalStorageAndPrepareData(true);
+    }
 
   /**
    * Update local storage if the REST-Service can be reached, prepare data into JSON
@@ -98,9 +100,8 @@ export class HistoryPage {
       let currentObject = data.activityList[i];
 
       //console.log(currentObject);
-
       if (currentObject['ticketID'] == this.ticketID){
-
+        console.log(data.activityList[i]);
       for (let j in currentObject['history']) {
 
 
@@ -109,17 +110,21 @@ export class HistoryPage {
           var statusText;
           var statusClass;
           var historyClass;
+          var subDate;
           if (currentHistory['stateStatus'] == 0){
+            subDate = currentObject['createDate'];
             statusText = "Offen";
             statusClass = "cl-open";
             historyClass = "card-open";
           }else {
+            subDate = currentObject['createDate'];
             statusText = "Abgeschlossen";
             statusClass = "cl-closed";
             historyClass = "card-closed";
           };
           this.history.push({head: 'Status: ' + '<b>' + statusText +'</b>',body: '<div class='+statusClass+'>' + currentHistory['stateText'] + '</div>', imgFile: currentObject.imgFile,cardClass: historyClass  });
-        };
+          this.hisStatus.push({submitDate: subDate.toString(), endDate: subDate.toString()});
+      };
       };
     }
   }

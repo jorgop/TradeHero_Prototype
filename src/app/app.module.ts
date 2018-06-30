@@ -48,7 +48,7 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp, { swipeBackEnabled: false }),
+    IonicModule.forRoot(MyApp, { swipeBackEnabled: false, tabsPlacement: 'top', backButtonText: "Zurück"}),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

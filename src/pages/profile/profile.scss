@@ -1,5 +1,17 @@
 page-profile {
 
+  .color-header {
+    background: #15B2A2;
+  }
+
+  .back-button {
+    color: white !important;
+  }
+
+  .color-btn-header {
+    color: white;
+  }
+
   hr{
     margin:0px;
   }
@@ -51,15 +63,8 @@ page-profile {
     height: 3.5em;
   }
 
-  .color-header {
-    background: #15B2A2;
-  }
-
-  .color-btn-header {
-    color: white;
-  }
-  ion-icon{
-    color:#424242;
+  .editIcon{
+    color: #424242;
     font-size: 1em;
     float: right;
   }

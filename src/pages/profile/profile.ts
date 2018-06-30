@@ -5,6 +5,7 @@ import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import { AlertController } from 'ionic-angular';
 import {HomePage} from "../home/home";
+import {LoginPage} from "../login/login";
 
 /**
  * Generated class for the ProfilePage page.
@@ -130,6 +131,11 @@ export class ProfilePage {
 
     goToHome(params){
         this.navCtrl.push(HomePage);
+    }
+    logout() {
+        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.popToRoot();
+        this.storage.clear();
     }
 
 }

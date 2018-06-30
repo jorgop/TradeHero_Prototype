@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from "ionic-angular";
+import {NavController, App} from "ionic-angular";
+import {LoginPage} from "../login/login";
 import {ActivityPage} from "../activity/activity";
 import {ContactPage} from "../contact/contact";
 import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
 import {RestProvider} from "../../providers/rest/rest";
 import { Storage } from '@ionic/storage';
+import {identity} from "rxjs/util/identity";
 
 @Component({
     selector: 'page-home',
@@ -15,10 +17,11 @@ export class HomePage {
 
     constructor(
         public navCtrl: NavController,
-        public navParams: NavParams,
+        public app: App,
         private storage: Storage,
         public restProvider: RestProvider) {
     }
+
 
     goToActivity(params){
       this.navCtrl.push(ActivityPage);
@@ -33,6 +36,12 @@ export class HomePage {
         this.navCtrl.push(ProfilePage);
     }
 
+    logout() {
+        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.popToRoot();
+        this.storage.clear();
+    }
+
   /**
    * set data form rest to local storage - not used
    */
@@ -41,6 +50,7 @@ export class HomePage {
     this.storage.get('identity').then((val) => {
       let identity = <any>{};
       identity = JSON.parse(val);
+      console.log(identity);
 
       //get user data
       this.restProvider.getUserData(identity['userID']).then((result) => {

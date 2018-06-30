@@ -1,6 +1,9 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Verlauf</ion-title>
+<ion-header class="color-header">
+  <ion-navbar  class="back-button" transparent>
+    <!--<button class="color-btn-header" clear ion-button icon-start on-click="goToHome()">
+        <ion-icon name="arrow-back"></ion-icon>
+        Zurück
+    </button>-->
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -17,8 +20,8 @@
       Ticket-ID: {{ticketID}}
       <!-- <img src="{{ history.body }}"> -->
     </ion-card-header>
-    <ion-card-content>
-      <p>Erstellt am:
+    <ion-card-content *ngFor="let hisStatus of hisStatus">
+      <p>Erstellt am: {{hisStatus.submitDate | date: 'dd.MM.yyyy'}}
       <br>
       Abgesclossen am:
       <br><br>

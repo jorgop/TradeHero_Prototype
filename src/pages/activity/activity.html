@@ -1,31 +1,11 @@
-<ion-header>
-    <div>
-        <ion-navbar hideBackButton>
-            <ion-buttons left>
-                <button ion-button (click)="goToHome()">
-                    Home
-                </button>
-            </ion-buttons>
-            <ion-title>Activity</ion-title>
-        </ion-navbar>
-    </div>
-</ion-header>
-
-<ion-content padding> -->
-
-
-
-<ion-header>
-    <ion-navbar class="color-header" transparent hideBackButton>
-        <button class="color-btn-header" clear ion-button icon-start on-click="goToHome()">
+<ion-header class="color-header">
+    <ion-navbar  class="back-button" transparent>
+        <!--<button class="color-btn-header" clear ion-button icon-start on-click="goToHome()">
             <ion-icon name="arrow-back"></ion-icon>
             Zurück
-        </button>
+        </button>-->
     </ion-navbar>
 </ion-header>
-
-
-
 
 <ion-content>
 
@@ -40,7 +20,7 @@
                         <ion-icon name="arrow-dropleft"></ion-icon>
                     </button>
                     <ion-fab-list side="left">
-                        <button class="shadow" ion-fab><ion-icon name="power"></ion-icon></button>
+                        <button class="shadow" ion-fab><ion-icon name="power" on-click="logout()"></ion-icon></button>
                         <button class="shadow" ion-fab><ion-icon name="information-circle"></ion-icon></button>
                         <button class="shadow" ion-fab><ion-icon name="settings"></ion-icon></button>
                         <button class="shadow" ion-fab><ion-icon name="call" on-click="goToContact()"></ion-icon></button>
@@ -67,16 +47,16 @@
             <section class="container">
                 <div class="left-half">
                     <article>
-                        <p>Eingereicht: {{aggregate.sumOpen}} €</p>
+                        <p>Eingereicht: {{aggregate.sumAll}} €</p>
                         <br>
-                        <p>Offen: {{aggregate.countOpen}}</p>
+                        <p>Offen: {{aggregate.sumOpen}} €</p>
                     </article>
                 </div>
                 <div class="right-half">
                     <article>
-                        <p>Bewilligt: {{aggregate.summClosed}} €</p>
+                        <p>Bewilligt: {{aggregate.sumClosed}} €</p>
                         <br>
-                        <p>Bezahlt: {{aggregate.contClosed}}</p>
+                        <p>Abgelehnt: {{aggregate.sumDenied}} €</p>
                     </article>
                 </div>
             </section>
@@ -93,10 +73,10 @@
                 Offen ({{aggregate.countOpen}})
             </ion-segment-button>
             <ion-segment-button value="paid" (click)="setStatus('paid')">
-                Bezahlt ({{aggregate.contClosed}})
+                Bezahlt ({{aggregate.countClosed}})
             </ion-segment-button>
             <ion-segment-button value="denied" (click)="setStatus('denied')">
-                Abgelehnt (2)
+                Abgelehnt ({{aggregate.countDenied}})
             </ion-segment-button>
         </ion-segment>
     </div>
