@@ -1,7 +1,31 @@
 page-home {
 
+  /* Header-Bar with Buttons */
+
+  .color-header {
+    background: #15B2A2;
+  }
+
+  .logout-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+  }
+
+  .fixed-header-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+    border-radius: 100px;
+    margin-right: 1%;
+  }
+
+
+    /* ... */
+
   .cstmz-padding {
-    padding-top: 22%;
     height: 100%;
   }
 
@@ -24,12 +48,12 @@ page-home {
     border: 1px solid blue;
   }
 
-  /*buttons */
+  /*buttons
 
   .fab {
     color: white;
     background: #FFB623;
-  }
+  } */
 
   .wrapper {
     position: relative;
