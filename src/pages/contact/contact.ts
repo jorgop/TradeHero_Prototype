@@ -57,7 +57,7 @@ export class ContactPage {
 
    callInsurance () {
        const confirm = this.alertCtrl.create({
-           title: 'Call Insurance',
+           title: '0123-456789',
            buttons: [
                {
                    text: 'Abbrechen',

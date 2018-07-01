@@ -1,29 +1,38 @@
 <ion-header class="color-header">
-    <ion-navbar class="back-button" transparent>
-        <!--<button class="color-btn-header" clear ion-button icon-start on-click="goToHome()">
-            <ion-icon name="arrow-back"></ion-icon>
-            Zurück
-        </button>-->
+    <ion-navbar  class="back-button" transparent>
+
+        <button class="logout-btn" round ion-button>
+            <ion-icon name="power"></ion-icon>
+        </button>
+        <button class="fixed-header-btn" ion-button>
+            <ion-icon name="information-circle"></ion-icon>
+        </button>
+        <button class="fixed-header-btn" ion-button>
+            <ion-icon name="settings"></ion-icon>
+        </button>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content>
 
-    <div class="square">Profil
-
-        <ion-fab class="position" right top>
-            <button class="shadow" ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
-            <ion-fab-list side="left">
-                <button class="shadow" ion-fab><ion-icon name="power"></ion-icon></button>
-                <button class="shadow" ion-fab><ion-icon name="information-circle"></ion-icon></button>
-                <button class="shadow" ion-fab><ion-icon name="settings"></ion-icon></button>
-                <button class="shadow" ion-fab><ion-icon name="paper"></ion-icon></button>
-                <button class="shadow" ion-fab><ion-icon name="person"></ion-icon></button>
-                <button class="shadow" ion-fab><ion-icon name="camera"></ion-icon></button>
-            </ion-fab-list>
-        </ion-fab>
-
+    <div class="square">
+        <div class="main-container">
+            <div class="top-container">Profil
+            </div>
+            <div class="bottom-container">
+                <ion-fab left>
+                    <button ion-fab color="light" class="shadow">
+                        <ion-icon name="arrow-dropright"></ion-icon>
+                    </button>
+                    <ion-fab-list side="right">
+                        <button class="shadow" ion-fab><ion-icon name="camera" on-click="goToScann()"></ion-icon></button>
+                        <button class="shadow" ion-fab><ion-icon name="paper" on-click="goToProfile()"></ion-icon></button>
+                        <button class="shadow" ion-fab><ion-icon name="call" on-click="goToContact()"></ion-icon></button>
+                    </ion-fab-list>
+                </ion-fab>
+            </div>
+        </div>
     </div>
 
     <div class="form"[ngStyle]="{'border': borderStyle}">
