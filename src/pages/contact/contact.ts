@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {Navbar, NavController} from 'ionic-angular';
 import {CallNumber} from "@ionic-native/call-number";
 import {AlertController} from 'ionic-angular';
 import {Storage} from "@ionic/storage";
@@ -17,30 +17,7 @@ import {AboutPage} from "../about/about";
 })
 export class ContactPage {
 
-  /* constructor(
-      public navCtrl: NavController,
-      public alertCtrl: AlertController,
-      private callSvc: CallNumber) {
-        }
-
-    callInsurance(){
-        this.callSvc.callNumber("00491719760565",true).then(()=> {
-          console.log('number dialed');
-        }).catch((err)=>{
-          alert(JSON.stringify(err))
-        })
-  } */ /*
-   async callInsurance():Promise<any>{
-      try{
-      await this.callSvc.callNumber("00491719760565",true).then(()=> {
-          console.log('number dialed');
-      }).catch((err)=>{
-          alert(JSON.stringify(err))
-      })}finally {
-
-      }
-   } */
-
+   @ViewChild(Navbar) navBar: Navbar;
    constructor(
        public alertCtrl: AlertController,
        private storage: Storage,
@@ -95,6 +72,12 @@ export class ContactPage {
     }
     goToAbout(){
         this.navCtrl.push(AboutPage);
+    }
+
+    ionViewDidLoad() {
+        this.navBar.backButtonClick = (e:UIEvent)=>{
+            this.navCtrl.push(HomePage);
+        }
     }
 
     performLogout() {

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Storage} from "@ionic/storage";
-import { NavController, AlertController } from 'ionic-angular';
+import {NavController, AlertController, Navbar} from 'ionic-angular';
 import {ProfilePage} from "../profile/profile";
 import {HomePage} from "../home/home";
 import {ContactPage} from "../contact/contact";
@@ -15,6 +15,7 @@ import {CallNumber} from "@ionic-native/call-number";
 })
 export class AboutPage {
 
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(
       public navCtrl: NavController,
       public alertCtrl: AlertController,
@@ -38,6 +39,12 @@ export class AboutPage {
     }
     goToAbout(){
         this.navCtrl.push(AboutPage);
+    }
+
+    ionViewDidLoad() {
+        this.navBar.backButtonClick = (e:UIEvent)=>{
+            this.navCtrl.push(HomePage);
+        }
     }
 
     performLogout() {

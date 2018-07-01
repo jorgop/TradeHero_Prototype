@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {Navbar, NavController,} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
-import { AlertController } from 'ionic-angular';
+import {AlertController} from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {AboutPage} from "../about/about";
 import {LoginPage} from "../login/login";
@@ -33,6 +33,7 @@ export class ProfilePage {
   public buttonStyle: string = 'none';
   public iconToggle: boolean = true;
 
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
               private storage: Storage,
@@ -56,6 +57,12 @@ export class ProfilePage {
       });
 
   }
+
+    ionViewDidLoad() {
+        this.navBar.backButtonClick = (e:UIEvent)=>{
+            this.navCtrl.push(HomePage);
+        }
+    }
 
 //function to change editing mode of personal infomation
     public toggleediting(): void {
