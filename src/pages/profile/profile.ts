@@ -5,7 +5,11 @@ import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import { AlertController } from 'ionic-angular';
 import {HomePage} from "../home/home";
+import {AboutPage} from "../about/about";
 import {LoginPage} from "../login/login";
+import {ContactPage} from "../contact/contact";
+import {ScanPage} from "../scan/scan";
+import {ActivityPage} from "../activity/activity";
 
 /**
  * Generated class for the ProfilePage page.
@@ -30,7 +34,7 @@ export class ProfilePage {
   public iconToggle: boolean = true;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+              public alertCtrl: AlertController,
               private storage: Storage,
               private formBuilder: FormBuilder,
               public restProvider: RestProvider) {
@@ -129,13 +133,50 @@ export class ProfilePage {
       });
   }
 
-    goToHome(params){
+    goToScan(){
+        this.navCtrl.push(ScanPage);
+    }
+    goToProfile(){
+        this.navCtrl.push(ProfilePage);
+    }
+    goToContact(){
+        this.navCtrl.push(ContactPage);
+    }
+    goToActivity(){
+        this.navCtrl.push(ActivityPage);
+    }
+    goToHome(){
         this.navCtrl.push(HomePage);
     }
-    logout() {
+    goToAbout(){
+        this.navCtrl.push(AboutPage);
+    }
+
+    performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
+    }
+    logout() {
+        const confirm = this.alertCtrl.create({
+            title: 'Logout bestätigen',
+            buttons: [
+                {
+                    text: 'Abbrechen',
+                    handler: () => {
+                        console.log('Logout abgebrochen');
+                    }
+                },
+                {
+                    text: 'Logout',
+                    handler: () => {
+                        console.log('Logout erfolgreich');
+                        this.performLogout();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 
 }

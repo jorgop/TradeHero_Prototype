@@ -9,6 +9,7 @@ import {HomePage} from "../home/home";
 import {ProfilePage} from "../profile/profile";
 import {ScanPage} from "../scan/scan";
 import {LoginPage} from "../login/login";
+import {AboutPage} from "../about/about";
 
 @Component({
   selector: 'page-contact',
@@ -77,25 +78,50 @@ export class ContactPage {
        confirm.present();
    }
 
-    goToHome(params){
-        this.navCtrl.push(HomePage);
-    }
-
-    goToProfile(params){
-        this.navCtrl.push(ProfilePage);
-    }
-
-    goToScann(params){
+    goToScan(){
         this.navCtrl.push(ScanPage);
     }
-
-    goToActivity(params){
+    goToProfile(){
+        this.navCtrl.push(ProfilePage);
+    }
+    goToContact(){
+        this.navCtrl.push(ContactPage);
+    }
+    goToActivity(){
         this.navCtrl.push(ActivityPage);
     }
-    logout() {
+    goToHome(){
+        this.navCtrl.push(HomePage);
+    }
+    goToAbout(){
+        this.navCtrl.push(AboutPage);
+    }
+
+    performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
+    }
+    logout() {
+        const confirm = this.alertCtrl.create({
+            title: 'Logout bestätigen',
+            buttons: [
+                {
+                    text: 'Abbrechen',
+                    handler: () => {
+                        console.log('Logout abgebrochen');
+                    }
+                },
+                {
+                    text: 'Logout',
+                    handler: () => {
+                        console.log('Logout erfolgreich');
+                        this.performLogout();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 }
 

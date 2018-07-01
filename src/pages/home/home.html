@@ -4,7 +4,7 @@
       <ion-icon name="power"></ion-icon>
     </button>
     <button class="fixed-header-btn" ion-button>
-      <ion-icon name="information-circle"></ion-icon>
+      <ion-icon name="information-circle" (click)="goToAbout()"></ion-icon>
     </button>
     <button class="fixed-header-btn" ion-button>
       <ion-icon name="settings"></ion-icon>
@@ -36,7 +36,7 @@
       <div class="left-container">
 
         <div class="btn-size">
-          <button clear class="cstmz-btn" ion-button icon-only on-click="goToScann()">
+          <button clear class="cstmz-btn" ion-button icon-only on-click="goToScan()">
             <ion-icon class="place-icon" name="camera"></ion-icon>
             <div class="place-title">Scan</div>
           </button>

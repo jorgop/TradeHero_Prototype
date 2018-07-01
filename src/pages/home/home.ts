@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {NavController, App} from "ionic-angular";
+import {NavController, App, AlertController} from "ionic-angular";
 import {LoginPage} from "../login/login";
 import {ActivityPage} from "../activity/activity";
+import {AboutPage} from "../about/about";
 import {ContactPage} from "../contact/contact";
 import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
@@ -17,29 +18,57 @@ export class HomePage {
 
     constructor(
         public navCtrl: NavController,
+        public alertCtrl: AlertController,
         public app: App,
         private storage: Storage,
         public restProvider: RestProvider) {
     }
 
 
-    goToActivity(params){
-      this.navCtrl.push(ActivityPage);
+    goToScan(){
+        this.navCtrl.push(ScanPage);
     }
-    goToContact(params){
-      this.navCtrl.push(ContactPage);
-    }
-    goToScann(params){
-      this.navCtrl.push(ScanPage);
-    }
-    goToProfile(params){
+    goToProfile(){
         this.navCtrl.push(ProfilePage);
     }
+    goToContact(){
+        this.navCtrl.push(ContactPage);
+    }
+    goToActivity(){
+        this.navCtrl.push(ActivityPage);
+    }
+    goToHome(){
+        this.navCtrl.push(HomePage);
+    }
+    goToAbout(){
+        this.navCtrl.push(AboutPage);
+    }
 
-    logout() {
+    performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
+    }
+    logout() {
+        const confirm = this.alertCtrl.create({
+            title: 'Logout bestätigen',
+            buttons: [
+                {
+                    text: 'Abbrechen',
+                    handler: () => {
+                        console.log('Logout abgebrochen');
+                    }
+                },
+                {
+                    text: 'Logout',
+                    handler: () => {
+                        console.log('Logout erfolgreich');
+                        this.performLogout();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 
   /**

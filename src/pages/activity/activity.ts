@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, App} from 'ionic-angular';
+import {LoadingController, NavController, App, AlertController} from 'ionic-angular';
 import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {ViewChild} from "@angular/core";
@@ -11,6 +11,8 @@ import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
 import {ContactPage} from "../contact/contact";
 import {LoginPage} from "../login/login";
+import {AboutPage} from "../about/about";
+
 
 @Component({
     selector: 'page-activity',
@@ -24,6 +26,7 @@ export class ActivityPage {
 
     @ViewChild(Navbar) navBar: Navbar;
     constructor(public navCtrl: NavController,
+                public alertCtrl: AlertController,
                 public app: App,
                 private activityService: ActivityService,
                 private storage: Storage,
@@ -218,20 +221,23 @@ export class ActivityPage {
         }
     }
 
-    goToHome(){
-        this.navCtrl.popTo(HomePage);
-    }
-
-    goToProfile(params){
-        this.navCtrl.push(ProfilePage);
-    }
-
-    goToScann(params){
+    goToScan(){
         this.navCtrl.push(ScanPage);
     }
-
-    goToContact(params){
+    goToProfile(){
+        this.navCtrl.push(ProfilePage);
+    }
+    goToContact(){
         this.navCtrl.push(ContactPage);
+    }
+    goToActivity(){
+        this.navCtrl.push(ActivityPage);
+    }
+    goToHome(){
+        this.navCtrl.push(HomePage);
+    }
+    goToAbout(){
+        this.navCtrl.push(AboutPage);
     }
 
 
@@ -246,9 +252,30 @@ export class ActivityPage {
 
     }
 
-    logout() {
+    performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
+    }
+    logout() {
+        const confirm = this.alertCtrl.create({
+            title: 'Logout bestätigen',
+            buttons: [
+                {
+                    text: 'Abbrechen',
+                    handler: () => {
+                        console.log('Logout abgebrochen');
+                    }
+                },
+                {
+                    text: 'Logout',
+                    handler: () => {
+                        console.log('Logout erfolgreich');
+                        this.performLogout();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 }

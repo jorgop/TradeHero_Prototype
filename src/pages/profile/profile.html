@@ -1,10 +1,10 @@
 <ion-header class="color-header">
     <ion-navbar  class="back-button" transparent>
 
-        <button class="logout-btn" round ion-button>
+        <button class="logout-btn" (click)="logout()" round ion-button>
             <ion-icon name="power"></ion-icon>
         </button>
-        <button class="fixed-header-btn" ion-button>
+        <button class="fixed-header-btn" (click)="goToAbout()" ion-button>
             <ion-icon name="information-circle"></ion-icon>
         </button>
         <button class="fixed-header-btn" ion-button>
@@ -26,9 +26,9 @@
                         <ion-icon name="arrow-dropright"></ion-icon>
                     </button>
                     <ion-fab-list side="right">
-                        <button class="shadow" ion-fab><ion-icon name="camera" on-click="goToScann()"></ion-icon></button>
-                        <button class="shadow" ion-fab><ion-icon name="paper" on-click="goToProfile()"></ion-icon></button>
-                        <button class="shadow" ion-fab><ion-icon name="call" on-click="goToContact()"></ion-icon></button>
+                        <button class="shadow" (click)="goToScan()" ion-fab><ion-icon name="camera"></ion-icon></button>
+                        <button class="shadow" (click)="goToActivity()" ion-fab><ion-icon name="paper"></ion-icon></button>
+                        <button class="shadow" (click)="goToContact()" ion-fab><ion-icon name="call"></ion-icon></button>
                     </ion-fab-list>
                 </ion-fab>
             </div>
