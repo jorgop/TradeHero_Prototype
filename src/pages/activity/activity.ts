@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, App, AlertController} from 'ionic-angular';
+import {LoadingController, NavController, App, AlertController, ToastController} from 'ionic-angular';
 import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {ViewChild} from "@angular/core";
@@ -26,6 +26,7 @@ export class ActivityPage {
 
     @ViewChild(Navbar) navBar: Navbar;
     constructor(public navCtrl: NavController,
+                private toastCtrl: ToastController,
                 public alertCtrl: AlertController,
                 public app: App,
                 private activityService: ActivityService,
@@ -252,14 +253,13 @@ export class ActivityPage {
 
     }
 
-    performLogout() {
-        this.navCtrl.setRoot(LoginPage);
-        this.navCtrl.popToRoot();
-        this.storage.clear();
-    }
+    /**
+     * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.
+     * Im Anschluß erscheint ein Toast zur Bestätigung des erfolgreichen Logouts, nachdem der Storage geleert wurde.
+     */
     logout() {
         const confirm = this.alertCtrl.create({
-            title: 'Logout bestätigen',
+            title: 'Wollen Sie sich wirklich ausloggen?',
             buttons: [
                 {
                     text: 'Abbrechen',
@@ -268,7 +268,7 @@ export class ActivityPage {
                     }
                 },
                 {
-                    text: 'Logout',
+                    text: 'Ausloggen',
                     handler: () => {
                         console.log('Logout erfolgreich');
                         this.performLogout();
@@ -278,4 +278,21 @@ export class ActivityPage {
         });
         confirm.present();
     }
+    performLogout() {
+        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.popToRoot();
+        this.storage.clear();
+        let logoutConf = this.toastCtrl.create({
+            message: 'Sie wurden erfolgreich ausgeloggt',
+            duration: 2000,
+            position: 'top',
+            showCloseButton: true,
+            closeButtonText: 'X'
+        });
+        logoutConf.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+        logoutConf.present();
+    }
+
 }
