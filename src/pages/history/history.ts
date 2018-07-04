@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, ToastController} from "ionic-angular";
+import {LoadingController, NavController, PopoverController, ToastController} from "ionic-angular";
 import {NavParams} from "ionic-angular";
 import {HistoryService} from "../../services/history.service";
 import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
+import { ImageViewerController } from 'ionic-img-viewer';
 import {HomePage} from "../home/home";
 
 @Component({
@@ -14,8 +15,8 @@ import {HomePage} from "../home/home";
 export class HistoryPage {
 
     private ticketID : any;
-    history: {head:string,body:string,imgFile:string,cardClass: string}[] = [];
-    hisStatus: {submitDate: string, endDate: String}[] = [];
+    history: {head: string, body: string, cardClass: string}[] = [];
+    historyHeader: {submitDate: string, endDate: String, refund: number, imgFile: String, invoiceID: String}[] = [];
 
     private historyLoading : any;
 
@@ -25,8 +26,10 @@ export class HistoryPage {
         private historyService: HistoryService,
         private storage: Storage,
         public restProvider: RestProvider,
+        private imageViewerCtrl: ImageViewerController,
         public loadingController: LoadingController,
-        public toastCtrl: ToastController) {
+        public toastCtrl: ToastController
+    ) {
 
         this.ticketID = this.navParams.get('ticketID');
         console.log("ticket: " + this.ticketID);
@@ -35,6 +38,8 @@ export class HistoryPage {
             this.historyLoading = this.loadingController.create({
             content: 'Bild wird verarbeitet'
             });
+
+        this.imageViewerCtrl = imageViewerCtrl;
 
     }
     ionViewWillEnter(){
@@ -92,42 +97,62 @@ export class HistoryPage {
     });
   }
 
-  addCards(data) {
 
 
+    addCards(data) {
     //loop through the activityList
     for (let i in data.activityList) {
       let currentObject = data.activityList[i];
-
       //console.log(currentObject);
       if (currentObject['ticketID'] == this.ticketID){
         console.log(data.activityList[i]);
       for (let j in currentObject['history']) {
-
-
-
         let currentHistory = currentObject['history'][j];
           var statusText;
           var statusClass;
           var historyClass;
           var subDate;
+          var endDate;
+          var imgFile;
+          var refund;
+          var invID;
+          subDate = currentObject['createDate'];
+          if(currentHistory['stateID'] == 3 && currentHistory['stateStatus'] == "1"){
+            endDate = currentHistory['stateDate'];
+          }else {
+              endDate = null;
+          }
+          imgFile = currentObject['imgFile'];
+          refund = currentObject['refund'];
+          invID = currentObject['invoiceID'];
+
           if (currentHistory['stateStatus'] == 0){
-            subDate = currentObject['createDate'];
             statusText = "Offen";
             statusClass = "cl-open";
             historyClass = "card-open";
           }else {
-            subDate = currentObject['createDate'];
             statusText = "Abgeschlossen";
             statusClass = "cl-closed";
             historyClass = "card-closed";
           };
-          this.history.push({head: 'Status: ' + '<b>' + statusText +'</b>',body: '<div class='+statusClass+'>' + currentHistory['stateText'] + '</div>', imgFile: currentObject.imgFile,cardClass: historyClass  });
-          this.hisStatus.push({submitDate: subDate.toString(), endDate: subDate.toString()});
+          this.history.push({head: 'Status: ' + '<b>' + statusText +'</b>',body: '<div class='+statusClass+'>' + currentHistory['stateText'] + '</div>', cardClass: historyClass  });
       };
       };
+
     }
+        this.historyHeader.push({submitDate: subDate.toString(), endDate: endDate.toString(), refund: refund, imgFile: imgFile, invoiceID: invID});
   }
+
+  /*
+  showPhoto(){
+    this.photoViewer.show(this.historyHeader['imgFile']);
+  }
+  */
+
+    showPhoto(myImg) {
+        const imageViewer = this.imageViewerCtrl.create(myImg);
+        imageViewer.present(myImg);
+    }
 
   /**
    * View a toast message
@@ -149,6 +174,7 @@ export class HistoryPage {
   hisRefresh(refresher) {
         console.log('Begin async operation', refresher);
         this.history = [];
+        this.historyHeader = [];
         this.updateLocalStorageAndPrepareData(false);
         console.log('Async operation has ended');
         refresher.complete();

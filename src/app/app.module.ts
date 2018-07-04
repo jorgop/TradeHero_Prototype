@@ -20,7 +20,7 @@ import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
 import {HistoryPage} from "../pages/history/history";
 import {HistoryService} from "../services/history.service";
-import {PhotoViewer} from "@ionic-native/photo-viewer";
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 //import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";
@@ -48,6 +48,7 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     FormsModule,
     BrowserModule,
     HttpClientModule,
+    IonicImageViewerModule,
     IonicModule.forRoot(MyApp, { swipeBackEnabled: false, tabsPlacement: 'top', backButtonText: "Zurück"}),
     IonicStorageModule.forRoot()
   ],
@@ -73,7 +74,6 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     ActivityService,
     HistoryService,
     CallNumber,
-    PhotoViewer,
       //if running on device
     Camera, //if running on device
     CameraPreview

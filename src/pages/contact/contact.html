@@ -13,12 +13,7 @@
     </ion-navbar>
 </ion-header>
 
-
-
-
 <ion-content>
-
-
     <div class="square">
         <div class="main-container">
             <div class="top-container">Kontakt
@@ -29,7 +24,7 @@
                         <ion-icon name="arrow-dropright"></ion-icon>
                     </button>
                     <ion-fab-list side="right">
-                        <button class="shadow" (Click)="goToScan()" ion-fab><ion-icon name="camera"></ion-icon></button>
+                        <button class="shadow" (click)="goToScan()" ion-fab><ion-icon name="camera"></ion-icon></button>
                         <button class="shadow" (click)="goToActivity()" ion-fab><ion-icon name="paper"></ion-icon></button>
                         <button class="shadow" (click)="goToProfile()" ion-fab><ion-icon name="person"></ion-icon></button>
                     </ion-fab-list>
@@ -38,24 +33,18 @@
         </div>
     </div>
 
+    <button round class="button-align" ion-button icon-start (click)="callInsurance()">
+        <ion-icon name="call"></ion-icon>
+        InsuRabbit
+    </button>
 
-
-  <button round class="button-align" ion-button icon-start (click)="callInsurance()">
-    <ion-icon name="call"></ion-icon>
-    0123-456789
-  </button>
-
-  <div class="info">
-
-    <p class="title">Öffnungszeiten</p>
-    <p>Montag - Freitag 8-18 Uhr <br> Samstag - Sonntag 9-17 Uhr</p>
-    <p></p>
-    <p class="title">Adresse</p>
-    <p>Name der Versicherung XYZ <br> Beispielstr. 123 <br> 12345 Beispielstadt</p>
-    <p></p>
-    <p>Beispiel@Mail.de</p>
-
-  </div>
-
-
+    <div class="info">
+        <p class="title">Öffnungszeiten</p>
+        <p>Montag - Freitag 8-18 Uhr <br> Samstag - Sonntag 9-17 Uhr</p>
+        <p></p>
+        <p class="title">Adresse</p>
+        <p>Name der Versicherung XYZ <br> Beispielstr. 123 <br> 12345 Beispielstadt</p>
+        <p></p>
+        <p>Beispiel@Mail.de</p>
+    </div>
 </ion-content>
