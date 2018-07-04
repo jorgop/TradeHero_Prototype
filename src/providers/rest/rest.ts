@@ -80,6 +80,7 @@ export class RestProvider {
     });
   }
 
+
   /**
    * Check user authentication
    * @param mail User mail
@@ -99,13 +100,29 @@ export class RestProvider {
   }
 
   /**
-   * Get the actifities by userID
+   * Update user user data by userID
    * @param userID User-ID
-   * @returns {Promise<any>} Return a list of the activities by the User-ID
+   * @returns {Promise<any>} Return update status
    */
   getUserData(userID) {
     return new Promise((resolve, reject) => {
       this.http.get(this.apiUrl+'/api/user?userID='+userID,{responseType: "json"})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  /**
+   * Get the actifities by userID
+   * @param userID User-ID
+   * @returns {Promise<any>} Return a list of the activities by the User-ID
+   */
+  updateUserData(userID) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/api/user?userID='+userID,{responseType: "json"})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
