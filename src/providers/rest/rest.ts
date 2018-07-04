@@ -120,9 +120,9 @@ export class RestProvider {
    * @param userID User-ID
    * @returns {Promise<any>} Return a list of the activities by the User-ID
    */
-  updateUserData(userID) {
+  updateUserData(userID,data) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl+'/api/user?userID='+userID,{responseType: "json"})
+      this.http.post(this.apiUrl+'/api/user?userID='+userID,data)
         .subscribe(res => {
           resolve(res);
         }, (err) => {

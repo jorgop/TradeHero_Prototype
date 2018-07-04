@@ -99,16 +99,33 @@ export class ProfilePage {
 
   }
 
+  //Read userdata from form and send it to REST
   sendUserData(){
-      var myData = <any>{};
-      myData = {'firstName': this.stammdatenForm.controls.firstName.value,
+      var restData = <any>{};
+      restData = {'firstName': this.stammdatenForm.controls.firstName.value,
                 'lastName': this.stammdatenForm.controls.lastName.value,
                 'mail': this.stammdatenForm.controls.mail.value,
                 'street': this.stammdatenForm.controls.street.value,
                 'houseNumber': this.stammdatenForm.controls.houseNumber.value,};
-      console.log(myData);
+      console.log(restData);
+
+      var myIdentity;
+
+      this.storage.get('identity').then((val) => {
+          let identity = <any>{};
+          identity = JSON.parse(val);
+
+          this.restProvider.updateUserData(identity['userID'],restData).then((result) => {
+              console.log(result);
+
+          }, (err) => {
+              console.log('error2 ' + err);
+
+          });
+      });
   }
 
+  //Update the Inputfields
   updateUserDataInputfields(){
       this.storage.get('user').then((val) => {
           let user = <any>{};
@@ -140,6 +157,8 @@ export class ProfilePage {
           });
       });
   }
+
+  //"Go to" function
 
     goToScan(){
         this.navCtrl.push(ScanPage);
