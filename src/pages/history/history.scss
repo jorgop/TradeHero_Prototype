@@ -1,4 +1,32 @@
 page-history {
+
+  .color-header {
+    background: #15B2A2;
+  }
+
+  .back-button {
+    color: white !important;
+  }
+  .color-btn-header {
+    color: white;
+  }
+
+  .logout-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+  }
+
+  .fixed-header-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+    border-radius: 100px;
+    margin-right: 1%;
+  }
+
   .cl-open {
     color: darkorange;
   }

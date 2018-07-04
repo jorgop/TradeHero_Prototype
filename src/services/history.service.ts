@@ -1,6 +1,6 @@
 export class HistoryService{
-  private card: {head:string,body:string,imgFile:string,cardClass: string} [] = [];
-  private hisStatus: {submitDate: string, endDate: string}[] = [];
+  private card: {head:string,body:string,cardClass: string} [] = [];
+  private historyHeader: {submitDate: string, endDate: string, refund: number, imgFile: string, invoiceID: String}[] = [];
 
   addCard(card:{head:string,body:string,imgFile:string,cardClass: string}){
     this.card.push(card);
@@ -10,10 +10,10 @@ export class HistoryService{
     return this.card.slice();
   }
 
-  addHisStatus(hisStatus:{submitDate: string, endDate: string}){
-      this.hisStatus.push(hisStatus);
+  addHistoryHeader(historyHeader:{submitDate: string, endDate: string, refund: number, imgFile: string, invoiceID: String}){
+      this.historyHeader.push(historyHeader);
   }
-  getHisStatus(){
-      return this.hisStatus.slice();
+  getHistoryHeader(){
+      return this.historyHeader.slice();
   }
 }

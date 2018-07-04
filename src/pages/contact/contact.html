@@ -1,69 +1,50 @@
+<ion-header class="color-header">
+    <ion-navbar  class="back-button" transparent>
 
-<ion-header>
-  <ion-navbar class="color-header" transparent hideBackButton>
-    <button class="color-btn-header" clear ion-button icon-start on-click="goToHome()">
-      <ion-icon name="arrow-back"></ion-icon>
-      Zurück
-    </button>
-
-    <button class="logout-btn" round ion-button>
-      <ion-icon name="power"></ion-icon>
-    </button>
-    <button class="fixed-header-btn" ion-button>
-      <ion-icon name="information-circle"></ion-icon>
-    </button>
-    <button class="fixed-header-btn" ion-button>
-      <ion-icon name="settings"></ion-icon>
-    </button>
-  </ion-navbar>
+        <button class="logout-btn" (click)="logout()" round ion-button>
+            <ion-icon name="power"></ion-icon>
+        </button>
+        <button class="fixed-header-btn" (click)="goToAbout()" ion-button>
+            <ion-icon name="information-circle"></ion-icon>
+        </button>
+        <button class="fixed-header-btn" ion-button>
+            <ion-icon name="settings"></ion-icon>
+        </button>
+    </ion-navbar>
 </ion-header>
 
-
-
-
 <ion-content>
-
-
-  <div class="square">
-  <div class="main-container">
-    <div class="top-container">Kontakt
+    <div class="square">
+        <div class="main-container">
+            <div class="top-container">Kontakt
+            </div>
+            <div class="bottom-container">
+                <ion-fab left>
+                    <button ion-fab color="light" class="shadow">
+                        <ion-icon name="arrow-dropright"></ion-icon>
+                    </button>
+                    <ion-fab-list side="right">
+                        <button class="shadow" (click)="goToScan()" ion-fab><ion-icon name="camera"></ion-icon></button>
+                        <button class="shadow" (click)="goToActivity()" ion-fab><ion-icon name="paper"></ion-icon></button>
+                        <button class="shadow" (click)="goToProfile()" ion-fab><ion-icon name="person"></ion-icon></button>
+                    </ion-fab-list>
+                </ion-fab>
+            </div>
+        </div>
     </div>
-    <div class="bottom-container">
-      <ion-fab right>
-        <button ion-fab color="light" class="shadow">
-          <ion-icon name="arrow-dropleft"></ion-icon>
-        </button>
-        <ion-fab-list side="left">
-          <button class="shadow" ion-fab><ion-icon name="power"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="information-circle"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="settings"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="paper" on-click="goToActivity()"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="person" on-click="goToProfile()"></ion-icon></button>
-          <button class="shadow" ion-fab><ion-icon name="camera" on-click="goToScann()"></ion-icon></button>
-        </ion-fab-list>
-      </ion-fab>
+
+    <button round class="button-align" ion-button icon-start (click)="callInsurance()">
+        <ion-icon name="call"></ion-icon>
+        InsuRabbit
+    </button>
+
+    <div class="info">
+        <p class="title">Öffnungszeiten</p>
+        <p>Montag - Freitag 8-18 Uhr <br> Samstag - Sonntag 9-17 Uhr</p>
+        <p></p>
+        <p class="title">Adresse</p>
+        <p>Name der Versicherung XYZ <br> Beispielstr. 123 <br> 12345 Beispielstadt</p>
+        <p></p>
+        <p>Beispiel@Mail.de</p>
     </div>
-  </div>
-  </div>
-
-
-
-  <button round class="button-align" ion-button icon-start (click)="callInsurance()">
-    <ion-icon name="call"></ion-icon>
-    0123-456789
-  </button>
-
-  <div class="info">
-
-    <p class="title">Öffnungszeiten</p>
-    <p>Montag - Freitag 8-18 Uhr <br> Samstag - Sonntag 9-17 Uhr</p>
-    <p></p>
-    <p class="title">Adresse</p>
-    <p>Name der Versicherung XYZ <br> Beispielstr. 123 <br> 12345 Beispielstadt</p>
-    <p></p>
-    <p>Beispiel@Mail.de</p>
-
-  </div>
-
-
 </ion-content>

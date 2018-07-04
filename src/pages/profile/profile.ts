@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {Navbar, NavController, ToastController,} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
-import { AlertController } from 'ionic-angular';
+import {AlertController} from 'ionic-angular';
 import {HomePage} from "../home/home";
+import {AboutPage} from "../about/about";
 import {LoginPage} from "../login/login";
+import {ContactPage} from "../contact/contact";
+import {ScanPage} from "../scan/scan";
+import {ActivityPage} from "../activity/activity";
 
 /**
  * Generated class for the ProfilePage page.
@@ -29,8 +33,10 @@ export class ProfilePage {
   public buttonStyle: string = 'none';
   public iconToggle: boolean = true;
 
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+              private toastCtrl: ToastController,
+              public alertCtrl: AlertController,
               private storage: Storage,
               private formBuilder: FormBuilder,
               public restProvider: RestProvider) {
@@ -52,6 +58,12 @@ export class ProfilePage {
       });
 
   }
+
+    ionViewDidLoad() {
+        this.navBar.backButtonClick = (e:UIEvent)=>{
+            this.navCtrl.push(HomePage);
+        }
+    }
 
 //function to change editing mode of personal infomation
     public toggleediting(): void {
@@ -129,13 +141,65 @@ export class ProfilePage {
       });
   }
 
-    goToHome(params){
+    goToScan(){
+        this.navCtrl.push(ScanPage);
+    }
+    goToProfile(){
+        this.navCtrl.push(ProfilePage);
+    }
+    goToContact(){
+        this.navCtrl.push(ContactPage);
+    }
+    goToActivity(){
+        this.navCtrl.push(ActivityPage);
+    }
+    goToHome(){
         this.navCtrl.push(HomePage);
     }
+    goToAbout(){
+        this.navCtrl.push(AboutPage);
+    }
+
+    /**
+     * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.
+     * Im Anschluß erscheint ein Toast zur Bestätigung des erfolgreichen Logouts, nachdem der Storage geleert wurde.
+     */
     logout() {
+        const confirm = this.alertCtrl.create({
+            title: 'Wollen Sie sich wirklich ausloggen?',
+            buttons: [
+                {
+                    text: 'Abbrechen',
+                    handler: () => {
+                        console.log('Logout abgebrochen');
+                    }
+                },
+                {
+                    text: 'Ausloggen',
+                    handler: () => {
+                        console.log('Logout erfolgreich');
+                        this.performLogout();
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
+    performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
+        let logoutConf = this.toastCtrl.create({
+            message: 'Sie wurden erfolgreich ausgeloggt',
+            duration: 2000,
+            position: 'top',
+            showCloseButton: true,
+            closeButtonText: 'X'
+        });
+        logoutConf.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+        logoutConf.present();
     }
 
 }

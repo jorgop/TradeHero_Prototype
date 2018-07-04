@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, App} from 'ionic-angular';
+import {LoadingController, NavController, App, AlertController, ToastController} from 'ionic-angular';
 import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {ViewChild} from "@angular/core";
@@ -11,6 +11,8 @@ import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
 import {ContactPage} from "../contact/contact";
 import {LoginPage} from "../login/login";
+import {AboutPage} from "../about/about";
+
 
 @Component({
     selector: 'page-activity',
@@ -24,6 +26,8 @@ export class ActivityPage {
 
     @ViewChild(Navbar) navBar: Navbar;
     constructor(public navCtrl: NavController,
+                private toastCtrl: ToastController,
+                public alertCtrl: AlertController,
                 public app: App,
                 private activityService: ActivityService,
                 private storage: Storage,
@@ -218,20 +222,23 @@ export class ActivityPage {
         }
     }
 
-    goToHome(){
-        this.navCtrl.popTo(HomePage);
-    }
-
-    goToProfile(params){
-        this.navCtrl.push(ProfilePage);
-    }
-
-    goToScann(params){
+    goToScan(){
         this.navCtrl.push(ScanPage);
     }
-
-    goToContact(params){
+    goToProfile(){
+        this.navCtrl.push(ProfilePage);
+    }
+    goToContact(){
         this.navCtrl.push(ContactPage);
+    }
+    goToActivity(){
+        this.navCtrl.push(ActivityPage);
+    }
+    goToHome(){
+        this.navCtrl.push(HomePage);
+    }
+    goToAbout(){
+        this.navCtrl.push(AboutPage);
     }
 
 
@@ -246,9 +253,46 @@ export class ActivityPage {
 
     }
 
+    /**
+     * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.
+     * Im Anschluß erscheint ein Toast zur Bestätigung des erfolgreichen Logouts, nachdem der Storage geleert wurde.
+     */
     logout() {
+        const confirm = this.alertCtrl.create({
+            title: 'Wollen Sie sich wirklich ausloggen?',
+            buttons: [
+                {
+                    text: 'Abbrechen',
+                    handler: () => {
+                        console.log('Logout abgebrochen');
+                    }
+                },
+                {
+                    text: 'Ausloggen',
+                    handler: () => {
+                        console.log('Logout erfolgreich');
+                        this.performLogout();
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
+    performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
+        let logoutConf = this.toastCtrl.create({
+            message: 'Sie wurden erfolgreich ausgeloggt',
+            duration: 2000,
+            position: 'top',
+            showCloseButton: true,
+            closeButtonText: 'X'
+        });
+        logoutConf.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+        logoutConf.present();
     }
+
 }

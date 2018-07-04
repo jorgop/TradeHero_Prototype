@@ -1,9 +1,15 @@
 <ion-header class="color-header">
   <ion-navbar  class="back-button" transparent>
-    <!--<button class="color-btn-header" clear ion-button icon-start on-click="goToHome()">
-        <ion-icon name="arrow-back"></ion-icon>
-        Zurück
-    </button>-->
+
+    <button class="logout-btn" round ion-button>
+      <ion-icon name="power"></ion-icon>
+    </button>
+    <button class="fixed-header-btn" ion-button>
+      <ion-icon name="information-circle"></ion-icon>
+    </button>
+    <button class="fixed-header-btn" ion-button>
+      <ion-icon name="settings"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -16,21 +22,29 @@
   </ion-refresher>
 <ion-content padding>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header *ngFor="let historyHeader of historyHeader">
       Ticket-ID: {{ticketID}}
-      <!-- <img src="{{ history.body }}"> -->
-    </ion-card-header>
-    <ion-card-content *ngFor="let hisStatus of hisStatus">
-      <p>Erstellt am: {{hisStatus.submitDate | date: 'dd.MM.yyyy'}}
       <br>
-      Abgesclossen am:
-      <br><br>
-      Rechungsbetrag:
+      <p>Erstellt am: {{historyHeader.submitDate | date: 'dd.MM.yyyy'}}
+        <br>
+        Abgeschlossen am: {{historyHeader.endDate | date: 'dd.MM.yyyy'}}
+        <br>
+        Rechungsbetrag: {{historyHeader.refund}}
       </p>
+    </ion-card-header>
+    <ion-card-content *ngFor="let historyHeader of historyHeader">
+        <ion-item>
+            <ion-thumbnail item-start (click)="showPhoto(historyHeader.imgFile)">
+              <img src="{{historyHeader.imgFile}}" imageViewer/>
+            </ion-thumbnail>
+          <p>
+            RechungsID: {{historyHeader.invoiceID}}
+          </p>
+        </ion-item>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let history of history " class={{history.cardClass}} >
+  <ion-card *ngFor="let history of history" class={{history.cardClass}} >
     <ion-card-header>
      <!-- <img src="{{ history.body }}"> -->
       <div [innerHtml]=history.head></div>
