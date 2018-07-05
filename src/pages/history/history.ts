@@ -36,7 +36,7 @@ export class HistoryPage {
 
         //loading for sending data
             this.historyLoading = this.loadingController.create({
-            content: 'Bild wird verarbeitet'
+            content: 'Verlauf wird geladen'
             });
 
         this.imageViewerCtrl = imageViewerCtrl;
@@ -136,7 +136,7 @@ export class HistoryPage {
             historyClass = "card-closed";
           };
           this.history.push({head: 'Status: ' + '<b>' + statusText +'</b>',body: '<div class='+statusClass+'>' + currentHistory['stateText'] + '</div>', cardClass: historyClass  });
-      };
+        };
       };
 
     }

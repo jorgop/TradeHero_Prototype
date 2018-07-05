@@ -21,7 +21,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import {HistoryPage} from "../pages/history/history";
 import {HistoryService} from "../services/history.service";
 import { IonicImageViewerModule } from 'ionic-img-viewer';
-
+import {ImpressumPage} from "../pages/impressum/impressum";
 //import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";
 
@@ -42,7 +42,8 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     ScanPage,
     HistoryPage,
     ProfilePage,
-    OcrPage
+    OcrPage,
+    ImpressumPage
   ],
   imports: [
     FormsModule,
@@ -64,7 +65,8 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     ScanPage,
     ProfilePage,
     HistoryPage,
-    OcrPage
+    OcrPage,
+    ImpressumPage
   ],
   providers: [
     StatusBar,
