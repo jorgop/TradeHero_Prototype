@@ -116,9 +116,9 @@ export class HistoryPage {
           var imgFile;
           var refund;
           var invID;
-          subDate = currentObject['createDate'];
+          subDate = currentObject['startDate'];
           if(currentHistory['stateID'] == 3 && currentHistory['stateStatus'] == "1"){
-            endDate = currentHistory['stateDate'];
+            endDate = currentHistory['endDate'];
           }else {
               endDate = null;
           }
