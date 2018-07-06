@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar transparent></ion-navbar>
+  <ion-navbar transparent hideBackButton></ion-navbar>
 </ion-header>
 
 <ion-content id="page2" class="set-background">
@@ -9,14 +9,7 @@
       <div class="top-container">InsuRabbit</div>
       <div class="bottom-container">
         <!-- InfoText hier-->
-        <div class="info-text1">
         <p class="info-text"> {{nachricht}}</p>
-        </div>
-        <div class="info-text2">
-        <p class="info-text"> {{nachrichtzwei}}</p>
-        </div>
-
-
       </div>
     </div>
   </div>
@@ -38,7 +31,7 @@
         </ion-label>
         <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email"></ion-input>
 
-        <button clear ion-button item-right (click)="message()">
+        <button clear ion-button item-right (click)="message(1)">
           <ion-icon name="information-circle"></ion-icon>
         </button>
 
@@ -55,7 +48,7 @@
         </ion-label>
         <ion-input formControlName="password" type="password" placeholder="Passwort" name="password"></ion-input>
 
-        <button clear ion-button item-right (click)="messagetwo()">
+        <button clear ion-button item-right (click)="message(2)">
           <ion-icon name="information-circle"></ion-icon>
         </button>
 

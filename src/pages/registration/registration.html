@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar transparent></ion-navbar>
+  <ion-navbar transparent hideBackButton></ion-navbar>
 </ion-header>
 
 
@@ -11,15 +11,7 @@
     </div>
     <div class="bottom-container">
       <!-- InfoText hier-->
-      <div class="info-text1">
         <p class="info-text"> {{nachricht}}</p>
-      </div>
-      <div class="info-text2">
-        <p class="info-text"> {{nachrichtzwei}}</p>
-      </div>
-      <div class="info-text3">
-        <p class="info-text"> {{nachrichtdrei}}</p>
-      </div>
     </div>
   </div>
 
@@ -45,7 +37,7 @@
         <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email">
         </ion-input>
 
-        <button clear ion-button item-right (click)="message()">
+        <button clear ion-button item-right (click)="message(1)">
           <ion-icon name="information-circle"></ion-icon>
         </button>
 
@@ -62,7 +54,7 @@
 
         <ion-input formControlName="token" type="token" placeholder="Token" name="token"></ion-input>
 
-        <button clear ion-button item-right (click)="messagetwo()">
+        <button clear ion-button item-right (click)="message(2)">
           <ion-icon name="information-circle"></ion-icon>
         </button>
 
@@ -78,7 +70,7 @@
 
         <ion-input formControlName="password" type="password" placeholder="Passwort"  name="password"></ion-input>
 
-        <button clear ion-button item-right (click)="messagethree()">
+        <button clear ion-button item-right (click)="message(3)">
           <ion-icon name="information-circle"></ion-icon>
         </button>
 
@@ -104,7 +96,7 @@
   <button id="signup-button6" ion-button style="text-decoration:underline; color:white" clear color="positive" block on-click="goToLogin()">
 
     <!-- <p><ion-icon name="arrow-back"></ion-icon>  Zurück zum Login</p> -->
-    <div class="coloring"><ion-icon class="arrow-login" name="arrow-back"></ion-icon>Zurück zum Login</div>
+    <div class="coloring">Zurück zum Login</div>
   </button>
 
     </div>

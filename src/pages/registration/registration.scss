@@ -30,46 +30,27 @@ page-registration {
   }
 
   .top-container {
-    height: 50%;
+    height: 70%;
     width: 100%;
     text-align: center;
     font-size: 3.0em;
     color: #15B2A2;
     text-shadow: 1px 1px gray;
-    padding-top: 20%;
+    padding-top: 25%;
     font-family: "Merriweather Sans";
   }
 
   .bottom-container {
-    top: 50%;
     position: relative;
-    height: 50%;
+    top: 70%;
+    height: 30%;
     width: 100%;
   }
 
   /* Container für Info Text */
 
-  .info-text1 {
-    position: absolute;
-    height: 33%;
-    width: 100%;
-  }
-
-  .info-text2 {
-    position: absolute;
-    top: 33%;
-    height: 33%;
-    width: 100%;
-  }
-
-  .info-text3 {
-    position: absolute;
-    top: 66%;
-    height: 33%;
-    width: 100%;
-  }
-
   .info-text {
+    padding-top: 5%;
     color: #404040;
     text-align: center;
     font-family: "Open Sans";
@@ -80,7 +61,6 @@ page-registration {
   /* Body */
 
   .body {
-    margin-top: 5%;
     position: relative;
     width: 100%;
     height: 60%;
@@ -142,9 +122,6 @@ page-registration {
   }
 
 
-
-
-
   /* Register Button */
 
   .body-bottom {
@@ -168,16 +145,6 @@ page-registration {
     text-decoration: underline;
     text-decoration-color: #15B2A2;
   }
-
-  .arrow-login {
-    color: #15B2A2;
-    padding-right: 5%;
-  }
-
-
-
-
-
 
 
 }

@@ -16,7 +16,6 @@ import { AlertController } from 'ionic-angular';
 export class LoginPage {
 
   nachricht: String;
-  nachrichtzwei: String;
 
   submitAttempt: boolean = false;
   private myForm : FormGroup;
@@ -35,15 +34,16 @@ export class LoginPage {
     });
   }
 
-  message () {
-    this.nachricht = "Max@Mustermann.de";
-    return this.nachricht;
-  }
-
-  messagetwo () {
-    this.nachrichtzwei = "Mindestens 6 Buchstaben";
-    return this.nachrichtzwei;
-  }
+    message(myParam) {
+        if (myParam == 1) {
+            this.nachricht = "Max@Mustermann.de";
+            return this.nachricht;
+        } else (myParam == 2)
+        {
+            this.nachricht = "Mindestens 6 Buchstaben";
+            return this.nachricht;
+        }
+    }
 
 
     /**
