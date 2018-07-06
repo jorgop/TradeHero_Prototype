@@ -3,69 +3,147 @@ page-registration {
     color: white;
   }
 
-  .title {
-    font-family: "Avenir Next";
-  }
   .validatortxt{
     border:none;
   }
-  .square {
-    height: 35%;
-    text-align: center;
-    padding: 70px 0;
-    font-size: 36px;
-    font-family: "Calibri Light";
-    color: white;
-    text-shadow: 1px 1px black;
-  }
+
+  /* Hintergrundfarbe */
 
   .set-background {
-    background-image: url('../assets/imgs/bluewater.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: white;
   }
 
-  .set-transparency {
-    background-color: transparent;
-    color: white;
+
+  /* Header */
+
+  .square {
+    position: relative;
+    height: 35%;
+    width: 100%;
+    background: white;
   }
 
-  .item {
-    padding-left: 30px;
-    border-left: none;
-    border-right: none;
+  .main-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
   }
 
-  .input {
-    input::placeholder {
-      color:white;
-    }
+  .top-container {
+    height: 70%;
+    width: 100%;
+    text-align: center;
+    font-size: 3.0em;
+    color: #15B2A2;
+    text-shadow: 1px 1px gray;
+    padding-top: 25%;
+    font-family: "Merriweather Sans";
   }
 
-  .input-md {
-    padding-right: 15%;
+  .bottom-container {
+    position: relative;
+    top: 70%;
+    height: 30%;
+    width: 100%;
   }
+
+  /* Container für Info Text */
+
+  .info-text {
+    padding-top: 5%;
+    color: #404040;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 1.0em;
+  }
+
+
+  /* Body */
+
+  .body {
+    position: relative;
+    width: 100%;
+    height: 60%;
+  }
+
+  .body-top {
+    position: absolute;
+    height: 40%;
+    width: 100%;
+  }
+
+  /* Input Felder */
+
+  /* Icon in Input */
 
   ion-icon{
-    color:white;
+    color: #15B2A2;
+    font-size: 1.5em;
   }
 
-  .button {
-    box-shadow: none;
-  }
+  /* set border of input label */
 
   #border {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
+    border-top: 1px solid #15B2A2;
+    border-bottom: 1px solid #15B2A2;
   }
 
   #border1 {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
+    border-top: 1px solid #15B2A2;
+    border-bottom: 1px solid #15B2A2;
   }
 
-  .padding-icon {
+  ion-item.item {
+    text-align: center;
+    /* border-radius: 100px; */
     padding-left: 10%;
+    background-color: rgba(255, 255, 255, 0.4);
+    .label {
+      width: 10%;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  /* Set color of placeholder text */
+
+  .input {
+    input::placeholder {
+      color: #404040;
+      font-family: "Open Sans";
+      font-size: 1.0em;
+    }
+  }
+
+  /* Set color of text when typing */
+
+  .text-color {
+    color: #404040;
+    font-family: "Open Sans";
+  }
+
+
+  /* Register Button */
+
+  .body-bottom {
+    position: absolute;
+    top: 40%;
+    height: 60%;
+    width: 100%;
+  }
+
+  .register-btn {
+    color: white;
+    font-family:"Open Sans";
+    box-shadow: none;
+    background-color: #15B2A2;
+  }
+
+  .coloring {
+    color: #15B2A2;
+    font-size: 1.0em;
+    font-family: "Open Sans";
+    text-decoration: underline;
+    text-decoration-color: #15B2A2;
   }
 
 

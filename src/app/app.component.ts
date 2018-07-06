@@ -8,7 +8,7 @@ import {RegistrationPage} from "../pages/registration/registration";
 import {ContactPage} from "../pages/contact/contact";
 import {ActivityPage} from "../pages/activity/activity";
 
-
+import {ImpressumPage} from "../pages/impressum/impressum";
 
 @Component({
   templateUrl: 'app.html'
