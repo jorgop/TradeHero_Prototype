@@ -48,6 +48,8 @@ export class HomePage {
         this.navCtrl.push(ImpressumPage);
     }
 
+
+
     /**
      * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.
      * Im Anschluß erscheint ein Toast zur Bestätigung des erfolgreichen Logouts, nachdem der Storage geleert wurde.
