@@ -40,10 +40,10 @@ export class LoginPage {
     return this.nachricht;
   }
 
-    messagetwo () {
-        this.nachrichtzwei = "Mindestens 6 Buchstaben";
-        return this.nachrichtzwei;
-    }
+  messagetwo () {
+    this.nachrichtzwei = "Mindestens 6 Buchstaben";
+    return this.nachrichtzwei;
+  }
 
 
     /**
