@@ -7,7 +7,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Md5 } from "ts-md5";
 import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
-import { AlertController } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
     selector: 'page-login',
@@ -24,7 +24,14 @@ export class LoginPage {
               public toastCtrl: ToastController,
               public restProvider: RestProvider,
               private storage: Storage,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private keyboard: Keyboard) {
+
+    //detect if keyboard is shown
+    this.keyboard.onKeyboardShow().subscribe(() => {
+      console.log("keyboard detected")
+      this.keyboard.disableScroll(false);
+    });
 
     //this.storage.clear();
 
@@ -44,7 +51,6 @@ export class LoginPage {
             return this.nachricht;
         }
     }
-
 
     /**
     * Site navigation
@@ -103,4 +109,3 @@ export class LoginPage {
     }
 
 }
-
