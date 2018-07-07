@@ -8,14 +8,14 @@
     <div class="main-container">
       <div class="top-container">InsuRabbit</div>
       <div class="bottom-container">
-        <!-- InfoText hier-->
+        <!-- InfoText here-->
         <p class="info-text"> {{nachricht}}</p>
       </div>
     </div>
   </div>
 
 
-  <!-- Input Felder -->
+  <!-- Input Labels -->
 
   <div class="body">
 
@@ -25,10 +25,14 @@
 
     <ion-list id="signup-list3">
 
+      <!-- E-Mail -->
+
       <ion-item id="border" class="text-color">
+
         <ion-label>
           <ion-icon name="md-mail"></ion-icon>
         </ion-label>
+
         <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email"></ion-input>
 
         <button clear ion-button item-right (click)="message(1)">
@@ -40,12 +44,14 @@
         <p *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Bitte korrekte E-Mail-Adresse eingeben.</p>
 
 
-
+      <!-- Passwort -->
 
       <ion-item id="border1" class="text-color">
+
         <ion-label>
           <ion-icon name="md-lock"></ion-icon>
         </ion-label>
+
         <ion-input formControlName="password" type="password" placeholder="Passwort" name="password"></ion-input>
 
         <button clear ion-button item-right (click)="message(2)">
@@ -55,15 +61,18 @@
       </ion-item>
 
         <p *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Mindestens 6 Buchstaben.</p>
+
     </ion-list>
 
   </div>
 
     </div>
 
+    <!-- Login-Button -->
+
       <div class="body-bottom">
 
-      <!-- Login-Button -->
+
 
 
   <div style="text-align:center">
