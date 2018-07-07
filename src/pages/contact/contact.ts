@@ -9,7 +9,7 @@ import {HomePage} from "../home/home";
 import {ProfilePage} from "../profile/profile";
 import {ScanPage} from "../scan/scan";
 import {LoginPage} from "../login/login";
-import {AboutPage} from "../about/about";
+import {ImpressumPage} from "../impressum/impressum";
 
 @Component({
   selector: 'page-contact',
@@ -71,8 +71,8 @@ export class ContactPage {
     goToHome(){
         this.navCtrl.push(HomePage);
     }
-    goToAbout(){
-        this.navCtrl.push(AboutPage);
+    goToImpressum(){
+        this.navCtrl.push(ImpressumPage);
     }
 
     ionViewDidLoad() {

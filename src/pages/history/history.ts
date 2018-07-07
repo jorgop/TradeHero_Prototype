@@ -7,6 +7,11 @@ import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import { ImageViewerController } from 'ionic-img-viewer';
 import {HomePage} from "../home/home";
+import {ProfilePage} from "../profile/profile";
+import {ContactPage} from "../contact/contact";
+import {ActivityPage} from "../activity/activity";
+import {ImpressumPage} from "../impressum/impressum";
+import {ScanPage} from "../scan/scan";
 
 @Component({
     selector: 'page-history',
@@ -42,6 +47,26 @@ export class HistoryPage {
         this.imageViewerCtrl = imageViewerCtrl;
 
     }
+
+    goToScan(){
+        this.navCtrl.push(ScanPage);
+    }
+    goToProfile(){
+        this.navCtrl.push(ProfilePage);
+    }
+    goToContact(){
+        this.navCtrl.push(ContactPage);
+    }
+    goToActivity(){
+        this.navCtrl.push(ActivityPage);
+    }
+    goToHome(){
+        this.navCtrl.push(HomePage);
+    }
+    goToImpressum(){
+        this.navCtrl.push(ImpressumPage);
+    }
+
     ionViewWillEnter(){
         this.history = this.historyService.getCard();
         this.updateLocalStorageAndPrepareData(true);
@@ -117,13 +142,13 @@ export class HistoryPage {
           var refund;
           var invID;
 
-          subDate = currentObject['createDate'];
+          subDate = currentObject['startDate'];
           if(currentHistory['stateID'] == 3 && currentHistory['stateStatus'] == "1"){
-            endDate = currentHistory['stateDate'];
+            endDate = currentHistory['endDate'];
           }else if(currentHistory['stateStatus'] == "2"){
-              endDate = currentHistory['stateDate'];
+              endDate = currentHistory['endDate'];
           }else if(currentHistory['stateStatus'] == "0"){
-              endDate = currentHistory['stateDate'];
+              endDate = currentHistory['endDate'];
           }
 
           imgFile = currentObject['imgFile'];
