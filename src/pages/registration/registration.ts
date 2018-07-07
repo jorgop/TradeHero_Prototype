@@ -15,8 +15,7 @@ import {Md5} from "ts-md5";
 export class RegistrationPage {
 
     nachricht: String;
-    /* nachrichtzwei: String;
-    nachrichtdrei: String; */
+
 
   submitAttempt: boolean = false;
   private myForm : FormGroup;
@@ -42,21 +41,6 @@ export class RegistrationPage {
         }
     }
 
-  /*
-  message () {
-    this.nachricht = "Max@Mustermann.de";
-    return this.nachricht;
-  }
-
-  messagetwo () {
-        this.nachrichtzwei = "Mindestens 6 Buchstaben";
-        return this.nachrichtzwei;
-  }
-
-  messagethree () {
-    this.nachrichtdrei = "Mindestens 6 Buchstaben";
-    return this.nachrichtdrei;
-  } */
 
 
 

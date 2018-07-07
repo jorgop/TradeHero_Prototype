@@ -3,7 +3,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -23,8 +22,8 @@ import {HistoryService} from "../services/history.service";
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import {ImpressumPage} from "../pages/impressum/impressum";
-//import { CameraMock } from './mocks/CameraMock';
 import {Camera} from "@ionic-native/camera";
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { IonicStorageModule } from '@ionic/storage';
 import {ScanPage} from "../pages/scan/scan";
@@ -78,6 +77,7 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     HistoryService,
     CallNumber,
     PhotoViewer,
+    Keyboard,
       //if running on device
     Camera, //if running on device
     CameraPreview
