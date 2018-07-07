@@ -1,0 +1,17 @@
+import { FormControl } from '@angular/forms';
+export class RefundValidator {
+
+  static isValid(control: FormControl): any {
+
+    var re = /^[0-9]+\.[0-9]{2}$/;
+    let result = re.test(control.value);
+
+    if (!result) {
+      return {
+        'refund:validation:fail' : true
+      }
+    }
+
+    return null;
+  }
+}

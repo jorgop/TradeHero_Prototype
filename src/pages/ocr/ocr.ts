@@ -7,6 +7,9 @@ import {RestProvider} from "../../providers/rest/rest";
 import {Storage} from "@ionic/storage";
 import {ActivityPage} from "../activity/activity";
 import {HomePage} from "../home/home";
+import {IbanValidator} from "../../validators/iban";
+import {PlzValidator} from "../../validators/plz";
+import {RefundValidator} from "../../validators/refund";
 
 @Component({
     selector: 'page-ocr',
@@ -16,6 +19,7 @@ export class OcrPage {
 
     private scanedImage : any;
     private myForm : FormGroup;
+    private myVal : any;
     private osrLoading : any;
     private sendLoading : any;
     private userID : any;
@@ -31,16 +35,27 @@ export class OcrPage {
 
       this.scanedImage = this.navParams.get('scanedImage');
 
+      this.myVal = {
+        name: "true",
+        street: "true",
+        place : "true",
+        plz : "true",
+        bankName : "true",
+        IBAN : "true",
+        invoiceNumber : "true",
+        refund : "true"
+      }
+
       //form for ocr text
       this.myForm = formBuilder.group({
         name: ['', Validators.required],
-        street: [''],
-        place : [''],
-        plz : [''],
-        bankName : [''],
-        IBAN : [''],
+        street: ['', Validators.required],
+        place : ['', Validators.required],
+        plz : ['', Validators.compose([Validators.required, PlzValidator.isValid])],
+        bankName : ['', Validators.required],
+        IBAN : ['', Validators.compose([Validators.required, IbanValidator.isValid])],
         invoiceNumber : [''],
-        refund : [''],
+        refund : ['', Validators.compose([Validators.required, RefundValidator.isValid])],
       });
 
       //loading for ocr request
@@ -126,6 +141,8 @@ export class OcrPage {
       //set amount
       this.myForm.patchValue({refund:refund});
 
+      this.validateFields();
+
       this.osrLoading.dismiss().then(() => {
         console.log('OCR Success');
       });
@@ -140,45 +157,160 @@ export class OcrPage {
     });
   }
 
+  /**
+   * Validate vields and mark incorrect filds with a red border
+   */
+  validateFields(){
+
+    if(!this.myForm.controls.name.valid){
+      this.myVal.name = "false";
+    }else{
+      this.myVal.name = "true";
+    }
+
+    if(!this.myForm.controls.street.valid){
+      this.myVal.street = "false";
+    }else{
+      this.myVal.street = "true";
+    }
+
+    if(!this.myForm.controls.place.valid){
+        this.myVal.place = "false";
+    }else{
+        this.myVal.place = "true";
+    }
+
+    if(!this.myForm.controls.plz.valid){
+        this.myVal.plz = "false";
+    }else{
+        this.myVal.plz = "true";
+    }
+
+    if(!this.myForm.controls.bankName.valid){
+        this.myVal.bankName = "false";
+    }else{
+        this.myVal.bankName = "true";
+    }
+
+    if(!this.myForm.controls.IBAN.valid){
+      this.myVal.IBAN = "false";
+    }else{
+      this.myVal.IBAN = "true";
+    }
+
+    if(!this.myForm.controls.invoiceNumber.valid){
+      this.myVal.invoiceNumber = "false";
+    }else{
+      this.myVal.invoiceNumber = "true";
+    }
+
+    if(!this.myForm.controls.refund.valid){
+      this.myVal.refund = "false";
+    }else{
+      this.myVal.refund = "true";
+    }
+  }
+
+
+
 
   /**
    * Send formula data to the server and create a actvity
    */
   sendDataAndCreateActivity(){
 
-    this.sendLoading.present();
+    this.validateFields();
 
-    var restData = <any>{};
 
-    restData = { "activity":[
-        { "userID": this.userID ,
-          "imgFile": this.scanedImage,
-          "name": this.myForm.controls.name.value,
-          "street": this.myForm.controls.street.value,
-          "place" : this.myForm.controls.place.value,
-          "plz" : this.myForm.controls.plz.value,
-          "bankName" :  this.myForm.controls.bankName.value,
-          "IBAN" :  this.myForm.controls.IBAN.value,
-          "invoiceNumber" :  this.myForm.controls.invoiceNumber.value,
-          "refund" :  this.myForm.controls.refund.value
+    if( this.myForm.controls.name.valid &&
+        this.myForm.controls.street.valid &&
+        this.myForm.controls.place.valid  &&
+        this.myForm.controls.plz.valid  &&
+        this.myForm.controls.bankName.valid &&
+        this.myForm.controls.IBAN.valid &&
+        this.myForm.controls.refund.valid){
+
+      this.sendLoading.present();
+
+      var restData = <any>{};
+
+      restData = { "activity":[
+          { "userID": this.userID ,
+            "imgFile": this.scanedImage,
+            "name": this.myForm.controls.name.value,
+            "street": this.myForm.controls.street.value,
+            "place" : this.myForm.controls.place.value,
+            "plz" : this.myForm.controls.plz.value,
+            "bankName" :  this.myForm.controls.bankName.value,
+            "IBAN" :  this.myForm.controls.IBAN.value,
+            "invoiceNumber" :  this.myForm.controls.invoiceNumber.value,
+            "refund" :  this.myForm.controls.refund.value
+          }
+        ]
+      };
+
+      this.restProvider.addActivity(restData).then((result) => {
+        if (result == true){
+          this.sendLoading.dismiss().then(() => {
+            console.log("Activity erfolgreich erstellt");
+            this.navCtrl.push(ActivityPage);
+          });
+        }else {
+          this.sentToast("Activity konnte nicht erstellt werden")
         }
-      ]
-    };
+      }, (err) => {
+        this.sendLoading.dismiss();
+        console.log('error2 ' + err);
+        this.sentToast("Oooops activity failed");
+      });
+    }else{
 
-    this.restProvider.addActivity(restData).then((result) => {
-      if (result == true){
-        this.sendLoading.dismiss().then(() => {
-          console.log("Activity erfolgreich erstellt");
-          this.navCtrl.push(ActivityPage);
-        });
-      }else {
-        this.sentToast("Activity konnte nicht erstellt werden")
-      }
-    }, (err) => {
-      this.sendLoading.dismiss();
-      console.log('error2 ' + err);
-      this.sentToast("Oooops activity failed");
-    });
+      var dynamicText = "";
+      var checkValues = { "name":this.myForm.controls.name.valid,
+                          "street":this.myForm.controls.street.valid ,
+                          "place":this.myForm.controls.place.valid  ,
+                          "plz":this.myForm.controls.plz.valid  ,
+                          "bankName":this.myForm.controls.bankName.valid ,
+                          "IBAN":this.myForm.controls.IBAN.valid ,
+                          "refund":this.myForm.controls.refund.valid };
+
+      for(let key in checkValues){
+        if(checkValues[key] == false){
+
+          switch (key){
+            case "name": {
+              dynamicText += "Arzt" + "\n";
+              break;
+            }
+            case "street":{
+              dynamicText += "Strasse" + "\n";
+              break;
+            }
+            case "place":{
+              dynamicText += "Ort" + "\n";
+              break;
+            }
+            case "plz":{
+              dynamicText += "Postleitzahl" + "\n";
+              break;
+            }
+            case "bankName":{
+              dynamicText += "Bankname" + "\n";
+              break;
+            }
+            case "IBAN":{
+              dynamicText += "IBAN" + "\n";
+              break;
+            }
+            case "refund":{
+              dynamicText += "Rechungsbetrag" + "\n";
+              break;
+            }
+          }
+        }
+      };
+      this.sentToast("Bitte Daten überprüfen: \n"+ dynamicText)
+    }
   }
 
   /**
@@ -228,5 +360,4 @@ export class OcrPage {
     });
     toast.present();
   }
-
 }
