@@ -66,7 +66,7 @@ export class ProfilePage {
         }
     }
 
-//function to change editing mode of personal infomation
+//function to change editing mode of personal information
     public toggleediting(): void {
         if(this.editInfo === 'true') {
             this.editInfo = 'false';
@@ -245,7 +245,9 @@ export class ProfilePage {
         let toast = this.toastCtrl.create({
             message: message,
             duration: 3000,
-            position: 'top'
+            position: 'top',
+            cssClass: 'toastB',
+            showCloseButton: true
         });
         toast.present();
     }

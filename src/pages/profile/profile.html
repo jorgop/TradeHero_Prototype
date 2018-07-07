@@ -44,39 +44,25 @@
 
             <table>
                 <tr>
-                    <td><ion-label color="primary" stacked>Name</ion-label></td>
-                    <td><ion-label color="primary" stacked>Nachname</ion-label > </td>
+                    <td><ion-label stacked>Name</ion-label></td>
+                    <td><ion-label stacked>Nachname</ion-label > </td>
                 </tr>
                 <tr>
                     <td><ion-input formControlName="firstName" type="text" [disabled]="true"></ion-input></td>
                     <td><ion-input formControlName="lastName" type="text" [disabled]="true"></ion-input></td>
                 </tr>
                 <tr>
-                    <td><ion-label color="primary" stacked>Straße</ion-label></td>
-                    <td><ion-label color="primary" stacked>Hausnummer</ion-label></td>
+                    <td><ion-label stacked>Straße</ion-label></td>
+                    <td><ion-label stacked>Hausnummer</ion-label></td>
                 </tr>
                 <tr>
                     <td><ion-input formControlName="street" type="text" [disabled]="editInfo"></ion-input></td>
                     <td><ion-input formControlName="houseNumber" type="text" [disabled]="editInfo"></ion-input></td>
                 </tr>
             </table>
-            <ion-label color="primary" stacked>Email</ion-label>
+            <ion-label stacked>Email</ion-label>
             <ion-input formControlName="mail" type="text" [disabled]="editInfo"></ion-input>
-
-            <!--
-                       <ion-label color="primary" stacked>Name</ion-label>
-                       <ion-input formControlName="firstName" type="text" [disabled]="true"></ion-input>
-                       <hr>
-                       <ion-label color="primary" stacked>Nachname</ion-label >
-                       <ion-input formControlName="lastName" type="text" [disabled]="true"></ion-input>
-                       <hr>
-                       <ion-label color="primary" stacked>Email</ion-label>
-                       <ion-input formControlName="mail" type="text" [disabled]="editInfo"></ion-input>
-                       <hr>
-                       <ion-label color="primary" stacked>Adresse</ion-label>
-                       <ion-input formControlName="street" type="text" [disabled]="editInfo"></ion-input>
-                       <ion-input formControlName="houseNumber" type="text" [disabled]="editInfo"></ion-input> -->
         </div>
     </div>
-    <button ion-button on-click="sendUserData()" [ngStyle]="{'display': buttonStyle}">Daten abschicken</button>
+    <button ion-button id="SendData" on-click="sendUserData()" [ngStyle]="{'display': buttonStyle}">Daten abschicken</button>
 </ion-content>
