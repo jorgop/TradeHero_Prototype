@@ -4,7 +4,7 @@
         <button class="logout-btn" (click)="logout()" round ion-button>
             <ion-icon name="power"></ion-icon>
         </button>
-        <button class="fixed-header-btn" (click)="goToImpressum()" ion-button>
+        <button class="fixed-header-btn" (click)="goToAbout()" ion-button>
             <ion-icon name="information-circle"></ion-icon>
         </button>
         <button class="fixed-header-btn" ion-button>
@@ -50,16 +50,16 @@
             <section class="container">
                 <div class="left-half">
                     <article>
-                        <p>Eingereicht: {{aggregate.sumAll}} €</p>
+                        <p>Eingereicht: {{aggregate.sumAll | number: '1.2-2': 'de'}} €</p>
                         <br>
-                        <p>Offen: {{aggregate.sumOpen}} €</p>
+                        <p>Offen: {{aggregate.sumOpen | number: '1.2-2': 'de' }} €</p>
                     </article>
                 </div>
                 <div class="right-half">
                     <article>
-                        <p>Bewilligt: {{aggregate.sumClosed}} €</p>
+                        <p>Bewilligt: {{aggregate.sumClosed | number: '1.2-2': 'de' }} €</p>
                         <br>
-                        <p>Abgelehnt: {{aggregate.sumDenied}} €</p>
+                        <p>Abgelehnt: {{aggregate.sumDenied | number: '1.2-2': 'de' }} €</p>
                     </article>
                 </div>
             </section>

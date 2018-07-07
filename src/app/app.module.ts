@@ -1,5 +1,7 @@
 import { FormsModule } from '@angular/forms';
-import { NgModule, ErrorHandler } from '@angular/core';
+import {NgModule, ErrorHandler} from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -72,6 +74,7 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     StatusBar,
     SplashScreen,
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
+    //[{ provide: LOCALE_ID, useValue: 'de' }],
     RestProvider,
     ActivityService,
     HistoryService,
@@ -85,3 +88,4 @@ import {CameraPreview} from "@ionic-native/camera-preview";
   ]
 })
 export class AppModule {}
+    registerLocaleData(localeDe,'de');
