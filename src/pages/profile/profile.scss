@@ -1,6 +1,8 @@
 page-profile {
   h2 {
   padding-top: 1.2em;
+  color: #15B2A2;
+  text-transform: uppercase;
   }
   .color-header {
     background: #15B2A2;
@@ -117,9 +119,34 @@ page-profile {
       font-size: 14px;
       color: #424242;
     }
-    .form {
-      padding: 1em;
-    }
+
+
+  //Form Styles
+
+  .form {
+    padding: 1em;
+  }
+  ion-label{
+    font-family: "Open Sans";
+    color: #15B2A2;
+  }
+
+  //Button to Send Data to Rest
+  #SendData {
+    background-color: #15B2A2;
+    border-radius: 64px;
+  }
+  //Toast-Message blue background NOT WORKING :(
+
+  /**
+  .toastB{
+    background-color: #ffffff;
+    font-family: "Open Sans";
+  }
+  toast-container{
+    background-color: #ffffff;
+    font-family: "Open Sans";
+  }**/
   }
 
 
