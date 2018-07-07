@@ -1,67 +1,163 @@
 page-login {
-p{
-  color:white;
-}
+
+  p {
+    color:white;
+  }
+
   html, body, .ion-app, .ion-content {
     background-color: transparent;
   }
 
+  /* Header */
+
   .square {
+    position: relative;
     height: 35%;
-    text-align: center;
-    padding: 70px 0;
-    font-size: 36px;
-    font-family: "Calibri Light";
-    color: white;
-    text-shadow: 1px 1px black;
+    width: 100%;
+    background: #15B2A2;
   }
+
+  .main-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .top-container {
+    height: 70%;
+    width: 100%;
+    text-align: center;
+    font-size: 3.5em;
+    color: white;
+    text-shadow: 1px 1px gray;
+    padding-top: 25%;
+    font-family: "Merriweather Sans";
+  }
+
+  /* Container for Info Text */
+
+  .bottom-container {
+    position: relative;
+    height: 30%;
+    width: 100%;
+  }
+
+  /* Actual Info Text */
+
+  .info-text {
+    padding-top: 5%;
+    color: white;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 1.0em;
+  }
+
+  /* Background-color */
 
   .set-background {
-    background-image: url('../assets/imgs/bluewater.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #15B2A2;
   }
 
-  .icon {
-    font-size: 15px;
+  /* Body */
+
+  .body {
+    position: relative;
+    width: 100%;
+    height: 60%;
   }
 
-  .anmelde-btn {
+  .body-top {
+    height: 30%;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Input Labels */
+
+  /* Icon in Input */
+
+  ion-icon {
     color: white;
-    font-family:"Calibri";
-    box-shadow: none;
+    font-size: 1.5em;
   }
 
-  .set-transparency {
-    background-color: transparent;
-    color: white;
-  }
-
-  .input {
-    input::placeholder {
-      color:white;
-    }
-  }
-
-  .item {
-    padding-left: 30px;
-    border-left: none;
-    border-right: none;
-  }
-  ion-icon{
-    color: white;
-  }
+  /* set border of input label */
 
   #border {
     border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
     border-bottom: none;
   }
 
   #border1 {
     border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
     border-bottom: 1px solid white;
   }
 
+  ion-item.item {
+    text-align: center;
+    border-radius: 5px;
+    width: 90%;
+    margin: auto;
+    padding-left: 5%;
+    background-color: rgba(255, 255, 255, 0.4);
+    .label {
+      width: 10%;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  /* Set color of placeholder text */
+
+  .input {
+    input::placeholder {
+      color: white;
+      font-family: "Open Sans";
+      font-size: 1.0em;
+    }
+    input::selection {
+      color: white;
+      background: #15B2A2;
+    }
+    input::-moz-selection {
+      color: white;
+      background: #15B2A2;
+    }
+  }
+
+  /* Set color of text when typing */
+
+  .text-color {
+    color: white;
+    font-family: "Open Sans";
+  }
+
+  /* Login Button */
+
+  .body-bottom {
+    height: 70%;
+    width: 100%;
+  }
+
+  .anmelde-btn {
+    color: #15B2A2;
+    font-family:"Open Sans";
+    box-shadow: none;
+    background-color: white;
+  }
+
+  /* Register Button */
+
+  .coloring {
+    color: white;
+    font-size: 1.2em;
+    font-family: "Open Sans";
+    text-decoration: underline;
+    text-decoration-color: white;
+  }
 
 
 }

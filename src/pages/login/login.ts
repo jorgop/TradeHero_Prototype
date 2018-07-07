@@ -7,12 +7,15 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Md5 } from "ts-md5";
 import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
     selector: 'page-login',
     templateUrl: 'login.html'
 })
 export class LoginPage {
+
+  nachricht: String;
 
   submitAttempt: boolean = false;
   private myForm : FormGroup;
@@ -21,7 +24,14 @@ export class LoginPage {
               public toastCtrl: ToastController,
               public restProvider: RestProvider,
               private storage: Storage,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private keyboard: Keyboard) {
+
+    //detect if keyboard is shown
+    this.keyboard.onKeyboardShow().subscribe(() => {
+      console.log("keyboard detected")
+      this.keyboard.disableScroll(false);
+    });
 
     //this.storage.clear();
 
@@ -30,6 +40,17 @@ export class LoginPage {
       password : ['', Validators.compose([Validators.minLength(6), Validators.required])],
     });
   }
+
+    message(myParam) {
+        if (myParam == 1) {
+            this.nachricht = "Max@Mustermann.de";
+            return this.nachricht;
+        } else (myParam == 2)
+        {
+            this.nachricht = "Mindestens 6 Buchstaben";
+            return this.nachricht;
+        }
+    }
 
     /**
     * Site navigation
@@ -64,7 +85,7 @@ export class LoginPage {
           this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
           this.navCtrl.push(HomePage,{userID: restResult.data[0].userID});
         }else{
-          this.sentToast("Wrong password!");
+          this.sentToast("Die Anmeldung ist leider fehlgeschlagen. Bitte versuchen Sie es erneut.");
         }
       }, (err) => {
         console.log('error2 ' + err.message);
@@ -86,5 +107,5 @@ export class LoginPage {
       });
       toast.present();
     }
-}
 
+}

@@ -9,6 +9,7 @@ import {ProfilePage} from "../profile/profile";
 import {RestProvider} from "../../providers/rest/rest";
 import { Storage } from '@ionic/storage';
 import {identity} from "rxjs/util/identity";
+import {ImpressumPage} from "../impressum/impressum";
 
 @Component({
     selector: 'page-home',
@@ -43,9 +44,11 @@ export class HomePage {
     goToHome(){
         this.navCtrl.push(HomePage);
     }
-    goToAbout(){
-        this.navCtrl.push(AboutPage);
+    goToImpressum(){
+        this.navCtrl.push(ImpressumPage);
     }
+
+
 
     /**
      * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.

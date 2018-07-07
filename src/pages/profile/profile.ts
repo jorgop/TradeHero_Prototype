@@ -5,7 +5,7 @@ import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import {AlertController} from 'ionic-angular';
 import {HomePage} from "../home/home";
-import {AboutPage} from "../about/about";
+import {ImpressumPage} from "../impressum/impressum";
 import {LoginPage} from "../login/login";
 import {ContactPage} from "../contact/contact";
 import {ScanPage} from "../scan/scan";
@@ -190,8 +190,8 @@ export class ProfilePage {
     goToHome(){
         this.navCtrl.push(HomePage);
     }
-    goToAbout(){
-        this.navCtrl.push(AboutPage);
+    goToImpressum(){
+        this.navCtrl.push(ImpressumPage);
     }
 
     /**

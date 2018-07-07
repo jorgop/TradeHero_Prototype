@@ -14,6 +14,9 @@ import {Md5} from "ts-md5";
 })
 export class RegistrationPage {
 
+    nachricht: String;
+
+
   submitAttempt: boolean = false;
   private myForm : FormGroup;
 
@@ -24,6 +27,22 @@ export class RegistrationPage {
       password : ['', Validators.compose([Validators.minLength(6), Validators.required])],
     });
   }
+
+    message(myParam) {
+        if (myParam == 1) {
+            this.nachricht = "Max@Mustermann.de";
+            return this.nachricht;
+        } else if (myParam == 2) {
+            this.nachricht = "Mindestens 6 Buchstaben";
+            return this.nachricht;
+        } else {
+            this.nachricht = "Mindestens 6 Buchstaben";
+            return this.nachricht;
+        }
+    }
+
+
+
 
   /**
    *  Page routing

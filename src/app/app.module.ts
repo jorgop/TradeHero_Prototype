@@ -1,9 +1,10 @@
 import { FormsModule } from '@angular/forms';
-import { NgModule, ErrorHandler } from '@angular/core';
+import {NgModule, ErrorHandler} from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -20,10 +21,11 @@ import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
 import {HistoryPage} from "../pages/history/history";
 import {HistoryService} from "../services/history.service";
+import {PhotoViewer} from "@ionic-native/photo-viewer";
 import { IonicImageViewerModule } from 'ionic-img-viewer';
-
-//import { CameraMock } from './mocks/CameraMock';
+import {ImpressumPage} from "../pages/impressum/impressum";
 import {Camera} from "@ionic-native/camera";
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { IonicStorageModule } from '@ionic/storage';
 import {ScanPage} from "../pages/scan/scan";
@@ -42,7 +44,8 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     ScanPage,
     HistoryPage,
     ProfilePage,
-    OcrPage
+    OcrPage,
+    ImpressumPage
   ],
   imports: [
     FormsModule,
@@ -64,16 +67,20 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     ScanPage,
     ProfilePage,
     HistoryPage,
-    OcrPage
+    OcrPage,
+    ImpressumPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
+    //[{ provide: LOCALE_ID, useValue: 'de' }],
     RestProvider,
     ActivityService,
     HistoryService,
     CallNumber,
+    PhotoViewer,
+    Keyboard,
       //if running on device
     Camera, //if running on device
     CameraPreview
@@ -81,3 +88,4 @@ import {CameraPreview} from "@ionic-native/camera-preview";
   ]
 })
 export class AppModule {}
+    registerLocaleData(localeDe,'de');

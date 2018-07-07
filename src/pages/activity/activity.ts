@@ -11,6 +11,7 @@ import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
 import {ContactPage} from "../contact/contact";
 import {LoginPage} from "../login/login";
+import {ImpressumPage} from "../impressum/impressum";
 import {AboutPage} from "../about/about";
 
 
@@ -151,12 +152,12 @@ export class ActivityPage {
 
         for (let i in data.activityList) {
             let currentObject = data.activityList[i];
-
+            console.log(data.activityList[i]);
             //get values from a current activity
             Object.keys(currentObject).forEach(key => {
 
                 var name = currentObject["ticketID"];
-                var date = currentObject["createDate"];
+                var date = currentObject["startDate"];
                 var status = currentObject["ticketStatus"];
                 var iconName = "";
                 var statusText = "";
@@ -230,9 +231,6 @@ export class ActivityPage {
     }
     goToContact(){
         this.navCtrl.push(ContactPage);
-    }
-    goToActivity(){
-        this.navCtrl.push(ActivityPage);
     }
     goToHome(){
         this.navCtrl.push(HomePage);

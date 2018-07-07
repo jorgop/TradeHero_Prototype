@@ -9,6 +9,7 @@ import {HomePage} from "../home/home";
 import {ProfilePage} from "../profile/profile";
 import {ScanPage} from "../scan/scan";
 import {LoginPage} from "../login/login";
+import {ImpressumPage} from "../impressum/impressum";
 import {AboutPage} from "../about/about";
 
 @Component({

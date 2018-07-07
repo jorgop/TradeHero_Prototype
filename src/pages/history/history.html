@@ -1,10 +1,10 @@
 <ion-header class="color-header">
   <ion-navbar  class="back-button" transparent>
 
-    <button class="logout-btn" round ion-button>
+    <button class="logout-btn" (click)="logout()" round ion-button>
       <ion-icon name="power"></ion-icon>
     </button>
-    <button class="fixed-header-btn" ion-button>
+    <button class="fixed-header-btn" (click)="goToAbout()" ion-button>
       <ion-icon name="information-circle"></ion-icon>
     </button>
     <button class="fixed-header-btn" ion-button>
@@ -29,7 +29,7 @@
         <br>
         Abgeschlossen am: {{historyHeader.endDate | date: 'dd.MM.yyyy'}}
         <br>
-        Rechungsbetrag: {{historyHeader.refund}}
+        Rechungsbetrag: {{historyHeader.refund | number: '1.2-2': 'de' }}
       </p>
     </ion-card-header>
     <ion-card-content *ngFor="let historyHeader of historyHeader">

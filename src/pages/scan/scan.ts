@@ -7,7 +7,6 @@ import { RestProvider } from '../../providers/rest/rest';
 import { ToastController } from 'ionic-angular';
 import { OcrPage } from "../ocr/ocr";
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { PhotoViewer } from '@ionic-native/photo-viewer';
 import {HomePage} from "../home/home";
 
 @Component({
@@ -19,7 +18,7 @@ export class ScanPage {
 
   private imgbase64ImageFile: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,platform: Platform,public restProvider: RestProvider,public toastCtrl: ToastController,private camera: Camera,private photoViewer: PhotoViewer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,platform: Platform,public restProvider: RestProvider,public toastCtrl: ToastController,private camera: Camera) {
 
   }
 
