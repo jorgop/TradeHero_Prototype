@@ -20,6 +20,7 @@ import { ActivityService } from '../services/activity.service';
 import { CallNumber } from '@ionic-native/call-number';
 import {HistoryPage} from "../pages/history/history";
 import {HistoryService} from "../services/history.service";
+import {PhotoViewer} from "@ionic-native/photo-viewer";
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import {ImpressumPage} from "../pages/impressum/impressum";
 //import { CameraMock } from './mocks/CameraMock';
@@ -76,6 +77,7 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     ActivityService,
     HistoryService,
     CallNumber,
+    PhotoViewer,
       //if running on device
     Camera, //if running on device
     CameraPreview
