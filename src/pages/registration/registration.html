@@ -46,7 +46,7 @@
         <p *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Bitte korrekte E-Mail-Adresse eingeben.</p>
 
 
-      <ion-item>
+      <ion-item id="border1">
 
         <ion-label>
           <ion-icon name="md-barcode"></ion-icon>
@@ -62,7 +62,7 @@
 
         <p *ngIf="!myForm.controls.token.valid  && (myForm.controls.token.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Mindestens 6 Zeichen.</p>
 
-      <ion-item id="border1">
+      <ion-item id="border2">
 
         <ion-label >
           <ion-icon name="md-lock"></ion-icon>
@@ -94,8 +94,6 @@
 
 
   <button id="signup-button6" ion-button style="text-decoration:underline; color:white" clear color="positive" block on-click="goToLogin()">
-
-    <!-- <p><ion-icon name="arrow-back"></ion-icon>  Zurück zum Login</p> -->
     <div class="coloring">Zurück zum Login</div>
   </button>
 
