@@ -150,10 +150,8 @@ export class OcrPage {
       console.log('OCR failed ' + err);
       this.osrLoading.dismiss().then(() => {
         console.log('Oooops OCR failed');
-        this.sentToast("Scan failed");
+        this.sentToast("Dokument konnte nicht gelesen werden.",false,3000,"schließen");
       });
-
-      //this.navCtrl.push(LoginPage);
     });
   }
 
@@ -212,15 +210,13 @@ export class OcrPage {
   }
 
 
-
-
   /**
    * Send formula data to the server and create a actvity
    */
   sendDataAndCreateActivity(){
 
+    //validate fieds
     this.validateFields();
-
 
     if( this.myForm.controls.name.valid &&
         this.myForm.controls.street.valid &&
@@ -256,17 +252,18 @@ export class OcrPage {
             this.navCtrl.push(ActivityPage);
           });
         }else {
-          this.sentToast("Activity konnte nicht erstellt werden")
+          this.sentToast("Activity konnte nicht erstellt werden",false,3000,"schließen");
         }
       }, (err) => {
         this.sendLoading.dismiss();
         console.log('error2 ' + err);
-        this.sentToast("Oooops activity failed");
+        this.sentToast("Oooops activity failed",false,3000,"schließen");
       });
     }else{
 
-      var dynamicText = "";
-      var checkValues = { "name":this.myForm.controls.name.valid,
+      //d
+      var wrongTextFields = "";
+      var checkValuesList = { "name":this.myForm.controls.name.valid,
                           "street":this.myForm.controls.street.valid ,
                           "place":this.myForm.controls.place.valid  ,
                           "plz":this.myForm.controls.plz.valid  ,
@@ -274,42 +271,42 @@ export class OcrPage {
                           "IBAN":this.myForm.controls.IBAN.valid ,
                           "refund":this.myForm.controls.refund.valid };
 
-      for(let key in checkValues){
-        if(checkValues[key] == false){
+      for(let key in checkValuesList){
+        if(checkValuesList[key] == false){
 
           switch (key){
             case "name": {
-              dynamicText += "Arzt" + "\n";
+              wrongTextFields += "Arzt" + "\n";
               break;
             }
             case "street":{
-              dynamicText += "Strasse" + "\n";
+              wrongTextFields += "Strasse" + "\n";
               break;
             }
             case "place":{
-              dynamicText += "Ort" + "\n";
+              wrongTextFields += "Ort" + "\n";
               break;
             }
             case "plz":{
-              dynamicText += "Postleitzahl" + "\n";
+              wrongTextFields += "Postleitzahl" + "\n";
               break;
             }
             case "bankName":{
-              dynamicText += "Bankname" + "\n";
+              wrongTextFields += "Bank" + "\n";
               break;
             }
             case "IBAN":{
-              dynamicText += "IBAN" + "\n";
+              wrongTextFields += "IBAN" + "\n";
               break;
             }
             case "refund":{
-              dynamicText += "Rechungsbetrag" + "\n";
+              wrongTextFields += "Rechungsbetrag" + "\n";
               break;
             }
           }
         }
       };
-      this.sentToast("Bitte Daten überprüfen: \n"+ dynamicText)
+      this.sentToast("Bitte die Felder überprüfen: \n"+ wrongTextFields, true,5000,"schließen");
     }
   }
 
@@ -350,13 +347,19 @@ export class OcrPage {
 
   /**
    * View a toast message
-   * @param message Toast Text
+   * @param message Toast message
+   * @param showCloseButton Show close button
+   * @param duration Duration of toast message
+   * @param closeButtonText Text of the close button
    */
-  sentToast(message) {
+  sentToast(message,showCloseButton,duration,closeButtonText) {
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 3000,
-      position: 'top'
+      duration: duration,
+      position: 'top',
+      showCloseButton: showCloseButton,
+      closeButtonText: closeButtonText
+
     });
     toast.present();
   }
