@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import {timeout} from 'rxjs/operators/timeout';
 
 
 /*
@@ -72,6 +74,7 @@ export class RestProvider {
   getOcrData(data) {
     return new Promise((resolve, reject) => {
       this.http.post(this.apiUrl+'/api/ocr', data)
+        .pipe(timeout(100000))
         .subscribe(res => {
           resolve(res);
         }, (err) => {

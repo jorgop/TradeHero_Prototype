@@ -7,6 +7,9 @@ import {RestProvider} from "../../providers/rest/rest";
 import {Storage} from "@ionic/storage";
 import {ActivityPage} from "../activity/activity";
 import {HomePage} from "../home/home";
+import {IbanValidator} from "../../validators/iban";
+import {PlzValidator} from "../../validators/plz";
+import {RefundValidator} from "../../validators/refund";
 
 @Component({
     selector: 'page-ocr',
@@ -16,6 +19,7 @@ export class OcrPage {
 
     private scanedImage : any;
     private myForm : FormGroup;
+    private myVal : any;
     private osrLoading : any;
     private sendLoading : any;
     private userID : any;
@@ -31,16 +35,27 @@ export class OcrPage {
 
       this.scanedImage = this.navParams.get('scanedImage');
 
+      this.myVal = {
+        name: "true",
+        street: "true",
+        place : "true",
+        plz : "true",
+        bankName : "true",
+        IBAN : "true",
+        invoiceNumber : "true",
+        refund : "true"
+      }
+
       //form for ocr text
       this.myForm = formBuilder.group({
         name: ['', Validators.required],
-        street: [''],
-        place : [''],
-        plz : [''],
-        bankName : [''],
-        IBAN : [''],
+        street: ['', Validators.required],
+        place : ['', Validators.required],
+        plz : ['', Validators.compose([Validators.required, PlzValidator.isValid])],
+        bankName : ['', Validators.required],
+        IBAN : ['', Validators.compose([Validators.required, IbanValidator.isValid])],
         invoiceNumber : [''],
-        refund : [''],
+        refund : ['', Validators.compose([Validators.required, RefundValidator.isValid])],
       });
 
       //loading for ocr request
@@ -126,6 +141,8 @@ export class OcrPage {
       //set amount
       this.myForm.patchValue({refund:refund});
 
+      this.validateFields();
+
       this.osrLoading.dismiss().then(() => {
         console.log('OCR Success');
       });
@@ -133,11 +150,63 @@ export class OcrPage {
       console.log('OCR failed ' + err);
       this.osrLoading.dismiss().then(() => {
         console.log('Oooops OCR failed');
-        this.sentToast("Scan failed");
+        this.sentToast("Dokument konnte nicht gelesen werden.",false,3000,"schließen");
       });
-
-      //this.navCtrl.push(LoginPage);
     });
+  }
+
+  /**
+   * Validate vields and mark incorrect filds with a red border
+   */
+  validateFields(){
+
+    if(!this.myForm.controls.name.valid){
+      this.myVal.name = "false";
+    }else{
+      this.myVal.name = "true";
+    }
+
+    if(!this.myForm.controls.street.valid){
+      this.myVal.street = "false";
+    }else{
+      this.myVal.street = "true";
+    }
+
+    if(!this.myForm.controls.place.valid){
+        this.myVal.place = "false";
+    }else{
+        this.myVal.place = "true";
+    }
+
+    if(!this.myForm.controls.plz.valid){
+        this.myVal.plz = "false";
+    }else{
+        this.myVal.plz = "true";
+    }
+
+    if(!this.myForm.controls.bankName.valid){
+        this.myVal.bankName = "false";
+    }else{
+        this.myVal.bankName = "true";
+    }
+
+    if(!this.myForm.controls.IBAN.valid){
+      this.myVal.IBAN = "false";
+    }else{
+      this.myVal.IBAN = "true";
+    }
+
+    if(!this.myForm.controls.invoiceNumber.valid){
+      this.myVal.invoiceNumber = "false";
+    }else{
+      this.myVal.invoiceNumber = "true";
+    }
+
+    if(!this.myForm.controls.refund.valid){
+      this.myVal.refund = "false";
+    }else{
+      this.myVal.refund = "true";
+    }
   }
 
 
@@ -146,39 +215,99 @@ export class OcrPage {
    */
   sendDataAndCreateActivity(){
 
-    this.sendLoading.present();
+    //validate fieds
+    this.validateFields();
 
-    var restData = <any>{};
+    if( this.myForm.controls.name.valid &&
+        this.myForm.controls.street.valid &&
+        this.myForm.controls.place.valid  &&
+        this.myForm.controls.plz.valid  &&
+        this.myForm.controls.bankName.valid &&
+        this.myForm.controls.IBAN.valid &&
+        this.myForm.controls.refund.valid){
 
-    restData = { "activity":[
-        { "userID": this.userID ,
-          "imgFile": this.scanedImage,
-          "name": this.myForm.controls.name.value,
-          "street": this.myForm.controls.street.value,
-          "place" : this.myForm.controls.place.value,
-          "plz" : this.myForm.controls.plz.value,
-          "bankName" :  this.myForm.controls.bankName.value,
-          "IBAN" :  this.myForm.controls.IBAN.value,
-          "invoiceNumber" :  this.myForm.controls.invoiceNumber.value,
-          "refund" :  this.myForm.controls.refund.value
+      this.sendLoading.present();
+
+      var restData = <any>{};
+
+      restData = { "activity":[
+          { "userID": this.userID ,
+            "imgFile": this.scanedImage,
+            "name": this.myForm.controls.name.value,
+            "street": this.myForm.controls.street.value,
+            "place" : this.myForm.controls.place.value,
+            "plz" : this.myForm.controls.plz.value,
+            "bankName" :  this.myForm.controls.bankName.value,
+            "IBAN" :  this.myForm.controls.IBAN.value,
+            "invoiceNumber" :  this.myForm.controls.invoiceNumber.value,
+            "refund" :  this.myForm.controls.refund.value
+          }
+        ]
+      };
+
+      this.restProvider.addActivity(restData).then((result) => {
+        if (result == true){
+          this.sendLoading.dismiss().then(() => {
+            console.log("Activity erfolgreich erstellt");
+            this.navCtrl.push(ActivityPage);
+          });
+        }else {
+          this.sentToast("Activity konnte nicht erstellt werden",false,3000,"schließen");
         }
-      ]
-    };
+      }, (err) => {
+        this.sendLoading.dismiss();
+        console.log('error2 ' + err);
+        this.sentToast("Oooops activity failed",false,3000,"schließen");
+      });
+    }else{
 
-    this.restProvider.addActivity(restData).then((result) => {
-      if (result == true){
-        this.sendLoading.dismiss().then(() => {
-          console.log("Activity erfolgreich erstellt");
-          this.navCtrl.push(ActivityPage);
-        });
-      }else {
-        this.sentToast("Activity konnte nicht erstellt werden")
-      }
-    }, (err) => {
-      this.sendLoading.dismiss();
-      console.log('error2 ' + err);
-      this.sentToast("Oooops activity failed");
-    });
+      //d
+      var wrongTextFields = "";
+      var checkValuesList = { "name":this.myForm.controls.name.valid,
+                          "street":this.myForm.controls.street.valid ,
+                          "place":this.myForm.controls.place.valid  ,
+                          "plz":this.myForm.controls.plz.valid  ,
+                          "bankName":this.myForm.controls.bankName.valid ,
+                          "IBAN":this.myForm.controls.IBAN.valid ,
+                          "refund":this.myForm.controls.refund.valid };
+
+      for(let key in checkValuesList){
+        if(checkValuesList[key] == false){
+
+          switch (key){
+            case "name": {
+              wrongTextFields += "Arzt" + "\n";
+              break;
+            }
+            case "street":{
+              wrongTextFields += "Strasse" + "\n";
+              break;
+            }
+            case "place":{
+              wrongTextFields += "Ort" + "\n";
+              break;
+            }
+            case "plz":{
+              wrongTextFields += "Postleitzahl" + "\n";
+              break;
+            }
+            case "bankName":{
+              wrongTextFields += "Bank" + "\n";
+              break;
+            }
+            case "IBAN":{
+              wrongTextFields += "IBAN" + "\n";
+              break;
+            }
+            case "refund":{
+              wrongTextFields += "Rechungsbetrag" + "\n";
+              break;
+            }
+          }
+        }
+      };
+      this.sentToast("Bitte die Felder überprüfen: \n"+ wrongTextFields, true,5000,"schließen");
+    }
   }
 
   /**
@@ -218,15 +347,20 @@ export class OcrPage {
 
   /**
    * View a toast message
-   * @param message Toast Text
+   * @param message Toast message
+   * @param showCloseButton Show close button
+   * @param duration Duration of toast message
+   * @param closeButtonText Text of the close button
    */
-  sentToast(message) {
+  sentToast(message,showCloseButton,duration,closeButtonText) {
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 3000,
-      position: 'top'
+      duration: duration,
+      position: 'top',
+      showCloseButton: showCloseButton,
+      closeButtonText: closeButtonText
+
     });
     toast.present();
   }
-
 }

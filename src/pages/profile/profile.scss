@@ -1,5 +1,9 @@
 page-profile {
-
+  h2 {
+  padding-top: 1.2em;
+  color: #15B2A2;
+  text-transform: uppercase;
+  }
   .color-header {
     background: #15B2A2;
   }
@@ -28,9 +32,6 @@ page-profile {
     margin-right: 1%;
   }
 
-  hr{
-    margin:0px;
-  }
   .square {
     position: relative;
     height: 30%;
@@ -68,9 +69,9 @@ page-profile {
     height: 2.2em;
   }
 
-  .fab ion-icon {
-    font-size: 1.3em;
-  }
+  //.fab ion-icon {
+  //  font-size: 1.3em;
+  // }
 
   .position {
     position: absolute;
@@ -83,46 +84,69 @@ page-profile {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10%;
+    margin-top: 15%;
     width: 50%;
     height: 10%;
     font-size: 120%;
-  }
+    /* Fab-Ion */}
 
-  /* Fab-Ion */
+    .bottom-container {
+      position: relative;
+      height: 10%;
+      width: 100%;
+    }
 
-  .bottom-container {
-    position: relative;
-    height: 10%;
-    width: 100%;
-  }
+    .fab {
+      color: white;
+      background: #FFB623;
+      width: 3.5em;
+      height: 3.5em;
+    }
 
-  .fab {
-    color: white;
-    background: #FFB623;
-    width: 3.5em;
-    height: 3.5em;
-  }
+    .shadow {
+      box-shadow: 2px 2px 5px gray;
+    }
 
-  .shadow {
-    box-shadow: 2px 2px 5px gray;
-  }
+    /*---*/
+    .editIcon {
+      color: #424242;
+      font-size: 1em;
+      float: right;
+    }
+
+    p {
+      text-align: justify;
+      font-size: 14px;
+      color: #424242;
+    }
 
 
-  /*---*/
-  .editIcon{
-    color: #424242;
-    font-size: 1em;
-    float: right;
-  }
+  //Form Styles
 
-  p{
-    text-align: justify;
-    font-size:14px;
-    color:#424242;
-  }
-  .form{
+  .form {
     padding: 1em;
   }
-}
+  ion-label{
+    font-family: "Open Sans";
+    color: #15B2A2;
+  }
+
+  //Button to Send Data to Rest
+  #SendData {
+    background-color: #15B2A2;
+    border-radius: 64px;
+  }
+  //Toast-Message blue background NOT WORKING :(
+
+  /**
+  .toastB{
+    background-color: #ffffff;
+    font-family: "Open Sans";
+  }
+  toast-container{
+    background-color: #ffffff;
+    font-family: "Open Sans";
+  }**/
+  }
 
 

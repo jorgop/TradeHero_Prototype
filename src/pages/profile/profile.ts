@@ -32,6 +32,7 @@ export class ProfilePage {
   public borderStyle: string = ''; // Variable for Border Style
   public buttonStyle: string = 'none';
   public iconToggle: boolean = true;
+  public errorMsg: boolean = false;
 
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,
@@ -65,7 +66,7 @@ export class ProfilePage {
         }
     }
 
-//function to change editing mode of personal infomation
+//function to change editing mode of personal information
     public toggleediting(): void {
         if(this.editInfo === 'true') {
             this.editInfo = 'false';
@@ -101,6 +102,8 @@ export class ProfilePage {
 
   //Read userdata from form and send it to REST
   sendUserData(){
+
+      //read new data from sheet
       var restData = <any>{};
       restData = {'firstName': this.stammdatenForm.controls.firstName.value,
                 'lastName': this.stammdatenForm.controls.lastName.value,
@@ -108,6 +111,9 @@ export class ProfilePage {
                 'street': this.stammdatenForm.controls.street.value,
                 'houseNumber': this.stammdatenForm.controls.houseNumber.value,};
       console.log(restData);
+
+
+      //send data to rest in variable restData
 
       var myIdentity;
 
@@ -117,15 +123,24 @@ export class ProfilePage {
 
           this.restProvider.updateUserData(identity['userID'],restData).then((result) => {
               console.log(result);
+              console.log(result['userMail'])
+              if(result['userMail'] == "false"){
+                  this.sentToast("Email-Fehler");
+              }
+              else if ((result['userMail'] == "true")&&(result['userData'] == "true")){
+              this.toggleediting();
+              this.sentToast("Daten erfolgreich aktualisiert!");
+              }
 
           }, (err) => {
               console.log('error2 ' + err);
-
+              this.sentToast("Keine Internetverbindung!");
           });
       });
   }
 
   //Update the Inputfields
+
   updateUserDataInputfields(){
       this.storage.get('user').then((val) => {
           let user = <any>{};
@@ -219,6 +234,22 @@ export class ProfilePage {
             console.log('Dismissed toast');
         });
         logoutConf.present();
+    }
+
+    /**
+     * View a toast message
+     * @param message Toast Text
+     */
+
+    sentToast(message) {
+        let toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000,
+            position: 'top',
+            cssClass: 'toastB',
+            showCloseButton: true
+        });
+        toast.present();
     }
 
 }

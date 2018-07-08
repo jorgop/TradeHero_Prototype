@@ -15,3 +15,15 @@ page-ocr {
     height: 61px;
   }
 }
+
+.valid-true{
+  border: 1px solid transparent;
+}
+
+.valid-false{
+  border: 1px solid #f00;
+}
+
+.toast-message {
+  white-space: pre;
+}

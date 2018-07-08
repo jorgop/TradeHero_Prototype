@@ -1,52 +1,94 @@
-<!-- <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Login
-    </ion-title>
-  </ion-navbar>
-</ion-header> -->
+<ion-header>
+  <ion-navbar transparent hideBackButton></ion-navbar>
+</ion-header>
 
 <ion-content id="page2" class="set-background">
-  <div class="square">Willkommen</div>
 
+  <div class="square">
+    <div class="main-container">
+      <div class="top-container">InsuRabbit</div>
+      <div class="bottom-container">
+        <!-- InfoText here-->
+        <p class="info-text"> {{nachricht}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Input Labels -->
+
+  <div class="body">
+
+    <div class="body-top">
 
   <div [formGroup]="myForm">
 
     <ion-list id="signup-list3">
 
-      <ion-item id="border" class="set-transparency">
+      <!-- E-Mail -->
+
+      <ion-item id="border" class="text-color">
+
         <ion-label>
           <ion-icon name="md-mail"></ion-icon>
         </ion-label>
+
         <ion-input formControlName="email" type="email" placeholder="E-Mail" name="email"></ion-input>
+
+        <button clear ion-button item-right (click)="message(1)">
+          <ion-icon name="information-circle"></ion-icon>
+        </button>
+
       </ion-item>
 
-        <p *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Bitte korrekte E-Mail-Adresse eingeben.</p>
+        <!-- <p *ngIf="!myForm.controls.email.valid  && (myForm.controls.email.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Bitte korrekte E-Mail-Adresse eingeben.</p> -->
 
 
+      <!-- Passwort -->
 
+      <ion-item id="border1" class="text-color">
 
-      <ion-item id="border1" class="set-transparency">
         <ion-label>
           <ion-icon name="md-lock"></ion-icon>
         </ion-label>
+
         <ion-input formControlName="password" type="password" placeholder="Passwort" name="password"></ion-input>
+
+        <button clear ion-button item-right (click)="message(2)">
+          <ion-icon name="information-circle"></ion-icon>
+        </button>
+
       </ion-item>
 
-        <p *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Mindestens 6 Buchstaben.</p>
+        <!-- <p *ngIf="!myForm.controls.password.valid  && (myForm.controls.password.dirty || submitAttempt)"><ion-icon name="alert"></ion-icon> Mindestens 6 Buchstaben.</p> -->
 
     </ion-list>
+
   </div>
+
+    </div>
+
+    <!-- Login-Button -->
+
+      <div class="body-bottom">
+
+
+
+
   <div style="text-align:center">
     <button round class="anmelde-btn" ion-button icon="checkmark" (click)="authenticateUser()">Los geht's!</button>
   </div>
   <div id="cart-container6"></div>
   <button id="cart-button4" style="text-decoration:underline; color:white" ion-button clear color="positive" block small on-click="goToSignup()">
-    Registrieren
+    <div class="coloring">Registrieren</div>
   </button>
+
+
+
+  </div>
+
+  </div>
+
 
 
 </ion-content>

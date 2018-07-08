@@ -156,7 +156,7 @@ export class ActivityPage {
             Object.keys(currentObject).forEach(key => {
 
                 var name = currentObject["ticketID"];
-                var date = currentObject["createDate"];
+                var date = currentObject["startDate"];
                 var status = currentObject["ticketStatus"];
                 var iconName = "";
                 var statusText = "";
@@ -230,9 +230,6 @@ export class ActivityPage {
     }
     goToContact(){
         this.navCtrl.push(ContactPage);
-    }
-    goToActivity(){
-        this.navCtrl.push(ActivityPage);
     }
     goToHome(){
         this.navCtrl.push(HomePage);
