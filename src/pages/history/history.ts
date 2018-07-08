@@ -6,7 +6,7 @@ import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import { ImageViewerController } from 'ionic-img-viewer';
-import {AboutPage} from "../about/about";
+import {ImpressumPage} from "../impressum/impressum";
 import {LoginPage} from "../login/login";
 
 @Component({
@@ -50,8 +50,8 @@ export class HistoryPage {
         this.updateLocalStorageAndPrepareData(true);
     }
 
-    goToAbout() {
-        this.navCtrl.push(AboutPage);
+    goToImpressum() {
+        this.navCtrl.push(ImpressumPage);
     }
 
     /**
