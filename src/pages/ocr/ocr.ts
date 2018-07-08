@@ -150,6 +150,7 @@ export class OcrPage {
       console.log('OCR failed ' + err);
       this.osrLoading.dismiss().then(() => {
         console.log('Oooops OCR failed');
+        this.validateFields();
         this.sentToast("Dokument konnte nicht gelesen werden.",false,3000,"schließen");
       });
     });
