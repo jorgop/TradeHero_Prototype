@@ -26,6 +26,8 @@ export class ContactPage {
        public navCtrl: NavController) {
    }
 
+   //test
+
    startCall(){
        this.callSvc.callNumber("00491719760565",true).then(()=> {
            console.log('number dialed');
