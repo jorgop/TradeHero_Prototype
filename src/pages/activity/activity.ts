@@ -11,7 +11,7 @@ import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
 import {ContactPage} from "../contact/contact";
 import {LoginPage} from "../login/login";
-import {AboutPage} from "../about/about";
+import {ImpressumPage} from "../impressum/impressum";
 
 
 @Component({
@@ -237,8 +237,8 @@ export class ActivityPage {
     goToHome(){
         this.navCtrl.push(HomePage);
     }
-    goToAbout(){
-        this.navCtrl.push(AboutPage);
+    goToImpressum(){
+        this.navCtrl.push(ImpressumPage);
     }
 
 

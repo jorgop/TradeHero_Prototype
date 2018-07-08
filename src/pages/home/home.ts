@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {NavController, App, AlertController, ToastController} from "ionic-angular";
 import {LoginPage} from "../login/login";
 import {ActivityPage} from "../activity/activity";
-import {AboutPage} from "../about/about";
 import {ContactPage} from "../contact/contact";
 import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
