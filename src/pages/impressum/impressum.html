@@ -4,26 +4,42 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header class="color-header">
 
-  <ion-navbar>
-    <ion-title>impressum</ion-title>
-  </ion-navbar>
+  <ion-navbar  class="back-button" transparent>
+
+    <ion-navbar  class="Impressum" transparent></ion-navbar>
+
+   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <h1 class="schwarz">Hotline Deutschland:</h1>
-    <p>0800 330 09 95 (kostenlos aus dem Festnetz)<br> erreichbar von MO-Fr(7-20Uhr)</p>
-    <p></p>
-  <h1 class="schwarz">Vorstand:</h1>
+<ion-content>
+  <div class="square">
+    <div class="main-container">
+      <div class="top-container">Impressum
+      </div>
+      <div class="bottom-container"></div>
+    </div>
+  </div>
+
+  <div class="form"[ngStyle]="{'border': borderStyle}">
+
+  <div class="MeinInhalt">
+    <h1 class="Überschrifte">Hotline Deutschland:</h1>
+      <p calss="Überschrifte">0800 330 09 95 (kostenlos aus dem Festnetz)
+        <br> Montag - Freitag 8-20 Uhr)<br>Samstag - Sonntag 9-19 Uhr</p>
+      <p></p>
+    <h1 class="Überschrifte">Vorstand:</h1>
     <p>Max Mustermann<p></p>
-  <h1 class="schwarz">Vorsitzende des Aufsichtsrates:</h1>
+    <h1 class="Überschrifte">Vorsitzende des Aufsichtsrates:</h1>
     <p>Peter Schneider</p>
     <p></p>
 
-    <h1 class="schwarz">Hauptentwickler</h1>
+    <h1 class="Überschrifte">Hauptentwickler</h1>
     <p>Johannes T. Brandau</p>
     <p></p>
-</ion-content>
+  </div>
+
+
