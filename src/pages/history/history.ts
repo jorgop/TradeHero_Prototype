@@ -6,7 +6,6 @@ import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import { ImageViewerController } from 'ionic-img-viewer';
-import {AboutPage} from "../about/about";
 import {LoginPage} from "../login/login";
 
 @Component({
@@ -51,7 +50,7 @@ export class HistoryPage {
     }
 
     goToAbout() {
-        this.navCtrl.push(AboutPage);
+
     }
 
     /**
