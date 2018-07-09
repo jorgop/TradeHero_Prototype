@@ -1,9 +1,5 @@
 page-registration {
 
-  p {
-    color: white;
-  }
-
   html, body, .ion-app, .ion-content {
     background-color: transparent;
   }
@@ -57,7 +53,7 @@ page-registration {
 
   .info-text {
     padding-top: 5%;
-    color: white;
+    color: #FFB623;
     text-align: center;
     font-family: "Open Sans";
     font-size: 1.0em;
@@ -74,7 +70,7 @@ page-registration {
 
   .body-top {
     position: absolute;
-    height: 40%;
+    height: 45%;
     width: 100%;
   }
 
@@ -149,10 +145,11 @@ page-registration {
   /* Register Button */
 
   .body-bottom {
-    position: absolute;
-    top: 40%;
-    height: 60%;
+    position: relative;
+    top: 45%;
+    height: 55%;
     width: 100%;
+    padding-top: 1.0em;
   }
 
   .register-btn {

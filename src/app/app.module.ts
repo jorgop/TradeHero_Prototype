@@ -30,6 +30,8 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { IonicStorageModule } from '@ionic/storage';
 import {ScanPage} from "../pages/scan/scan";
 import {CameraPreview} from "@ionic-native/camera-preview";
+import { SimpleTimer } from 'ng2-simple-timer';
+
 
 
 @NgModule({
@@ -51,7 +53,7 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     BrowserModule,
     HttpClientModule,
     IonicImageViewerModule,
-    IonicModule.forRoot(MyApp, { swipeBackEnabled: false, tabsPlacement: 'top', backButtonText: "Zurück"}),
+    IonicModule.forRoot(MyApp, { swipeBackEnabled: false, tabsPlacement: 'top', backButtonText: "Zurück", scrollPadding: false, scrollAssist: false, autoFocusAssist: false}),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -69,6 +71,7 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     ImpressumPage
   ],
   providers: [
+    SimpleTimer,
     StatusBar,
     SplashScreen,
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
