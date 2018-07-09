@@ -97,7 +97,7 @@ export class HistoryPage {
                     if (loadRequired == true) {
                         this.historyLoading.dismiss().then(() => {
                             console.log('Verlauf konnte nicht geladen werden ;( ');
-                            this.sentToast("Scan failed");
+                            //this.sentToast("Scan failed");
                         });
                     }
                     ;

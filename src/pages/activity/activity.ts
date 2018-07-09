@@ -83,31 +83,18 @@ export class ActivityPage {
                 this.storage.get('strActivities').then((val) => {
                     let activity = <any>{};
                     activity = JSON.parse(val);
+                    this.aggregateData(activity);
                     this.pushDataIntoList(activity);
                 });
             }, (err) => {
-
                 //get activities from storage if rest failed - no internet connection
                 this.storage.get('strActivities').then((val) => {
                     let activity = <any>{};
                     activity = JSON.parse(val);
-                    this.aggregateData(activity)
+                    this.aggregateData(activity);
                     this.pushDataIntoList(activity);
                 });
             });
-
-          this.storage.get('strActivities').then((val) => {
-            let activity = <any>{};
-            activity = JSON.parse(val);
-            this.aggregateData(activity);
-          });
-
-          this.storage.get('strAggregation').then((val) => {
-            let aggregationData = <any>{};
-            aggregationData = JSON.parse(val);
-            this.pushDataIntoView(aggregationData);
-          });
-
         });
     }
 
@@ -185,10 +172,10 @@ export class ActivityPage {
                           "sumClosed": sumClosed,
                           "countClosed": countClosed};
 
-    this.storage.set('strAggregation',JSON.stringify(aggregatedData));
+    this.pushDataIntoView(aggregatedData);
+
+    //this.storage.set('strAggregation',JSON.stringify(aggregatedData));
   }
-
-
 
   /**
    * Get activites from the activityList an push the items into the list
