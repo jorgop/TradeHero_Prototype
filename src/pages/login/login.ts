@@ -8,6 +8,9 @@ import { Md5 } from "ts-md5";
 import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
+import {duration} from "moment";
+import { SimpleTimer } from 'ng2-simple-timer';
+
 
 @Component({
     selector: 'page-login',
@@ -25,7 +28,8 @@ export class LoginPage {
               public restProvider: RestProvider,
               private storage: Storage,
               private formBuilder: FormBuilder,
-              private keyboard: Keyboard) {
+              private keyboard: Keyboard,
+              private st: SimpleTimer) {
 
     //detect if keyboard is shown
     this.keyboard.onKeyboardShow().subscribe(() => {
@@ -42,6 +46,7 @@ export class LoginPage {
   }
 
     message(myParam) {
+        this.st.newTimer('2sec', 2);
         if (myParam == 1) {
             this.nachricht = "Max@Mustermann.de";
             return this.nachricht;
@@ -49,8 +54,10 @@ export class LoginPage {
         {
             this.nachricht = "Mindestens 6 Buchstaben";
             return this.nachricht;
-        }
+        };
     }
+
+
 
     /**
     * Site navigation
@@ -85,7 +92,7 @@ export class LoginPage {
           this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
           this.navCtrl.push(HomePage,{userID: restResult.data[0].userID});
         }else{
-          this.sentToast("Die Anmeldung ist leider fehlgeschlagen. Bitte versuchen Sie es erneut.");
+          this.sentToast("Die Anmeldung ist leider fehlgeschlagen. \nBitte versuchen Sie es erneut.");
         }
       }, (err) => {
         console.log('error2 ' + err.message);
