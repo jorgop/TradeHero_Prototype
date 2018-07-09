@@ -4,7 +4,31 @@ page-impressum {
     background: #15B2A2;
   }
 
+  .back-button {
+    color: white !important;
+    background: #15B2A2;
+  }
 
+  .color-btn-header {
+    color: white;
+  }
+
+  .logout-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+  }
+
+
+  .fixed-header-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+    border-radius: 100px;
+    margin-right: 1%;
+  }
 
   .square {
     position: relative;
@@ -19,47 +43,43 @@ page-impressum {
     height: 100%;
   }
 
-  .bottom-container {
-    position: relative;
-    height: 10%;
-    width: 100%;
-  }
-
   .top-container {
-    position: relative;
+
+    //position: relative;
     height: 90%;
     width: 100%;
-    padding: 15%;
+    //padding: 15%;
     text-align: center;
     font-size: 3.5em;
     color: white;
     text-shadow: 1px 1px black;
-  }
-
-  .back-button {
-     color: white !important;
-     background: #15B2A2;
-   }
-  .Impressum{
-    color: white !important;
-    font-size: 16px;
-    font-family: "Calibri";
-    color: #15B2A2;
-    text-transform: uppercase;
-
-    position: relative;
+    padding-top: 20%;
 
   }
 
-   .color-btn-header {
+  .bottom-container {
+   // position: relative;
+    height: 10%;
+    width: 100%;
+  }
+
+  .fab {
     color: white;
+    background: #FFB623;
+    width: 3.5em;
+    height: 3.5em;
   }
+
+  .shadow {
+    box-shadow: 2px 2px 5px gray;
+  }
+
   .MeinInhalt{
   height: 43%;
-margin-bottom: 10%;
-margin-top: 20%;
+//margin-bottom: 10%;
+//margin-top: 20%;
 font-size: 14px;
-font-family: "Calibri Light";
+font-family: "Open Sans";
 color: #404040;
 padding-left: 11%;
 
@@ -67,14 +87,11 @@ padding-left: 11%;
 
 .Überschrifte{
   font-size: 16px;
-  font-family: "Calibri";
+  font-family: "Merriweather Sans";
   color: #15B2A2;
   text-transform: uppercase;
 }
 
-  #blau {
-    color: blue;
-}
 
 
 

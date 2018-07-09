@@ -8,7 +8,13 @@
 
   <ion-navbar  class="back-button" transparent>
 
-    <ion-navbar  class="Impressum" transparent></ion-navbar>
+    <button class="logout-btn" (click)="logout()" round ion-button>
+      <ion-icon name="power"></ion-icon>
+    </button>
+
+    <button class="fixed-header-btn" ion-button>
+      <ion-icon name="settings"></ion-icon>
+    </button>
 
    </ion-navbar>
 
@@ -18,27 +24,47 @@
 <ion-content>
   <div class="square">
     <div class="main-container">
-      <div class="top-container">Impressum
+      <div class="top-container">Impressum</div>
+      <div class="bottom-container">
+        <ion-fab left>
+          <button ion-fab color="light" class="shadow">
+            <ion-icon name="arrow-dropright"></ion-icon>
+          </button>
+          <ion-fab-list side="right">
+            <button class="shadow" (click)="goToScan()" ion-fab><ion-icon name="camera"></ion-icon></button>
+            <button class="shadow" (click)="goToActivity()" ion-fab><ion-icon name="paper"></ion-icon></button>
+            <button class="shadow" (click)="goToProfile()" ion-fab><ion-icon name="person"></ion-icon></button>
+            <button class="shadow" (click)="goToContact()" ion-fab><ion-icon name="call"></ion-icon></button>
+          </ion-fab-list>
+        </ion-fab>
       </div>
-      <div class="bottom-container"></div>
     </div>
   </div>
 
   <div class="form"[ngStyle]="{'border': borderStyle}">
 
   <div class="MeinInhalt">
-    <h1 class="Überschrifte">Hotline Deutschland:</h1>
-      <p calss="Überschrifte">0800 330 09 95 (kostenlos aus dem Festnetz)
-        <br> Montag - Freitag 8-20 Uhr)<br>Samstag - Sonntag 9-19 Uhr</p>
+    <h1 class="Überschrifte"><br>Adresse</h1>
+      <p calss="Überschrifte">InsuRabbit
+        <br> Beispielstr. 123<br>12345 Beispielstadt</p>
+        Telefon: 06123 456789
+        <br>Email: kontakt@insurabbit.de
       <p></p>
-    <h1 class="Überschrifte">Vorstand:</h1>
+    <h1 class="Überschrifte">Vertreten durch</h1>
     <p>Max Mustermann<p></p>
-    <h1 class="Überschrifte">Vorsitzende des Aufsichtsrates:</h1>
-    <p>Peter Schneider</p>
+    <h1 class="Überschrifte">Umsatzsteuer-ID</h1>
+    <p>Umsatzsteuer-Identifikationsnummer nach §27a Umsatzsteuergesetz: DE999999999</p>
     <p></p>
 
-    <h1 class="Überschrifte">Hauptentwickler</h1>
-    <p>Johannes T. Brandau</p>
+       <p>
+      All rights reserved<br>
+      Jonas Becker<br>
+      Johannes Brandau<br>
+      Katharina Endsuleit<br>
+      Nina Nguyen<br>
+      Emilie Koyeung Tije<br>
+      Georgios Papaefthymiou
+    </p>
     <p></p>
   </div>
 
