@@ -151,22 +151,6 @@ export class RestProvider {
   }
 
   /**
-   * Get user user data by userID
-   * @param userID User-ID
-   * @returns {Promise<any>} Return the user data as JSON format
-   */
-  getAggregationData(userID) {
-    return new Promise((resolve, reject) => {
-      this.http.get(this.apiUrl+'/api/aggregation?userID='+userID,{responseType: "json"})
-        .subscribe(res => {
-          resolve(res);
-        }, (err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
    * Get ticket data by ticketID
    * @param ticketID Ticket-ID
    * @returns {Promise<any>} Return the user data as JSON format

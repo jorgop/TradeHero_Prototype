@@ -5,7 +5,6 @@ import { RestProvider } from '../../providers/rest/rest';
 import { ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {Md5} from "ts-md5";
-import { Keyboard } from '@ionic-native/keyboard';
 
 
 @Component({
@@ -15,8 +14,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 })
 export class RegistrationPage {
 
-    nachricht: String;
-
+  nachricht: String;
 
   submitAttempt: boolean = false;
   private myForm : FormGroup;
@@ -24,15 +22,7 @@ export class RegistrationPage {
   constructor(public navCtrl: NavController,
               public restProvider: RestProvider,
               public toastCtrl: ToastController,
-              private formBuilder: FormBuilder,
-              private keyboard: Keyboard) {
-
-      //detect if keyboard is shown
-      this.keyboard.onKeyboardShow().subscribe(() => {
-          console.log("keyboard detected")
-          this.keyboard.disableScroll(false);
-      });
-
+              private formBuilder: FormBuilder) {
 
     this.myForm = formBuilder.group({
       email: ['',Validators.compose([Validators.required, Validators.email])],
@@ -53,8 +43,6 @@ export class RegistrationPage {
             return this.nachricht;
         }
     }
-
-
 
 
   /**

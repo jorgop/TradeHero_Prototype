@@ -91,30 +91,23 @@ export class ActivityPage {
                 this.storage.get('strActivities').then((val) => {
                     let activity = <any>{};
                     activity = JSON.parse(val);
+                    this.aggregateData(activity)
                     this.pushDataIntoList(activity);
                 });
             });
 
-            //get Aggregation data from REST - set to soratge and push to view
-            this.restProvider.getAggregationData(identity['userID']).then((result) => {
-              //set activities to Storage
-              this.storage.set('strAggregation',JSON.stringify(result));
+          this.storage.get('strActivities').then((val) => {
+            let activity = <any>{};
+            activity = JSON.parse(val);
+            this.aggregateData(activity);
+          });
 
-              //get refreshed aggregation data from storage
-              this.storage.get('strAggregation').then((val) => {
-                let aggregationData = <any>{};
-                aggregationData = JSON.parse(val);
-                this.pushDataIntoView(aggregationData);
-              });
-            }, (err) => {
+          this.storage.get('strAggregation').then((val) => {
+            let aggregationData = <any>{};
+            aggregationData = JSON.parse(val);
+            this.pushDataIntoView(aggregationData);
+          });
 
-              //get aggregation data from storage if rest failed - no internet connection
-              this.storage.get('strAggregation').then((val) => {
-                let aggregationData = <any>{};
-                aggregationData = JSON.parse(val);
-                this.pushDataIntoView(aggregationData);
-              });
-            });
         });
     }
 
@@ -143,12 +136,66 @@ export class ActivityPage {
   }
 
   /**
+   * Calculate sum and counts of all,closed,open and denied tickets
+   * @param activityData List of all activities
+   */
+  aggregateData(activityData){
+
+    var countClosed = 0;
+    var sumClosed = 0;
+    var countOpen = 0;
+    var sumOpen = 0;
+    var countDenied = 0;
+    var sumDenied = 0;
+    var countAll = 0;
+    var sumAll = 0;
+
+    for(let i in activityData){
+
+      var currentActivity = activityData[i];
+
+      Object.keys(currentActivity).forEach(key => {
+
+        sumAll += currentActivity[key]['refund'];
+        countAll += 1;
+
+        if(currentActivity[key]['ticketStatus'] == 0){
+          countOpen += 1;
+          sumOpen += currentActivity[key]['refund'];
+        }
+
+        if(currentActivity[key]['ticketStatus'] == 1){
+          countClosed += 1;
+          sumClosed += currentActivity[key]['refund'];
+        }
+
+        if(currentActivity[key]['ticketStatus'] == 2){
+          countDenied += 1;
+          sumDenied += currentActivity[key]['refund'];
+        }
+      });
+    }
+
+    var aggregatedData = {"sumDenied": sumDenied,
+                          "countAll": countAll,
+                          "countDenied": countDenied,
+                          "countOpen": countOpen,
+                          "sumAll": sumAll,
+                          "sumOpen": sumOpen,
+                          "sumClosed": sumClosed,
+                          "countClosed": countClosed};
+
+    this.storage.set('strAggregation',JSON.stringify(aggregatedData));
+  }
+
+
+
+  /**
    * Get activites from the activityList an push the items into the list
    * @param data
    */
   pushDataIntoList(data){
         //loop through the activityList
-
         for (let i in data.activityList) {
             let currentObject = data.activityList[i];
 
@@ -237,8 +284,6 @@ export class ActivityPage {
     goToImpressum(){
         this.navCtrl.push(ImpressumPage);
     }
-
-
 
     actRefresh(refresher) {
         console.log('Begin async operation', refresher);
