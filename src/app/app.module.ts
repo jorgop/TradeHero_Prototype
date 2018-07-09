@@ -29,6 +29,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import {ScanPage} from "../pages/scan/scan";
 import {CameraPreview} from "@ionic-native/camera-preview";
 import {PreviewPage} from "../pages/preview/preview";
+import { SimpleTimer } from 'ng2-simple-timer';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import {PreviewPage} from "../pages/preview/preview";
     PreviewPage
   ],
   providers: [
+    SimpleTimer,
     StatusBar,
     SplashScreen,
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
