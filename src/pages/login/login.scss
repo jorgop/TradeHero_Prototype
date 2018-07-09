@@ -1,9 +1,5 @@
 page-login {
 
-  p {
-    color:white;
-  }
-
   html, body, .ion-app, .ion-content {
     background-color: transparent;
   }
@@ -37,7 +33,6 @@ page-login {
   /* Container for Info Text */
 
   .bottom-container {
-    position: relative;
     height: 30%;
     width: 100%;
   }
@@ -46,7 +41,7 @@ page-login {
 
   .info-text {
     padding-top: 5%;
-    color: white;
+    color: #FFB623;
     text-align: center;
     font-family: "Open Sans";
     font-size: 1.0em;
@@ -110,6 +105,7 @@ page-login {
     }
   }
 
+
   /* Set color of placeholder text */
 
   .input {
@@ -140,6 +136,7 @@ page-login {
   .body-bottom {
     height: 70%;
     width: 100%;
+    padding-top: 1.5em;
   }
 
   .anmelde-btn {
@@ -155,9 +152,15 @@ page-login {
     color: white;
     font-size: 1.2em;
     font-family: "Open Sans";
+    padding-top: 0.5em;
     text-decoration: underline;
     text-decoration-color: white;
   }
+
+  .scroll-content{
+    margin-top: 500px;
+  }
+
 
 
 }

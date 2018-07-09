@@ -14,13 +14,16 @@ import {Md5} from "ts-md5";
 })
 export class RegistrationPage {
 
-    nachricht: String;
-
+  nachricht: String;
 
   submitAttempt: boolean = false;
   private myForm : FormGroup;
 
-  constructor(public navCtrl: NavController, public restProvider: RestProvider, public toastCtrl: ToastController, private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController,
+              public restProvider: RestProvider,
+              public toastCtrl: ToastController,
+              private formBuilder: FormBuilder) {
+
     this.myForm = formBuilder.group({
       email: ['',Validators.compose([Validators.required, Validators.email])],
       token: ['', Validators.compose([Validators.minLength(6), Validators.required])],
@@ -40,8 +43,6 @@ export class RegistrationPage {
             return this.nachricht;
         }
     }
-
-
 
 
   /**

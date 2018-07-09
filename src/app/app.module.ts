@@ -5,7 +5,6 @@ import localeDe from '@angular/common/locales/de';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -26,10 +25,11 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import {ImpressumPage} from "../pages/impressum/impressum";
 import {Camera} from "@ionic-native/camera";
 import { Keyboard } from '@ionic-native/keyboard';
-
 import { IonicStorageModule } from '@ionic/storage';
 import {ScanPage} from "../pages/scan/scan";
 import {CameraPreview} from "@ionic-native/camera-preview";
+import {PreviewPage} from "../pages/preview/preview";
+import { SimpleTimer } from 'ng2-simple-timer';
 
 
 @NgModule({
@@ -44,7 +44,8 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     HistoryPage,
     ProfilePage,
     OcrPage,
-    ImpressumPage
+    ImpressumPage,
+    PreviewPage
   ],
   imports: [
     FormsModule,
@@ -66,9 +67,11 @@ import {CameraPreview} from "@ionic-native/camera-preview";
     ProfilePage,
     HistoryPage,
     OcrPage,
-    ImpressumPage
+    ImpressumPage,
+    PreviewPage
   ],
   providers: [
+    SimpleTimer,
     StatusBar,
     SplashScreen,
     [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
