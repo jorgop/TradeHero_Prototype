@@ -34,7 +34,6 @@ export class HistoryPage {
     ) {
 
         this.ticketID = this.navParams.get('ticketID');
-        console.log("ticket: " + this.ticketID);
 
         //loading for sending data
         this.historyLoading = this.loadingController.create({
@@ -112,9 +111,7 @@ export class HistoryPage {
         //loop through the activityList
         for (let i in data.activityList) {
             let currentObject = data.activityList[i];
-            //console.log(currentObject);
             if (currentObject['ticketID'] == this.ticketID) {
-                console.log(data.activityList[i]);
                 for (let j in currentObject['history']) {
                     let currentHistory = currentObject['history'][j];
                     var statusText;
