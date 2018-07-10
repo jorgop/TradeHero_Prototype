@@ -58,11 +58,16 @@ export class LoginPage {
             );
         };
 
-        if(myParam == 2)
-        {
+        if(myParam == 2) {
             this.nachricht = "Mindestens 6 Buchstaben";
-            //return this.nachricht;
-            this.sentToast(this.nachricht);
+            const start = Date.now();
+            let timeOutHandler = setTimeout(
+                () => {
+                    const e = Date.now() - start;
+                    this.nachricht = "";
+                },
+                3000
+            );
         };
     }
 
@@ -101,27 +106,34 @@ export class LoginPage {
           this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
           this.navCtrl.push(HomePage,{userID: restResult.data[0].userID});
         }else{
-          this.sentToast("Die Anmeldung ist leider fehlgeschlagen. \nBitte versuchen Sie es erneut.");
+          this.sentToast("Die Anmeldung ist leider fehlgeschlagen. \nBitte versuchen Sie es erneut.", true, "3000", "x");
         }
       }, (err) => {
         console.log('error2 ' + err.message);
-        this.sentToast("Keine internet Verbindung");
+        this.sentToast("Keine Internetverbindung.", true, "3000", "x");
         //this.navCtrl.push(LoginPage);
       });
     };
   }
 
-  /**
-   * View a toast message
-   * @param message Toast Text
-   */
-  sentToast(message) {
-      let toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+
+    /**
+     * View a toast message
+     * @param message Toast message
+     * @param showCloseButton Show close button
+     * @param duration Duration of toast message
+     * @param closeButtonText Text of the close button
+     */
+    sentToast(message,showCloseButton,duration,closeButtonText) {
+        let toast = this.toastCtrl.create({
+            message: message,
+            duration: duration,
+            position: 'top',
+            showCloseButton: showCloseButton,
+            closeButtonText: closeButtonText
+
+        });
+        toast.present();
     }
 
 }
