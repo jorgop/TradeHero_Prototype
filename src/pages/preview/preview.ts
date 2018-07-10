@@ -5,6 +5,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { ToastController } from 'ionic-angular';
 import {OcrPage} from "../ocr/ocr";
 import {HomePage} from "../home/home";
+import {ScanPage} from "../scan/scan";
 
 @Component({
   selector: 'page-preview',
@@ -28,7 +29,7 @@ export class PreviewPage {
 
     //loading for sending data
     this.sendLoading = this.loadingController.create({
-      content: 'Rechung wird eingereicht'
+      content: 'Bild wird gescannt'
     });
   }
 
@@ -39,7 +40,6 @@ export class PreviewPage {
     this.scanImage();
   }
 
-
   /**
    * Detect borders and greyscale the images with opencv upon calling the rest service
    */
@@ -49,10 +49,7 @@ export class PreviewPage {
 
     let myImage = { "imgFile": this.takenImage };
 
-    console.log(myImage);
-
     this.restProvider.scanImage(myImage).then((result) => {
-
 
       let scanFile = <any>{};
       scanFile = result;
@@ -66,11 +63,44 @@ export class PreviewPage {
     }, (err) => {
       console.log('Scan failed ' + err);
       this.sendLoading.dismiss().then(() => {
-        console.log('Oooops Scan failed');
-        //this.navCtrl.push(ScanPage);
-        this.sentToast("Bild konnte nicht gelesen werden!");
+        this.presentConfirm();
       });
     });
+  }
+
+  /**
+   * Show message Box if scan failed
+   */
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Oh nein ;(',
+     // message: 'Leider konnte das Bild nicht erkannt werden. Bitte überprüfe deine Internet Verbindung und achte darauf das nur die Rechnung im Bild zu sehen ist.',
+
+      message: '<p>Leider konnte das Bild nicht erkannt werden. Bitte pr&uuml;fe die folgenden Punkte:</p>\n' +
+      '<ul>\n' +
+      '<li>Internetverbindung&nbsp;</li>\n' +
+      '<li>Kein zu heller Hintergrund</li>\n' +
+      '<li>Nur die Rechunug ist zu sehen&nbsp;</li>\n' +
+      '<li>Das Format ist A4</li>\n' +
+      '</ul>',
+      cssClass: 'alertCustomCss',
+      buttons: [
+        {
+          text: 'Abbrechen',
+          role: 'cancel',
+          handler: () => {
+            this.navCtrl.push(HomePage);
+          }
+        },
+        {
+          text: 'Erneut versuchen',
+          handler: () => {
+            this.navCtrl.push(ScanPage);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   /**
@@ -99,5 +129,4 @@ export class PreviewPage {
     });
     toast.present();
   }
-
 }

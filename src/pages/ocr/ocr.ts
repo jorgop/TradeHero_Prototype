@@ -284,7 +284,7 @@ export class OcrPage {
               break;
             }
             case "street":{
-              wrongTextFields += "Strasse" + "\n";
+              wrongTextFields += "Strße" + "\n";
               break;
             }
             case "place":{
@@ -296,7 +296,7 @@ export class OcrPage {
               break;
             }
             case "bankName":{
-              wrongTextFields += "Bank" + "\n";
+              wrongTextFields += "BIC" + "\n";
               break;
             }
             case "IBAN":{

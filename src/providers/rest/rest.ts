@@ -58,6 +58,7 @@ export class RestProvider {
   scanImage(data) {
     return new Promise((resolve, reject) => {
       this.http.post(this.apiUrl+'/api/scan', data)
+        .pipe(timeout(30000))
         .subscribe(res => {
           resolve(res);
         }, (err) => {
