@@ -101,12 +101,16 @@ export class LoginPage {
         let restResult = <any>{};
         restResult = result;
           //console.log(result);
-        if(restResult.data[0].login == "true"){
 
-          this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
-          this.navCtrl.push(HomePage,{userID: restResult.data[0].userID});
+        if(restResult.data[0].mail == "true") {
+            if(restResult.data[0].password == "true"){
+                this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
+                this.navCtrl.push(HomePage,{userID: restResult.data[0].userID});
+            }else{
+                this.sentToast("Das Passwort stimmt leider nicht. \nBitte versuchen Sie es erneut.", true, "3000", "x");
+            }
         }else{
-          this.sentToast("Die Anmeldung ist leider fehlgeschlagen. \nBitte versuchen Sie es erneut.", true, "3000", "x");
+          this.sentToast("Die E-Mail stimmt leider nicht. \nBitte versuchen Sie es erneut.", true, "3000", "x");
         }
       }, (err) => {
         console.log('error2 ' + err.message);

@@ -161,10 +161,16 @@ page-registration {
 
   /* Login Button */
 
+  .login-btn {
+    width: 100%;
+    text-align: center;
+  }
+
   .coloring {
     color: white;
-    font-size: 1.0em;
+    font-size: 1.1em;
     font-family: "Open Sans";
+    padding-top: 0.3em;
     text-decoration: underline;
     text-decoration-color: white;
   }
