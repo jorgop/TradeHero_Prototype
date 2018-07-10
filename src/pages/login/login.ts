@@ -9,7 +9,7 @@ import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 import {duration} from "moment";
-import { SimpleTimer } from 'ng2-simple-timer';
+
 
 
 @Component({
@@ -28,8 +28,7 @@ export class LoginPage {
               public restProvider: RestProvider,
               private storage: Storage,
               private formBuilder: FormBuilder,
-              private keyboard: Keyboard,
-              private st: SimpleTimer) {
+              private keyboard: Keyboard) {
 
     //detect if keyboard is shown
     this.keyboard.onKeyboardShow().subscribe(() => {
@@ -46,14 +45,24 @@ export class LoginPage {
   }
 
     message(myParam) {
-        this.st.newTimer('2sec', 2);
+
         if (myParam == 1) {
             this.nachricht = "Max@Mustermann.de";
-            return this.nachricht;
-        } else (myParam == 2)
+            const start = Date.now();
+            let timeOutHandler = setTimeout(
+              () => {
+                const e = Date.now() - start;
+                this.nachricht = "";
+              },
+              3000
+            );
+        };
+
+        if(myParam == 2)
         {
             this.nachricht = "Mindestens 6 Buchstaben";
-            return this.nachricht;
+            //return this.nachricht;
+            this.sentToast(this.nachricht);
         };
     }
 
@@ -96,7 +105,7 @@ export class LoginPage {
         }
       }, (err) => {
         console.log('error2 ' + err.message);
-        this.sentToast("Oooops registration failed");
+        this.sentToast("Keine internet Verbindung");
         //this.navCtrl.push(LoginPage);
       });
     };
