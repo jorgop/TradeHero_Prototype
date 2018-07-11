@@ -48,7 +48,7 @@ export class OcrPage {
         street: "true",
         place : "true",
         plz : "true",
-        bankName : "true",
+        BIC : "true",
         IBAN : "true",
         invoiceNumber : "true",
         refund : "true"
@@ -60,7 +60,7 @@ export class OcrPage {
         street: ['', Validators.required],
         place : ['', Validators.required],
         plz : ['', Validators.compose([Validators.required, PlzValidator.isValid])],
-        bankName : ['', Validators.required],
+        BIC : ['', Validators.required],
         IBAN : ['', Validators.compose([Validators.required, IbanValidator.isValid])],
         invoiceNumber : [''],
         refund : ['', Validators.compose([Validators.required, RefundValidator.isValid])],
@@ -119,8 +119,8 @@ export class OcrPage {
             this.myForm.patchValue({plz:docData[key]});
             break;
           }
-          case "bankName":{
-            this.myForm.patchValue({bankName:docData[key]});
+          case "BIC":{
+            this.myForm.patchValue({BIC:docData[key]});
             break;
           }
           case "IBAN":{
@@ -156,7 +156,7 @@ export class OcrPage {
       this.osrLoading.dismiss().then(() => {
         console.log('Oooops OCR failed');
         this.validateFields();
-        this.sentToast("Dokument konnte nicht gelesen werden.",false,3000,"schließen");
+        this.sentToast("Text konnte nicht erknant werden.",false,3000,"schließen");
       });
     });
   }
@@ -190,10 +190,10 @@ export class OcrPage {
         this.myVal.plz = "true";
     }
 
-    if(!this.myForm.controls.bankName.valid){
-        this.myVal.bankName = "false";
+    if(!this.myForm.controls.BIC.valid){
+        this.myVal.BIC = "false";
     }else{
-        this.myVal.bankName = "true";
+        this.myVal.BIC = "true";
     }
 
     if(!this.myForm.controls.IBAN.valid){
@@ -227,7 +227,7 @@ export class OcrPage {
         this.myForm.controls.street.valid &&
         this.myForm.controls.place.valid  &&
         this.myForm.controls.plz.valid  &&
-        this.myForm.controls.bankName.valid &&
+        this.myForm.controls.BIC.valid &&
         this.myForm.controls.IBAN.valid &&
         this.myForm.controls.refund.valid){
 
@@ -242,13 +242,15 @@ export class OcrPage {
             "street": this.myForm.controls.street.value,
             "place" : this.myForm.controls.place.value,
             "plz" : this.myForm.controls.plz.value,
-            "bankName" :  this.myForm.controls.bankName.value,
+            "BIC" :  this.myForm.controls.BIC.value,
             "IBAN" :  this.myForm.controls.IBAN.value,
             "invoiceNumber" :  this.myForm.controls.invoiceNumber.value,
             "refund" :  this.myForm.controls.refund.value
           }
         ]
       };
+
+      console.log(restData);
 
       this.restProvider.addActivity(restData).then((result) => {
         if (result == true){
@@ -268,12 +270,12 @@ export class OcrPage {
 
       var wrongTextFields = "";
       var checkValuesList = { "name":this.myForm.controls.name.valid,
-                          "street":this.myForm.controls.street.valid ,
-                          "place":this.myForm.controls.place.valid  ,
-                          "plz":this.myForm.controls.plz.valid  ,
-                          "bankName":this.myForm.controls.bankName.valid ,
-                          "IBAN":this.myForm.controls.IBAN.valid ,
-                          "refund":this.myForm.controls.refund.valid };
+                              "street":this.myForm.controls.street.valid ,
+                              "place":this.myForm.controls.place.valid  ,
+                              "plz":this.myForm.controls.plz.valid  ,
+                              "BIC":this.myForm.controls.BIC.valid ,
+                              "IBAN":this.myForm.controls.IBAN.valid ,
+                              "refund":this.myForm.controls.refund.valid };
 
       for(let key in checkValuesList){
         if(checkValuesList[key] == false){
@@ -295,7 +297,7 @@ export class OcrPage {
               wrongTextFields += "Postleitzahl" + "\n";
               break;
             }
-            case "bankName":{
+            case "BIC":{
               wrongTextFields += "BIC" + "\n";
               break;
             }
