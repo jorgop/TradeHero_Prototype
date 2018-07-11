@@ -8,6 +8,9 @@ import { Md5 } from "ts-md5";
 import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
+import {duration} from "moment";
+
+
 
 @Component({
     selector: 'page-login',
@@ -42,15 +45,33 @@ export class LoginPage {
   }
 
     message(myParam) {
+
         if (myParam == 1) {
             this.nachricht = "Max@Mustermann.de";
-            return this.nachricht;
-        } else (myParam == 2)
-        {
+            const start = Date.now();
+            let timeOutHandler = setTimeout(
+              () => {
+                const e = Date.now() - start;
+                this.nachricht = "";
+              },
+              3000
+            );
+        };
+
+        if(myParam == 2) {
             this.nachricht = "Mindestens 6 Buchstaben";
-            return this.nachricht;
-        }
+            const start = Date.now();
+            let timeOutHandler = setTimeout(
+                () => {
+                    const e = Date.now() - start;
+                    this.nachricht = "";
+                },
+                3000
+            );
+        };
     }
+
+
 
     /**
     * Site navigation
@@ -80,32 +101,43 @@ export class LoginPage {
         let restResult = <any>{};
         restResult = result;
           //console.log(result);
-        if(restResult.data[0].login == "true"){
 
-          this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
-          this.navCtrl.push(HomePage,{userID: restResult.data[0].userID});
+        if(restResult.data[0].mail == "true") {
+            if(restResult.data[0].password == "true"){
+                this.storage.set('identity',JSON.stringify({"userID":restResult.data[0].userID}));
+                this.navCtrl.push(HomePage,{userID: restResult.data[0].userID});
+            }else{
+                this.sentToast("Das Passwort stimmt leider nicht. \nBitte versuchen Sie es erneut.", true, "3000", "x");
+            }
         }else{
-          this.sentToast("Die Anmeldung ist leider fehlgeschlagen. Bitte versuchen Sie es erneut.");
+          this.sentToast("Die E-Mail stimmt leider nicht. \nBitte versuchen Sie es erneut.", true, "3000", "x");
         }
       }, (err) => {
         console.log('error2 ' + err.message);
-        this.sentToast("Oooops registration failed");
+        this.sentToast("Keine Internetverbindung.", true, "3000", "x");
         //this.navCtrl.push(LoginPage);
       });
     };
   }
 
-  /**
-   * View a toast message
-   * @param message Toast Text
-   */
-  sentToast(message) {
-      let toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+
+    /**
+     * View a toast message
+     * @param message Toast message
+     * @param showCloseButton Show close button
+     * @param duration Duration of toast message
+     * @param closeButtonText Text of the close button
+     */
+    sentToast(message,showCloseButton,duration,closeButtonText) {
+        let toast = this.toastCtrl.create({
+            message: message,
+            duration: duration,
+            position: 'top',
+            showCloseButton: showCloseButton,
+            closeButtonText: closeButtonText
+
+        });
+        toast.present();
     }
 
 }

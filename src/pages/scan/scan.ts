@@ -8,6 +8,7 @@ import { ToastController } from 'ionic-angular';
 import { OcrPage } from "../ocr/ocr";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {HomePage} from "../home/home";
+import {PreviewPage} from "../preview/preview";
 
 @Component({
   selector: 'page-scan',
@@ -18,19 +19,24 @@ export class ScanPage {
 
   private imgbase64ImageFile: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,platform: Platform,public restProvider: RestProvider,public toastCtrl: ToastController,private camera: Camera) {
-
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public alertCtrl: AlertController,platform: Platform,
+              public restProvider: RestProvider,
+              public toastCtrl: ToastController,
+              private camera: Camera) {
   }
-
-
+  
   /**
    * Start Camera to take a picture
    */
   takeCameraPicture(){
     const options: CameraOptions = {
+      sourceType:1,
+      saveToPhotoAlbum: true,
       quality: 100,
-      targetWidth: 1080,
-      targetHeight: 1920,
+      targetWidth: 1920,
+      targetHeight: 1080,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE
@@ -41,7 +47,7 @@ export class ScanPage {
       // If it's base64:
       var base64Image = 'data:image/png;base64,' + imageData;
       this.imgbase64ImageFile = base64Image;
-      this.gotToOcrPage();
+      this.gotToPreviewPage();
       if (imageData == null){
         this.navCtrl.push(HomePage);
       }
@@ -62,6 +68,13 @@ export class ScanPage {
    */
   gotToOcrPage(){
     this.navCtrl.push(OcrPage,{scanedImage: this.imgbase64ImageFile});
+  }
+
+  /**
+   * Navigate to Ocr Page
+   */
+  gotToPreviewPage(){
+    this.navCtrl.push(PreviewPage,{takenImage: this.imgbase64ImageFile});
   }
 
 }

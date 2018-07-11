@@ -11,12 +11,6 @@ import {ContactPage} from "../contact/contact";
 import {ScanPage} from "../scan/scan";
 import {ActivityPage} from "../activity/activity";
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-profile',
@@ -25,7 +19,6 @@ import {ActivityPage} from "../activity/activity";
 export class ProfilePage {
 
   private stammdatenForm : FormGroup;
-  private userID: any;
   private fname: any;
   private mail: any;
   public editInfo: string = "true";  //toggle Variable for editing the personal data
@@ -41,13 +34,6 @@ export class ProfilePage {
               private storage: Storage,
               private formBuilder: FormBuilder,
               public restProvider: RestProvider) {
-
-// Saves user Id from storage
-      this.storage.get('identity').then((val) => {
-          let identity = <any>{};
-          identity = JSON.parse(val);
-          this.userID = identity['userID'];
-      });
 
 // Creates form
       this.stammdatenForm = formBuilder.group({
@@ -85,19 +71,22 @@ export class ProfilePage {
 
   ionViewWillEnter() {
 
-      this.restProvider.getUserData(this.userID).then((result) => {
-          //set activities to Storage
-          this.storage.set('user',JSON.stringify(result));
+    this.storage.get('identity').then((val) => {
+      let identity = <any>{};
+      identity = JSON.parse(val);
 
-         this.updateUserDataInputfields();
+      this.restProvider.getUserData(identity['userID']).then((result) => {
+        //set activities to Storage
+        this.storage.set('user',JSON.stringify(result));
+
+        this.updateUserDataInputfields();
 
       }, (err) => {
 
-          this.updateUserDataInputfields()
-          // daten ins html aus storage wenn rest nicht geht
+        this.updateUserDataInputfields()
+        // daten ins html aus storage wenn rest nicht geht
       });
-
-
+    });
   }
 
   //Read userdata from form and send it to REST
@@ -123,7 +112,7 @@ export class ProfilePage {
 
           this.restProvider.updateUserData(identity['userID'],restData).then((result) => {
               console.log(result);
-              console.log(result['userMail'])
+              console.log(result['userMail']);
               if(result['userMail'] == "false"){
                   this.sentToast("Email-Fehler");
               }

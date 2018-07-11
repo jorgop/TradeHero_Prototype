@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import {timeout} from 'rxjs/operators/timeout';
 
 
 /*
@@ -56,6 +58,7 @@ export class RestProvider {
   scanImage(data) {
     return new Promise((resolve, reject) => {
       this.http.post(this.apiUrl+'/api/scan', data)
+        .pipe(timeout(30000))
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -72,6 +75,7 @@ export class RestProvider {
   getOcrData(data) {
     return new Promise((resolve, reject) => {
       this.http.post(this.apiUrl+'/api/ocr', data)
+        .pipe(timeout(100000))
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -139,22 +143,6 @@ export class RestProvider {
   getActivityData(userID) {
     return new Promise((resolve, reject) => {
       this.http.get(this.apiUrl+'/api/activity?userID='+userID,{responseType: "json"})
-        .subscribe(res => {
-          resolve(res);
-        }, (err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
-   * Get user user data by userID
-   * @param userID User-ID
-   * @returns {Promise<any>} Return the user data as JSON format
-   */
-  getAggregationData(userID) {
-    return new Promise((resolve, reject) => {
-      this.http.get(this.apiUrl+'/api/aggregation?userID='+userID,{responseType: "json"})
         .subscribe(res => {
           resolve(res);
         }, (err) => {

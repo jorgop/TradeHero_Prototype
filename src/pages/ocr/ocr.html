@@ -5,7 +5,7 @@
         <ion-icon name="md-menu"></ion-icon>
       </button>
     </ion-buttons> -->
-    <ion-title>OCR</ion-title>
+    <ion-title>Rechnungsformular</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -46,10 +46,10 @@
       </ion-item>
       </div>
       <br>
-      <div [ngClass]="(this.myVal.bankName == 'true') ? 'valid-true' : 'valid-false'">
+      <div [ngClass]="(this.myVal.BIC == 'true') ? 'valid-true' : 'valid-false'">
       <ion-item>
-        <ion-label color="primary" stacked>Bank</ion-label>
-        <ion-input formControlName="bankName" type="text" ></ion-input>
+        <ion-label color="primary" stacked>BIC</ion-label>
+        <ion-input formControlName="BIC" type="text" ></ion-input>
       </ion-item>
       </div>
       <br>
@@ -62,7 +62,7 @@
       <br>
       <div>
       <ion-item>
-        <ion-label color="primary" stacked>Rechnungsnummer</ion-label>
+        <ion-label color="primary" stacked>Rechnungsnummer(optional)</ion-label>
         <ion-input formControlName="invoiceNumber" type="text" ></ion-input>
       </ion-item>
       </div>

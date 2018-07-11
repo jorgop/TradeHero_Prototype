@@ -6,7 +6,7 @@ import {ActivityService} from "../../services/activity.service";
 import {Storage} from "@ionic/storage";
 import {RestProvider} from "../../providers/rest/rest";
 import { ImageViewerController } from 'ionic-img-viewer';
-import {AboutPage} from "../about/about";
+import {ImpressumPage} from "../impressum/impressum";
 import {LoginPage} from "../login/login";
 
 @Component({
@@ -35,7 +35,6 @@ export class HistoryPage {
     ) {
 
         this.ticketID = this.navParams.get('ticketID');
-        console.log("ticket: " + this.ticketID);
 
         //loading for sending data
         this.historyLoading = this.loadingController.create({
@@ -51,8 +50,8 @@ export class HistoryPage {
         this.updateLocalStorageAndPrepareData(true);
     }
 
-    goToAbout() {
-        this.navCtrl.push(AboutPage);
+    goToImpressum() {
+        this.navCtrl.push(ImpressumPage);
     }
 
     /**
@@ -99,7 +98,7 @@ export class HistoryPage {
                     if (loadRequired == true) {
                         this.historyLoading.dismiss().then(() => {
                             console.log('Verlauf konnte nicht geladen werden ;( ');
-                            this.sentToast("Scan failed");
+                            //this.sentToast("Scan failed");
                         });
                     }
                     ;
@@ -113,9 +112,7 @@ export class HistoryPage {
         //loop through the activityList
         for (let i in data.activityList) {
             let currentObject = data.activityList[i];
-            //console.log(currentObject);
             if (currentObject['ticketID'] == this.ticketID) {
-                console.log(data.activityList[i]);
                 for (let j in currentObject['history']) {
                     let currentHistory = currentObject['history'][j];
                     var statusText;

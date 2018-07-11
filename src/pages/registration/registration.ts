@@ -14,13 +14,16 @@ import {Md5} from "ts-md5";
 })
 export class RegistrationPage {
 
-    nachricht: String;
-
+  nachricht: String;
 
   submitAttempt: boolean = false;
   private myForm : FormGroup;
 
-  constructor(public navCtrl: NavController, public restProvider: RestProvider, public toastCtrl: ToastController, private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController,
+              public restProvider: RestProvider,
+              public toastCtrl: ToastController,
+              private formBuilder: FormBuilder) {
+
     this.myForm = formBuilder.group({
       email: ['',Validators.compose([Validators.required, Validators.email])],
       token: ['', Validators.compose([Validators.minLength(6), Validators.required])],
@@ -29,19 +32,43 @@ export class RegistrationPage {
   }
 
     message(myParam) {
+
         if (myParam == 1) {
             this.nachricht = "Max@Mustermann.de";
-            return this.nachricht;
-        } else if (myParam == 2) {
+            const start = Date.now();
+            let timeOutHandler = setTimeout(
+                () => {
+                    const e = Date.now() - start;
+                    this.nachricht = "";
+                },
+                3000
+            );
+        };
+
+        if(myParam == 2) {
             this.nachricht = "Mindestens 6 Buchstaben";
-            return this.nachricht;
-        } else {
+            const start = Date.now();
+            let timeOutHandler = setTimeout(
+                () => {
+                    const e = Date.now() - start;
+                    this.nachricht = "";
+                },
+                3000
+            );
+        };
+
+        if(myParam == 3) {
             this.nachricht = "Mindestens 6 Buchstaben";
-            return this.nachricht;
-        }
+            const start = Date.now();
+            let timeOutHandler = setTimeout(
+                () => {
+                    const e = Date.now() - start;
+                    this.nachricht = "";
+                },
+                3000
+            );
+        };
     }
-
-
 
 
   /**
@@ -80,35 +107,41 @@ export class RegistrationPage {
         registration = registration.registration[0];
 
         if (registration["mail"] == "false"){
-            this.sentToast("Email nicht registriert!");
+            this.sentToast("E-Mail nicht registriert!", true, "3000", "x");
         }else if (registration["token"]== "false"){
-            this.sentToast("Bitte Token prüfen!");
+            this.sentToast("Bitte Token überprüfen!", true, "3000", "x");
         }else if (registration["activate"] == "false"){
-            this.sentToast("Konto bereits aktiviert!");
+            this.sentToast("Konto ist bereits aktiviert!", true, "3000", "x");
             this.navCtrl.push(LoginPage);
         }else{
-            this.sentToast("Konto erfolgreich aktiviert!");
+            this.sentToast("Konto wurde erfolgreich aktiviert!", true, "3000", "x");
             this.navCtrl.push(LoginPage);
         }
       }, (err) => {
         console.log('error2 ' + err);
-        this.sentToast("Oooops registration failed");
+        this.sentToast("Keine Internetverbindung.", true, "3000", "x");
         //this.navCtrl.push(LoginPage);
       });
     }
   }
 
-  /**
-   * View a toast message
-   * @param message Toast Text
-   */
-  sentToast(message) {
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000,
-      position: 'top'
-    });
-    toast.present();
-  }
+    /**
+     * View a toast message
+     * @param message Toast message
+     * @param showCloseButton Show close button
+     * @param duration Duration of toast message
+     * @param closeButtonText Text of the close button
+     */
+    sentToast(message,showCloseButton,duration,closeButtonText) {
+        let toast = this.toastCtrl.create({
+            message: message,
+            duration: duration,
+            position: 'top',
+            showCloseButton: showCloseButton,
+            closeButtonText: closeButtonText
+
+        });
+        toast.present();
+    }
 
 }
