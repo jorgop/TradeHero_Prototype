@@ -16,8 +16,9 @@ import {LoginPage} from "../login/login";
 export class HistoryPage {
 
     private ticketID: any;
-    history: { head: string, body: string, cardClass: string }[] = [];
-    historyHeader: { submitDate: string, endDate: String, refund: number, imgFile: String, invoiceID: String }[] = [];
+
+    history: { head: string, body: string, cardClass: string, cardIcon: string}[] = [];
+    historyHeader: { submitDate: string, endDate: string, refund: number, imgFile: string, invoiceID: string}[] = [];
 
     private historyLoading: any;
 
@@ -120,6 +121,7 @@ export class HistoryPage {
                     var statusText;
                     var statusClass;
                     var historyClass;
+                    var historyIcon;
                     var subDate;
                     var endDate;
                     var imgFile;
@@ -145,16 +147,26 @@ export class HistoryPage {
                     if (currentHistory['stateStatus'] == 0) {
                         statusText = "Offen";
                         statusClass = "cl-open";
-                        historyClass = "card-open";
-                    } else {
+                        historyClass = "actOpen";
+                        historyIcon = "ios-disc";
+                    } else if (currentHistory['stateStatus'] == 1) {
                         statusText = "Abgeschlossen";
                         statusClass = "cl-closed";
-                        historyClass = "card-closed";
+                        historyClass = "actClosed";
+                        historyIcon = "ios-checkmark-circle";
+                    }else if (currentHistory['stateStatus'] == 2) {
+                        statusText = "Abgelehnt";
+                        statusClass = "cl-closed";
+                        historyClass = "actDenied";
+                        historyIcon = "ios-close-circle";
                     }
                     ;
                     this.history.push({
-                        head: 'Status: ' + '<b>' + statusText + '</b>',
-                        body: '<div class=' + statusClass + '>' + currentHistory['stateText'] + '</div>',
+                        head: '<div>Status: ' + '<b>' + statusText + '</b></div>' +
+                              '<div class=' + historyClass + '><ion-icon name=' + historyIcon + '></ion-icon></div>',
+                        body: '<div class=' + statusClass + '>' +
+                        '<ion-icon name=' + historyIcon + '></ion-icon>' + currentHistory['stateText'] + ' </div>',
+                        cardIcon: historyIcon,
                         cardClass: historyClass
                     });
                 }

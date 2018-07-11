@@ -85,7 +85,7 @@
     </div>
     <div [ngSwitch]="status">
         <ion-list *ngSwitchCase="status" inset>
-            <button ion-item *ngFor="let activity of activity" (click)="goToHistoryPage(activity.ticketID)">
+            <button ion-item *ngFor="let activity of activity" (click)="goToHistoryPage(activity.ticketID, activity.iconName, activity.cssClass)">
             <section class="container">
                 <div class={{activity.cssClass}}>
 
@@ -97,9 +97,7 @@
                     Status: {{activity.ticketStatus}}
                 </div>
             </section>
-                 <!--<button ion-button outline item-end (click)="goToHistoryPage(activity.ticketID)">Mehr Infos!</button>-->
             </button>
         </ion-list>
-
     </div>
 </ion-content>
