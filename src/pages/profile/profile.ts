@@ -11,12 +11,6 @@ import {ContactPage} from "../contact/contact";
 import {ScanPage} from "../scan/scan";
 import {ActivityPage} from "../activity/activity";
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-profile',
