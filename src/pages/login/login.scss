@@ -148,20 +148,36 @@ page-login {
 
   /* Register Button */
 
+  .register-btn {
+    width: 100%;
+    text-align: center;
+  }
+
   .coloring {
     color: white;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-family: "Open Sans";
-    padding-top: 0.5em;
+    padding-top: 0.3em;
     text-decoration: underline;
     text-decoration-color: white;
   }
 
-  .scroll-content{
-    margin-top: 500px;
-  }
+}
 
+/* Global for Toast Messages */
 
+.toast-message {
+  white-space: pre;
+  background-color: #404040;
+  font-family: "Open Sans";
+}
 
+.toast-container {
+  background-color: #FFB623;
+  font-family: "Open Sans";
+}
+
+.toast-button {
+  color: #404040;
 }
 
