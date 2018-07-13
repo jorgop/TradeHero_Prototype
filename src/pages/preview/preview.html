@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="set-background">
-  <ion-card>
+  <ion-card (click)="showPreviewPhoto(scanedImage)">
     <img src="{{ scanedImage }}">
     <div class="card-title"></div>
     <div class="card-subtitle"></div>

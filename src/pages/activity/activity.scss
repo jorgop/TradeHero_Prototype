@@ -80,10 +80,6 @@ page-activity {
 
   /* ... */
 
-  .container {
-    display: grid;
-  }
-
   .left-half {
     grid-column: 1;
   }
@@ -97,30 +93,45 @@ page-activity {
   .cl-closed {
     color: green;
   }
+  .container {
+    display: grid;
+    width: 100%;
+  }
+  .listEntry{
+    width: 100%;
+    height: 100%;
+  }
   .actList{
-    grid-column: 2;
+    //grid-column: 2;
+    width: 85%;
+    height: 100%;
+    float: right;
+  }
+  .symbol{
+    width: 15%;
+    height: 100%;
+    float: left;
+    padding: 9% 6% 9% 0%;
   }
   .actOpen{
-    grid-column: 1;
     margin: auto;
-    width: 15px;
-    height: 15px;
+    width: 1em;
+    height: 1em;
     border-radius: 100%;
     background: gold;
   }
   .actPaid{
-    grid-column: 1;
     margin: auto;
-    width: 15px;
-    height: 15px;
+    width: 1em;
+    height: 1em;
     border-radius: 100%;
     background: green;
   }
   .actDenied{
-    grid-column: 1;
     margin: auto;
-    width: 15px;
-    height: 15px;
+    float: left;
+    width: 1em;
+    height: 1em;
     border-radius: 100%;
     background: red;
   }

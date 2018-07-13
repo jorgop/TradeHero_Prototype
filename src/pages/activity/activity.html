@@ -86,17 +86,18 @@
     <div [ngSwitch]="status">
         <ion-list *ngSwitchCase="status" inset>
             <button ion-item *ngFor="let activity of activity" (click)="goToHistoryPage(activity.ticketID, activity.iconName, activity.cssClass)">
-            <section class="container">
-                <div class={{activity.cssClass}}>
-
+            <div class="listEntry">
+                <div class="symbol">
+                    <div class={{activity.cssClass}}>
+                    </div>
                 </div>
-                <!--<ion-icon name={{activity.iconName}} class={{activity.cssClass}} item-left></ion-icon>-->
+
                 <div class="actList">
                     Bearbeitungs-ID: {{activity.ticketID}} <br>
                     Datum: {{activity.date | date: 'dd.MM.yyyy' }} <br>
                     Status: {{activity.ticketStatus}}
                 </div>
-            </section>
+            </div>
             </button>
         </ion-list>
     </div>
