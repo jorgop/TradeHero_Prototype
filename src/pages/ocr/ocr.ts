@@ -17,14 +17,52 @@ import {RefundValidator} from "../../validators/refund";
 })
 export class OcrPage {
 
-    private scanedImage : any;
-    private rawImage : any;
-    private myForm : FormGroup;
-    private myVal : any;
-    private osrLoading : any;
-    private sendLoading : any;
-    private userID : any;
+  /**
+   * Scanned image
+   */
+  private scanedImage : any;
 
+  /**
+   * Raw image for OCR
+   */
+  private rawImage : any;
+
+  /**
+   * Form for input vields
+   */
+  private myForm : FormGroup;
+
+  /**
+   * Form with validated fields
+   */
+  private myVal : any;
+
+  /**
+   * Loading animation for OCR request
+   */
+  private osrLoading : any;
+
+  /**
+   * Loadig animation while crating the activity
+   */
+  private sendLoading : any;
+
+  /**
+   * Current user-id
+   */
+  private userID : any;
+
+  /**
+   * Constructor ocrPage
+   * @param {NavController} navCtrl
+   * @param {NavParams} navParams
+   * @param {AlertController} alertCtrl
+   * @param {FormBuilder} formBuilder
+   * @param {LoadingController} loadingController
+   * @param {RestProvider} restProvider
+   * @param {ToastController} toastCtrl
+   * @param {Storage} storage
+   */
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private alertCtrl: AlertController,
@@ -34,33 +72,36 @@ export class OcrPage {
                 public toastCtrl: ToastController,
                 private storage: Storage) {
 
+      //get userID from local storage
       this.storage.get('identity').then((val) => {
         let identity = <any>{};
         identity = JSON.parse(val);
         this.userID = identity['userID'];
       });
 
+      //get images by parameter injection from the preview page
       this.scanedImage = this.navParams.get('scanedImage');
       this.rawImage = this.navParams.get('rawImage');
 
+      //field validation structure
       this.myVal = {
         name: "true",
         street: "true",
         place : "true",
         plz : "true",
-        bankName : "true",
+        BIC : "true",
         IBAN : "true",
         invoiceNumber : "true",
         refund : "true"
       }
 
-      //form for ocr text
+      //form for ocr text and validation
       this.myForm = formBuilder.group({
         name: ['', Validators.required],
         street: ['', Validators.required],
         place : ['', Validators.required],
         plz : ['', Validators.compose([Validators.required, PlzValidator.isValid])],
-        bankName : ['', Validators.required],
+        BIC : ['', Validators.required],
         IBAN : ['', Validators.compose([Validators.required, IbanValidator.isValid])],
         invoiceNumber : [''],
         refund : ['', Validators.compose([Validators.required, RefundValidator.isValid])],
@@ -77,16 +118,19 @@ export class OcrPage {
       });
     }
 
-
+  /**
+   * IF the page will be entered the image will be send to the server for OCR
+   */
   ionViewWillEnter(){
     this.callOcrRequest();
   }
 
   /**
-   * Send scaned file to the server and get the text from ocr
+   * Send scanned file to the server and get the text from ocr
    */
   callOcrRequest(){
 
+    //view loading animation
     this.osrLoading.present();
 
     //json structure for ocr data call
@@ -100,7 +144,7 @@ export class OcrPage {
       let docData = <any>{};
       docData = result['Doc'];
 
-      //set data from doc
+      //update the input fields with the detected text from the ocr request
       Object.keys(docData).forEach(key => {
         switch(key){
           case "Name":{
@@ -119,8 +163,8 @@ export class OcrPage {
             this.myForm.patchValue({plz:docData[key]});
             break;
           }
-          case "bankName":{
-            this.myForm.patchValue({bankName:docData[key]});
+          case "BIC":{
+            this.myForm.patchValue({BIC:docData[key]});
             break;
           }
           case "IBAN":{
@@ -146,8 +190,10 @@ export class OcrPage {
       //set amount
       this.myForm.patchValue({refund:refund});
 
+      //call field validation
       this.validateFields();
 
+      //hide loading animation
       this.osrLoading.dismiss().then(() => {
         console.log('OCR Success');
       });
@@ -156,13 +202,13 @@ export class OcrPage {
       this.osrLoading.dismiss().then(() => {
         console.log('Oooops OCR failed');
         this.validateFields();
-        this.sentToast("Dokument konnte nicht gelesen werden.",false,3000,"schließen");
+        this.sentToast("Text konnte nicht erknant werden.",false,3000,"schließen");
       });
     });
   }
 
   /**
-   * Validate vields and mark incorrect filds with a red border
+   * Validate fields and mark incorrect fields with a red border
    */
   validateFields(){
 
@@ -190,10 +236,10 @@ export class OcrPage {
         this.myVal.plz = "true";
     }
 
-    if(!this.myForm.controls.bankName.valid){
-        this.myVal.bankName = "false";
+    if(!this.myForm.controls.BIC.valid){
+        this.myVal.BIC = "false";
     }else{
-        this.myVal.bankName = "true";
+        this.myVal.BIC = "true";
     }
 
     if(!this.myForm.controls.IBAN.valid){
@@ -220,14 +266,14 @@ export class OcrPage {
    */
   sendDataAndCreateActivity(){
 
-    //validate fieds
+    //validate fields
     this.validateFields();
 
     if( this.myForm.controls.name.valid &&
         this.myForm.controls.street.valid &&
         this.myForm.controls.place.valid  &&
         this.myForm.controls.plz.valid  &&
-        this.myForm.controls.bankName.valid &&
+        this.myForm.controls.BIC.valid &&
         this.myForm.controls.IBAN.valid &&
         this.myForm.controls.refund.valid){
 
@@ -242,7 +288,7 @@ export class OcrPage {
             "street": this.myForm.controls.street.value,
             "place" : this.myForm.controls.place.value,
             "plz" : this.myForm.controls.plz.value,
-            "bankName" :  this.myForm.controls.bankName.value,
+            "BIC" :  this.myForm.controls.BIC.value,
             "IBAN" :  this.myForm.controls.IBAN.value,
             "invoiceNumber" :  this.myForm.controls.invoiceNumber.value,
             "refund" :  this.myForm.controls.refund.value
@@ -250,6 +296,9 @@ export class OcrPage {
         ]
       };
 
+      console.log(restData);
+
+      //call rest service to crate activity
       this.restProvider.addActivity(restData).then((result) => {
         if (result == true){
           this.sendLoading.dismiss().then(() => {
@@ -266,15 +315,17 @@ export class OcrPage {
       });
     }else{
 
+      //wrong fields for toast message
       var wrongTextFields = "";
       var checkValuesList = { "name":this.myForm.controls.name.valid,
-                          "street":this.myForm.controls.street.valid ,
-                          "place":this.myForm.controls.place.valid  ,
-                          "plz":this.myForm.controls.plz.valid  ,
-                          "bankName":this.myForm.controls.bankName.valid ,
-                          "IBAN":this.myForm.controls.IBAN.valid ,
-                          "refund":this.myForm.controls.refund.valid };
+                              "street":this.myForm.controls.street.valid ,
+                              "place":this.myForm.controls.place.valid  ,
+                              "plz":this.myForm.controls.plz.valid  ,
+                              "BIC":this.myForm.controls.BIC.valid ,
+                              "IBAN":this.myForm.controls.IBAN.valid ,
+                              "refund":this.myForm.controls.refund.valid };
 
+      //push wrong values to the checkValuesList
       for(let key in checkValuesList){
         if(checkValuesList[key] == false){
 
@@ -295,7 +346,7 @@ export class OcrPage {
               wrongTextFields += "Postleitzahl" + "\n";
               break;
             }
-            case "bankName":{
+            case "BIC":{
               wrongTextFields += "BIC" + "\n";
               break;
             }

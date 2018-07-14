@@ -163,6 +163,7 @@ export class ActivityPage {
       });
     }
 
+
     var aggregatedData = {"sumDenied": sumDenied,
                           "countAll": countAll,
                           "countDenied": countDenied,

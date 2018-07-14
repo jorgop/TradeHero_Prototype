@@ -4,11 +4,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="set-background">
-  <ion-card>
-    <img src="{{ scanedImage }}">
-    <div class="card-title"></div>
-    <div class="card-subtitle"></div>
-  </ion-card>
+  <ion-thumbnail (click)="showPreviewPhoto(scanedImage)">
+    <ion-card>
+      <img src="{{ scanedImage }}" imageViewer>
+      <!--<div class="card-title"></div>
+      <div class="card-subtitle"></div>-->
+    </ion-card>
+  </ion-thumbnail>
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar id="scanFooter">

@@ -15,7 +15,6 @@
 
 <ion-content>
 
-
     <div class="square">
         <div class="main-container">
             <div class="top-container">Übersicht
@@ -85,21 +84,20 @@
     </div>
     <div [ngSwitch]="status">
         <ion-list *ngSwitchCase="status" inset>
-            <button ion-item *ngFor="let activity of activity" (click)="goToHistoryPage(activity.ticketID)">
-            <section class="container">
-                <div class={{activity.cssClass}}>
-
+            <button ion-item *ngFor="let activity of activity" (click)="goToHistoryPage(activity.ticketID, activity.iconName, activity.cssClass)">
+            <div class="listEntry">
+                <div class="symbol">
+                    <div class={{activity.cssClass}}>
+                    </div>
                 </div>
-                <!--<ion-icon name={{activity.iconName}} class={{activity.cssClass}} item-left></ion-icon>-->
+
                 <div class="actList">
                     Bearbeitungs-ID: {{activity.ticketID}} <br>
                     Datum: {{activity.date | date: 'dd.MM.yyyy' }} <br>
                     Status: {{activity.ticketStatus}}
                 </div>
-            </section>
-                 <!--<button ion-button outline item-end (click)="goToHistoryPage(activity.ticketID)">Mehr Infos!</button>-->
+            </div>
             </button>
         </ion-list>
-
     </div>
 </ion-content>
