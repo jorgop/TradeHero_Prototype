@@ -23,15 +23,17 @@ export class HistoryPage {
     private ticket1_head : string;
     private ticket1_body : string;
     private ticket1_status : string;
-
+    private ticket1_status_color : string;
 
     private ticket2_head : string;
     private ticket2_body : string;
     private ticket2_status : string;
+    private ticket2_status_color : string;
 
     private ticket3_head : string;
     private ticket3_body : string;
     private ticket3_status : string;
+    private ticket3_status_color : string;
 
     private historyLoading: any;
 
@@ -171,20 +173,28 @@ export class HistoryPage {
                       if (counter == 1){
                         this.ticket1_head = "Offen";
                         this.ticket1_status = "true";
+                        this.ticket2_status = "false";
+                        this.ticket3_status = "false";
+                        this.ticket1_status_color = "false";
                         this.ticket1_body = currentHistory['stateText'];
-
 
                       };
 
                       if (counter == 2){
                         this.ticket2_head = "Offen";
+                        this.ticket1_status = "true";
                         this.ticket2_status = "true";
+                        this.ticket3_status = "false";
+                        this.ticket2_status_color = "false";
                         this.ticket2_body = currentHistory['stateText'];
                       };
 
                       if (counter == 3){
                         this.ticket3_head = "Offen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
                         this.ticket3_status = "true";
+                        this.ticket3_status_color = "false";
                         this.ticket3_body = currentHistory['stateText'];
                       };
 
@@ -195,19 +205,28 @@ export class HistoryPage {
 
                       if (counter == 1){
                         this.ticket1_head = "Abgeschlossen";
-                        this.ticket1_status = "false";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "false";
+                        this.ticket3_status = "false";
+                        this.ticket1_status_color = "true";
                         this.ticket1_body = currentHistory['stateText'];
                       };
 
                       if (counter == 2){
                         this.ticket2_head = "Abgeschlossen";
-                        this.ticket2_status = "false";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "false";
+                        this.ticket2_status_color = "true";
                         this.ticket2_body = currentHistory['stateText'];
                       };
 
                       if (counter == 3){
                         this.ticket3_head = "Abgeschlossen";
-                        this.ticket3_status = "false";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "true";
+                        this.ticket3_status_color = "true";
                         this.ticket3_body = currentHistory['stateText'];
                       };
                     }
@@ -224,8 +243,8 @@ export class HistoryPage {
 
         }
         this.historyHeader.push({
-            submitDate: subDate.toString(),
-            endDate: endDate.toString(),
+            submitDate: "",
+            endDate: "",
             refund: refund,
             imgFile: imgFile,
             invoiceID: invID
