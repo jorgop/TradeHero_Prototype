@@ -6,6 +6,7 @@ page-history {
 
   .back-button {
     color: white !important;
+    font-family: "Open Sans";
   }
   .color-btn-header {
     color: white;
@@ -27,24 +28,196 @@ page-history {
     margin-right: 1%;
   }
 
+  /* Statusfarben */
   .cl-open {
     color: darkorange;
   }
   .cl-closed {
     color: green;
   }
+
+  /* Statuskarten */
   .card-closed {
     background-color: #dddddd;
     border: 2px solid #aaaaaa;
     border-radius: 35px;
     margin-bottom: 10px;
-
   }
 
   .card-open {
     border: 2px solid #aaaaaa;
     border-radius: 35px;
     margin-bottom: 10px;
-
   }
+
+  /* timeline tesing */
+
+  // Variables
+  $yellow: #FFB623;
+  $green: #15B2A2;
+  $grey: #404040;
+
+
+  // Mixins and Placeholders
+  %clearfix {
+    &:after, &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      clear: both;
+    }
+  }
+
+  @mixin prefix($prop, $val) {
+    @each $prefix in '-webkit-', '-moz-', '-ms-', '' {
+      #{$prefix}#{$prop}: $val;
+    }
+  }
+  *, *:before, *:after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1, h2 {
+    font:{
+      family: "Merriweather Sans";
+      weight: 300;
+    }
+  }
+
+  h1 {
+    color: $green;
+  }
+
+  .project-name {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+
+
+  // Timeline
+  #timeline {
+    width: 100%;
+    margin: 30px auto;
+    position: relative;
+    padding: 0 10px;
+    @include prefix(transition, all .4s ease);
+
+    &:before {
+      content:"";
+      width: 3px;
+      height: 100%;
+      background: $grey;
+      left: 50%;
+      top: 0;
+      position: absolute;
+    }
+
+    &:after {
+      content: "";
+      clear: both;
+      display: table;
+      width: 100%;
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+      position: relative;
+      @extend %clearfix;
+
+      .timeline-icon {
+        background: red; /* color change depending on status - dynamisch setzen*/
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        overflow: hidden;
+        margin-left: -23px;
+        border: 3px solid $yellow;
+        @include prefix(border-radius, 50%);
+      }
+
+      .timeline-content {
+        width: 45%;
+        background: white;
+        padding: 20px;
+        @include prefix(box-shadow, 0 3px 0 rgba(0,0,0,0.1));
+        @include prefix(border-radius, 5px);
+        @include prefix(transition, all .3s ease);
+
+        h2 {
+          padding: 15px;
+          background: $green;
+          color: #fff;
+          margin: -20px -20px 0 -20px;
+          font-weight: 300;
+          @include prefix(border-radius, 3px 3px 0 0);
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          left: 45%;
+          top: 20px;
+          width: 0;
+          height: 0;
+          border-top: 7px solid transparent;
+          border-bottom: 7px solid transparent;
+          border-left: 7px solid $grey;
+        }
+
+        &.right {
+          float: right;
+
+          &:before {
+            content: '';
+            right: 45%;
+            left: inherit;
+            border-left: 0;
+            border-right: 7px solid $grey;
+          }
+        }
+      }
+    }
+  }
+
+
+  @media screen and (max-width: 768px) {
+    #timeline {
+      margin: 30px;
+      padding: 0px;
+      width: 90%;
+      &:before {
+        left: 0;
+      }
+
+      .timeline-item {
+        .timeline-content {
+          width: 90%;
+          float: right;
+
+          &:before, &.right:before {
+            left: 10%;
+            margin-left: -6px;
+            border-left: 0;
+            border-right: 7px solid $grey;
+          }
+        }
+
+        .timeline-icon {
+          left: 0;
+        }
+      }
+    }
+  }
+
 }
