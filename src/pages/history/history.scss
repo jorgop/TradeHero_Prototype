@@ -27,15 +27,11 @@ page-history {
     margin-right: 1%;
   }
 
-  .actOpen{
-    color: gold;
+  .cl-open {
+    color: darkorange;
   }
-  .actClosed{
+  .cl-closed {
     color: green;
-    float: right;
-  }
-  .actDenied{
-    color: red;
   }
   .card-closed {
     background-color: #dddddd;
