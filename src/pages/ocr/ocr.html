@@ -1,15 +1,5 @@
 <ion-header class="color-header">
   <ion-navbar  class="back-button" transparent>
-
-    <button class="logout-btn" (click)="logout()" round ion-button>
-      <ion-icon name="power"></ion-icon>
-    </button>
-    <button class="fixed-header-btn" (click)="goToImpressum()" ion-button>
-      <ion-icon name="information-circle"></ion-icon>
-    </button>
-    <button class="fixed-header-btn" ion-button>
-      <ion-icon name="settings"></ion-icon>
-    </button>
   </ion-navbar>
 </ion-header>
 
@@ -53,8 +43,6 @@
       <div [ngClass]="(this.myVal.BIC == 'true') ? 'valid-true' : 'valid-false'">
       <ion-item>
         <ion-label stacked>BIC</ion-label>
-        <ion-input formControlName="bankName" type="text" ></ion-input>
-        <ion-label color="primary" stacked>BIC</ion-label>
         <ion-input formControlName="BIC" type="text" ></ion-input>
       </ion-item>
       </div>

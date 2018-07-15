@@ -9,6 +9,8 @@ import {ContactPage} from "../pages/contact/contact";
 import {ActivityPage} from "../pages/activity/activity";
 
 import {ImpressumPage} from "../pages/impressum/impressum";
+import {OcrPage} from "../pages/ocr/ocr";
+import {PreviewPage} from "../pages/preview/preview";
 
 @Component({
   templateUrl: 'app.html'
