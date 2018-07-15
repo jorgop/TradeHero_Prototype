@@ -53,7 +53,7 @@ page-activity {
     text-align: center;
     font-size: 3.5em;
     color: white;
-    text-shadow: 1px 1px black;
+   // text-shadow: 1px 1px black;
   }
 
 
@@ -106,33 +106,56 @@ page-activity {
     width: 85%;
     height: 100%;
     float: right;
+    padding-left: 15%;
+    padding-top: 1em;
   }
   .symbol{
     width: 15%;
     height: 100%;
     float: left;
-    padding: 9% 6% 9% 0%;
+    padding: 9% 9% 9% 4%;
   }
   .actOpen{
     margin: auto;
-    width: 1em;
-    height: 1em;
+    width: 2em;
+    height: 2em;
     border-radius: 100%;
     background: gold;
   }
   .actPaid{
     margin: auto;
-    width: 1em;
-    height: 1em;
+    width: 2em;
+    height: 2em;
     border-radius: 100%;
-    background: green;
+    background: #0f8561;
   }
   .actDenied{
     margin: auto;
     float: left;
-    width: 1em;
-    height: 1em;
+    width: 2em;
+    height: 2em;
     border-radius: 100%;
-    background: red;
+    background: #aa0000;
+  }
+  .card-ios {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .segment-ios .segment-button.segment-activated{
+    background-color: #15B2A2;
+    span{
+      color:white;
+    }
+  }
+  .segment-ios .segment-button{
+    border-color: #15B2A2;
+    span{
+      color: #15B2A2;
+    }
+  }
+
+  .input-wrapper{
+    color: #404040;
+    font-size: 1.4rem;
   }
 }

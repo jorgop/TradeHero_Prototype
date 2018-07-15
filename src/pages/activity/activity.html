@@ -50,14 +50,14 @@
                 <div class="left-half">
                     <article>
                         <p>Eingereicht: {{aggregate.sumAll | number: '1.2-2': 'de'}} €</p>
-                        <br>
+                        <hr>
                         <p>Offen: {{aggregate.sumOpen | number: '1.2-2': 'de' }} €</p>
                     </article>
                 </div>
                 <div class="right-half">
                     <article>
                         <p>Bewilligt: {{aggregate.sumClosed | number: '1.2-2': 'de' }} €</p>
-                        <br>
+                        <hr>
                         <p>Abgelehnt: {{aggregate.sumDenied | number: '1.2-2': 'de' }} €</p>
                     </article>
                 </div>
@@ -69,16 +69,16 @@
     <div padding>
         <ion-segment [(ngModel)]="status" *ngFor="let aggregate of aggregate" color="royal">
             <ion-segment-button value="all" (click)="setStatus('all')">
-                Alle ({{aggregate.countAll}})
+                <span>Alle ({{aggregate.countAll}})</span>
             </ion-segment-button>
             <ion-segment-button value="open" (click)="setStatus('open')">
-                Offen ({{aggregate.countOpen}})
+               <span>Offen ({{aggregate.countOpen}})</span>
             </ion-segment-button>
             <ion-segment-button value="paid" (click)="setStatus('paid')">
-                Bezahlt ({{aggregate.countClosed}})
+              <span>Bezahlt ({{aggregate.countClosed}})</span>
             </ion-segment-button>
             <ion-segment-button value="denied" (click)="setStatus('denied')">
-                Abgelehnt ({{aggregate.countDenied}})
+                <span>Abgelehnt ({{aggregate.countDenied}})</span>
             </ion-segment-button>
         </ion-segment>
     </div>
