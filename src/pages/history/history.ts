@@ -8,6 +8,7 @@ import {RestProvider} from "../../providers/rest/rest";
 import { ImageViewerController } from 'ionic-img-viewer';
 import {ImpressumPage} from "../impressum/impressum";
 import {LoginPage} from "../login/login";
+import {count} from "rxjs/operators";
 
 @Component({
     selector: 'page-history',
@@ -18,6 +19,19 @@ export class HistoryPage {
     private ticketID: any;
     history: { head: string, body: string, cardClass: string }[] = [];
     historyHeader: { submitDate: string, endDate: String, refund: number, imgFile: String, invoiceID: String }[] = [];
+
+    private ticket1_head : string;
+    private ticket1_body : string;
+    private ticket1_status : string;
+
+
+    private ticket2_head : string;
+    private ticket2_body : string;
+    private ticket2_status : string;
+
+    private ticket3_head : string;
+    private ticket3_body : string;
+    private ticket3_status : string;
 
     private historyLoading: any;
 
@@ -108,9 +122,13 @@ export class HistoryPage {
 
 
     addCards(data) {
+
+      var counter = 0;
         //loop through the activityList
         for (let i in data.activityList) {
+
             let currentObject = data.activityList[i];
+
             if (currentObject['ticketID'] == this.ticketID) {
                 for (let j in currentObject['history']) {
                     let currentHistory = currentObject['history'][j];
@@ -123,12 +141,15 @@ export class HistoryPage {
                     var refund;
                     var invID;
 
+
                     /*Card-Header*/
                     subDate = currentObject['startDate'];
                     endDate = currentObject['endDate'];
                     imgFile = currentObject['imgFile'];
                     refund = currentObject['refund'];
                     invID = currentObject['invoiceID'];
+
+
 
                     /*Card-Body*/
                     /*if(currentHistory['stateID'] == 3 && currentHistory['stateStatus'] == "1"){
@@ -139,14 +160,56 @@ export class HistoryPage {
                         endDate = currentHistory['endDate'];
                     }*/
 
+                    counter += 1;
+
                     if (currentHistory['stateStatus'] == 0) {
                         statusText = "Offen";
                         statusClass = "cl-open";
                         historyClass = "card-open";
+
+
+                      if (counter == 1){
+                        this.ticket1_head = "Offen";
+                        this.ticket1_status = "true";
+                        this.ticket1_body = currentHistory['stateText'];
+
+
+                      };
+
+                      if (counter == 2){
+                        this.ticket2_head = "Offen";
+                        this.ticket2_status = "true";
+                        this.ticket2_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 3){
+                        this.ticket3_head = "Offen";
+                        this.ticket3_status = "true";
+                        this.ticket3_body = currentHistory['stateText'];
+                      };
+
                     } else {
                         statusText = "Abgeschlossen";
                         statusClass = "cl-closed";
                         historyClass = "card-closed";
+
+                      if (counter == 1){
+                        this.ticket1_head = "Abgeschlossen";
+                        this.ticket1_status = "false";
+                        this.ticket1_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 2){
+                        this.ticket2_head = "Abgeschlossen";
+                        this.ticket2_status = "false";
+                        this.ticket2_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 3){
+                        this.ticket3_head = "Abgeschlossen";
+                        this.ticket3_status = "false";
+                        this.ticket3_body = currentHistory['stateText'];
+                      };
                     }
                     ;
                     this.history.push({

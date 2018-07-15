@@ -134,7 +134,7 @@ page-history {
       @extend %clearfix;
 
       .timeline-icon {
-        background: red; /* color change depending on status - dynamisch setzen*/
+        /* color change depending on status - dynamisch setzen*/
         width: 50px;
         height: 50px;
         position: absolute;
@@ -218,6 +218,24 @@ page-history {
         }
       }
     }
+  }
+
+  /* circle color */
+  .ticket-color-true{
+    background: #ffeb2d;
+  }
+
+  .ticket-color-false{
+    background: green;
+  }
+
+  /* view or hide ticket*/
+  .ticket-hidden{
+    visibility: hidden;
+  }
+
+  .ticket-visable{
+    visibility: visible;
   }
 
 }

@@ -1,4 +1,4 @@
-<ion-header class="color-header">
+<ion-header class="color-header" xmlns="http://www.w3.org/1999/html">
   <ion-navbar  class="back-button" transparent>
 
     <button class="logout-btn" (click)="logout()" round ion-button>
@@ -65,48 +65,40 @@
 
   <!-- timeline testing -->
 
-
   <div class="container">
     <h1 class="project-name">Bearbeitungs-ID {{ticketID}}</h1>
 
     <div id="timeline">
-      <div class="timeline-item">
-        <div class="timeline-icon"></div>
+      <div [ngClass]="(this.ticket1_status == 'true') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]="(this.ticket1_status == 'true') ? 'timeline-icon ticket-color-true' : 'timeline-icon ticket-color-false'"></div>
         <div class="timeline-content">
-          <h2>LOREM IPSUM DOLOR</h2>
+          <h2>{{ticket1_head}}</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Atque, facilis quo maiores magnam modi ab libero praesentium blanditiis.
+            {{ticket1_body}}
           </p>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-icon">
-
-        </div>
-        <div class="timeline-content right">
-          <h2>LOREM IPSUM DOLOR</h2>
+      <div [ngClass]="(this.ticket2_status == 'true') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]="(this.ticket2_status == 'true') ? 'timeline-icon ticket-color-true' : 'timeline-icon ticket-color-false'"></div>
+        <div class="timeline-content">
+          <h2>{{ticket2_head}}</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, facilis quo. Maiores magnam modi ab libero praesentium blanditiis consequatur aspernatur accusantium maxime molestiae sunt ipsa.
+            {{ticket2_body}}
           </p>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-icon">
-
-        </div>
+      <div [ngClass]="(this.ticket3_status == 'true') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]="(this.ticket3_status == 'true') ? 'timeline-icon ticket-color-true' : 'timeline-icon ticket-color-false'"></div>
         <div class="timeline-content">
-          <h2>LOREM IPSUM DOLOR</h2>
+          <h2>{{ticket3_head}}</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, facilis quo. Maiores magnam modi ab libero praesentium blanditiis consequatur aspernatur accusantium maxime molestiae sunt ipsa.
+            {{ticket3_body}}
           </p>
         </div>
       </div>
     </div>
   </div>
-
-
 
 </ion-content>
