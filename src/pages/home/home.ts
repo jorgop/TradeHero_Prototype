@@ -46,7 +46,15 @@ export class HomePage {
     goToImpressum(){
         this.navCtrl.push(ImpressumPage);
     }
-
+    swipeEvent(e){
+        if (e.direction == 4) {
+            this.navCtrl.push(ActivityPage);
+            console.log('Swipe Right')
+        }else if(e.direction == 2){
+            this.navCtrl.push(ScanPage);
+            console.log('Swipe Left')
+        }
+    }
 
 
     /**

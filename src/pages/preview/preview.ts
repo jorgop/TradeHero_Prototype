@@ -3,6 +3,7 @@ import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { ToastController } from 'ionic-angular';
+import { ImageViewerController } from 'ionic-img-viewer';
 import {OcrPage} from "../ocr/ocr";
 import {HomePage} from "../home/home";
 import {ScanPage} from "../scan/scan";
@@ -20,6 +21,7 @@ export class PreviewPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private imageViewerCtrl: ImageViewerController,
               public alertCtrl: AlertController,
               public restProvider: RestProvider,
               public toastCtrl: ToastController,
@@ -116,6 +118,11 @@ export class PreviewPage {
   goToHome(){
     this.navCtrl.push(HomePage);
   }
+
+    showPreviewPhoto(myImg) {
+        const imageViewer = this.imageViewerCtrl.create(myImg);
+        imageViewer.present(myImg);
+    }
 
   /**
    * View a toast message

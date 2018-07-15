@@ -1,25 +1,27 @@
 <ion-header>
-  <ion-navbar end>
+  <ion-navbar>
     <ion-title>Preview</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content class="set-background">
-  <ion-card>
-    <img src="{{ scanedImage }}">
-    <div class="card-title"></div>
-    <div class="card-subtitle"></div>
-  </ion-card>
+  <ion-thumbnail (click)="showPreviewPhoto(scanedImage)">
+    <ion-card>
+      <img src="{{ scanedImage }}" imageViewer>
+      <!--<div class="card-title"></div>
+      <div class="card-subtitle"></div>-->
+    </ion-card>
+  </ion-thumbnail>
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar id="scanFooter">
     <div class="leftcontainer">
       <ion-buttons>
-        <button ion-button on-click="gotToOcrPage()">Text Auslesen</button>
+        <button class="buttonsdown"ion-button on-click="gotToOcrPage()">Text Auslesen</button>
       </ion-buttons>
     </div>
     <div class="rightcontainer">
       <ion-buttons>
-        <button ion-button on-click="goToHome()">Abbrechen</button>
+        <button class="buttonsdown"ion-button on-click="goToHome()">Abbrechen</button>
       </ion-buttons>
     </div>
   </ion-toolbar>

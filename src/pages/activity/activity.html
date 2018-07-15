@@ -15,7 +15,6 @@
 
 <ion-content>
 
-
     <div class="square">
         <div class="main-container">
             <div class="top-container">Übersicht
@@ -50,16 +49,16 @@
             <section class="container">
                 <div class="left-half">
                     <article>
-                        <p>Eingereicht: {{aggregate.sumAll | number: '1.2-2': 'de'}} €</p>
-                        <br>
-                        <p>Offen: {{aggregate.sumOpen | number: '1.2-2': 'de' }} €</p>
+                        <p><span>Eingereicht: </span>{{aggregate.sumAll | number: '1.2-2': 'de'}} €</p>
+                        <hr>
+                        <p><span>Offen:</span> {{aggregate.sumOpen | number: '1.2-2': 'de' }} €</p>
                     </article>
                 </div>
                 <div class="right-half">
                     <article>
-                        <p>Bewilligt: {{aggregate.sumClosed | number: '1.2-2': 'de' }} €</p>
-                        <br>
-                        <p>Abgelehnt: {{aggregate.sumDenied | number: '1.2-2': 'de' }} €</p>
+                        <p><span>Bewilligt:</span> {{aggregate.sumClosed | number: '1.2-2': 'de' }} €</p>
+                        <hr>
+                        <p><span>Abgelehnt:</span> {{aggregate.sumDenied | number: '1.2-2': 'de' }} €</p>
                     </article>
                 </div>
             </section>
@@ -67,39 +66,39 @@
     </ion-card>
     </div>
     <!--<h2 align="center">Meine Rechnungen</h2>-->
-    <div padding>
-        <ion-segment [(ngModel)]="status" *ngFor="let aggregate of aggregate" color="royal">
+    <div padding class="navbar">
+        <ion-segment [(ngModel)]="status" *ngFor="let aggregate of aggregate">
             <ion-segment-button value="all" (click)="setStatus('all')">
-                Alle ({{aggregate.countAll}})
+                <span>Alle ({{aggregate.countAll}})</span>
             </ion-segment-button>
             <ion-segment-button value="open" (click)="setStatus('open')">
-                Offen ({{aggregate.countOpen}})
+                <span> Offen ({{aggregate.countOpen}})</span>
             </ion-segment-button>
             <ion-segment-button value="paid" (click)="setStatus('paid')">
-                Bezahlt ({{aggregate.countClosed}})
+                <span>Bezahlt ({{aggregate.countClosed}})</span>
             </ion-segment-button>
             <ion-segment-button value="denied" (click)="setStatus('denied')">
-                Abgelehnt ({{aggregate.countDenied}})
+                <span> Abgelehnt({{aggregate.countDenied}})</span>
             </ion-segment-button>
         </ion-segment>
     </div>
+
     <div [ngSwitch]="status">
         <ion-list *ngSwitchCase="status" inset>
-            <button ion-item *ngFor="let activity of activity" (click)="goToHistoryPage(activity.ticketID)">
-            <section class="container">
-                <div class={{activity.cssClass}}>
-
+            <button ion-item *ngFor="let activity of activity" (click)="goToHistoryPage(activity.ticketID, activity.iconName, activity.cssClass)">
+            <div class="listEntry">
+                <div class="symbol">
+                    <div class={{activity.cssClass}}>
+                    </div>
                 </div>
-                <!--<ion-icon name={{activity.iconName}} class={{activity.cssClass}} item-left></ion-icon>-->
+
                 <div class="actList">
                     Bearbeitungs-ID: {{activity.ticketID}} <br>
                     Datum: {{activity.date | date: 'dd.MM.yyyy' }} <br>
                     Status: {{activity.ticketStatus}}
                 </div>
-            </section>
-                 <!--<button ion-button outline item-end (click)="goToHistoryPage(activity.ticketID)">Mehr Infos!</button>-->
+            </div>
             </button>
         </ion-list>
-
     </div>
 </ion-content>

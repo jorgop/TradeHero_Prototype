@@ -1,8 +1,44 @@
 page-ocr {
+
+  .color-header {
+    background: #15B2A2;
+    }
+
+  .color-btn-header {
+    color: white;
+  }
+
+  .logout-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+  }
+
+  .fixed-header-btn {
+    float: right;
+    color: white;
+    background: #FFB623;
+    box-shadow: 2px 2px 5px gray;
+    border-radius: 100px;
+    margin-right: 1%;
+  }
+  ion-title{
+    color: white;
+    padding: 1em;
+  }
+  ion-label{
+    color: #15B2A2;
+  }
+
   .leftcontainer {
     float: left;
     width:50%;
     text-align: center;
+  }
+
+  .item-ios {
+    background-color: transparent;
   }
 
   .rightcontainer {
@@ -21,9 +57,20 @@ page-ocr {
 }
 
 .valid-false{
-  border: 1px solid #f00;
+  border: 2px solid #aa0000;
+  border-radius:5px;
 }
 
 .toast-message {
   white-space: pre;
+}
+
+.buttonsdown {
+  background-color: #15B2A2;
+  border-radius: 64px;
+  height: 2.8em;
+  padding:0 2.6rem;
+  span{
+    color: #ffffff;
+  }
 }
