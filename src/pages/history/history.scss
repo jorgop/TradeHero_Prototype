@@ -221,12 +221,16 @@ page-history {
   }
 
   /* circle color */
-  .ticket-color-true{
+  .ticket-color-finished{
+    background: green;
+  }
+
+  .ticket-color-waiting{
     background: #ffeb2d;
   }
 
-  .ticket-color-false{
-    background: green;
+  .ticket-color-failed{
+    background: red;
   }
 
   /* view or hide ticket*/

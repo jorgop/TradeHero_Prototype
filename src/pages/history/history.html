@@ -70,7 +70,7 @@
 
     <div id="timeline">
       <div [ngClass]="(this.ticket1_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]="(this.ticket1_status_color == 'false') ? 'timeline-icon ticket-color-true' : 'timeline-icon ticket-color-false'"></div>
+        <div [ngClass]=" 'timeline-icon ' + this.ticket1_status_color"></div>
         <div class="timeline-content">
           <h2>{{ticket1_head}}</h2>
           <p>
@@ -80,7 +80,7 @@
       </div>
 
       <div [ngClass]="(this.ticket2_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]="(this.ticket2_status_color == 'false') ? 'timeline-icon ticket-color-true' : 'timeline-icon ticket-color-false'"></div>
+        <div [ngClass]=" 'timeline-icon ' + this.ticket2_status_color"></div>
         <div class="timeline-content">
           <h2>{{ticket2_head}}</h2>
           <p>
@@ -90,7 +90,7 @@
       </div>
 
       <div [ngClass]="(this.ticket3_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]="(this.ticket3_status_color == 'false') ? 'timeline-icon ticket-color-true' : 'timeline-icon ticket-color-false'"></div>
+        <div [ngClass]=" 'timeline-icon ' + this.ticket3_status_color"></div>
         <div class="timeline-content">
           <h2>{{ticket3_head}}</h2>
           <p>

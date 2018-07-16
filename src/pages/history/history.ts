@@ -152,30 +152,22 @@ export class HistoryPage {
                     invID = currentObject['invoiceID'];
 
 
-
-                    /*Card-Body*/
-                    /*if(currentHistory['stateID'] == 3 && currentHistory['stateStatus'] == "1"){
-                        endDate = currentHistory['endDate'];
-                    }else if(currentHistory['stateStatus'] == "2"){
-                        endDate = currentHistory['endDate'];
-                    }else if(currentHistory['stateStatus'] == "0"){
-                        endDate = currentHistory['endDate'];
-                    }*/
-
                     counter += 1;
 
                     if (currentHistory['stateStatus'] == 0) {
+
+                      /*
                         statusText = "Offen";
                         statusClass = "cl-open";
                         historyClass = "card-open";
-
+                      */
 
                       if (counter == 1){
                         this.ticket1_head = "Offen";
                         this.ticket1_status = "true";
                         this.ticket2_status = "false";
                         this.ticket3_status = "false";
-                        this.ticket1_status_color = "false";
+                        this.ticket1_status_color = "ticket-color-waiting";
                         this.ticket1_body = currentHistory['stateText'];
 
                       };
@@ -185,7 +177,7 @@ export class HistoryPage {
                         this.ticket1_status = "true";
                         this.ticket2_status = "true";
                         this.ticket3_status = "false";
-                        this.ticket2_status_color = "false";
+                        this.ticket2_status_color = "ticket-color-waiting";
                         this.ticket2_body = currentHistory['stateText'];
                       };
 
@@ -194,21 +186,24 @@ export class HistoryPage {
                         this.ticket1_status = "true";
                         this.ticket2_status = "true";
                         this.ticket3_status = "true";
-                        this.ticket3_status_color = "false";
+                        this.ticket3_status_color = "ticket-color-waiting";
                         this.ticket3_body = currentHistory['stateText'];
                       };
 
-                    } else {
-                        statusText = "Abgeschlossen";
-                        statusClass = "cl-closed";
-                        historyClass = "card-closed";
+                    } else if (currentHistory['stateStatus'] == 1) {
+
+                      /*
+                      statusText = "Abgeschlossen";
+                      statusClass = "cl-closed";
+                      historyClass = "card-closed";
+                      */
 
                       if (counter == 1){
                         this.ticket1_head = "Abgeschlossen";
                         this.ticket1_status = "true";
                         this.ticket2_status = "false";
                         this.ticket3_status = "false";
-                        this.ticket1_status_color = "true";
+                        this.ticket1_status_color = "ticket-color-finished";
                         this.ticket1_body = currentHistory['stateText'];
                       };
 
@@ -217,7 +212,7 @@ export class HistoryPage {
                         this.ticket1_status = "true";
                         this.ticket2_status = "true";
                         this.ticket3_status = "false";
-                        this.ticket2_status_color = "true";
+                        this.ticket2_status_color = "ticket-color-finished";
                         this.ticket2_body = currentHistory['stateText'];
                       };
 
@@ -226,16 +221,46 @@ export class HistoryPage {
                         this.ticket1_status = "true";
                         this.ticket2_status = "true";
                         this.ticket3_status = "true";
-                        this.ticket3_status_color = "true";
+                        this.ticket3_status_color = "ticket-color-finished";
                         this.ticket3_body = currentHistory['stateText'];
                       };
-                    }
-                    ;
+                    }else{
+
+                      if (counter == 1){
+                        this.ticket1_head = "Abgebrochen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "false";
+                        this.ticket3_status = "false";
+                        this.ticket1_status_color = "ticket-color-failed";
+                        this.ticket1_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 2){
+                        this.ticket2_head = "Abgebrochen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "false";
+                        this.ticket2_status_color = "ticket-color-failed";
+                        this.ticket2_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 3){
+                        this.ticket3_head = "Abgebrochen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "true";
+                        this.ticket3_status_color = "ticket-color-failed";
+                        this.ticket3_body = currentHistory['stateText'];
+                      };
+                    };
+
+                    /*
                     this.history.push({
                         head: 'Status: ' + '<b>' + statusText + '</b>',
                         body: '<div class=' + statusClass + '>' + currentHistory['stateText'] + '</div>',
                         cardClass: historyClass
                     });
+                    */
                 }
                 ;
             }
