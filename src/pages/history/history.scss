@@ -241,10 +241,12 @@ page-history {
   @keyframes fadeIn {
     0% {
       opacity: 0;
+      transform: translateX(100px);
     }
     100% {
       opacity: 1;
       visibility: visible;
+      transform: translateX(0);
     }
   }
 
