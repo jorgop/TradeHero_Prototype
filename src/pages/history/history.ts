@@ -154,6 +154,10 @@ export class HistoryPage {
 
                     counter += 1;
 
+                    this.ticket1_status = "false";
+                    this.ticket2_status = "false";
+                    this.ticket2_status = "false";
+
                     if (currentHistory['stateStatus'] == 0) {
 
                       /*

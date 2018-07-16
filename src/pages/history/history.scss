@@ -57,7 +57,6 @@ page-history {
   $green: #15B2A2;
   $grey: #404040;
 
-
   // Mixins and Placeholders
   %clearfix {
     &:after, &:before {
@@ -79,14 +78,13 @@ page-history {
     -moz-box-sizing: border-box;
   }
 
-
   .container {
     max-width: 1100px;
     margin: 0 auto;
   }
 
   h1, h2 {
-    font:{
+    font: {
       family: "Merriweather Sans";
       weight: 300;
     }
@@ -101,8 +99,6 @@ page-history {
     padding: 10px 0;
   }
 
-
-
   // Timeline
   #timeline {
     width: 100%;
@@ -112,7 +108,7 @@ page-history {
     @include prefix(transition, all .4s ease);
 
     &:before {
-      content:"";
+      content: "";
       width: 3px;
       height: 100%;
       background: $grey;
@@ -150,7 +146,7 @@ page-history {
         width: 45%;
         background: white;
         padding: 20px;
-        @include prefix(box-shadow, 0 3px 0 rgba(0,0,0,0.1));
+        @include prefix(box-shadow, 0 3px 0 rgba(0, 0, 0, 0.1));
         @include prefix(border-radius, 5px);
         @include prefix(transition, all .3s ease);
 
@@ -190,7 +186,6 @@ page-history {
     }
   }
 
-
   @media screen and (max-width: 768px) {
     #timeline {
       margin: 30px;
@@ -221,25 +216,36 @@ page-history {
   }
 
   /* circle color */
-  .ticket-color-finished{
+  .ticket-color-finished {
     background: green;
   }
 
-  .ticket-color-waiting{
+  .ticket-color-waiting {
     background: #ffeb2d;
   }
 
-  .ticket-color-failed{
+  .ticket-color-failed {
     background: red;
   }
 
   /* view or hide ticket*/
-  .ticket-hidden{
+  .ticket-hidden {
     visibility: hidden;
   }
 
   .ticket-visable{
-    visibility: visible;
+    /* test animation*/
+    animation: 1s fadeIn ;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
 }
