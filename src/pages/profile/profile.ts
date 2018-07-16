@@ -75,17 +75,22 @@ export class ProfilePage {
       let identity = <any>{};
       identity = JSON.parse(val);
 
-      this.restProvider.getUserData(identity['userID']).then((result) => {
-        //set activities to Storage
-        this.storage.set('user',JSON.stringify(result));
+      try{
+        this.restProvider.getUserData(identity['userID']).then((result) => {
+          //set activities to Storage
+          this.storage.set('user',JSON.stringify(result));
 
-        this.updateUserDataInputfields();
+          this.updateUserDataInputfields();
 
-      }, (err) => {
+        }, (err) => {
 
-        this.updateUserDataInputfields()
-        // daten ins html aus storage wenn rest nicht geht
-      });
+          this.updateUserDataInputfields()
+          // daten ins html aus storage wenn rest nicht geht
+        });
+      }catch (e) {
+        //TODO: Exception handling
+        console.log("ID is null!")
+      }
     });
   }
 
@@ -107,24 +112,29 @@ export class ProfilePage {
       var myIdentity;
 
       this.storage.get('identity').then((val) => {
-          let identity = <any>{};
-          identity = JSON.parse(val);
+        let identity = <any>{};
+        identity = JSON.parse(val);
 
-          this.restProvider.updateUserData(identity['userID'],restData).then((result) => {
-              console.log(result);
-              console.log(result['userMail']);
-              if(result['userMail'] == "false"){
-                  this.sentToast("Email-Fehler");
-              }
-              else if ((result['userMail'] == "true")&&(result['userData'] == "true")){
+        try {
+          this.restProvider.updateUserData(identity['userID'], restData).then((result) => {
+            console.log(result);
+            console.log(result['userMail']);
+            if (result['userMail'] == "false") {
+              this.sentToast("Email-Fehler");
+            }
+            else if ((result['userMail'] == "true") && (result['userData'] == "true")) {
               this.toggleediting();
               this.sentToast("Daten erfolgreich aktualisiert!");
-              }
+            }
 
           }, (err) => {
-              console.log('error2 ' + err);
-              this.sentToast("Keine Internetverbindung!");
+            console.log('error2 ' + err);
+            this.sentToast("Keine Internetverbindung!");
           });
+        }catch (e) {
+          //TODO:exception handling
+          console.log("ID is null!")
+        }
       });
   }
 

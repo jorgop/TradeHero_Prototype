@@ -81,44 +81,52 @@ export class HistoryPage {
 
         //get user ID from storage
         this.storage.get('identity').then((val) => {
-            let identity = <any>{};
-            identity = JSON.parse(val);
+          let identity = <any>{};
+          identity = JSON.parse(val);
+
+          try {
+
+
 
             //get activities from REST - set to soratge and push to list
             this.restProvider.getTicketData(this.ticketID).then((result) => {
 
-                //set activities to Storage
-                this.storage.set(this.ticketID, JSON.stringify(result));
+              //set activities to Storage
+              this.storage.set(this.ticketID, JSON.stringify(result));
 
-                //get refreshed activities from storage
-                this.storage.get(this.ticketID).then((val) => {
-                    let history = <any>{};
-                    history = JSON.parse(val);
-                    this.addCards(history);
+              //get refreshed activities from storage
+              this.storage.get(this.ticketID).then((val) => {
+                let history = <any>{};
+                history = JSON.parse(val);
+                this.addCards(history);
 
-                    if (loadRequired == true) {
-                        this.historyLoading.dismiss().then(() => {
-                            console.log('History loaded');
-                        });
-                    }
-                    ;
-                });
+                if (loadRequired == true) {
+                  this.historyLoading.dismiss().then(() => {
+                    console.log('History loaded');
+                  });
+                }
+                ;
+              });
             }, (err) => {
 
-                //get activities from storage if rest failed - no internet connection
-                this.storage.get(this.ticketID).then((val) => {
-                    let history = <any>{};
-                    history = JSON.parse(val);
-                    this.addCards(history);
-                    if (loadRequired == true) {
-                        this.historyLoading.dismiss().then(() => {
-                            console.log('Verlauf konnte nicht geladen werden ;( ');
-                            //this.sentToast("Scan failed");
-                        });
-                    }
-                    ;
-                });
+              //get activities from storage if rest failed - no internet connection
+              this.storage.get(this.ticketID).then((val) => {
+                let history = <any>{};
+                history = JSON.parse(val);
+                this.addCards(history);
+                if (loadRequired == true) {
+                  this.historyLoading.dismiss().then(() => {
+                    console.log('Verlauf konnte nicht geladen werden ;( ');
+                    //this.sentToast("Scan failed");
+                  });
+                }
+                ;
+              });
             });
+        }catch (e) {
+            //TODO: exception handling
+            console.log("ID is null!")
+          }
         });
     }
 
