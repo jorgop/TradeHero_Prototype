@@ -8,6 +8,7 @@ import {RestProvider} from "../../providers/rest/rest";
 import { ImageViewerController } from 'ionic-img-viewer';
 import {ImpressumPage} from "../impressum/impressum";
 import {LoginPage} from "../login/login";
+import {count} from "rxjs/operators";
 
 @Component({
     selector: 'page-history',
@@ -16,9 +17,23 @@ import {LoginPage} from "../login/login";
 export class HistoryPage {
 
     private ticketID: any;
+    history: { head: string, body: string, cardClass: string }[] = [];
+    historyHeader: { submitDate: string, endDate: String, refund: number, imgFile: String, invoiceID: String }[] = [];
 
-    history: { head: string, body: string, cardClass: string, cardIcon: string}[] = [];
-    historyHeader: { submitDate: string, endDate: string, refund: number, imgFile: string, invoiceID: string}[] = [];
+    private ticket1_head : string;
+    private ticket1_body : string;
+    private ticket1_status : string;
+    private ticket1_status_color : string;
+
+    private ticket2_head : string;
+    private ticket2_body : string;
+    private ticket2_status : string;
+    private ticket2_status_color : string;
+
+    private ticket3_head : string;
+    private ticket3_body : string;
+    private ticket3_status : string;
+    private ticket3_status_color : string;
 
     private historyLoading: any;
 
@@ -66,64 +81,76 @@ export class HistoryPage {
 
         //get user ID from storage
         this.storage.get('identity').then((val) => {
-            let identity = <any>{};
-            identity = JSON.parse(val);
+          let identity = <any>{};
+          identity = JSON.parse(val);
+
+          try {
+
+
 
             //get activities from REST - set to soratge and push to list
             this.restProvider.getTicketData(this.ticketID).then((result) => {
 
-                //set activities to Storage
-                this.storage.set(this.ticketID, JSON.stringify(result));
+              //set activities to Storage
+              this.storage.set(this.ticketID, JSON.stringify(result));
 
-                //get refreshed activities from storage
-                this.storage.get(this.ticketID).then((val) => {
-                    let history = <any>{};
-                    history = JSON.parse(val);
-                    this.addCards(history);
+              //get refreshed activities from storage
+              this.storage.get(this.ticketID).then((val) => {
+                let history = <any>{};
+                history = JSON.parse(val);
+                this.addCards(history);
 
-                    if (loadRequired == true) {
-                        this.historyLoading.dismiss().then(() => {
-                            console.log('History loaded');
-                        });
-                    }
-                    ;
-                });
+                if (loadRequired == true) {
+                  this.historyLoading.dismiss().then(() => {
+                    console.log('History loaded');
+                  });
+                }
+                ;
+              });
             }, (err) => {
 
-                //get activities from storage if rest failed - no internet connection
-                this.storage.get(this.ticketID).then((val) => {
-                    let history = <any>{};
-                    history = JSON.parse(val);
-                    this.addCards(history);
-                    if (loadRequired == true) {
-                        this.historyLoading.dismiss().then(() => {
-                            console.log('Verlauf konnte nicht geladen werden ;( ');
-                            //this.sentToast("Scan failed");
-                        });
-                    }
-                    ;
-                });
+              //get activities from storage if rest failed - no internet connection
+              this.storage.get(this.ticketID).then((val) => {
+                let history = <any>{};
+                history = JSON.parse(val);
+                this.addCards(history);
+                if (loadRequired == true) {
+                  this.historyLoading.dismiss().then(() => {
+                    console.log('Verlauf konnte nicht geladen werden ;( ');
+                    //this.sentToast("Scan failed");
+                  });
+                }
+                ;
+              });
             });
+        }catch (e) {
+            //TODO: exception handling
+            console.log("ID is null!")
+          }
         });
     }
 
 
     addCards(data) {
+
+      var counter = 0;
         //loop through the activityList
         for (let i in data.activityList) {
+
             let currentObject = data.activityList[i];
+
             if (currentObject['ticketID'] == this.ticketID) {
                 for (let j in currentObject['history']) {
                     let currentHistory = currentObject['history'][j];
                     var statusText;
                     var statusClass;
                     var historyClass;
-                    var historyIcon;
                     var subDate;
                     var endDate;
                     var imgFile;
                     var refund;
                     var invID;
+
 
                     /*Card-Header*/
                     subDate = currentObject['startDate'];
@@ -132,40 +159,120 @@ export class HistoryPage {
                     refund = currentObject['refund'];
                     invID = currentObject['invoiceID'];
 
-                    /*Card-Body*/
-                    /*if(currentHistory['stateID'] == 3 && currentHistory['stateStatus'] == "1"){
-                        endDate = currentHistory['endDate'];
-                    }else if(currentHistory['stateStatus'] == "2"){
-                        endDate = currentHistory['endDate'];
-                    }else if(currentHistory['stateStatus'] == "0"){
-                        endDate = currentHistory['endDate'];
-                    }*/
+
+                    counter += 1;
+
+                    this.ticket1_status = "false";
+                    this.ticket2_status = "false";
+                    this.ticket2_status = "false";
 
                     if (currentHistory['stateStatus'] == 0) {
+
+                      /*
                         statusText = "Offen";
                         statusClass = "cl-open";
-                        historyClass = "actOpen";
-                        historyIcon = "ios-disc";
+                        historyClass = "card-open";
+                      */
+
+                      if (counter == 1){
+                        this.ticket1_head = "Offen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "false";
+                        this.ticket3_status = "false";
+                        this.ticket1_status_color = "ticket-color-waiting";
+                        this.ticket1_body = currentHistory['stateText'];
+
+                      };
+
+                      if (counter == 2){
+                        this.ticket2_head = "Offen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "false";
+                        this.ticket2_status_color = "ticket-color-waiting";
+                        this.ticket2_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 3){
+                        this.ticket3_head = "Offen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "true";
+                        this.ticket3_status_color = "ticket-color-waiting";
+                        this.ticket3_body = currentHistory['stateText'];
+                      };
+
                     } else if (currentHistory['stateStatus'] == 1) {
-                        statusText = "Abgeschlossen";
-                        statusClass = "cl-closed";
-                        historyClass = "actClosed";
-                        historyIcon = "ios-checkmark-circle";
-                    }else if (currentHistory['stateStatus'] == 2) {
-                        statusText = "Abgelehnt";
-                        statusClass = "cl-closed";
-                        historyClass = "actDenied";
-                        historyIcon = "ios-close-circle";
-                    }
-                    ;
+
+                      /*
+                      statusText = "Abgeschlossen";
+                      statusClass = "cl-closed";
+                      historyClass = "card-closed";
+                      */
+
+                      if (counter == 1){
+                        this.ticket1_head = "Abgeschlossen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "false";
+                        this.ticket3_status = "false";
+                        this.ticket1_status_color = "ticket-color-finished";
+                        this.ticket1_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 2){
+                        this.ticket2_head = "Abgeschlossen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "false";
+                        this.ticket2_status_color = "ticket-color-finished";
+                        this.ticket2_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 3){
+                        this.ticket3_head = "Abgeschlossen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "true";
+                        this.ticket3_status_color = "ticket-color-finished";
+                        this.ticket3_body = currentHistory['stateText'];
+                      };
+                    }else{
+
+                      if (counter == 1){
+                        this.ticket1_head = "Abgebrochen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "false";
+                        this.ticket3_status = "false";
+                        this.ticket1_status_color = "ticket-color-failed";
+                        this.ticket1_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 2){
+                        this.ticket2_head = "Abgebrochen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "false";
+                        this.ticket2_status_color = "ticket-color-failed";
+                        this.ticket2_body = currentHistory['stateText'];
+                      };
+
+                      if (counter == 3){
+                        this.ticket3_head = "Abgebrochen";
+                        this.ticket1_status = "true";
+                        this.ticket2_status = "true";
+                        this.ticket3_status = "true";
+                        this.ticket3_status_color = "ticket-color-failed";
+                        this.ticket3_body = currentHistory['stateText'];
+                      };
+                    };
+
+                    /*
                     this.history.push({
-                        head: '<div>Status: ' + '<b>' + statusText + '</b></div>' +
-                              '<div class=' + historyClass + '><ion-icon name=' + historyIcon + '></ion-icon></div>',
-                        body: '<div class=' + statusClass + '>' +
-                        '<ion-icon name=' + historyIcon + '></ion-icon>' + currentHistory['stateText'] + ' </div>',
-                        cardIcon: historyIcon,
+                        head: 'Status: ' + '<b>' + statusText + '</b>',
+                        body: '<div class=' + statusClass + '>' + currentHistory['stateText'] + '</div>',
                         cardClass: historyClass
                     });
+                    */
                 }
                 ;
             }
@@ -173,8 +280,8 @@ export class HistoryPage {
 
         }
         this.historyHeader.push({
-            submitDate: subDate.toString(),
-            endDate: endDate.toString(),
+            submitDate: "",
+            endDate: "",
             refund: refund,
             imgFile: imgFile,
             invoiceID: invID

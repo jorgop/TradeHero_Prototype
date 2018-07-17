@@ -1,4 +1,4 @@
-<ion-header class="color-header">
+<ion-header class="color-header" xmlns="http://www.w3.org/1999/html">
   <ion-navbar  class="back-button" transparent>
 
     <button class="logout-btn" (click)="logout()" round ion-button>
@@ -12,7 +12,10 @@
     </button>
   </ion-navbar>
 </ion-header>
-<ion-content>
+
+
+<ion-content padding>
+
   <ion-refresher (ionRefresh)="hisRefresh($event)">
     <ion-refresher-content pullingText="arrow-dropdown"
                            pullingText="Aktualisieren"
@@ -20,6 +23,7 @@
                            refreshingText="wird aktualisiert...">
     </ion-refresher-content>
   </ion-refresher>
+
 
   <ion-card>
     <ion-card-header *ngFor="let historyHeader of historyHeader">
@@ -44,15 +48,57 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let history of history">
-      <ion-card-header>
-        <div [innerHtml]=history.head></div>
-        <div class={{history.cssClass}}>
-          <ion-icon name={{history.cardIcon}}></ion-icon>
-        </div>
-      </ion-card-header>
-      <ion-card-content>
-        <div [innerHtml]=history.body></div>
-      </ion-card-content>
+  <ion-card *ngFor="let history of history" class={{history.cardClass}} >
+
+
+    <ion-card-header>
+     <!-- <img src="{{ history.body }}"> -->
+  <div [innerHtml]=history.head></div>
+    </ion-card-header>
+
+
+    <ion-card-content>
+      <div [innerHtml]=history.body></div>
+    </ion-card-content>
   </ion-card>
+
+
+  <!-- timeline testing -->
+
+  <div class="container">
+    <h1 class="project-name">Bearbeitungs-ID {{ticketID}}</h1>
+
+    <div id="timeline">
+      <div [ngClass]="(this.ticket1_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket1_status_color"></div>
+        <div class="timeline-content">
+          <h2>{{ticket1_head}}</h2>
+          <p>
+            {{ticket1_body}}
+          </p>
+        </div>
+      </div>
+
+      <div [ngClass]="(this.ticket2_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket2_status_color"></div>
+        <div class="timeline-content">
+          <h2>{{ticket2_head}}</h2>
+          <p>
+            {{ticket2_body}}
+          </p>
+        </div>
+      </div>
+
+      <div [ngClass]="(this.ticket3_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket3_status_color"></div>
+        <div class="timeline-content">
+          <h2>{{ticket3_head}}</h2>
+          <p>
+            {{ticket3_body}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </ion-content>

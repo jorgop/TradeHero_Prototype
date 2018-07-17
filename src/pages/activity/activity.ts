@@ -71,30 +71,35 @@ export class ActivityPage {
     updateLocalStorageAndPrepareData(){
         //get user ID from storage
         this.storage.get('identity').then((val) => {
-            let identity = <any>{};
-            identity = JSON.parse(val);
+          let identity = <any>{};
+          identity = JSON.parse(val);
 
+          try {
             //get activities from REST - set to soratge and push to list
             this.restProvider.getActivityData(identity['userID']).then((result) => {
-                //set activities to Storage
-                this.storage.set('strActivities',JSON.stringify(result));
+              //set activities to Storage
+              this.storage.set('strActivities', JSON.stringify(result));
 
-                //get refreshed activities from storage
-                this.storage.get('strActivities').then((val) => {
-                    let activity = <any>{};
-                    activity = JSON.parse(val);
-                    this.aggregateData(activity);
-                    this.pushDataIntoList(activity);
-                });
+              //get refreshed activities from storage
+              this.storage.get('strActivities').then((val) => {
+                let activity = <any>{};
+                activity = JSON.parse(val);
+                this.aggregateData(activity);
+                this.pushDataIntoList(activity);
+              });
             }, (err) => {
-                //get activities from storage if rest failed - no internet connection
-                this.storage.get('strActivities').then((val) => {
-                    let activity = <any>{};
-                    activity = JSON.parse(val);
-                    this.aggregateData(activity);
-                    this.pushDataIntoList(activity);
-                });
+              //get activities from storage if rest failed - no internet connection
+              this.storage.get('strActivities').then((val) => {
+                let activity = <any>{};
+                activity = JSON.parse(val);
+                this.aggregateData(activity);
+                this.pushDataIntoList(activity);
+              });
             });
+          }catch (e) {
+            //TODO: exception handling
+            console.log("id is null!")
+          }
         });
     }
 
