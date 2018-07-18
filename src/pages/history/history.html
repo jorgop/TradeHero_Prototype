@@ -25,28 +25,7 @@
   </ion-refresher>
 
 
-  <ion-card>
-    <ion-card-header *ngFor="let historyHeader of historyHeader">
-      Ticket-ID: {{ticketID}}
-      <br>
-      <p>Erstellt am: {{historyHeader.submitDate | date: 'dd.MM.yyyy'}}
-        <br>
-        Abgeschlossen am: {{historyHeader.endDate | date: 'dd.MM.yyyy'}}
-        <br>
-        Rechungsbetrag: {{historyHeader.refund | number: '1.2-2': 'de' }}
-      </p>
-    </ion-card-header>
-    <ion-card-content *ngFor="let historyHeader of historyHeader">
-        <ion-item>
-            <ion-thumbnail item-start (click)="showPhoto(historyHeader.imgFile)">
-              <img src="{{historyHeader.imgFile}}" imageViewer/>
-            </ion-thumbnail>
-          <p>
-            RechungsID: {{historyHeader.invoiceID}}
-          </p>
-        </ion-item>
-    </ion-card-content>
-  </ion-card>
+
 
   <ion-card *ngFor="let history of history" class={{history.cardClass}} >
 
@@ -67,6 +46,29 @@
 
   <div class="container">
     <h1 class="project-name">Bearbeitungs-ID {{ticketID}}</h1>
+
+    <ion-card>
+      <ion-card-header *ngFor="let historyHeader of historyHeader">
+        Ticket-ID: {{ticketID}}
+        <br>
+        <p>Erstellt am: {{historyHeader.submitDate | date: 'dd.MM.yyyy'}}
+          <br>
+          Abgeschlossen am: {{historyHeader.endDate | date: 'dd.MM.yyyy'}}
+          <br>
+          Rechungsbetrag: {{historyHeader.refund | number: '1.2-2': 'de' }}
+        </p>
+      </ion-card-header>
+      <ion-card-content *ngFor="let historyHeader of historyHeader">
+        <ion-item>
+          <ion-thumbnail item-start (click)="showPhoto(historyHeader.imgFile)">
+            <img src="{{historyHeader.imgFile}}" imageViewer/>
+          </ion-thumbnail>
+          <p>
+            RechungsID: {{historyHeader.invoiceID}}
+          </p>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
 
     <div id="timeline">
       <div [ngClass]="(this.ticket1_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
