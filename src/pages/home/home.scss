@@ -38,14 +38,19 @@ page-home {
   }
 
   .square {
-    height: 35%;
+    width: 100vw;
     text-align: center;
-    padding: 70px 0;
-    margin-bottom: 10%;
-    font-size: 30px;
-    font-family: "Comic Sans MS";
-    color: red;
-    border: 1px solid blue;
+    padding: 0px;
+    margin-bottom: 5px;
+    background-color: rgb(300, 300, 300) !important;
+    padding: 30px 0;
+  }
+
+  .rabbitlogo{
+    display: block !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+
   }
 
   /*buttons
