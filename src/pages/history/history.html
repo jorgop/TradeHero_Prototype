@@ -71,32 +71,32 @@
     </ion-card>
 
     <div id="timeline">
-      <div [ngClass]="(this.ticket1_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]=" 'timeline-icon ' + this.ticket1_status_color"></div>
+      <div [ngClass]="(this.ticket1.status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket1.status_color"></div>
         <div class="timeline-content">
-          <h2>{{ticket1_head}}</h2>
+          <h2>{{ticket1.head}}</h2>
           <p>
-            {{ticket1_body}}
+            {{ticket1.body}}
           </p>
         </div>
       </div>
 
-      <div [ngClass]="(this.ticket2_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]=" 'timeline-icon ' + this.ticket2_status_color"></div>
+      <div [ngClass]="(this.ticket2.status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket2.status_color"></div>
         <div class="timeline-content">
-          <h2>{{ticket2_head}}</h2>
+          <h2>{{ticket2.head}}</h2>
           <p>
-            {{ticket2_body}}
+            {{ticket2.body}}
           </p>
         </div>
       </div>
 
-      <div [ngClass]="(this.ticket3_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]=" 'timeline-icon ' + this.ticket3_status_color"></div>
+      <div [ngClass]="(this.ticket3.status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket3.status_color"></div>
         <div class="timeline-content">
-          <h2>{{ticket3_head}}</h2>
+          <h2>{{ticket3.head}}</h2>
           <p>
-            {{ticket3_body}}
+            {{ticket3.body}}
           </p>
         </div>
       </div>
