@@ -18,6 +18,15 @@ import {ImpressumPage} from "../impressum/impressum";
 export class ContactPage {
 
    @ViewChild(Navbar) navBar: Navbar;
+
+  /**
+   * @constructor
+   * @param {AlertController} Alert Controller
+   * @param {ToastController} toastCtrl Toast Message Controller
+   * @param {Storage} storage Local Storage
+   * @param {CallNumber} callSvc Call Number
+   * @param {NavController} navCtrl Navigation Controller
+   */
    constructor(
        public alertCtrl: AlertController,
        private toastCtrl: ToastController,
@@ -26,8 +35,8 @@ export class ContactPage {
        public navCtrl: NavController) {
    }
 
-   //test
 
+  //TODO: set comments. For Example look at the ocrPage!
    startCall(){
        this.callSvc.callNumber("00491719760565",true).then(()=> {
            console.log('number dialed');
@@ -36,6 +45,7 @@ export class ContactPage {
        })
    }
 
+    //TODO: set comments. For Example look at the ocrPage!
    callInsurance () {
        const confirm = this.alertCtrl.create({
            title: 'InsuRabbit',
@@ -58,35 +68,58 @@ export class ContactPage {
        confirm.present();
    }
 
-    goToScan(){
+  /**
+   * Navigate to ScanPage
+   */
+  goToScan(){
         this.navCtrl.push(ScanPage);
     }
-    goToProfile(){
+
+  /**
+   * Navigate to ProfilePage
+   */
+  goToProfile(){
         this.navCtrl.push(ProfilePage);
     }
-    goToContact(){
+
+  /**
+   * Navigate to ContactPage
+   */
+  goToContact(){
         this.navCtrl.push(ContactPage);
     }
-    goToActivity(){
+
+  /**
+   * Navigate to ActivityPage
+   */
+  goToActivity(){
         this.navCtrl.push(ActivityPage);
     }
-    goToHome(){
+
+  /**
+   * Navigate to HomePage
+   */
+  goToHome(){
         this.navCtrl.push(HomePage);
     }
-    goToImpressum(){
+
+  /**
+   * Navigate to ImpressumPage
+   */
+  goToImpressum(){
         this.navCtrl.push(ImpressumPage);
     }
 
-    ionViewDidLoad() {
+  /**
+   * Function will be called if page will be load
+   */
+  ionViewDidLoad() {
         this.navBar.backButtonClick = (e:UIEvent)=>{
             this.navCtrl.push(HomePage);
         }
     }
 
-    /**
-     * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.
-     * Im Anschluß erscheint ein Toast zur Bestätigung des erfolgreichen Logouts, nachdem der Storage geleert wurde.
-     */
+    //TODO: set comments. For Example look at the ocrPage!
     logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
@@ -108,6 +141,8 @@ export class ContactPage {
         });
         confirm.present();
     }
+
+    //TODO: set comments. For Example look at the ocrPage!
     performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();

@@ -14,8 +14,16 @@ import {timeout} from 'rxjs/operators/timeout';
 @Injectable()
 export class RestProvider {
 
+  /**
+   * Rest Service URL
+   * @type {string}
+   */
   apiUrl = 'https://rest-app.brandau.solutions';
 
+  /**
+   * @constructor
+   * @param {HttpClient} http Client for HTTP
+   */
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
   }

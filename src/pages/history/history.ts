@@ -16,16 +16,46 @@ import {count} from "rxjs/operators";
 })
 export class HistoryPage {
 
-    private ticketID: any;
-    history: { head: string, body: string, cardClass: string }[] = [];
-    historyHeader: { submitDate: string, endDate: String, refund: number, imgFile: String, invoiceID: String }[] = [];
+  /**
+   *  Current ticket id
+   */
+  private ticketID: any;
 
-    private ticket1 =  {head: "",body: "", status: "", status_color: ""};
-    private ticket2 =  {head: "",body: "", status: "", status_color: ""};
-    private ticket3 =  {head: "",body: "", status: "", status_color: ""};
+    private history: { head: string, body: string, cardClass: string }[] = [];
+    private historyHeader: { submitDate: string, endDate: String, refund: number, imgFile: String, invoiceID: String }[] = [];
 
-    private historyLoading: any;
+  /**
+   *  Object for the first ticket
+   * @type {{head: string; body: string; status: string; status_color: string}}
+   */
+  private ticket1 =  {head: "",body: "", status: "", status_color: ""};
+  /**
+   *  Object for the second ticket
+   * @type {{head: string; body: string; status: string; status_color: string}}
+   */
+  private ticket2 =  {head: "",body: "", status: "", status_color: ""};
+  /**
+   *  Object for the third ticket
+   * @type {{head: string; body: string; status: string; status_color: string}}
+   */
+  private ticket3 =  {head: "",body: "", status: "", status_color: ""};
+  /**
+   *  Object for the loading animation
+   */
+  private historyLoading: any;
 
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Navigation Controller
+   * @param {NavParams} navParams Navigation Paramter
+   * @param {HistoryService} historyService History Service
+   * @param {Storage} storage Local Storage
+   * @param {RestProvider} restProvider Provider for the Rest-Service
+   * @param {ImageViewerController} imageViewerCtrl Image viewer controller
+   * @param {LoadingController} loadingController Controller for loading animations
+   * @param {ToastController} toastCtrl Toast Message Controller
+   * @param {AlertController} alertCtrl Alert Controller
+   */
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -49,12 +79,18 @@ export class HistoryPage {
 
     }
 
-    ionViewWillEnter() {
+  /**
+   * Function will called if the page will be entered to update the local storage and prepare the data
+   */
+  ionViewWillEnter() {
         this.history = this.historyService.getCard();
         this.updateLocalStorageAndPrepareData(true);
     }
 
-    goToImpressum() {
+  /**
+   * Navigate to ImpressumPage
+   */
+  goToImpressum() {
         this.navCtrl.push(ImpressumPage);
     }
 
@@ -74,8 +110,6 @@ export class HistoryPage {
           identity = JSON.parse(val);
 
           try {
-
-
 
             //get activities from REST - set to soratge and push to list
             this.restProvider.getTicketData(this.ticketID).then((result) => {
@@ -119,7 +153,7 @@ export class HistoryPage {
         });
     }
 
-
+    //TODO: set comments. For Example look at the ocrPage!
     addCards(data) {
 
       var counter = 0;
@@ -270,12 +304,7 @@ export class HistoryPage {
         });
     }
 
-    /*
-    showPhoto(){
-      this.photoViewer.show(this.historyHeader['imgFile']);
-    }
-    */
-
+    //TODO: set comments. For Example look at the ocrPage!
     showPhoto(myImg) {
         const imageViewer = this.imageViewerCtrl.create(myImg);
         imageViewer.present(myImg);
@@ -307,6 +336,7 @@ export class HistoryPage {
         refresher.complete();
     }
 
+    //TODO: set comments. For Example look at the ocrPage!
     logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
@@ -328,6 +358,8 @@ export class HistoryPage {
         });
         confirm.present();
     }
+
+    //TODO: set comments. For Example look at the ocrPage!
     performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();

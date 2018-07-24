@@ -14,11 +14,27 @@ import {Md5} from "ts-md5";
 })
 export class RegistrationPage {
 
-  nachricht: String;
-
-  submitAttempt: boolean = false;
+  /**
+   *  Information Message
+   */
+  private nachricht: String;
+  /**
+   * Check if the message will be shown
+   * @type {boolean}
+   */
+  private submitAttempt: boolean = false;
+  /**
+   * Form group with the elements email, token and the hashed password for the authentication
+   */
   private myForm : FormGroup;
 
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Navigation Controller
+   * @param {RestProvider} restProvider Provider for Rest-Service
+   * @param {ToastController} toastCtrl Toast Message Controller
+   * @param {FormBuilder} formBuilder Form Builder
+   */
   constructor(public navCtrl: NavController,
               public restProvider: RestProvider,
               public toastCtrl: ToastController,
@@ -31,7 +47,11 @@ export class RegistrationPage {
     });
   }
 
-    message(myParam) {
+  /**
+   * View an infomation message for 3 seconds  if the information button will be pressed
+   * @param myParam Parameter which button will be pressed 1,2 or 3
+   */
+  message(myParam) {
 
         if (myParam == 1) {
             this.nachricht = "Max@Mustermann.de";

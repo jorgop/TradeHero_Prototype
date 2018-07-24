@@ -19,12 +19,26 @@ import {ImpressumPage} from "../impressum/impressum";
     templateUrl: 'activity.html'
 })
 export class ActivityPage {
-    activity: {date: string, ticketID:string,ticketStatus: string, iconName: String, cssClass: String}[] = [];
-    aggregate: {countClosed: number, countAll: number, countOpen: number, countDenied: number, sumAll: number, sumOpen: number, sumClosed: number, sumDenied: number}[] = [];
+
+    //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
+    private activity: {date: string, ticketID:string,ticketStatus: string, iconName: String, cssClass: String}[] = [];
+    private aggregate: {countClosed: number, countAll: number, countOpen: number, countDenied: number, sumAll: number, sumOpen: number, sumClosed: number, sumDenied: number}[] = [];
     // Erstes Segment default wählen
-    status = "all";
+    private status = "all";
 
     @ViewChild(Navbar) navBar: Navbar;
+
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Naviagtion Controller
+   * @param {ToastController} toastCtrl Toast Controller
+   * @param {AlertController} alertCtrl Alert Controller
+   * @param {App} app App
+   * @param {ActivityService} activityService Activity Service
+   * @param {Storage} storage Local Storage
+   * @param {RestProvider} restProvider Provider for Rest-Service
+   * @param {LoadingController} loadingController Controller for Login Animation
+   */
     constructor(public navCtrl: NavController,
                 private toastCtrl: ToastController,
                 public alertCtrl: AlertController,
@@ -35,11 +49,15 @@ export class ActivityPage {
                 public loadingController: LoadingController) {
     }
 
-    ionViewDidLoad() {
+  /**
+   * Call Function if Page is loading
+   */
+  ionViewDidLoad() {
         this.navBar.backButtonClick = (e:UIEvent)=>{
             this.navCtrl.push(HomePage);
         }
     }
+
     /**
      * Navigate to HistoryPage
      * @param id TicketID from activity
@@ -262,22 +280,42 @@ export class ActivityPage {
         }
     }
 
-    goToScan(){
+  /**
+   * Navigate to ScanPage
+   */
+  goToScan(){
         this.navCtrl.push(ScanPage);
     }
-    goToProfile(){
+
+  /**
+   * Navigate to ProfilePage
+   */
+  goToProfile(){
         this.navCtrl.push(ProfilePage);
     }
-    goToContact(){
+
+  /**
+   * Navigate to ContactPage
+   */
+  goToContact(){
         this.navCtrl.push(ContactPage);
     }
-    goToHome(){
+
+  /**
+   * Navigate to HomePage
+   */
+  goToHome(){
         this.navCtrl.push(HomePage);
     }
-    goToImpressum(){
+
+  /**
+   * Navigate to ImpressumPage
+   */
+  goToImpressum(){
         this.navCtrl.push(ImpressumPage);
     }
 
+    //TODO: set comments. For Example look at the ocrPage!
     actRefresh(refresher) {
         console.log('Begin async operation', refresher);
         this.activity = [];
@@ -288,10 +326,7 @@ export class ActivityPage {
 
     }
 
-    /**
-     * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.
-     * Im Anschluß erscheint ein Toast zur Bestätigung des erfolgreichen Logouts, nachdem der Storage geleert wurde.
-     */
+    //TODO: set comments. For Example look at the ocrPage!
     logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
@@ -313,6 +348,8 @@ export class ActivityPage {
         });
         confirm.present();
     }
+
+    //TODO: set comments. For Example look at the ocrPage!
     performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();

@@ -54,6 +54,7 @@ export class OcrPage {
 
   /**
    * Constructor ocrPage
+   * @constructor
    * @param {NavController} navCtrl
    * @param {NavParams} navParams
    * @param {AlertController} alertCtrl

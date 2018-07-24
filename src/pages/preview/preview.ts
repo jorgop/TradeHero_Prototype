@@ -14,11 +14,31 @@ import {ScanPage} from "../scan/scan";
 })
 export class PreviewPage {
 
-  private imgbase64ImageFile: any;
+  /**
+   * Scanned Image from openCV
+   */
   private scanedImage : any;
+
+  /**
+   * Raw Image from the camera
+   */
   private takenImage: any;
+
+  /**
+   * Loading Animation for sending the Image
+   */
   private sendLoading : any;
 
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Navigation Controller
+   * @param {NavParams} navParams Parameter Controller
+   * @param {ImageViewerController} imageViewerCtrl Image Viewer
+   * @param {AlertController} alertCtrl Alert Controller
+   * @param {RestProvider} restProvider Provider for Rest-Service
+   * @param {ToastController} toastCtrl Toast Message Controller
+   * @param {LoadingController} loadingController Loding Animation Controller
+   */
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private imageViewerCtrl: ImageViewerController,

@@ -16,6 +16,15 @@ import {ImpressumPage} from "../impressum/impressum";
 })
 export class HomePage {
 
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Navigation Controller
+   * @param {AlertController} alertCtrl Alert Controller
+   * @param {ToastController} toastCtrl Toast Message Controller
+   * @param {App} app App
+   * @param {Storage} storage Local Storage
+   * @param {RestProvider} restProvider Provider for Rest-Service
+   */
     constructor(
         public navCtrl: NavController,
         public alertCtrl: AlertController,
@@ -25,28 +34,50 @@ export class HomePage {
         public restProvider: RestProvider) {
     }
 
-    /**
-     * Funktionen zur Navigation von Home zu restlichen Seiten
-     */
-    goToScan(){
-        this.navCtrl.push(ScanPage);
-    }
-    goToProfile(){
+  /**
+   * Navigate to ScanPage
+   */
+  goToScan(){
+      this.navCtrl.push(ScanPage);
+  }
+
+  /**
+   * Navigate to ProfilePage
+   */
+  goToProfile(){
         this.navCtrl.push(ProfilePage);
     }
-    goToContact(){
+
+  /**
+   * Navigate to ContactPage
+   */
+  goToContact(){
         this.navCtrl.push(ContactPage);
     }
-    goToActivity(){
+
+  /**
+   * Navigate to ActivityPage
+   */
+  goToActivity(){
         this.navCtrl.push(ActivityPage);
     }
-    goToHome(){
+
+  /**
+   * Navigate to HomePage
+   */
+  goToHome(){
         this.navCtrl.push(HomePage);
     }
-    goToImpressum(){
+
+  /**
+   * Navigate to ImpressumPage
+   */
+  goToImpressum(){
         this.navCtrl.push(ImpressumPage);
     }
-    swipeEvent(e){
+
+  //TODO: set comments. For Example look at the ocrPage!
+  swipeEvent(e){
         if (e.direction == 4) {
             this.navCtrl.push(ActivityPage);
             console.log('Swipe Right')
@@ -56,12 +87,8 @@ export class HomePage {
         }
     }
 
-
-    /**
-     * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.
-     * Im Anschluß erscheint ein Toast zur Bestätigung des erfolgreichen Logouts, nachdem der Storage geleert wurde.
-     */
-    logout() {
+  //TODO: set comments. For Example look at the ocrPage!
+  logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
             buttons: [
@@ -82,7 +109,9 @@ export class HomePage {
         });
         confirm.present();
     }
-    performLogout() {
+
+  //TODO: set comments. For Example look at the ocrPage!
+  performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
@@ -98,27 +127,4 @@ export class HomePage {
         });
         logoutConf.present();
     }
-
-    /**
-   * set data form rest to local storage - not used
-   */
-  addDataToLocalStorage(){
-
-    this.storage.get('identity').then((val) => {
-      let identity = <any>{};
-      identity = JSON.parse(val);
-      console.log(identity);
-
-      //get user data
-      this.restProvider.getUserData(identity['userID']).then((result) => {
-        this.storage.set('user',JSON.stringify(result));
-      });
-
-      //get activities
-      this.restProvider.getActivityData(identity['userID']).then((result) => {
-        this.storage.set('strActivities',JSON.stringify(result));
-      });
-    });
-  }
-
 }
