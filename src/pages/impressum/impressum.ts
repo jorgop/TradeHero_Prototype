@@ -8,14 +8,6 @@ import { Storage } from '@ionic/storage';
 import {LoginPage} from "../login/login";
 
 
-
-/**
- * Generated class for the ImpressumPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-impressum',
   templateUrl: 'impressum.html',
