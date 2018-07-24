@@ -1,15 +1,10 @@
 <ion-header class="color-header">
-  <ion-navbar transparent>
+  <ion-navbar transparent hideBackButton>
+    <ion-title>Meine Rechung</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-<!--    <ion-card>
-      <img src="{{ scanedImage }}">
-      <div class="card-title"></div>
-      <div class="card-subtitle"></div>
-    </ion-card>
--->
   <div [formGroup]="myForm">
     <ion-list>
       <div [ngClass]="(this.myVal.name == 'true') ? 'valid-true' : 'valid-false'">
@@ -74,12 +69,12 @@
   <ion-toolbar id="scanFooter">
     <div class="leftcontainer">
       <ion-buttons>
-        <button ion-button class="buttonsdown" on-click="presentConfirm()" >Einreichen</button>
+        <button ion-button class="buttonsdown" on-click="goToHome()">Abbrechen</button>
       </ion-buttons>
     </div>
     <div class="rightcontainer">
       <ion-buttons>
-        <button ion-button class="buttonsdown" on-click="goToHome()">Abbrechen</button>
+        <button ion-button class="buttonsdown" on-click="presentConfirm()" >Einreichen</button>
       </ion-buttons>
     </div>
   </ion-toolbar>
