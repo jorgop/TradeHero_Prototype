@@ -17,8 +17,21 @@ import {PreviewPage} from "../preview/preview";
 export class ScanPage {
   @ViewChild(Content) content: Content;
 
+  /**
+   * Raw image from the Camera
+   */
   private imgbase64ImageFile: any;
 
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Navigation Controller
+   * @param {NavParams} navParams Paramter Controller
+   * @param {AlertController} alertCtrl Alert Controller
+   * @param {Platform} platform Platform
+   * @param {RestProvider} restProvider Provider for Rest-Service
+   * @param {ToastController} toastCtrl Controler for Toast Messages
+   * @param {Camera} camera Camera
+   */
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,platform: Platform,
@@ -26,7 +39,7 @@ export class ScanPage {
               public toastCtrl: ToastController,
               private camera: Camera) {
   }
-  
+
   /**
    * Start Camera to take a picture
    */

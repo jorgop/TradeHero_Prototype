@@ -18,16 +18,34 @@ import {ActivityPage} from "../activity/activity";
 })
 export class ProfilePage {
 
+  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
   private stammdatenForm : FormGroup;
+  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
   private fname: any;
+  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
   private mail: any;
-  public editInfo: string = "true";  //toggle Variable for editing the personal data
-  public borderStyle: string = ''; // Variable for Border Style
-  public buttonStyle: string = 'none';
-  public iconToggle: boolean = true;
-  public errorMsg: boolean = false;
+  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
+  private editInfo: string = "true";  //toggle Variable for editing the personal data
+  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
+  private borderStyle: string = ''; // Variable for Border Style
+  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
+  private buttonStyle: string = 'none';
+  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
+  private iconToggle: boolean = true;
+  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
+  private errorMsg: boolean = false;
 
   @ViewChild(Navbar) navBar: Navbar;
+
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Controller for Navigation
+   * @param {ToastController} toastCtrl Tosat Message Controller
+   * @param {AlertController} alertCtrl Alert Controller
+   * @param {Storage} storage Local Storage
+   * @param {FormBuilder} formBuilder Builder to create Forms
+   * @param {RestProvider} restProvider Provider for Rest Service
+   */
   constructor(public navCtrl: NavController,
               private toastCtrl: ToastController,
               public alertCtrl: AlertController,
@@ -46,7 +64,10 @@ export class ProfilePage {
 
   }
 
-    ionViewDidLoad() {
+  /**
+   * Function will be called if page will be load
+   */
+  ionViewDidLoad() {
         this.navBar.backButtonClick = (e:UIEvent)=>{
             this.navCtrl.push(HomePage);
         }
@@ -69,6 +90,9 @@ export class ProfilePage {
         }
     }
 
+  /**
+   * Function will called if page will be entered
+   */
   ionViewWillEnter() {
 
     this.storage.get('identity').then((val) => {
@@ -94,7 +118,9 @@ export class ProfilePage {
     });
   }
 
-  //Read userdata from form and send it to REST
+  /**
+   * Read userdata from form and send it to REST
+   */
   sendUserData(){
 
       //read new data from sheet
@@ -138,8 +164,9 @@ export class ProfilePage {
       });
   }
 
-  //Update the Inputfields
-
+  /**
+   * Update the Inputfields
+   */
   updateUserDataInputfields(){
       this.storage.get('user').then((val) => {
           let user = <any>{};
@@ -172,32 +199,53 @@ export class ProfilePage {
       });
   }
 
-  //"Go to" function
-
-    goToScan(){
+  /**
+   * Navigate to ScanPage
+   */
+  goToScan(){
         this.navCtrl.push(ScanPage);
     }
-    goToProfile(){
+
+  /**
+   * Navigate to  ProfilePage
+   */
+  goToProfile(){
         this.navCtrl.push(ProfilePage);
     }
-    goToContact(){
+
+  /**
+   * Navigate to ContactPage
+   */
+  goToContact(){
         this.navCtrl.push(ContactPage);
     }
-    goToActivity(){
+
+  /**
+   * Navigate to ActivityPage
+   */
+  goToActivity(){
         this.navCtrl.push(ActivityPage);
     }
-    goToHome(){
+
+  /**
+   * Navigate to HomePage
+   */
+  goToHome(){
         this.navCtrl.push(HomePage);
     }
-    goToImpressum(){
+
+  /**
+   * Navigate to ImpressumPage
+   */
+  goToImpressum(){
         this.navCtrl.push(ImpressumPage);
     }
 
-    /**
-     * Logout Funktion: logout() startet einen Confirm Alert. Bei Bestätigung des Logouts wird die Funktion performLogout() ausgeführt.
-     * Im Anschluß erscheint ein Toast zur Bestätigung des erfolgreichen Logouts, nachdem der Storage geleert wurde.
-     */
-    logout() {
+
+  /**
+   * Ask for logout
+   */
+  logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
             buttons: [
@@ -218,7 +266,11 @@ export class ProfilePage {
         });
         confirm.present();
     }
-    performLogout() {
+
+  /**
+   * Perform logout and clean the local storage
+   */
+  performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
@@ -239,7 +291,6 @@ export class ProfilePage {
      * View a toast message
      * @param message Toast Text
      */
-
     sentToast(message) {
         let toast = this.toastCtrl.create({
             message: message,

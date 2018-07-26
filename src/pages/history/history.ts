@@ -16,27 +16,46 @@ import {count} from "rxjs/operators";
 })
 export class HistoryPage {
 
-    private ticketID: any;
-    history: { head: string, body: string, cardClass: string }[] = [];
-    historyHeader: { submitDate: string, endDate: String, refund: number, imgFile: String, invoiceID: String }[] = [];
+  /**
+   *  Current ticket id
+   */
+  private ticketID: any;
 
-    private ticket1_head : string;
-    private ticket1_body : string;
-    private ticket1_status : string;
-    private ticket1_status_color : string;
+    private history: { head: string, body: string, cardClass: string }[] = [];
+    private historyHeader: { submitDate: string, endDate: String, refund: number, imgFile: String, invoiceID: String }[] = [];
 
-    private ticket2_head : string;
-    private ticket2_body : string;
-    private ticket2_status : string;
-    private ticket2_status_color : string;
+  /**
+   *  Object for the first ticket
+   * @type {{head: string; body: string; status: string; status_color: string}}
+   */
+  private ticket1 =  {head: "",body: "", status: "", status_color: ""};
+  /**
+   *  Object for the second ticket
+   * @type {{head: string; body: string; status: string; status_color: string}}
+   */
+  private ticket2 =  {head: "",body: "", status: "", status_color: ""};
+  /**
+   *  Object for the third ticket
+   * @type {{head: string; body: string; status: string; status_color: string}}
+   */
+  private ticket3 =  {head: "",body: "", status: "", status_color: ""};
+  /**
+   *  Object for the loading animation
+   */
+  private historyLoading: any;
 
-    private ticket3_head : string;
-    private ticket3_body : string;
-    private ticket3_status : string;
-    private ticket3_status_color : string;
-
-    private historyLoading: any;
-
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Navigation Controller
+   * @param {NavParams} navParams Navigation Paramter
+   * @param {HistoryService} historyService History Service
+   * @param {Storage} storage Local Storage
+   * @param {RestProvider} restProvider Provider for the Rest-Service
+   * @param {ImageViewerController} imageViewerCtrl Image viewer controller
+   * @param {LoadingController} loadingController Controller for loading animations
+   * @param {ToastController} toastCtrl Toast Message Controller
+   * @param {AlertController} alertCtrl Alert Controller
+   */
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -60,12 +79,18 @@ export class HistoryPage {
 
     }
 
-    ionViewWillEnter() {
+  /**
+   * Function will called if the page will be entered to update the local storage and prepare the data
+   */
+  ionViewWillEnter() {
         this.history = this.historyService.getCard();
         this.updateLocalStorageAndPrepareData(true);
     }
 
-    goToImpressum() {
+  /**
+   * Navigate to ImpressumPage
+   */
+  goToImpressum() {
         this.navCtrl.push(ImpressumPage);
     }
 
@@ -85,8 +110,6 @@ export class HistoryPage {
           identity = JSON.parse(val);
 
           try {
-
-
 
             //get activities from REST - set to soratge and push to list
             this.restProvider.getTicketData(this.ticketID).then((result) => {
@@ -130,7 +153,7 @@ export class HistoryPage {
         });
     }
 
-
+    //TODO: set comments. For Example look at the ocrPage!
     addCards(data) {
 
       var counter = 0;
@@ -159,111 +182,105 @@ export class HistoryPage {
                     refund = currentObject['refund'];
                     invID = currentObject['invoiceID'];
 
-
                     counter += 1;
 
-                    this.ticket1_status = "false";
-                    this.ticket2_status = "false";
-                    this.ticket2_status = "false";
+                    this.ticket1.status = "false";
+                    this.ticket2.status = "false";
+                    this.ticket2.status = "false";
 
                     if (currentHistory['stateStatus'] == 0) {
 
-                      /*
-                        statusText = "Offen";
-                        statusClass = "cl-open";
-                        historyClass = "card-open";
-                      */
-
-                      if (counter == 1){
-                        this.ticket1_head = "Offen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "false";
-                        this.ticket3_status = "false";
-                        this.ticket1_status_color = "ticket-color-waiting";
-                        this.ticket1_body = currentHistory['stateText'];
-
-                      };
-
-                      if (counter == 2){
-                        this.ticket2_head = "Offen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "true";
-                        this.ticket3_status = "false";
-                        this.ticket2_status_color = "ticket-color-waiting";
-                        this.ticket2_body = currentHistory['stateText'];
-                      };
-
-                      if (counter == 3){
-                        this.ticket3_head = "Offen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "true";
-                        this.ticket3_status = "true";
-                        this.ticket3_status_color = "ticket-color-waiting";
-                        this.ticket3_body = currentHistory['stateText'];
-                      };
-
+                      switch (counter){
+                        case 1:{
+                          this.ticket1.head = "Offen";
+                          this.ticket1.body = currentHistory['stateText'];
+                          this.ticket1.status = "true";
+                          this.ticket1.status_color = "ticket-color-waiting";
+                          this.ticket2.status = "false";
+                          this.ticket3.status = "false";
+                          break;
+                        }
+                        case 2:{
+                          this.ticket1.status = "true";
+                          this.ticket2.head = "Offen";
+                          this.ticket2.body = currentHistory['stateText'];
+                          this.ticket2.status = "true";
+                          this.ticket2.status_color = "ticket-color-waiting";
+                          this.ticket3.status = "false";
+                          break;
+                        }
+                        case 3:{
+                          this.ticket1.status = "true";
+                          this.ticket2.status = "true";
+                          this.ticket3.head = "Offen";
+                          this.ticket3.body = currentHistory['stateText'];
+                          this.ticket3.status = "true";
+                          this.ticket3.status_color = "ticket-color-waiting";
+                          break;
+                        }
+                      }
                     } else if (currentHistory['stateStatus'] == 1) {
 
-                      /*
-                      statusText = "Abgeschlossen";
-                      statusClass = "cl-closed";
-                      historyClass = "card-closed";
-                      */
-
-                      if (counter == 1){
-                        this.ticket1_head = "Abgeschlossen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "false";
-                        this.ticket3_status = "false";
-                        this.ticket1_status_color = "ticket-color-finished";
-                        this.ticket1_body = currentHistory['stateText'];
-                      };
-
-                      if (counter == 2){
-                        this.ticket2_head = "Abgeschlossen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "true";
-                        this.ticket3_status = "false";
-                        this.ticket2_status_color = "ticket-color-finished";
-                        this.ticket2_body = currentHistory['stateText'];
-                      };
-
-                      if (counter == 3){
-                        this.ticket3_head = "Abgeschlossen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "true";
-                        this.ticket3_status = "true";
-                        this.ticket3_status_color = "ticket-color-finished";
-                        this.ticket3_body = currentHistory['stateText'];
-                      };
+                      switch(counter){
+                        case 1:{
+                          this.ticket1.head = "Abgeschlossen";
+                          this.ticket1.body = currentHistory['stateText'];
+                          this.ticket1.status = "true";
+                          this.ticket1.status_color = "ticket-color-finished";
+                          this.ticket2.status = "false";
+                          this.ticket3.status = "false";
+                          break;
+                        }
+                        case 2:{
+                          this.ticket1.status = "true";
+                          this.ticket2.head = "Abgeschlossen";
+                          this.ticket2.body = currentHistory['stateText'];
+                          this.ticket2.status = "true";
+                          this.ticket2.status_color = "ticket-color-finished";
+                          this.ticket3.status = "false";
+                          break;
+                        }
+                        case 3:{
+                          this.ticket1.status = "true";
+                          this.ticket2.status = "true";
+                          this.ticket3.head = "Abgeschlossen";
+                          this.ticket3.body = currentHistory['stateText'];
+                          this.ticket3.status = "true";
+                          this.ticket3.status_color = "ticket-color-finished";
+                          break;
+                        }
+                      }
                     }else{
 
-                      if (counter == 1){
-                        this.ticket1_head = "Abgebrochen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "false";
-                        this.ticket3_status = "false";
-                        this.ticket1_status_color = "ticket-color-failed";
-                        this.ticket1_body = currentHistory['stateText'];
-                      };
-
-                      if (counter == 2){
-                        this.ticket2_head = "Abgebrochen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "true";
-                        this.ticket3_status = "false";
-                        this.ticket2_status_color = "ticket-color-failed";
-                        this.ticket2_body = currentHistory['stateText'];
-                      };
-
-                      if (counter == 3){
-                        this.ticket3_head = "Abgebrochen";
-                        this.ticket1_status = "true";
-                        this.ticket2_status = "true";
-                        this.ticket3_status = "true";
-                        this.ticket3_status_color = "ticket-color-failed";
-                        this.ticket3_body = currentHistory['stateText'];
-                      };
+                      switch (counter){
+                        case 1:{
+                          this.ticket1.head = "Abgebrochen";
+                          this.ticket1.body = currentHistory['stateText'];
+                          this.ticket1.status = "true";
+                          this.ticket1.status_color = "ticket-color-failed";
+                          this.ticket2.status = "false";
+                          this.ticket3.status = "false";
+                          break;
+                        }
+                        case 2:{
+                          this.ticket1.status = "true";
+                          this.ticket2.head = "Abgebrochen";
+                          this.ticket2.body = currentHistory['stateText'];
+                          this.ticket2.status = "true";
+                          this.ticket2.status_color = "ticket-color-failed";
+                          this.ticket3.status = "false";
+                          break;
+                        }
+                        case 3:{
+                          this.ticket1.status = "true";
+                          this.ticket2.status = "true";
+                          this.ticket3.head = "Abgebrochen";
+                          this.ticket3.body = currentHistory['stateText'];
+                          this.ticket3.status = "true";
+                          this.ticket3.status_color = "ticket-color-failed";
+                          break;
+                        }
+                      }
                     };
 
                     /*
@@ -277,7 +294,6 @@ export class HistoryPage {
                 ;
             }
             ;
-
         }
         this.historyHeader.push({
             submitDate: "",
@@ -288,12 +304,7 @@ export class HistoryPage {
         });
     }
 
-    /*
-    showPhoto(){
-      this.photoViewer.show(this.historyHeader['imgFile']);
-    }
-    */
-
+    //TODO: set comments. For Example look at the ocrPage!
     showPhoto(myImg) {
         const imageViewer = this.imageViewerCtrl.create(myImg);
         imageViewer.present(myImg);
@@ -325,6 +336,7 @@ export class HistoryPage {
         refresher.complete();
     }
 
+    //TODO: set comments. For Example look at the ocrPage!
     logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
@@ -346,6 +358,8 @@ export class HistoryPage {
         });
         confirm.present();
     }
+
+    //TODO: set comments. For Example look at the ocrPage!
     performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
