@@ -28,17 +28,17 @@ export class HistoryPage {
    *  Object for the first ticket
    * @type {{head: string; body: string; status: string; status_color: string}}
    */
-  private ticket1 =  {head: "",body: "", status: "", status_color: ""};
+  private ticket1 =  {head: "",body: "", startDate: "", endDate: "", status: "", status_color: ""};
   /**
    *  Object for the second ticket
    * @type {{head: string; body: string; status: string; status_color: string}}
    */
-  private ticket2 =  {head: "",body: "", status: "", status_color: ""};
+  private ticket2 =  {head: "",body: "", startDate: "", endDate: "", status: "", status_color: ""};
   /**
    *  Object for the third ticket
    * @type {{head: string; body: string; status: string; status_color: string}}
    */
-  private ticket3 =  {head: "",body: "", status: "", status_color: ""};
+  private ticket3 =  {head: "",body: "", startDate: "", endDate: "", status: "", status_color: ""};
   /**
    *  Object for the loading animation
    */
@@ -169,18 +169,29 @@ export class HistoryPage {
                     var statusClass;
                     var historyClass;
                     var subDate;
-                    var endDate;
+                    var endDate = currentObject['endDate'];
+                    var ticketStartDate;
+                    var ticketEndDate;
+                    var t2StartDate;
+                    var t2EndDate;
+                    var t3StartDate;
+                    var t3EndDate;
                     var imgFile;
                     var refund;
                     var invID;
 
-
                     /*Card-Header*/
-                    subDate = currentObject['startDate'];
-                    endDate = currentObject['endDate'];
+                    var subDateArray = currentObject['startDate'].split("-");
+                    var endDateArray = currentObject['endDate'].split("-");
+                    subDate = subDateArray[2] + "." + subDateArray[1]+ "." + subDateArray[0];
+                    endDate = endDateArray[2] + "." + endDateArray[1]+ "." + endDateArray[0];
                     imgFile = currentObject['imgFile'];
                     refund = currentObject['refund'];
-                    invID = currentObject['invoiceID'];
+                    if(currentObject['invoiceID'] == ""){
+                        invID = "k.A."
+                    }else{
+                        invID = currentObject['invoiceID'];
+                    }
 
                     counter += 1;
 
@@ -188,12 +199,19 @@ export class HistoryPage {
                     this.ticket2.status = "false";
                     this.ticket2.status = "false";
 
+                    var ticketStartDateArray = currentHistory['startDate'].split("-");
+                    var ticketEndDateArray = currentHistory['endDate'].split("-");
+                    ticketStartDate = ticketStartDateArray[2] + "." + ticketStartDateArray[1]+ "." + ticketStartDateArray[0];
+                    ticketEndDate = ticketEndDateArray[2] + "." + ticketEndDateArray[1]+ "." + ticketEndDateArray[0];
+
                     if (currentHistory['stateStatus'] == 0) {
 
                       switch (counter){
                         case 1:{
                           this.ticket1.head = "Offen";
                           this.ticket1.body = currentHistory['stateText'];
+                          this.ticket1.startDate = ticketStartDate;
+                          this.ticket1.endDate = ticketEndDate;
                           this.ticket1.status = "true";
                           this.ticket1.status_color = "ticket-color-waiting";
                           this.ticket2.status = "false";
@@ -204,6 +222,8 @@ export class HistoryPage {
                           this.ticket1.status = "true";
                           this.ticket2.head = "Offen";
                           this.ticket2.body = currentHistory['stateText'];
+                          this.ticket2.startDate = ticketStartDate;
+                          this.ticket2.endDate = ticketEndDate;
                           this.ticket2.status = "true";
                           this.ticket2.status_color = "ticket-color-waiting";
                           this.ticket3.status = "false";
@@ -214,6 +234,8 @@ export class HistoryPage {
                           this.ticket2.status = "true";
                           this.ticket3.head = "Offen";
                           this.ticket3.body = currentHistory['stateText'];
+                          this.ticket3.startDate = ticketStartDate;
+                          this.ticket3.endDate = ticketEndDate;
                           this.ticket3.status = "true";
                           this.ticket3.status_color = "ticket-color-waiting";
                           break;
@@ -225,6 +247,8 @@ export class HistoryPage {
                         case 1:{
                           this.ticket1.head = "Abgeschlossen";
                           this.ticket1.body = currentHistory['stateText'];
+                          this.ticket1.startDate = ticketStartDate;
+                          this.ticket1.endDate = ticketEndDate;
                           this.ticket1.status = "true";
                           this.ticket1.status_color = "ticket-color-finished";
                           this.ticket2.status = "false";
@@ -235,6 +259,8 @@ export class HistoryPage {
                           this.ticket1.status = "true";
                           this.ticket2.head = "Abgeschlossen";
                           this.ticket2.body = currentHistory['stateText'];
+                          this.ticket2.startDate = ticketStartDate;
+                          this.ticket2.endDate = ticketEndDate;
                           this.ticket2.status = "true";
                           this.ticket2.status_color = "ticket-color-finished";
                           this.ticket3.status = "false";
@@ -245,6 +271,8 @@ export class HistoryPage {
                           this.ticket2.status = "true";
                           this.ticket3.head = "Abgeschlossen";
                           this.ticket3.body = currentHistory['stateText'];
+                          this.ticket3.startDate = ticketStartDate;
+                          this.ticket3.endDate = ticketEndDate;
                           this.ticket3.status = "true";
                           this.ticket3.status_color = "ticket-color-finished";
                           break;
@@ -256,6 +284,8 @@ export class HistoryPage {
                         case 1:{
                           this.ticket1.head = "Abgebrochen";
                           this.ticket1.body = currentHistory['stateText'];
+                          this.ticket1.startDate = ticketStartDate;
+                          this.ticket1.endDate = ticketEndDate;
                           this.ticket1.status = "true";
                           this.ticket1.status_color = "ticket-color-failed";
                           this.ticket2.status = "false";
@@ -266,6 +296,8 @@ export class HistoryPage {
                           this.ticket1.status = "true";
                           this.ticket2.head = "Abgebrochen";
                           this.ticket2.body = currentHistory['stateText'];
+                          this.ticket2.startDate = ticketStartDate;
+                          this.ticket2.endDate = ticketEndDate;
                           this.ticket2.status = "true";
                           this.ticket2.status_color = "ticket-color-failed";
                           this.ticket3.status = "false";
@@ -276,6 +308,8 @@ export class HistoryPage {
                           this.ticket2.status = "true";
                           this.ticket3.head = "Abgebrochen";
                           this.ticket3.body = currentHistory['stateText'];
+                          this.ticket3.startDate = ticketStartDate;
+                          this.ticket3.endDate = ticketEndDate;
                           this.ticket3.status = "true";
                           this.ticket3.status_color = "ticket-color-failed";
                           break;
@@ -296,8 +330,8 @@ export class HistoryPage {
             ;
         }
         this.historyHeader.push({
-            submitDate: "",
-            endDate: "",
+            submitDate: subDate,
+            endDate: endDate,
             refund: refund,
             imgFile: imgFile,
             invoiceID: invID

@@ -277,6 +277,7 @@ export class ActivityPage {
                     });
                 }
             });
+            console.log(data.activityList);
         }
     }
 

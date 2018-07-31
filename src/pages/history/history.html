@@ -51,21 +51,25 @@
       <ion-card-header *ngFor="let historyHeader of historyHeader">
         Ticket-ID: {{ticketID}}
         <br>
-        <p>Erstellt am: {{historyHeader.submitDate | date: 'dd.MM.yyyy'}}
-          <br>
-          Abgeschlossen am: {{historyHeader.endDate | date: 'dd.MM.yyyy'}}
-          <br>
-          Rechungsbetrag: {{historyHeader.refund | number: '1.2-2': 'de' }}
-        </p>
+        <div>
+          Erstellt am: {{historyHeader.submitDate}}
+        </div>
+        <div *ngIf="historyHeader.endDate == null;else still_open">
+          Abgeschlossen am: noch offen
+        </div>
+        <ng-template #still_open>Abgeschlossen am: {{historyHeader.endDate}}</ng-template>
+        <div>
+          Rechungsbetrag: {{historyHeader.refund | number: '1.2-2': 'de' }} €
+        </div>
       </ion-card-header>
       <ion-card-content *ngFor="let historyHeader of historyHeader">
         <ion-item>
           <ion-thumbnail item-start (click)="showPhoto(historyHeader.imgFile)">
             <img src="{{historyHeader.imgFile}}" imageViewer/>
           </ion-thumbnail>
-          <p>
+          <div >
             RechungsID: {{historyHeader.invoiceID}}
-          </p>
+          </div>
         </ion-item>
       </ion-card-content>
     </ion-card>
@@ -75,9 +79,18 @@
         <div [ngClass]=" 'timeline-icon ' + this.ticket1.status_color"></div>
         <div class="timeline-content">
           <h2>{{ticket1.head}}</h2>
-          <p>
-            {{ticket1.body}}
-          </p>
+          <div>
+            <div>
+              {{ticket1.body}}
+            </div>
+            <div>
+              Start: {{ticket1.startDate}}
+            </div>
+            <div *ngIf="ticket1.endDate == null;else t1still_open">
+              Abgeschlossen am: noch offen
+            </div>
+            <ng-template #t1still_open>Abgeschlossen am: {{ticket1.endDate}}</ng-template>
+          </div>
         </div>
       </div>
 
@@ -85,9 +98,18 @@
         <div [ngClass]=" 'timeline-icon ' + this.ticket2.status_color"></div>
         <div class="timeline-content">
           <h2>{{ticket2.head}}</h2>
-          <p>
-            {{ticket2.body}}
-          </p>
+          <div>
+            <div>
+              {{ticket2.body}}
+            </div>
+            <div>
+              Start: {{ticket2.startDate}}
+            </div>
+            <div *ngIf="ticket2.endDate == null;else t2still_open">
+              Abgeschlossen am: noch offen
+            </div>
+            <ng-template #t2still_open>Abgeschlossen am: {{ticket2.endDate}}</ng-template>
+          </div>
         </div>
       </div>
 
@@ -95,9 +117,18 @@
         <div [ngClass]=" 'timeline-icon ' + this.ticket3.status_color"></div>
         <div class="timeline-content">
           <h2>{{ticket3.head}}</h2>
-          <p>
-            {{ticket3.body}}
-          </p>
+          <div>
+            <div>
+              {{ticket3.body}}
+            </div>
+            <div>
+              Start: {{ticket3.startDate}}
+            </div>
+            <div *ngIf="ticket3.endDate == null;else t3still_open">
+              Abgeschlossen am: noch offen
+            </div>
+            <ng-template #t3still_open>Abgeschlossen am: {{ticket3.endDate}}</ng-template>
+          </div>
         </div>
       </div>
     </div>
