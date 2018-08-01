@@ -23,8 +23,6 @@ export class ProfilePage {
   //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
   private fname: any;
   //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
-  private mail: any;
-  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
   private editInfo: string = "true";  //toggle Variable for editing the personal data
   //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
   private borderStyle: string = ''; // Variable for Border Style
@@ -59,7 +57,8 @@ export class ProfilePage {
           lastName : [''],
           mail : [''],
           street: [''],
-          houseNumber: ['']
+          houseNumber: [''],
+          contractID: ['']
       });
 
   }
@@ -86,6 +85,7 @@ export class ProfilePage {
             this.borderStyle = '';
             this.buttonStyle = 'none';
             this.iconToggle = true;
+            this.updateUserDataInputfields();
 
         }
     }
@@ -129,7 +129,8 @@ export class ProfilePage {
                 'lastName': this.stammdatenForm.controls.lastName.value,
                 'mail': this.stammdatenForm.controls.mail.value,
                 'street': this.stammdatenForm.controls.street.value,
-                'houseNumber': this.stammdatenForm.controls.houseNumber.value,};
+                'houseNumber': this.stammdatenForm.controls.houseNumber.value,
+                'contractID': this.stammdatenForm.controls.contractID.value};
       console.log(restData);
 
 
@@ -191,6 +192,9 @@ export class ProfilePage {
               }
               else if(key == "street"){
                   this.stammdatenForm.patchValue({street:userData['street']});
+              }
+              else if(key == "contractID"){
+                  this.stammdatenForm.patchValue({contractID:userData['contractID']});
               }
               else if(key == "houseNumber"){
                   this.stammdatenForm.patchValue({houseNumber:userData['houseNumber']});

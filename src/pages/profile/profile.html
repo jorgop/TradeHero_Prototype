@@ -59,9 +59,17 @@
                     <td><ion-input formControlName="street" type="text" [disabled]="editInfo"></ion-input></td>
                     <td><ion-input formControlName="houseNumber" type="text" [disabled]="editInfo"></ion-input></td>
                 </tr>
+                <tr>
+                    <td><ion-label stacked>Email</ion-label></td>
+                    <td><ion-label stacked>Versichertennr.</ion-label></td>
+                </tr>
+                <tr>
+                    <td><ion-input formControlName="mail" type="text" [disabled]="editInfo"></ion-input></td>
+                    <td><ion-input formControlName="contractID" type="text" [disabled]="true"></ion-input></td>
+                </tr>
             </table>
-            <ion-label stacked>Email</ion-label>
-            <ion-input formControlName="mail" type="text" [disabled]="editInfo"></ion-input>
+           <!-- <ion-label stacked>Email</ion-label>
+            <ion-input formControlName="mail" type="text" [disabled]="editInfo"></ion-input> -->
         </div>
     </div>
     <button ion-button id="SendData" on-click="sendUserData()" [ngStyle]="{'display': buttonStyle}">Daten abschicken</button>
