@@ -4,73 +4,66 @@ page-registration {
     background-color: transparent;
   }
 
-  .validatortxt{
-    border:none;
-  }
-
   /* Background-color */
 
   .set-background {
     background-color: #15B2A2;
   }
 
-  /* Header */
+  .validatortxt{
+    border:none;
+  }
 
-  .square {
-    position: relative;
+  /* Split Content in 2 */
+
+  .split-content {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Top Content */
+
+  .top-content {
     height: 30%;
     width: 100%;
-    background: #15B2A2;
   }
 
-  .main-container {
-    position: absolute;
+  /* Top of Top Content */
+
+  .top-top {
+    height: 75%;
     width: 100%;
-    height: 100%;
+    font-size: 3.2em;
+    color: white;
+    font-family: "Merriweather Sans";
+    text-shadow: 1px 1px gray;
+    text-align: center;
+    padding-top: 18%;
   }
 
-  .top-container {
+  /* Bottom of Top Content */
+
+  .top-bottom {
+    height: 25%;
+    width: 100%;
+    font-size: 1.0em;
+    color: #FFB623;
+    font-family: "Open Sans";
+    text-align: center;
+    padding-top: 5%;
+  }
+
+  /* Bottom Content */
+
+  .bottom-content {
     height: 70%;
     width: 100%;
-    text-align: center;
-    font-size: 3.0em;
-    color: white;
-    text-shadow: 1px 1px gray;
-    padding-top: 20%;
-    font-family: "Merriweather Sans";
   }
 
-  /* Container for Info Text */
+  /* Top of Bottom Content */
 
-  .bottom-container {
-    position: relative;
-    top: 70%;
-    height: 30%;
-    width: 100%;
-  }
-
-  /* Actual Info Text */
-
-  .info-text {
-    padding-top: 5%;
-    color: #FFB623;
-    text-align: center;
-    font-family: "Open Sans";
-    font-size: 1.0em;
-  }
-
-
-  /* Body */
-
-  .body {
-    position: relative;
-    width: 100%;
-    height: 60%;
-  }
-
-  .body-top {
-    position: absolute;
-    height: 45%;
+  .bottom-top {
+    height: 47%;
     width: 100%;
   }
 
@@ -142,15 +135,15 @@ page-registration {
     font-family: "Open Sans";
   }
 
-  /* Register Button */
 
-  .body-bottom {
-    position: relative;
-    top: 45%;
-    height: 55%;
+  /* Bottom of Bottom Content */
+
+  .bottom-bottom {
+    height: 53%;
     width: 100%;
-    padding-top: 1.0em;
   }
+
+  /* Register Button */
 
   .register-btn {
     color: #15B2A2;
