@@ -4,67 +4,63 @@ page-login {
     background-color: transparent;
   }
 
-  /* Header */
-
-  .square {
-    position: relative;
-    height: 35%;
-    width: 100%;
-    background: #15B2A2;
-  }
-
-  .main-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-
-  .top-container {
-    height: 70%;
-    width: 100%;
-    text-align: center;
-    font-size: 3.5em;
-    color: white;
-    text-shadow: 1px 1px gray;
-    padding-top: 25%;
-    font-family: "Merriweather Sans";
-  }
-
-  /* Container for Info Text */
-
-  .bottom-container {
-    height: 30%;
-    width: 100%;
-  }
-
-  /* Actual Info Text */
-
-  .info-text {
-    padding-top: 5%;
-    color: #FFB623;
-    text-align: center;
-    font-family: "Open Sans";
-    font-size: 1.0em;
-  }
-
   /* Background-color */
 
   .set-background {
     background-color: #15B2A2;
   }
 
-  /* Body */
+  /* Split Content in 2 */
 
-  .body {
-    position: relative;
+  .split-content {
+    height: 100%;
     width: 100%;
-    height: 60%;
   }
 
-  .body-top {
-    height: 30%;
+  /* Top Content */
+
+  .top-content {
+    height: 35%;
     width: 100%;
+  }
+
+  /* Top of Top Content */
+
+  .top-top {
+    height: 75%;
+    width: 100%;
+    font-size: 3.5em;
+    color: white;
+    font-family: "Merriweather Sans";
+    text-shadow: 1px 1px gray;
     text-align: center;
+    padding-top: 25%;
+  }
+
+  /* Bottom of Top Content */
+
+  .top-bottom {
+    height: 25%;
+    width: 100%;
+    font-size: 1.0em;
+    color: #FFB623;
+    font-family: "Open Sans";
+    text-align: center;
+    padding-top: 5%;
+  }
+
+  /* Bottom Content */
+
+  .bottom-content {
+    height: 65%;
+    width: 100%;
+  }
+
+  /* Top of Bottom Content */
+
+  .bottom-top {
+    height: 35%;
+    width: 100%;
   }
 
   /* Input Labels */
@@ -131,6 +127,14 @@ page-login {
     font-family: "Open Sans";
   }
 
+
+  /* Bottom of Bottom Content */
+
+  .bottom-bottom {
+    height: 65%;
+    width: 100%;
+  }
+
   /* Login Button */
 
   .body-bottom {
@@ -162,7 +166,12 @@ page-login {
     text-decoration-color: white;
   }
 
+
+
 }
+
+
+
 
 /* Global for Toast Messages */
 
