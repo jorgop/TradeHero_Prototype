@@ -10,16 +10,20 @@
         <button class="fixed-header-btn" ion-button>
             <ion-icon name="settings"></ion-icon>
         </button>
+
     </ion-navbar>
-</ion-header><content scroll="false">
+</ion-header>
 
-<ion-content scroll="false">
+<ion-content class="set-background">
 
-    <div class="square">
-        <div class="main-container">
-            <div class="top-container">Kontakt
+    <div class="split-content">
+
+        <div class="top-content">
+
+            <div class="top-top">
+                Kontakt
             </div>
-            <div class="bottom-container">
+            <div class="top-bottom">
                 <ion-fab left>
                     <button ion-fab color="light" class="shadow">
                         <ion-icon name="arrow-dropright"></ion-icon>
@@ -32,39 +36,32 @@
                 </ion-fab>
             </div>
         </div>
-    </div>
 
+        <div class="bottom-content">
 
-    <!-- Body -->
-
-    <div class="container-body">
-
-        <div class="container-bd">
-
-            <div class="container-call-btn">
-
-    <button round class="button-align" ion-button icon-start (click)="callInsurance()">
-        <ion-icon name="call"></ion-icon>
-        InsuRabbit
-    </button>
+            <div class="bottom-top">
+                <button round class="button-align" ion-button icon-start (click)="callInsurance()">
+                    <ion-icon name="call"></ion-icon>
+                    InsuRabbit
+                </button>
+            </div>
+            <div class="bottom-bottom">
+                <div class="info">
+                    <p class="title">Öffnungszeiten</p>
+                    <p>Montag - Freitag 8-18 Uhr <br> Samstag - Sonntag 9-17 Uhr</p>
+                    <p></p>
+                    <p class="title">Adresse</p>
+                    <p>InsuRabbit <br> Beispielstr. 123 <br> 12345 Beispielstadt</p>
+                    <p></p>
+                    <p>Insu@Rabbit.de</p>
+                </div>
             </div>
 
-
-        <div class="container-text">
-    <div class="info">
-        <p class="title">Öffnungszeiten</p>
-        <p>Montag - Freitag 8-18 Uhr <br> Samstag - Sonntag 9-17 Uhr</p>
-        <p></p>
-        <p class="title">Adresse</p>
-        <p>Name der Versicherung XYZ <br> Beispielstr. 123 <br> 12345 Beispielstadt</p>
-        <p></p>
-        <p>Beispiel@Mail.de</p>
-    </div>
-
-        </div>
-
         </div>
 
 
+
     </div>
+
+
 </ion-content>

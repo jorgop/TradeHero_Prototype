@@ -30,22 +30,30 @@ page-contact {
     margin-right: 1%;
   }
 
-  /* Header-Logo */
+  /* Background-color */
 
-  .square {
-    position: relative;
+  .set-background {
+    background-color: white;
+  }
+
+  /* Split Content in 2 */
+
+  .split-content {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Top Content */
+
+  .top-content {
     height: 30%;
     width: 100%;
     background: #15B2A2;
   }
 
-  .main-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
+  /* Top of Top Content */
 
-  .top-container {
+  .top-top {
     height: 90%;
     width: 100%;
     text-align: center;
@@ -55,13 +63,14 @@ page-contact {
     padding-top: 20%;
   }
 
+  /* Bottom of Top Content */
 
-  /* Fab-Ion */
-
-  .bottom-container {
+  .top-bottom {
     height: 10%;
     width: 100%;
   }
+
+  /* Fab Ions */
 
   .fab {
     color: white;
@@ -74,45 +83,41 @@ page-contact {
     box-shadow: 2px 2px 5px gray;
   }
 
-  /* Body */
 
-  .container-body {
+  /* Bottom Content */
+
+  .bottom-content {
     height: 70%;
     width: 100%;
-    position: relative;
   }
 
-  .container-bd {
-    position: absolute;
+  /* Top of Bottom Content */
+
+  .bottom-top {
+    height: 30%;
     width: 100%;
-    height: 100%;
   }
 
   /* Call Button */
 
-  .container-call-btn {
-    height: 25%;
-    width: 100%;
-    text-align: center;
+  .button-align {
+    width: 50%;
+    height: 40%;
+    font-size: 1.3em;
+    background-color: #15B2A2;
+    top: 45%;
+    left: 25%;
   }
 
 
-  .button-align {
-    width: 50%;
-    height: 50%;
-    font-size: 120%;
-    background-color: #15B2A2;
-    transform: translateY(-50%);
-    top: 65%;
+  /* Bottom of Bottom Content */
+
+  .bottom-bottom {
+    height: 70%;
+    width: 100%;
   }
 
   /* Info Text */
-
-  .container-text {
-    height: 75%;
-    width: 100%;
-  }
-
 
   .info {
     height: 43%;
@@ -128,6 +133,8 @@ page-contact {
     color: #15B2A2;
     text-transform: uppercase;
   }
+
+
 
 
 }
