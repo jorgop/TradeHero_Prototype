@@ -28,13 +28,6 @@ page-history {
     margin-right: 1%;
   }
 
-  /* Statusfarben */
-  .cl-open {
-    color: darkorange;
-  }
-  .cl-closed {
-    color: green;
-  }
 
   /* Statuskarten */
   .card-closed {
@@ -50,9 +43,8 @@ page-history {
     margin-bottom: 10px;
   }
 
-  /* timeline tesing */
+  /* Variables */
 
-  // Variables
   $yellow: #FFB623;
   $green: #15B2A2;
   $grey: #404040;
@@ -130,7 +122,7 @@ page-history {
       @extend %clearfix;
 
       .timeline-icon {
-        /* color change depending on status - dynamisch setzen*/
+        /* color change depending on status */
         width: 50px;
         height: 50px;
         position: absolute;
@@ -145,16 +137,17 @@ page-history {
       .timeline-content {
         width: 45%;
         background: white;
-        padding: 20px;
+        padding: 25px;
+        font-family: "Open Sans";
         @include prefix(box-shadow, 0 3px 0 rgba(0, 0, 0, 0.1));
         @include prefix(border-radius, 5px);
         @include prefix(transition, all .3s ease);
 
         h2 {
-          padding: 15px;
+          padding: 10px;
           background: $green;
           color: #fff;
-          margin: -20px -20px 0 -20px;
+          margin: -20px -20px 20px -20px;
           font-weight: 300;
           @include prefix(border-radius, 3px 3px 0 0);
         }
@@ -188,7 +181,7 @@ page-history {
 
   @media screen and (max-width: 768px) {
     #timeline {
-      margin: 30px;
+      margin: 25px;
       padding: 0px;
       width: 90%;
       &:before {
