@@ -42,13 +42,13 @@
   </ion-card>
 
 
-  <!-- timeline testing -->
+  <!-- timeline -->
 
   <div class="container">
     <h1 class="project-name">Bearbeitungs-ID {{ticketID}}</h1>
 
-    <ion-card>
-      <ion-card-header *ngFor="let historyHeader of historyHeader">
+    <ion-card class="border">
+      <ion-card-header class="customize-card" *ngFor="let historyHeader of historyHeader">
         Ticket-ID: {{ticketID}}
         <br>
         <div>
