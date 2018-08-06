@@ -13,13 +13,14 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="set-background">
 
-    <div class="square">
-        <div class="main-container">
-            <div class="top-container">Übersicht
+    <div class="split-content">
+        <div class="top-content">
+            <div class="top-top">
+                Übersicht
             </div>
-            <div class="bottom-container">
+            <div class="top-bottom">
                 <ion-fab left>
                     <button ion-fab color="light" class="shadow">
                         <ion-icon name="arrow-dropright"></ion-icon>
@@ -32,17 +33,19 @@
                 </ion-fab>
             </div>
         </div>
-    </div>
 
 
+        <div class="bottom-content">
 
-    <ion-refresher (ionRefresh)="actRefresh($event)">
-        <ion-refresher-content pullingText="arrow-dropdown"
+
+            <ion-refresher (ionRefresh)="actRefresh($event)">
+                <ion-refresher-content pullingText="arrow-dropdown"
                                pullingText="Aktualisieren"
                                refreshingSpinner="circles"
                                refreshingText="wird aktualisiert...">
-        </ion-refresher-content>
-    </ion-refresher>
+                </ion-refresher-content>
+            </ion-refresher>
+
     <div>
     <ion-card *ngFor="let aggregate of aggregate">
         <ion-card-header>
@@ -65,6 +68,7 @@
         </ion-card-header>
     </ion-card>
     </div>
+
     <!--<h2 align="center">Meine Rechnungen</h2>-->
     <div padding class="navbar">
         <ion-segment [(ngModel)]="status" *ngFor="let aggregate of aggregate">
@@ -101,4 +105,9 @@
             </button>
         </ion-list>
     </div>
+
+        </div>
+
+    </div>
+
 </ion-content>
