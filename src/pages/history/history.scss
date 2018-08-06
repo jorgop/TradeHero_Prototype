@@ -28,8 +28,20 @@ page-history {
     margin-right: 1%;
   }
 
+  /* Ticket Card */
 
-  /* Statuskarten */
+  .customize-card {
+    font-family: "Open Sans";
+    color: #404040;
+  }
+
+  .border {
+    border: 1px solid #FFB623;
+  }
+
+
+
+  /* Statuskarten
   .card-closed {
     background-color: #dddddd;
     border: 2px solid #aaaaaa;
@@ -41,7 +53,7 @@ page-history {
     border: 2px solid #aaaaaa;
     border-radius: 35px;
     margin-bottom: 10px;
-  }
+  } */
 
   /* Variables */
 
@@ -139,6 +151,7 @@ page-history {
         background: white;
         padding: 25px;
         font-family: "Open Sans";
+        font-color: $grey;
         @include prefix(box-shadow, 0 3px 0 rgba(0, 0, 0, 0.1));
         @include prefix(border-radius, 5px);
         @include prefix(transition, all .3s ease);
