@@ -32,6 +32,13 @@ page-profile {
     margin-right: 1%;
   }
 
+  .click-button {
+    :active {
+      background-color: white;
+      color: #FFB623;
+    }
+  }
+
   .square {
     position: relative;
     height: 30%;

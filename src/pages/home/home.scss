@@ -114,6 +114,13 @@ page-home {
     /* funktioniert noch nicht ganz */
   }
 
+  .click-button {
+    :active {
+      background-color: white;
+      color: #FFB623;
+    }
+  }
+
 
 
 }
