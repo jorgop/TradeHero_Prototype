@@ -10,6 +10,9 @@ import {LoginPage} from "../login/login";
 import {ContactPage} from "../contact/contact";
 import {ScanPage} from "../scan/scan";
 import {ActivityPage} from "../activity/activity";
+import {identity} from "rxjs/util/identity";
+import {PlzValidator} from "../../validators/plz";
+import {HousenumberValidator} from "../../validators/housenumber";
 
 
 @Component({
@@ -17,70 +20,86 @@ import {ActivityPage} from "../activity/activity";
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+    /**
+     * Form to display and change personal data
+     */
+    private stammdatenForm: FormGroup;
+    /**
+     * Variables to store user data
+     */
+    private fname: any;
+    private place: any;
+    private gender: any;
 
-  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
-  private stammdatenForm : FormGroup;
-  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
-  private fname: any;
-  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
-  private editInfo: string = "true";  //toggle Variable for editing the personal data
-  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
-  private borderStyle: string = ''; // Variable for Border Style
-  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
-  private buttonStyle: string = 'none';
-  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
-  private iconToggle: boolean = true;
-  //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
-  private errorMsg: boolean = false;
+    /**
+     *  toggle variable for editing the personal data
+     */
+    private editInfo: string = "true";
+    /**
+     *  Variable for border style
+     */
+    private borderStyle: string = '';
+    /**
+     *  Variable for button style
+     */
+    private buttonStyle: string = 'none';
+    /**
+     *  Variable for icon style
+     */
+    private iconToggle: boolean = true;
+    //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
+    //private errorMsg: boolean = false;
 
-  @ViewChild(Navbar) navBar: Navbar;
+    @ViewChild(Navbar) navBar: Navbar;
 
-  /**
-   * @constructor
-   * @param {NavController} navCtrl Controller for Navigation
-   * @param {ToastController} toastCtrl Tosat Message Controller
-   * @param {AlertController} alertCtrl Alert Controller
-   * @param {Storage} storage Local Storage
-   * @param {FormBuilder} formBuilder Builder to create Forms
-   * @param {RestProvider} restProvider Provider for Rest Service
-   */
-  constructor(public navCtrl: NavController,
-              private toastCtrl: ToastController,
-              public alertCtrl: AlertController,
-              private storage: Storage,
-              private formBuilder: FormBuilder,
-              public restProvider: RestProvider) {
+    /**
+     * @constructor
+     * @param {NavController} navCtrl Controller for Navigation
+     * @param {ToastController} toastCtrl Tosat Message Controller
+     * @param {AlertController} alertCtrl Alert Controller
+     * @param {Storage} storage Local Storage
+     * @param {FormBuilder} formBuilder Builder to create Forms
+     * @param {RestProvider} restProvider Provider for Rest Service
+     */
+    constructor(public navCtrl: NavController,
+                private toastCtrl: ToastController,
+                public alertCtrl: AlertController,
+                private storage: Storage,
+                private formBuilder: FormBuilder,
+                public restProvider: RestProvider) {
 
-// Creates form
-      this.stammdatenForm = formBuilder.group({
-          firstName: ['', Validators.required],
-          lastName : [''],
-          mail : [''],
-          street: [''],
-          houseNumber: [''],
-          contractID: ['']
-      });
+// Creates form with validators
+        this.stammdatenForm = formBuilder.group({
+            firstName: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+            lastName: ['', Validators.required],
+            mail: ['', Validators.compose([Validators.required, Validators.email])],
+            street: ['', Validators.required],
+            houseNumber: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])],
+            contractID: ['', Validators.required]
+        });
 
-  }
+    }
 
-  /**
-   * Function will be called if page will be load
-   */
-  ionViewDidLoad() {
-        this.navBar.backButtonClick = (e:UIEvent)=>{
+    /**
+     * Function will be called if page will be load
+     */
+    ionViewDidLoad() {
+        this.navBar.backButtonClick = (e: UIEvent) => {
             this.navCtrl.push(HomePage);
         }
     }
 
-//function to change editing mode of personal information
+    /**
+     * Function to change editing mode of personal information
+     */
     public toggleediting(): void {
-        if(this.editInfo === 'true') {
+        if (this.editInfo === 'true') {
             this.editInfo = 'false';
             this.borderStyle = '2px solid #15B2A2';
             this.buttonStyle = '';
             this.iconToggle = false;
             //console.log("first toggle: ", this.editInfo);
-        } else if(this.editInfo === 'false'){
+        } else if (this.editInfo === 'false') {
             this.editInfo = 'true';
             this.borderStyle = '';
             this.buttonStyle = 'none';
@@ -90,166 +109,206 @@ export class ProfilePage {
         }
     }
 
-  /**
-   * Function will called if page will be entered
-   */
-  ionViewWillEnter() {
+    /**
+     * Function will called if page will be entered
+     */
+    ionViewWillEnter() {
 
-    this.storage.get('identity').then((val) => {
-      let identity = <any>{};
-      identity = JSON.parse(val);
+        //get id from Rest
+        this.storage.get('identity').then((val) => {
+            let identity = <any>{};
+            identity = JSON.parse(val);
 
-      try{
-        this.restProvider.getUserData(identity['userID']).then((result) => {
-          //set activities to Storage
-          this.storage.set('user',JSON.stringify(result));
+            try {
+                this.restProvider.getUserData(identity['userID']).then((result) => {
+                    //set activities to Storage
+                    this.storage.set('user', JSON.stringify(result));
 
-          this.updateUserDataInputfields();
+                    this.updateUserDataInputfields();
 
-        }, (err) => {
+                }, (err) => {
+                    //sends stored data to html in case storage can not be reached
+                    this.updateUserDataInputfields()
 
-          this.updateUserDataInputfields()
-          // daten ins html aus storage wenn rest nicht geht
+                });
+            } catch (e) {
+                //TODO: Exception handling
+                console.log("ID is null!")
+            }
         });
-      }catch (e) {
-        //TODO: Exception handling
-        console.log("ID is null!")
-      }
-    });
-  }
+    }
 
-  /**
-   * Read userdata from form and send it to REST
-   */
-  sendUserData(){
+    /**
+     * Read userdata from form and send it to REST
+     */
+    sendUserData() {
 
-      //read new data from sheet
-      var restData = <any>{};
-      restData = {'firstName': this.stammdatenForm.controls.firstName.value,
-                'lastName': this.stammdatenForm.controls.lastName.value,
-                'mail': this.stammdatenForm.controls.mail.value,
-                'street': this.stammdatenForm.controls.street.value,
-                'houseNumber': this.stammdatenForm.controls.houseNumber.value,
-                'contractID': this.stammdatenForm.controls.contractID.value};
-      console.log(restData);
+        //read new data from sheet
+        var restData = <any>{};
+        restData = {
+            'firstName': this.stammdatenForm.controls.firstName.value,
+            'lastName': this.stammdatenForm.controls.lastName.value,
+            'mail': this.stammdatenForm.controls.mail.value,
+            'street': this.stammdatenForm.controls.street.value,
+            'houseNumber': this.stammdatenForm.controls.houseNumber.value,
+            'contractID': this.stammdatenForm.controls.contractID.value
+        };
 
+        //send data to rest in the variable "restData"
+        var myIdentity;
+        this.storage.get('identity').then((val) => {
+            let identity = <any>{};
+            identity = JSON.parse(val);
 
-      //send data to rest in variable restData
+        // checks validation of new input
+            try {
+                if (this.stammdatenForm.controls.street.valid &&
+                    this.stammdatenForm.controls.houseNumber.valid &&
+                    this.stammdatenForm.controls.mail.valid) {
+                this.validateFormInput();
+                this.restProvider.updateUserData(identity['userID'], restData).then((result) => {
+                    console.log(result);
+                    console.log(result['userMail']);
+                    if (result['userMail'] == "false") {
+                        this.sentToast("Email-Fehler");
+                    }
+                    else if ((result['userMail'] == "true") && (result['userData'] == "true")) {
+                        this.toggleediting();
+                        this.updateUserDataInputfields();
+                        this.sentToast("Daten erfolgreich aktualisiert!");
+                    }
 
-      var myIdentity;
+                }, (err) => {
+                    console.log('error2 ' + err);
+                    this.sentToast("Daten konnten nicht aktualisiert werden. Überprüfe deine Internetverbindung!");
+                });
+              }
 
-      this.storage.get('identity').then((val) => {
-        let identity = <any>{};
-        identity = JSON.parse(val);
+              else{
+                console.log("2");
+                    //wrong fields for toast message
+                    var wrongTextFields = "";
+                    var checkValuesList = {
+                        "street":this.stammdatenForm.controls.street.valid ,
+                        "houseNumber":this.stammdatenForm.controls.houseNumber.valid ,
+                        "email":this.stammdatenForm.controls.mail.valid };
 
-        try {
-          this.restProvider.updateUserData(identity['userID'], restData).then((result) => {
-            console.log(result);
-            console.log(result['userMail']);
-            if (result['userMail'] == "false") {
-              this.sentToast("Email-Fehler");
+                    //push wrong values to the checkValuesList
+                    for(let key in checkValuesList){
+                        if(checkValuesList[key] == false){
+
+                            switch (key){
+                                case "street": {
+                                    wrongTextFields += "Straßenname" + "\n";
+                                    break;
+                                }
+                                case "houseNumber":{
+                                    wrongTextFields += "Hausnummer" + "\n";
+                                    break;
+                                }
+                                case "email":{
+                                    wrongTextFields += "Email-Adresse" + "\n";
+                                    break;
+                                }
+
+                            }
+                        }
+                    };
+                    this.sentToast("Bitte die Felder überprüfen: \n"+ wrongTextFields);
+                }
+            } catch (e) {
+                //TODO:exception handling
+                console.log("ID is null!")
             }
-            else if ((result['userMail'] == "true") && (result['userData'] == "true")) {
-              this.toggleediting();
-              this.sentToast("Daten erfolgreich aktualisiert!");
-            }
+        });
+    }
 
-          }, (err) => {
-            console.log('error2 ' + err);
-            this.sentToast("Keine Internetverbindung!");
-          });
-        }catch (e) {
-          //TODO:exception handling
-          console.log("ID is null!")
-        }
-      });
-  }
+    /**
+     * Update the Inputfields
+     */
+    updateUserDataInputfields() {
+        this.storage.get('user').then((val) => {
+            let user = <any>{};
+            user = JSON.parse(val);
+            var userData = user['userData'][0];
 
-  /**
-   * Update the Inputfields
-   */
-  updateUserDataInputfields(){
-      this.storage.get('user').then((val) => {
-          let user = <any>{};
-          user = JSON.parse(val);
-          console.log("raw:", user);
-          //console.log("raw1:", user['userData'][0]['firstName']);
-          var userData = user['userData'][0];
+            //username for variable used in profile headline
+            this.fname = userData['firstName'];
 
-          //username for variable used in profile headline
-          this.fname = userData['firstName'];
-          Object.keys(userData).forEach(key => {
-              //console.log(key);
-              //console.log(userData[key]);
-              if(key == "firstName"){
-                  this.stammdatenForm.patchValue({firstName:userData['firstName']});
-              }
-              else if(key == "lastName"){
-                  this.stammdatenForm.patchValue({lastName:userData['lastName']});
-              }
-              else if(key == "mail"){
-                  this.stammdatenForm.patchValue({mail:userData['mail']});
-              }
-              else if(key == "street"){
-                  this.stammdatenForm.patchValue({street:userData['street']});
-              }
-              else if(key == "contractID"){
-                  this.stammdatenForm.patchValue({contractID:userData['contractID']});
-              }
-              else if(key == "houseNumber"){
-                  this.stammdatenForm.patchValue({houseNumber:userData['houseNumber']});
-              };
-          });
-      });
-  }
+            Object.keys(userData).forEach(key => {
 
-  /**
-   * Navigate to ScanPage
-   */
-  goToScan(){
+                if (key == "firstName") {
+                    this.stammdatenForm.patchValue({firstName: userData['firstName']});
+                }
+                else if (key == "lastName") {
+                    this.stammdatenForm.patchValue({lastName: userData['lastName']});
+                }
+                else if (key == "mail") {
+                    this.stammdatenForm.patchValue({mail: userData['mail']});
+                }
+                else if (key == "street") {
+                    this.stammdatenForm.patchValue({street: userData['street']});
+                }
+                else if (key == "contractID") {
+                    this.stammdatenForm.patchValue({contractID: userData['contractID']});
+                }
+                else if (key == "houseNumber") {
+
+                    this.stammdatenForm.patchValue({houseNumber: userData['houseNumber']});
+                }
+                ;
+            });
+        });
+    }
+
+
+    /**
+     * Navigate to ScanPage
+     */
+    goToScan() {
         this.navCtrl.push(ScanPage);
     }
 
-  /**
-   * Navigate to  ProfilePage
-   */
-  goToProfile(){
+    /**
+     * Navigate to  ProfilePage
+     */
+    goToProfile() {
         this.navCtrl.push(ProfilePage);
     }
 
-  /**
-   * Navigate to ContactPage
-   */
-  goToContact(){
+    /**
+     * Navigate to ContactPage
+     */
+    goToContact() {
         this.navCtrl.push(ContactPage);
     }
 
-  /**
-   * Navigate to ActivityPage
-   */
-  goToActivity(){
+    /**
+     * Navigate to ActivityPage
+     */
+    goToActivity() {
         this.navCtrl.push(ActivityPage);
     }
 
-  /**
-   * Navigate to HomePage
-   */
-  goToHome(){
+    /**
+     * Navigate to HomePage
+     */
+    goToHome() {
         this.navCtrl.push(HomePage);
     }
 
-  /**
-   * Navigate to ImpressumPage
-   */
-  goToImpressum(){
+    /**
+     * Navigate to ImpressumPage
+     */
+    goToImpressum() {
         this.navCtrl.push(ImpressumPage);
     }
 
 
-  /**
-   * Ask for logout
-   */
-  logout() {
+    /**
+     * Ask for logout
+     */
+    logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
             buttons: [
@@ -271,10 +330,10 @@ export class ProfilePage {
         confirm.present();
     }
 
-  /**
-   * Perform logout and clean the local storage
-   */
-  performLogout() {
+    /**
+     * Perform logout and clean the local storage
+     */
+    performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
@@ -306,4 +365,47 @@ export class ProfilePage {
         toast.present();
     }
 
+    /**
+     * Validate Data
+     * */
+
+    validateFormInput() {
+        //validate fields
+        //this.validateFields();
+
+
+            this.storage.get('user').then((val) => {
+                let user = <any>{};
+                user = JSON.parse(val);
+                //console.log("raw:", user);
+                var userData = user['userData'][0];
+                var myFname = userData['firstName'];
+                var myPlace = userData['place'];
+                var myPlz = userData['PLZ'];
+                var myBday = userData ['birthdate'];
+                var myGender = userData ['gender'];
+                var newData = <any>{};
+
+                newData = {
+                    "userData": [
+                        {
+                            "firstName": myFname,
+                            "street": this.stammdatenForm.controls.street.value,
+                            "place": myPlace,
+                            "PLZ": myPlz,
+                            "lastName": this.stammdatenForm.controls.lastName.value,
+                            "houseNumber": this.stammdatenForm.controls.houseNumber.value,
+                            "birthDate": myBday,
+                            "gender": myGender,
+                            "mail": this.stammdatenForm.controls.mail.value,
+                            "contractID": this.stammdatenForm.controls.contractID.value
+                        }
+                    ]
+                };
+
+                this.storage.set('user', JSON.stringify(newData));
+            })
+    }
 }
+
+
