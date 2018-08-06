@@ -203,7 +203,7 @@ export class OcrPage {
       this.osrLoading.dismiss().then(() => {
         console.log('Oooops OCR failed');
         this.validateFields();
-        this.sentToast("Text konnte nicht erknant werden.",false,3000,"schließen");
+        this.sentToast("Text konnte nicht erkannt werden.",false,3000,"schließen");
       });
     });
   }
@@ -303,16 +303,16 @@ export class OcrPage {
       this.restProvider.addActivity(restData).then((result) => {
         if (result == true){
           this.sendLoading.dismiss().then(() => {
-            console.log("Activity erfolgreich erstellt");
+            console.log("Activity erfolgreich erstellt.");
             this.navCtrl.push(ActivityPage);
           });
         }else {
-          this.sentToast("Activity konnte nicht erstellt werden",false,3000,"schließen");
+          this.sentToast("Rechnung konnte nicht eingereicht werden.",false,3000,"schließen");
         }
       }, (err) => {
         this.sendLoading.dismiss();
         console.log('error2 ' + err);
-        this.sentToast("Oooops activity failed",false,3000,"schließen");
+        this.sentToast("Keine Internetverbindung.",false,3000,"schließen");
       });
     }else{
 
@@ -372,7 +372,7 @@ export class OcrPage {
   presentConfirm() {
     let alert = this.alertCtrl.create({
       title: 'Korrektheit der Daten',
-      message: 'Ich bestätige, dass meine Angaben korrekt sind, der Rechungsbetrag von '+ this.myForm.controls.refund.value +' € und stimmt mit der Rechnung überein.',
+      message: 'Ich bestätige, dass meine Angaben korrekt sind und der Rechungsbetrag von '+ this.myForm.controls.refund.value +' € mit der eingereichten Rechnung übereinstimmt.',
       buttons: [
         {
           text: 'Nein',
