@@ -11,6 +11,7 @@ import {ContactPage} from "../contact/contact";
 import {ScanPage} from "../scan/scan";
 import {ActivityPage} from "../activity/activity";
 import {identity} from "rxjs/util/identity";
+import {Md5} from "ts-md5";
 import {PlzValidator} from "../../validators/plz";
 import {HousenumberValidator} from "../../validators/housenumber";
 
@@ -24,6 +25,10 @@ export class ProfilePage {
      * Form to display and change personal data
      */
     private stammdatenForm: FormGroup;
+    /**
+     * Form to change password
+     */
+    private pwForm: FormGroup;
     /**
      * Variables to store user name
      */
@@ -47,6 +52,8 @@ export class ProfilePage {
     private iconToggle: boolean = true;
     //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
     //private errorMsg: boolean = false;
+
+    private hide: boolean = false;
 
     @ViewChild(Navbar) navBar: Navbar;
 
@@ -73,7 +80,16 @@ export class ProfilePage {
             mail: ['', Validators.compose([Validators.required, Validators.email])],
             street: ['', Validators.required],
             houseNumber: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])],
-            contractID: ['', Validators.required]
+            contractID: ['', Validators.required],
+            bankAccountName: ['', Validators.required],
+            bic: ['', Validators.required],
+            iban: ['', Validators.required]
+        });
+
+        this.pwForm = formBuilder.group({
+            oldPw: ['', Validators.required],
+            newPw1:['', Validators.compose([Validators.required, Validators.minLength(6)])],
+            newPw2: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
         });
 
     }
@@ -86,6 +102,11 @@ export class ProfilePage {
             this.navCtrl.push(HomePage);
         }
     }
+
+    ngIfCtrl(){
+        this.hide = !this.hide;
+    }
+
 
     /**
      * Function to change editing mode of personal information
@@ -119,7 +140,7 @@ export class ProfilePage {
 
             try {
                 this.restProvider.getUserData(identity['userID']).then((result) => {
-                    //set activities to Storage
+                    //set user data to Storage
                     this.storage.set('user', JSON.stringify(result));
 
                     this.updateUserDataInputfields();
@@ -139,9 +160,11 @@ export class ProfilePage {
     /**
      * Read userdata from form and send it to REST
      */
+
     sendUserData() {
 
-        //read new data from sheet
+    //read new data from sheet
+
         var restData = <any>{};
         restData = {
             'firstName': this.stammdatenForm.controls.firstName.value,
@@ -149,16 +172,20 @@ export class ProfilePage {
             'mail': this.stammdatenForm.controls.mail.value,
             'street': this.stammdatenForm.controls.street.value,
             'houseNumber': this.stammdatenForm.controls.houseNumber.value,
-            'contractID': this.stammdatenForm.controls.contractID.value
+            'contractID': this.stammdatenForm.controls.contractID.value,
+            'iban': this.stammdatenForm.controls.iban.value,
+            'bic': this.stammdatenForm.controls.bic.value,
+            'bankAccountName': this.stammdatenForm.controls.bankAccountName.value
         };
 
-        //send data to rest in the variable "restData"
+    //send data to rest in the variable "restData"
+
         var newIdentity;
         this.storage.get('identity').then((val) => {
             let identity = <any>{};
             identity = JSON.parse(val);
 
-        // checks validation of new input
+    // checks validation of new input
             try {
                 if (this.stammdatenForm.controls.street.valid &&
                     this.stammdatenForm.controls.houseNumber.valid &&
@@ -191,7 +218,7 @@ export class ProfilePage {
                         "houseNumber":this.stammdatenForm.controls.houseNumber.valid ,
                         "email":this.stammdatenForm.controls.mail.valid };
 
-                    //push wrong values to the checkValuesList
+             //push wrong values to the checkValuesList
                     for(let key in checkValuesList){
                         if(checkValuesList[key] == false){
 
@@ -224,13 +251,15 @@ export class ProfilePage {
     /**
      * Update the Inputfields
      */
+
     updateUserDataInputfields() {
+
         this.storage.get('user').then((val) => {
             let user = <any>{};
             user = JSON.parse(val);
             var userData = user['userData'][0];
 
-            //username for variable used in profile headline
+        //username for variable used in profile headline
             this.fname = userData['firstName'];
 
             Object.keys(userData).forEach(key => {
@@ -253,6 +282,18 @@ export class ProfilePage {
                 else if (key == "houseNumber") {
 
                     this.stammdatenForm.patchValue({houseNumber: userData['houseNumber']});
+                }
+                else if (key == "bic") {
+
+                    this.stammdatenForm.patchValue({bic: userData['bic']});
+                }
+                else if (key == "bankAccountName") {
+
+                    this.stammdatenForm.patchValue({bankAccountName: userData['bankAccountName']});
+                }
+                else if (key == "iban") {
+
+                    this.stammdatenForm.patchValue({iban: userData['iban']});
                 }
                 ;
             });
@@ -404,6 +445,67 @@ export class ProfilePage {
                 this.storage.set('user', JSON.stringify(newData));
             })
     }
-}
+
+    changePw() {
+        this.storage.get('identity').then((val) => {
+            let identity = <any>{};
+            identity = JSON.parse(val);
+
+        console.log("Pw log 1");
+        if (this.pwForm.controls.oldPw.valid &&
+            this.pwForm.controls.newPw1.valid &&
+            this.pwForm.controls.newPw2.valid) {
+
+            console.log("Pw log 2");
+
+            if (this.pwForm.controls.newPw1.value == this.pwForm.controls.newPw2.value)
+            {
+                console.log("Pw log 3");
+                //var hashpw = Md5.hashStr(this.pwForm.controls.newpw1.value);
+                //console.log(hashpw);
+                var pwData = <any>{};
+                pwData = {
+                    'firstName': this.stammdatenForm.controls.firstName.value,
+                    'lastName': this.stammdatenForm.controls.lastName.value,
+                    'mail': this.stammdatenForm.controls.mail.value,
+                    'street': this.stammdatenForm.controls.street.value,
+                    'houseNumber': this.stammdatenForm.controls.houseNumber.value,
+                    'contractID': this.stammdatenForm.controls.contractID.value,
+                    'iban': this.stammdatenForm.controls.iban.value,
+                    'bic': this.stammdatenForm.controls.bic.value,
+                    'bankAccountName': this.stammdatenForm.controls.bankAccountName.value,
+                    'newPassword': Md5.hashStr(this.pwForm.controls.newPw1.value),
+                    'oldPassword': Md5.hashStr(this.pwForm.controls.oldPw.value)
+                };
+                console.log("Pw log 4");
+                console.log("Passwörter stimmen überein");
+                this.restProvider.updateUserData(identity['userID'], pwData).then((result) => {
+                    console.log(result);
+                    if (result['userPassword'] == "false") {
+                        this.sentToast("Das alte Passwort stimmt nicht.");
+                    }
+                    else if ((result['userPassword'] == "true") && (result['userData'] == "true")) {
+                        console.log("neues PW!")
+                        this.ngIfCtrl();
+                        this.sentToast("Passswort erfolgreich aktualisiert!");
+                    }
+
+                }, (err) => {
+                    console.log('error2 ' + err);
+                    this.sentToast("Daten konnten nicht aktualisiert werden. Überprüfe deine Internetverbindung!");
+                });
+            }
+
+            else
+            {
+                this.sentToast("Die Passwörter stimmen nicht überein");
+            }
+        }
+        else
+        {
+            this.sentToast("Passwörter erfüllen Anforderungen nicht. \nMindestlänge 6 Zeichen.")
+        }
+    });
+}}
 
 

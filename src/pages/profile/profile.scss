@@ -136,10 +136,18 @@ page-profile {
   }
 
   //Button to Send Data to Rest
-  #SendData {
+  .sendData {
     margin-top: 1.5em;
     background-color: #15B2A2;
     border-radius: 64px;
+  }
+  #pwDiv{
+    padding: 1em;
+    text-align: left;
+  }
+  #changePW{
+    text-align: left;
+    color: #15B2A2;
   }
 }
 
