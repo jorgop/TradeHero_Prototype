@@ -362,7 +362,7 @@ export class OcrPage {
           }
         }
       };
-      this.sentToast("Bitte die Felder überprüfen: \n"+ wrongTextFields, true,5000,"schließen");
+      this.sentToast("Bitte die Felder überprüfen: \n"+ wrongTextFields, true,5000,"x");
     }
   }
 

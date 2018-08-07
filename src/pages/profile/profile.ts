@@ -25,11 +25,9 @@ export class ProfilePage {
      */
     private stammdatenForm: FormGroup;
     /**
-     * Variables to store user data
+     * Variables to store user name
      */
     private fname: any;
-    private place: any;
-    private gender: any;
 
     /**
      *  toggle variable for editing the personal data
@@ -155,7 +153,7 @@ export class ProfilePage {
         };
 
         //send data to rest in the variable "restData"
-        var myIdentity;
+        var newIdentity;
         this.storage.get('identity').then((val) => {
             let identity = <any>{};
             identity = JSON.parse(val);
@@ -342,7 +340,7 @@ export class ProfilePage {
             duration: 2000,
             position: 'top',
             showCloseButton: true,
-            closeButtonText: 'X'
+            closeButtonText: 'x'
         });
         logoutConf.onDidDismiss(() => {
             console.log('Dismissed toast');
@@ -359,8 +357,8 @@ export class ProfilePage {
             message: message,
             duration: 3000,
             position: 'top',
-            cssClass: 'toastB',
-            showCloseButton: true
+            showCloseButton: true,
+            closeButtonText: 'x'
         });
         toast.present();
     }
@@ -379,24 +377,24 @@ export class ProfilePage {
                 user = JSON.parse(val);
                 //console.log("raw:", user);
                 var userData = user['userData'][0];
-                var myFname = userData['firstName'];
-                var myPlace = userData['place'];
-                var myPlz = userData['PLZ'];
-                var myBday = userData ['birthdate'];
-                var myGender = userData ['gender'];
+                var newFname = userData['firstName'];
+                var newPlace = userData['place'];
+                var newPlz = userData['PLZ'];
+                var newBday = userData ['birthdate'];
+                var newGender = userData ['gender'];
                 var newData = <any>{};
 
                 newData = {
                     "userData": [
                         {
-                            "firstName": myFname,
+                            "firstName": newFname,
                             "street": this.stammdatenForm.controls.street.value,
-                            "place": myPlace,
-                            "PLZ": myPlz,
+                            "place": newPlace,
+                            "PLZ": newPlz,
                             "lastName": this.stammdatenForm.controls.lastName.value,
                             "houseNumber": this.stammdatenForm.controls.houseNumber.value,
-                            "birthDate": myBday,
-                            "gender": myGender,
+                            "birthDate": newBday,
+                            "gender": newGender,
                             "mail": this.stammdatenForm.controls.mail.value,
                             "contractID": this.stammdatenForm.controls.contractID.value
                         }
