@@ -3,6 +3,11 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
+import {OcrPage} from "../pages/ocr/ocr";
+import {ScanPage} from "../pages/scan/scan";
+import {ImpressumPage} from "../pages/impressum/impressum";
+import {HomePage} from "../pages/home/home";
+import {ActivityPage} from "../pages/activity/activity";
 
 @Component({
   templateUrl: 'app.html'

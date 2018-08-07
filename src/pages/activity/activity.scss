@@ -188,4 +188,13 @@ page-activity {
     color: #404040;
     font-size: 1.4rem;
   }
+
+  .click-button {
+    :active {
+      background-color: white;
+      color: #FFB623;
+    }
+  }
+
+
 }

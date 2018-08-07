@@ -134,6 +134,13 @@ page-contact {
     text-transform: uppercase;
   }
 
+  .click-button {
+    :active {
+      background-color: white;
+      color: #FFB623;
+    }
+  }
+
 
 
 

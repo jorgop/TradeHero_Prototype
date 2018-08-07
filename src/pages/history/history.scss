@@ -28,6 +28,13 @@ page-history {
     margin-right: 1%;
   }
 
+  .click-button {
+    :active {
+      background-color: white;
+      color: #FFB623;
+    }
+  }
+
   /* Ticket Card */
 
   .customize-card {
