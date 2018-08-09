@@ -1,15 +1,24 @@
 <ion-header class="color-header" xmlns="http://www.w3.org/1999/html">
   <ion-navbar  class="back-button" transparent>
 
-    <button class="logout-btn" (click)="logout()" round ion-button>
-      <ion-icon name="power"></ion-icon>
-    </button>
-    <button class="fixed-header-btn" (click)="goToImpressum()" ion-button>
-      <ion-icon name="information-circle"></ion-icon>
-    </button>
-    <button class="fixed-header-btn" ion-button>
-      <ion-icon name="settings"></ion-icon>
-    </button>
+    <div class="click-button">
+      <button class="logout-btn" (click)="logout()" round ion-button>
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </div>
+
+    <div class="click-button">
+      <button class="fixed-header-btn" (click)="goToImpressum()" ion-button>
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </div>
+
+    <div class="click-button">
+      <button class="fixed-header-btn" ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </div>
+
   </ion-navbar>
 </ion-header>
 
@@ -42,62 +51,93 @@
   </ion-card>
 
 
-  <!-- timeline testing -->
+  <!-- timeline -->
 
   <div class="container">
     <h1 class="project-name">Bearbeitungs-ID {{ticketID}}</h1>
 
-    <ion-card>
-      <ion-card-header *ngFor="let historyHeader of historyHeader">
+    <ion-card class="border">
+      <ion-card-header class="customize-card" *ngFor="let historyHeader of historyHeader">
         Ticket-ID: {{ticketID}}
         <br>
-        <p>Erstellt am: {{historyHeader.submitDate | date: 'dd.MM.yyyy'}}
-          <br>
-          Abgeschlossen am: {{historyHeader.endDate | date: 'dd.MM.yyyy'}}
-          <br>
-          Rechungsbetrag: {{historyHeader.refund | number: '1.2-2': 'de' }}
-        </p>
+        <div>
+          Erstellt am: {{historyHeader.submitDate}}
+        </div>
+        <div *ngIf="historyHeader.endDate == null;else still_open">
+          Abgeschlossen am: noch offen
+        </div>
+        <ng-template #still_open>Abgeschlossen am: {{historyHeader.endDate}}</ng-template>
+        <div>
+          Rechungsbetrag: {{historyHeader.refund | number: '1.2-2': 'de' }} €
+        </div>
       </ion-card-header>
       <ion-card-content *ngFor="let historyHeader of historyHeader">
         <ion-item>
           <ion-thumbnail item-start (click)="showPhoto(historyHeader.imgFile)">
             <img src="{{historyHeader.imgFile}}" imageViewer/>
           </ion-thumbnail>
-          <p>
+          <div >
             RechungsID: {{historyHeader.invoiceID}}
-          </p>
+          </div>
         </ion-item>
       </ion-card-content>
     </ion-card>
 
     <div id="timeline">
-      <div [ngClass]="(this.ticket1_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]=" 'timeline-icon ' + this.ticket1_status_color"></div>
+      <div [ngClass]="(this.ticket1.status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket1.status_color"></div>
         <div class="timeline-content">
-          <h2>{{ticket1_head}}</h2>
-          <p>
-            {{ticket1_body}}
-          </p>
+          <h2>{{ticket1.head}}</h2>
+          <div>
+            <div>
+              {{ticket1.body}}
+            </div>
+            <div>
+              Start: {{ticket1.startDate}}
+            </div>
+            <div *ngIf="ticket1.endDate == null;else t1still_open">
+              Abgeschlossen am: noch offen
+            </div>
+            <ng-template #t1still_open>Abgeschlossen am: {{ticket1.endDate}}</ng-template>
+          </div>
         </div>
       </div>
 
-      <div [ngClass]="(this.ticket2_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]=" 'timeline-icon ' + this.ticket2_status_color"></div>
+      <div [ngClass]="(this.ticket2.status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket2.status_color"></div>
         <div class="timeline-content">
-          <h2>{{ticket2_head}}</h2>
-          <p>
-            {{ticket2_body}}
-          </p>
+          <h2>{{ticket2.head}}</h2>
+          <div>
+            <div>
+              {{ticket2.body}}
+            </div>
+            <div>
+              Start: {{ticket2.startDate}}
+            </div>
+            <div *ngIf="ticket2.endDate == null;else t2still_open">
+              Abgeschlossen am: noch offen
+            </div>
+            <ng-template #t2still_open>Abgeschlossen am: {{ticket2.endDate}}</ng-template>
+          </div>
         </div>
       </div>
 
-      <div [ngClass]="(this.ticket3_status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
-        <div [ngClass]=" 'timeline-icon ' + this.ticket3_status_color"></div>
+      <div [ngClass]="(this.ticket3.status == 'false') ? 'timeline-item ticket-hidden' : 'timeline-item ticket-visable'">
+        <div [ngClass]=" 'timeline-icon ' + this.ticket3.status_color"></div>
         <div class="timeline-content">
-          <h2>{{ticket3_head}}</h2>
-          <p>
-            {{ticket3_body}}
-          </p>
+          <h2>{{ticket3.head}}</h2>
+          <div>
+            <div>
+              {{ticket3.body}}
+            </div>
+            <div>
+              Start: {{ticket3.startDate}}
+            </div>
+            <div *ngIf="ticket3.endDate == null;else t3still_open">
+              Abgeschlossen am: noch offen
+            </div>
+            <ng-template #t3still_open>Abgeschlossen am: {{ticket3.endDate}}</ng-template>
+          </div>
         </div>
       </div>
     </div>

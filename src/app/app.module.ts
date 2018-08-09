@@ -52,7 +52,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
     BrowserModule,
     HttpClientModule,
     IonicImageViewerModule,
-    IonicModule.forRoot(MyApp, { swipeBackEnabled: false, tabsPlacement: 'top', backButtonText: "Zurück"}),
+    IonicModule.forRoot(MyApp, { swipeBackEnabled: false, tabsPlacement: 'top', backButtonText: "Zurück", scrollAssist: true, autoFocusAssist: true}),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

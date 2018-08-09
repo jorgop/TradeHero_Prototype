@@ -1,15 +1,10 @@
-<ion-header class="color-header">
-  <ion-navbar transparent>
+<ion-header class="customize-header">
+  <ion-navbar transparent hideBackButton>
+    Meine Rechnung
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-<!--    <ion-card>
-      <img src="{{ scanedImage }}">
-      <div class="card-title"></div>
-      <div class="card-subtitle"></div>
-    </ion-card>
--->
   <div [formGroup]="myForm">
     <ion-list>
       <div [ngClass]="(this.myVal.name == 'true') ? 'valid-true' : 'valid-false'">
@@ -56,7 +51,7 @@
       <br>
       <div>
       <ion-item>
-        <ion-label stacked>Rechnungsnummer(optional)</ion-label>
+        <ion-label stacked>Rechnungsnummer (optional)</ion-label>
         <ion-input formControlName="invoiceNumber" type="text" ></ion-input>
       </ion-item>
       </div>
@@ -70,20 +65,19 @@
     </ion-list>
   </div>
 </ion-content>
+
+
 <ion-footer no-border>
   <ion-toolbar id="scanFooter">
+
     <div class="leftcontainer">
-      <ion-buttons>
-        <button ion-button class="buttonsdown" on-click="presentConfirm()" >Einreichen</button>
-      </ion-buttons>
+        <button class="customize-button" ion-button block on-click="goToHome()">Abbrechen</button>
     </div>
+
     <div class="rightcontainer">
-      <ion-buttons>
-        <button ion-button class="buttonsdown" on-click="goToHome()">Abbrechen</button>
-      </ion-buttons>
+        <button class="customize-button-right" ion-button block on-click="presentConfirm()" >Einreichen</button>
     </div>
+
+
   </ion-toolbar>
 </ion-footer>
-
-
-

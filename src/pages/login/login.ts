@@ -8,8 +8,6 @@ import { Md5 } from "ts-md5";
 import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
-import {duration} from "moment";
-
 
 
 @Component({
@@ -18,11 +16,29 @@ import {duration} from "moment";
 })
 export class LoginPage {
 
-  nachricht: String;
-
-  submitAttempt: boolean = false;
+  /**
+   * Information Message
+   */
+  private nachricht: String;
+  /**
+   * Check if the message will be shown
+   * @type {boolean}
+   */
+  private submitAttempt: boolean = false;
+  /**
+   * Form group with email and password for validation
+   */
   private myForm : FormGroup;
 
+  /**
+   * @constructor
+   * @param {NavController} navCtrl Navigation Controller
+   * @param {ToastController} toastCtrl Toast Message Controller
+   * @param {RestProvider} restProvider Provider for Rest-Service
+   * @param {Storage} storage Local Storage
+   * @param {FormBuilder} formBuilder Form Builder
+   * @param {Keyboard} keyboard Keyboard
+   */
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
               public restProvider: RestProvider,
@@ -44,7 +60,11 @@ export class LoginPage {
     });
   }
 
-    message(myParam) {
+  /**
+   * View an infomation message for 3 seconds  if the information button will be pressed
+   * @param myParam Parameter which button will be pressed 1 or 2
+   */
+  message(myParam) {
 
         if (myParam == 1) {
             this.nachricht = "Max@Mustermann.de";

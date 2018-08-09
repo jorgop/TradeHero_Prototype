@@ -1,8 +1,10 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Preview</ion-title>
+<ion-header class="customize-header">
+  <ion-navbar transparent hideBackButton>
+    Preview
   </ion-navbar>
 </ion-header>
+
+
 <ion-content class="set-background">
   <ion-thumbnail (click)="showPreviewPhoto(scanedImage)">
     <ion-card>
@@ -12,17 +14,22 @@
     </ion-card>
   </ion-thumbnail>
 </ion-content>
+
+
 <ion-footer no-border>
   <ion-toolbar id="scanFooter">
+
+    <div class="split">
+
     <div class="leftcontainer">
-      <ion-buttons>
-        <button class="buttonsdown"ion-button on-click="gotToOcrPage()">Text Auslesen</button>
-      </ion-buttons>
+        <button class="customize-button" ion-button block on-click="goToHome()">Abbrechen</button>
     </div>
+
+
     <div class="rightcontainer">
-      <ion-buttons>
-        <button class="buttonsdown"ion-button on-click="goToHome()">Abbrechen</button>
-      </ion-buttons>
+        <button class="customize-button-right" ion-button block on-click="gotToOcrPage()">Text auslesen</button>
+    </div>
+
     </div>
   </ion-toolbar>
 </ion-footer>
