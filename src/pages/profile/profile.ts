@@ -175,7 +175,9 @@ export class ProfilePage {
             'contractID': this.stammdatenForm.controls.contractID.value,
             'iban': this.stammdatenForm.controls.iban.value,
             'bic': this.stammdatenForm.controls.bic.value,
-            'bankAccountName': this.stammdatenForm.controls.bankAccountName.value
+            'bankAccountName': this.stammdatenForm.controls.bankAccountName.value,
+            'oldPassword': 'null',
+            'newPassword': 'null'
         };
 
     //send data to rest in the variable "restData"
