@@ -1,15 +1,24 @@
 <ion-header class="color-header" xmlns="http://www.w3.org/1999/html">
   <ion-navbar  class="back-button" transparent>
 
-    <button class="logout-btn" (click)="logout()" round ion-button>
-      <ion-icon name="power"></ion-icon>
-    </button>
-    <button class="fixed-header-btn" (click)="goToImpressum()" ion-button>
-      <ion-icon name="information-circle"></ion-icon>
-    </button>
-    <button class="fixed-header-btn" ion-button>
-      <ion-icon name="settings"></ion-icon>
-    </button>
+    <div class="click-button">
+      <button class="logout-btn" (click)="logout()" round ion-button>
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </div>
+
+    <div class="click-button">
+      <button class="fixed-header-btn" (click)="goToImpressum()" ion-button>
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </div>
+
+    <div class="click-button">
+      <button class="fixed-header-btn" ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </div>
+
   </ion-navbar>
 </ion-header>
 
@@ -42,13 +51,13 @@
   </ion-card>
 
 
-  <!-- timeline testing -->
+  <!-- timeline -->
 
   <div class="container">
     <h1 class="project-name">Bearbeitungs-ID {{ticketID}}</h1>
 
-    <ion-card>
-      <ion-card-header *ngFor="let historyHeader of historyHeader">
+    <ion-card class="border">
+      <ion-card-header class="customize-card" *ngFor="let historyHeader of historyHeader">
         Ticket-ID: {{ticketID}}
         <br>
         <div>

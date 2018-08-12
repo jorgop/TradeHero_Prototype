@@ -1,15 +1,24 @@
 <ion-header class="color-header">
     <ion-navbar  class="back-button" transparent>
 
-        <button class="logout-btn" (click)="logout()" round ion-button>
-            <ion-icon name="power"></ion-icon>
-        </button>
-        <button class="fixed-header-btn" (click)="goToImpressum()" ion-button>
-            <ion-icon name="information-circle"></ion-icon>
-        </button>
-        <button class="fixed-header-btn" ion-button>
-            <ion-icon name="settings"></ion-icon>
-        </button>
+        <div class="click-button">
+            <button class="logout-btn" (click)="logout()" round ion-button>
+                <ion-icon name="power"></ion-icon>
+            </button>
+        </div>
+
+        <div class="click-button">
+            <button class="fixed-header-btn" (click)="goToImpressum()" ion-button>
+                <ion-icon name="information-circle"></ion-icon>
+            </button>
+        </div>
+
+        <div class="click-button">
+            <button class="fixed-header-btn" ion-button>
+                <ion-icon name="settings"></ion-icon>
+            </button>
+        </div>
+
     </ion-navbar>
 </ion-header>
 
@@ -35,7 +44,7 @@
 
     <div class="form"[ngStyle]="{'border': borderStyle}">
 
-        <h2>Stammdaten von {{fname}} <a on-click="toggleediting()">
+        <h2>Daten von {{fname}} <a on-click="toggleediting()">
             <ion-icon [name]="iconToggle ? 'build'  : 'close'" class="editIcon"></ion-icon>
         </a>
         </h2>
@@ -59,10 +68,43 @@
                     <td><ion-input formControlName="street" type="text" [disabled]="editInfo"></ion-input></td>
                     <td><ion-input formControlName="houseNumber" type="text" [disabled]="editInfo"></ion-input></td>
                 </tr>
+                <tr>
+                    <td><ion-label stacked>Email</ion-label></td>
+                    <td><ion-label stacked>Versichertennr.</ion-label></td>
+                </tr>
+                <tr>
+                    <td><ion-input formControlName="mail" type="text" [disabled]="editInfo"></ion-input></td>
+                    <td><ion-input formControlName="contractID" type="text" [disabled]="true"></ion-input></td>
+                </tr>
+                <tr>
+                    <td><ion-label stacked>Kontoinhaber</ion-label></td>
+                    <td><ion-label stacked>BIC</ion-label></td>
+                </tr>
+                <tr>
+                    <td><ion-input formControlName="bankAccountName" type="text" [disabled]="editInfo"></ion-input></td>
+                    <td><ion-input formControlName="bic" type="text" [disabled]="editInfo"></ion-input></td>
+                </tr>
             </table>
-            <ion-label stacked>Email</ion-label>
-            <ion-input formControlName="mail" type="text" [disabled]="editInfo"></ion-input>
+            <ion-label stacked>IBAN</ion-label>
+            <ion-input formControlName="iban" type="text" [disabled]="editInfo"></ion-input>
+           <!-- <ion-label stacked>Email</ion-label>
+            <ion-input formControlName="mail" type="text" [disabled]="editInfo"></ion-input> -->
         </div>
     </div>
-    <button ion-button id="SendData" on-click="sendUserData()" [ngStyle]="{'display': buttonStyle}">Daten abschicken</button>
+    <button ion-button class="sendData" on-click="sendUserData()" [ngStyle]="{'display': buttonStyle}">Daten abschicken</button>
+    <div id="pwDiv" [formGroup]="pwForm">
+        <a id="changePW" (click)="ngIfCtrl()" *ngIf="!hide">Passwort ändern</a>
+        <ion-label stacked *ngIf="hide">Altes Passwort</ion-label>
+        <ion-input type="password" value="" *ngIf="hide" formControlName="oldPw"></ion-input>
+        <ion-label stacked *ngIf="hide">Neues Passwort</ion-label>
+        <ion-input type="password" value="" *ngIf="hide" formControlName="newPw1"></ion-input>
+        <ion-label stacked *ngIf="hide">Neues Passwort wiederholen</ion-label>
+        <ion-input type="password" value="" *ngIf="hide" formControlName="newPw2"></ion-input>
+
+        <div>
+            <button ion-button class="sendData" on-click="ngIfCtrl()" *ngIf="hide">Abbrechen</button>
+            <button ion-button class="sendData" *ngIf="hide" on-click="changePw()">Passwort ändern</button>
+        </div>
+    </div>
+
 </ion-content>

@@ -29,42 +29,47 @@ page-activity {
     margin-right: 1%;
   }
 
-  /* Header-Logo */
+  /* Background-color */
 
-  .square {
-    position: relative;
+  .set-background {
+    background-color: white;
+  }
+
+  /* Split Content in 2 */
+
+  .split-content {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Top Content */
+
+  .top-content {
     height: 30%;
     width: 100%;
     background: #15B2A2;
-    margin-bottom: 15%;
   }
 
-  .main-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
+  /* Top of Top Content */
 
-  .top-container {
-    position: relative;
+  .top-top {
     height: 90%;
     width: 100%;
-    padding: 15%;
     text-align: center;
     font-size: 3.5em;
     color: white;
-   // text-shadow: 1px 1px black;
+    text-shadow: 1px 1px black;
+    padding-top: 20%;
   }
 
+  /* Bottom of Top Content */
 
-
-  /* Fab-Ion */
-
-  .bottom-container {
-    position: relative;
+  .top-bottom {
     height: 10%;
     width: 100%;
   }
+
+  /* Fab-Ion */
 
   .fab {
     color: white;
@@ -75,6 +80,14 @@ page-activity {
 
   .shadow {
     box-shadow: 2px 2px 5px gray;
+  }
+
+  /* Bottom Content */
+
+  .bottom-content {
+    height: 70%;
+    width: 100%;
+    padding-top: 10%;
   }
 
 
@@ -175,4 +188,13 @@ page-activity {
     color: #404040;
     font-size: 1.4rem;
   }
+
+  .click-button {
+    :active {
+      background-color: white;
+      color: #FFB623;
+    }
+  }
+
+
 }

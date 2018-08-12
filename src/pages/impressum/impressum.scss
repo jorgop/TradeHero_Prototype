@@ -30,6 +30,13 @@ page-impressum {
     margin-right: 1%;
   }
 
+  .click-button {
+    :active {
+      background-color: white;
+      color: #FFB623;
+    }
+  }
+
   .square {
     position: relative;
     height: 30%;
@@ -82,8 +89,6 @@ page-impressum {
 
   .MeinInhalt{
   height: 43%;
-//margin-bottom: 10%;
-//margin-top: 20%;
 font-size: 14px;
 font-family: "Open Sans";
 color: #404040;
