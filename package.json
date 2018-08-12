@@ -27,6 +27,7 @@
         "@ionic-native/core": "^4.7.0",
         "@ionic-native/globalization": "^4.9.0",
         "@ionic-native/keyboard": "^4.9.0",
+        "@ionic-native/native-page-transitions": "^4.11.0",
         "@ionic-native/photo-viewer": "^4.9.0",
         "@ionic-native/splash-screen": "4.7.0",
         "@ionic-native/status-bar": "4.7.0",
@@ -36,6 +37,7 @@
         "@mobiscroll/cli": "^0.5.6",
         "call-number": "^1.0.1",
         "com-sarriaroman-photoviewer": "^1.1.17",
+        "com.telerik.plugins.nativepagetransitions": "^0.6.5",
         "cordova-android": "7.1.0",
         "cordova-browser": "5.0.3",
         "cordova-ios": "4.5.4",
@@ -91,7 +93,8 @@
             "ionic-plugin-keyboard": {},
             "cordova-plugin-native-keyboard": {
                 "LICENSE": "TRIAL"
-            }
+            },
+            "com.telerik.plugins.nativepagetransitions": {}
         },
         "platforms": [
             "ios",

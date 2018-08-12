@@ -9,6 +9,7 @@ import {RestProvider} from "../../providers/rest/rest";
 import { Storage } from '@ionic/storage';
 import {identity} from "rxjs/util/identity";
 import {ImpressumPage} from "../impressum/impressum";
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 @Component({
     selector: 'page-home',
@@ -24,6 +25,7 @@ export class HomePage {
    * @param {App} app App
    * @param {Storage} storage Local Storage
    * @param {RestProvider} restProvider Provider for Rest-Service
+   * @param {NativePageTransitions} pageTransition Options for Native Page Transitions
    */
     constructor(
         public navCtrl: NavController,
@@ -31,8 +33,16 @@ export class HomePage {
         private toastCtrl: ToastController,
         public app: App,
         private storage: Storage,
-        public restProvider: RestProvider) {
+        public restProvider: RestProvider,
+        private pageTransition: NativePageTransitions) {
     }
+
+    /*leftOptions: NativeTransitionOptions = {
+        direction: 'left'
+    };
+    rightOptions: NativeTransitionOptions = {
+        direction: 'right'
+    };*/
 
   /**
    * Navigate to ScanPage
@@ -79,9 +89,23 @@ export class HomePage {
   //TODO: set comments. For Example look at the ocrPage!
   swipeEvent(e){
         if (e.direction == 4) {
+            let rightOptions: NativeTransitionOptions ={
+                direction: 'right',
+                duration: 400,
+                slowdownfactor: -1,
+                iosdelay: 50
+            };
+            this.pageTransition.slide(rightOptions);
             this.navCtrl.push(ActivityPage);
             console.log('Swipe Right')
         }else if(e.direction == 2){
+            let leftOptions: NativeTransitionOptions ={
+                direction: 'left',
+                duration: 400,
+                slowdownfactor: -1,
+                iosdelay: 50
+            };
+            this.pageTransition.slide(leftOptions);
             this.navCtrl.push(ScanPage);
             console.log('Swipe Left')
         }
