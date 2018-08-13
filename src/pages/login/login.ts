@@ -134,7 +134,7 @@ export class LoginPage {
         }
       }, (err) => {
         console.log('error2 ' + err.message);
-        this.sentToast("Keine Internetverbindung.", true, "3000", "x");
+        this.sentToast("Keine Internetverbindung vorhanden. \nBitte versuchen Sie es erneut.", true, "3000", "x");
         //this.navCtrl.push(LoginPage);
       });
     };

@@ -110,12 +110,12 @@ export class OcrPage {
 
       //loading for ocr request
       this.osrLoading = this.loadingController.create({
-        content: 'Text wird erkannt'
+        content: 'Text wird erkannt...'
       });
 
       //loading for sending data
       this.sendLoading = this.loadingController.create({
-        content: 'Rechung wird eingereicht'
+        content: 'Rechnung wird eingereicht...'
       });
     }
 
@@ -203,7 +203,7 @@ export class OcrPage {
       this.osrLoading.dismiss().then(() => {
         console.log('Oooops OCR failed');
         this.validateFields();
-        this.sentToast("Text konnte nicht erkannt werden.",false,3000,"schließen");
+        this.sentToast("Der Text konnte nicht erkannt werden.",false,3000,"schließen");
       });
     });
   }
@@ -307,12 +307,12 @@ export class OcrPage {
             this.navCtrl.push(ActivityPage);
           });
         }else {
-          this.sentToast("Rechnung konnte nicht eingereicht werden.",false,3000,"schließen");
+          this.sentToast("Die Rechnung konnte nicht eingereicht \nwerden.",false,3000,"schließen");
         }
       }, (err) => {
         this.sendLoading.dismiss();
         console.log('error2 ' + err);
-        this.sentToast("Keine Internetverbindung.",false,3000,"schließen");
+        this.sentToast("Keine Internetverbindung vorhanden. \nBitte versuchen Sie es erneut.",false,3000,"schließen");
       });
     }else{
 
@@ -336,7 +336,7 @@ export class OcrPage {
               break;
             }
             case "street":{
-              wrongTextFields += "Strße" + "\n";
+              wrongTextFields += "Straße" + "\n";
               break;
             }
             case "place":{
@@ -356,13 +356,13 @@ export class OcrPage {
               break;
             }
             case "refund":{
-              wrongTextFields += "Rechungsbetrag" + "\n";
+              wrongTextFields += "Rechnungsbetrag" + "\n";
               break;
             }
           }
         }
       };
-      this.sentToast("Bitte die Felder überprüfen: \n"+ wrongTextFields, true,5000,"x");
+      this.sentToast("Bitte überprüfen Sie die folgenden Felder: \n"+ wrongTextFields, true,5000,"x");
     }
   }
 
@@ -372,7 +372,7 @@ export class OcrPage {
   presentConfirm() {
     let alert = this.alertCtrl.create({
       title: 'Korrektheit der Daten',
-      message: 'Ich bestätige, dass meine Angaben korrekt sind und der Rechungsbetrag von '+ this.myForm.controls.refund.value +' € mit der eingereichten Rechnung übereinstimmt.',
+      message: 'Ich bestätige, dass meine Angaben korrekt sind und der Rechnungsbetrag von '+ this.myForm.controls.refund.value +' € mit der eingereichten Rechnung übereinstimmt.',
       buttons: [
         {
           text: 'Nein',

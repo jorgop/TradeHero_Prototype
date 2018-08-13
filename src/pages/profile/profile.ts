@@ -197,17 +197,17 @@ export class ProfilePage {
                     console.log(result);
                     console.log(result['userMail']);
                     if (result['userMail'] == "false") {
-                        this.sentToast("Email-Fehler");
+                        this.sentToast("Die eingegebene E-Mail-Adresse ist bereits \nvergeben.");
                     }
                     else if ((result['userMail'] == "true") && (result['userData'] == "true")) {
                         this.toggleediting();
                         this.updateUserDataInputfields();
-                        this.sentToast("Daten erfolgreich aktualisiert!");
+                        this.sentToast("Ihre Daten wurden erfolgreich aktualisiert.");
                     }
 
                 }, (err) => {
                     console.log('error2 ' + err);
-                    this.sentToast("Daten konnten nicht aktualisiert werden. Überprüfe deine Internetverbindung!");
+                    this.sentToast("Ihre Daten konnten nicht aktualisiert \nwerden. Bitte überprüfen Sie Ihre \nInternetverbindung.");
                 });
               }
 
@@ -234,14 +234,14 @@ export class ProfilePage {
                                     break;
                                 }
                                 case "email":{
-                                    wrongTextFields += "Email-Adresse" + "\n";
+                                    wrongTextFields += "E-Mail-Adresse" + "\n";
                                     break;
                                 }
 
                             }
                         }
                     };
-                    this.sentToast("Bitte die Felder überprüfen: \n"+ wrongTextFields);
+                    this.sentToast("Bitte überprüfen Sie die folgenden Felder: \n"+ wrongTextFields);
                 }
             } catch (e) {
                 //TODO:exception handling
@@ -379,7 +379,7 @@ export class ProfilePage {
         this.navCtrl.popToRoot();
         this.storage.clear();
         let logoutConf = this.toastCtrl.create({
-            message: 'Sie wurden erfolgreich ausgeloggt',
+            message: 'Sie wurden erfolgreich ausgeloggt.',
             duration: 2000,
             position: 'top',
             showCloseButton: true,
@@ -480,7 +480,7 @@ export class ProfilePage {
                     'oldPassword': Md5.hashStr(this.pwForm.controls.oldPw.value)
                 };
                 console.log("Pw log 4");
-                console.log("Passwörter stimmen überein");
+                console.log("Die Passwörter stimmen überein.");
                 this.restProvider.updateUserData(identity['userID'], pwData).then((result) => {
                     console.log(result);
                     if (result['userPassword'] == "false") {
@@ -489,23 +489,23 @@ export class ProfilePage {
                     else if ((result['userPassword'] == "true") && (result['userData'] == "true")) {
                         console.log("neues PW!")
                         this.ngIfCtrl();
-                        this.sentToast("Passswort erfolgreich aktualisiert!");
+                        this.sentToast("Das Passwort wurde erfolgreich aktualisiert.");
                     }
 
                 }, (err) => {
                     console.log('error2 ' + err);
-                    this.sentToast("Daten konnten nicht aktualisiert werden. Überprüfe deine Internetverbindung!");
+                    this.sentToast("Die Daten konnten nicht aktualisiert werden. \nBitte überprüfe Sie Ihre Internetverbindung.");
                 });
             }
 
             else
             {
-                this.sentToast("Die Passwörter stimmen nicht überein");
+                this.sentToast("Die Passwörter stimmen nicht überein.");
             }
         }
         else
         {
-            this.sentToast("Passwörter erfüllen Anforderungen nicht. \nMindestlänge 6 Zeichen.")
+            this.sentToast("Die Passwörter erfüllen die Anforderung \nnicht. Die Mindestlänge beträgt 6 Zeichen.")
         }
     });
 }}

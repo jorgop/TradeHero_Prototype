@@ -127,19 +127,19 @@ export class RegistrationPage {
         registration = registration.registration[0];
 
         if (registration["mail"] == "false"){
-            this.sentToast("E-Mail nicht registriert!", true, "3000", "x");
+            this.sentToast("Die E-Mail-Adresse ist nicht registriert.", true, "3000", "x");
         }else if (registration["token"]== "false"){
-            this.sentToast("Bitte Token überprüfen!", true, "3000", "x");
+            this.sentToast("Bitte überprüfen Sie den Token.", true, "3000", "x");
         }else if (registration["activate"] == "false"){
-            this.sentToast("Konto ist bereits aktiviert!", true, "3000", "x");
+            this.sentToast("Das Konto ist bereits aktiviert.", true, "3000", "x");
             this.navCtrl.push(LoginPage);
         }else{
-            this.sentToast("Konto wurde erfolgreich aktiviert!", true, "3000", "x");
+            this.sentToast("Ihr Konto wurde erfolgreich aktiviert.", true, "3000", "x");
             this.navCtrl.push(LoginPage);
         }
       }, (err) => {
         console.log('error2 ' + err);
-        this.sentToast("Keine Internetverbindung.", true, "3000", "x");
+        this.sentToast("Keine Internetverbindung vorhanden. \nBitte versuchen Sie es erneut.", true, "3000", "x");
         //this.navCtrl.push(LoginPage);
       });
     }

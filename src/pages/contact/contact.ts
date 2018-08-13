@@ -148,7 +148,7 @@ export class ContactPage {
         this.navCtrl.popToRoot();
         this.storage.clear();
         let logoutConf = this.toastCtrl.create({
-            message: 'Sie wurden erfolgreich ausgeloggt',
+            message: 'Sie wurden erfolgreich ausgeloggt.',
             duration: 2000,
             position: 'top',
             showCloseButton: true,

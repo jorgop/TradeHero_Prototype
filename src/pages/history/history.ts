@@ -72,7 +72,7 @@ export class HistoryPage {
 
         //loading for sending data
         this.historyLoading = this.loadingController.create({
-            content: 'Verlauf wird geladen'
+            content: 'Verlauf wird geladen...'
         });
 
         this.imageViewerCtrl = imageViewerCtrl;
@@ -399,7 +399,7 @@ export class HistoryPage {
         this.navCtrl.popToRoot();
         this.storage.clear();
         let logoutConf = this.toastCtrl.create({
-            message: 'Sie wurden erfolgreich ausgeloggt',
+            message: 'Sie wurden erfolgreich ausgeloggt.',
             duration: 2000,
             position: 'top',
             showCloseButton: true,

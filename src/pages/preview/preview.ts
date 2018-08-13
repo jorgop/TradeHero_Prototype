@@ -51,7 +51,7 @@ export class PreviewPage {
 
     //loading for sending data
     this.sendLoading = this.loadingController.create({
-      content: 'Bild wird gescannt'
+      content: 'Bild wird gescannt...'
     });
   }
 
@@ -98,11 +98,11 @@ export class PreviewPage {
       title: 'Oh nein ;(',
      // message: 'Leider konnte das Bild nicht erkannt werden. Bitte überprüfe deine Internet Verbindung und achte darauf das nur die Rechnung im Bild zu sehen ist.',
 
-      message: '<p>Leider konnte das Bild nicht erkannt werden. Bitte pr&uuml;fe die folgenden Punkte:</p>\n' +
+      message: '<p>Leider konnte das Bild nicht erkannt werden. Bitte überpr&uuml;fen Sie die folgenden Punkte:</p>\n' +
       '<ul>\n' +
-      '<li>Internetverbindung&nbsp;</li>\n' +
+      '<li>Aktive Internetverbindung&nbsp;</li>\n' +
       '<li>Kein zu heller Hintergrund</li>\n' +
-      '<li>Nur die Rechunug ist zu sehen&nbsp;</li>\n' +
+      '<li>Nur die Rechnung ist zu sehen&nbsp;</li>\n' +
       '<li>Das Format ist A4</li>\n' +
       '</ul>',
       cssClass: 'alertCustomCss',
