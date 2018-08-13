@@ -1,14 +1,14 @@
 {
   "name": "InsuRabbit",
-  "integrations": {
-    "cordova": {}
-  },
+  "app_id": "c597698e",
   "proxies": [
     {
       "path": "/api",
       "proxyUrl": "https://rest-app.brandau.solutions"
     }
   ],
-  "type": "ionic-angular",
-  "pro_id": "c597698e"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
 }

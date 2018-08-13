@@ -30,8 +30,6 @@ import {ScanPage} from "../pages/scan/scan";
 import {CameraPreview} from "@ionic-native/camera-preview";
 import {PreviewPage} from "../pages/preview/preview";
 import { SimpleTimer } from 'ng2-simple-timer';
-import { NativePageTransitions } from '@ionic-native/native-page-transitions';
-
 
 
 @NgModule({
@@ -80,7 +78,6 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions';
     //[{ provide: LOCALE_ID, useValue: 'de' }],
     RestProvider,
     ActivityService,
-    NativePageTransitions,
     HistoryService,
     CallNumber,
     PhotoViewer,

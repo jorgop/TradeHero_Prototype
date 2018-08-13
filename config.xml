@@ -105,5 +105,4 @@
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.1.0" />
     <engine name="browser" spec="5.0.3" />
-    <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
 </widget>
