@@ -7,7 +7,6 @@ import {ScanPage} from "../scan/scan";
 import {ProfilePage} from "../profile/profile";
 import {RestProvider} from "../../providers/rest/rest";
 import { Storage } from '@ionic/storage';
-import {identity} from "rxjs/util/identity";
 import {ImpressumPage} from "../impressum/impressum";
 
 @Component({
