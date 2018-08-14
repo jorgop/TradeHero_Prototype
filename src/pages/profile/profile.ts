@@ -50,9 +50,11 @@ export class ProfilePage {
      *  Variable for icon style
      */
     private iconToggle: boolean = true;
-    //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
     //private errorMsg: boolean = false;
-
+    /**
+     * Variable to hide an icon
+     * @type {boolean}
+     */
     private hide: boolean = false;
 
     @ViewChild(Navbar) navBar: Navbar;
@@ -347,7 +349,7 @@ export class ProfilePage {
 
 
     /**
-     * Ask for logout
+     * Ask for logout confirmation
      */
     logout() {
         const confirm = this.alertCtrl.create({
@@ -372,7 +374,7 @@ export class ProfilePage {
     }
 
     /**
-     * Perform logout and clean the local storage
+     * Perform logout and clear the local storage
      */
     performLogout() {
         this.navCtrl.setRoot(LoginPage);

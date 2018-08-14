@@ -75,19 +75,26 @@ export class HomePage {
         this.navCtrl.push(ImpressumPage);
     }
 
-  //TODO: set comments. For Example look at the ocrPage!
-  swipeEvent(e){
+    /**
+     * Handle swipe event on HomePage. Left to call goToScan(), right to call goToActivity().
+     * @param e
+     */
+    swipeEvent(e){
         if (e.direction == 4) {
-            this.navCtrl.push(ActivityPage);
+            let rightOpts = { animate: true, animation: "ios-transition",direction:'back', duration: 500}
+            this.navCtrl.push(ActivityPage,{}, rightOpts);
             console.log('Swipe Right')
         }else if(e.direction == 2){
-            this.navCtrl.push(ScanPage);
+            let leftOpts = { animate: true, animation: "ios-transition",direction:'forward', duration: 500}
+            this.navCtrl.push(ScanPage,{}, leftOpts);
             console.log('Swipe Left')
         }
     }
 
-  //TODO: set comments. For Example look at the ocrPage!
-  logout() {
+    /**
+     * Ask for logout confirmation
+     */
+    logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
             buttons: [
@@ -109,8 +116,10 @@ export class HomePage {
         confirm.present();
     }
 
-  //TODO: set comments. For Example look at the ocrPage!
-  performLogout() {
+    /**
+     * Perform logout and clear the local storage
+     */
+    performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
         this.storage.clear();
@@ -119,7 +128,7 @@ export class HomePage {
             duration: 2000,
             position: 'top',
             showCloseButton: true,
-            closeButtonText: 'X'
+            closeButtonText: 'x'
         });
         logoutConf.onDidDismiss(() => {
             console.log('Dismissed toast');

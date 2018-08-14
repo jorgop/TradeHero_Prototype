@@ -1,5 +1,9 @@
 page-contact {
 
+  /* Disable Scrolling*/
+  .no-scroll .scroll-content{
+    overflow: hidden;
+  }
   /* Header-Bar with Buttons */
 
   .color-header {

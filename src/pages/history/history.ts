@@ -153,7 +153,10 @@ export class HistoryPage {
         });
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Loop through data from local storage to handle status cards in ticket
+     * @param data
+     */
     addCards(data) {
 
       var counter = 0;
@@ -165,17 +168,10 @@ export class HistoryPage {
             if (currentObject['ticketID'] == this.ticketID) {
                 for (let j in currentObject['history']) {
                     let currentHistory = currentObject['history'][j];
-                    var statusText;
-                    var statusClass;
-                    var historyClass;
                     var subDate;
                     var endDate = currentObject['endDate'];
                     var ticketStartDate;
                     var ticketEndDate;
-                    var t2StartDate;
-                    var t2EndDate;
-                    var t3StartDate;
-                    var t3EndDate;
                     var imgFile;
                     var refund;
                     var invID;
@@ -316,14 +312,6 @@ export class HistoryPage {
                         }
                       }
                     };
-
-                    /*
-                    this.history.push({
-                        head: 'Status: ' + '<b>' + statusText + '</b>',
-                        body: '<div class=' + statusClass + '>' + currentHistory['stateText'] + '</div>',
-                        cardClass: historyClass
-                    });
-                    */
                 }
                 ;
             }
@@ -338,7 +326,10 @@ export class HistoryPage {
         });
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Thumbnail if scanned image is enlarged to full screen
+     * @param myImg
+     */
     showPhoto(myImg) {
         const imageViewer = this.imageViewerCtrl.create(myImg);
         imageViewer.present(myImg);
@@ -370,7 +361,9 @@ export class HistoryPage {
         refresher.complete();
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Ask for logout confirmation
+     */
     logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
@@ -393,7 +386,9 @@ export class HistoryPage {
         confirm.present();
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Perform logout and clear the local storage
+     */
     performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
@@ -403,12 +398,11 @@ export class HistoryPage {
             duration: 2000,
             position: 'top',
             showCloseButton: true,
-            closeButtonText: 'X'
+            closeButtonText: 'x'
         });
         logoutConf.onDidDismiss(() => {
             console.log('Dismissed toast');
         });
         logoutConf.present();
     }
-
 }

@@ -36,7 +36,9 @@ export class ContactPage {
    }
 
 
-  //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Perform the call
+     */
    startCall(){
        this.callSvc.callNumber("00491719760565",true).then(()=> {
            console.log('number dialed');
@@ -45,7 +47,9 @@ export class ContactPage {
        })
    }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Ask to make a call
+     */
    callInsurance () {
        const confirm = this.alertCtrl.create({
            title: 'InsuRabbit',
@@ -119,7 +123,9 @@ export class ContactPage {
         }
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Ask for logout confirmation
+     */
     logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
@@ -142,7 +148,9 @@ export class ContactPage {
         confirm.present();
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Perform logout and clear the local storage
+     */
     performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
@@ -152,11 +160,12 @@ export class ContactPage {
             duration: 2000,
             position: 'top',
             showCloseButton: true,
-            closeButtonText: 'X'
+            closeButtonText: 'x'
         });
         logoutConf.onDidDismiss(() => {
             console.log('Dismissed toast');
         });
         logoutConf.present();
     }
+
 }

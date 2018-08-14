@@ -1,4 +1,5 @@
 <ion-header class="color-header">
+    <!--  Navigation Bar with buttons  -->
     <ion-navbar  class="back-button" transparent>
 
         <div class="click-button">
@@ -13,11 +14,27 @@
             </button>
         </div>
 
+        <!--<div class="click-button">
+            <button class="fixed-header-btn" ion-button>
+                <ion-icon name="settings"></ion-icon>
+            </button>
+        </div>-->
+
     </ion-navbar>
 </ion-header>
 
 <ion-content class="set-background">
 
+    <!--  Pull to Refresh  -->
+    <ion-refresher (ionRefresh)="actRefresh($event)">
+        <ion-refresher-content pullingText="arrow-dropdown"
+                               pullingText="Aktualisieren"
+                               refreshingSpinner="circles"
+                               refreshingText="wird aktualisiert...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <!--  Menu Buttons in Container -->
     <div class="split-content">
         <div class="top-content">
             <div class="top-top">
@@ -40,15 +57,7 @@
 
         <div class="bottom-content">
 
-
-            <ion-refresher (ionRefresh)="actRefresh($event)">
-                <ion-refresher-content pullingText="arrow-dropdown"
-                               pullingText="Aktualisieren"
-                               refreshingSpinner="circles"
-                               refreshingText="wird aktualisiert...">
-                </ion-refresher-content>
-            </ion-refresher>
-
+    <!--  Summed invoices  -->
     <div>
     <ion-card *ngFor="let aggregate of aggregate">
         <ion-card-header>
@@ -72,7 +81,7 @@
     </ion-card>
     </div>
 
-    <!--<h2 align="center">Meine Rechnungen</h2>-->
+    <!--  Segment Status Count  -->
     <div padding class="navbar">
         <ion-segment [(ngModel)]="status" *ngFor="let aggregate of aggregate">
             <ion-segment-button value="all" (click)="setStatus('all')">
@@ -90,6 +99,7 @@
         </ion-segment>
     </div>
 
+    <!--  List Entry  -->
     <div [ngSwitch]="status">
         <ion-list *ngSwitchCase="status" inset>
             <button ion-item *ngFor="let activity of activity" (click)="goToHistoryPage(activity.ticketID, activity.iconName, activity.cssClass)">

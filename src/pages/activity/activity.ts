@@ -20,7 +20,11 @@ import {ImpressumPage} from "../impressum/impressum";
 })
 export class ActivityPage {
 
-    //TODO: set comments to variables and remove unused variables. For Example look at the ocrPage!
+    /**
+     * @type {any[]} , defined in Activity Service
+     * activity: List items
+     * aggregate: Header aggregations
+     */
     private activity: {date: string, ticketID:string,ticketStatus: string, iconName: String, cssClass: String}[] = [];
     private aggregate: {countClosed: number, countAll: number, countOpen: number, countDenied: number, sumAll: number, sumOpen: number, sumClosed: number, sumDenied: number}[] = [];
     // Erstes Segment default wählen
@@ -316,7 +320,10 @@ export class ActivityPage {
         this.navCtrl.push(ImpressumPage);
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * History refresh by pull down
+     * @param refresher
+     */
     actRefresh(refresher) {
         console.log('Begin async operation', refresher);
         this.activity = [];
@@ -327,7 +334,9 @@ export class ActivityPage {
 
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Ask for logout confirmation
+     */
     logout() {
         const confirm = this.alertCtrl.create({
             title: 'Wollen Sie sich wirklich ausloggen?',
@@ -350,7 +359,9 @@ export class ActivityPage {
         confirm.present();
     }
 
-    //TODO: set comments. For Example look at the ocrPage!
+    /**
+     * Perform logout and clear the local storage
+     */
     performLogout() {
         this.navCtrl.setRoot(LoginPage);
         this.navCtrl.popToRoot();
@@ -360,12 +371,11 @@ export class ActivityPage {
             duration: 2000,
             position: 'top',
             showCloseButton: true,
-            closeButtonText: 'X'
+            closeButtonText: 'x'
         });
         logoutConf.onDidDismiss(() => {
             console.log('Dismissed toast');
         });
         logoutConf.present();
     }
-
 }

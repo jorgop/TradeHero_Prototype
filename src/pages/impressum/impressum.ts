@@ -59,44 +59,48 @@ export class ImpressumPage {
         this.navCtrl.push(ContactPage);
     }
 
-  //TODO: set comments. For Example look at the ocrPage!
-  logout() {
-      const confirm = this.alertCtrl.create({
-          title: 'Wollen Sie sich wirklich ausloggen?',
-          buttons: [
-              {
-                  text: 'Abbrechen',
-                  handler: () => {
-                      console.log('Logout abgebrochen');
-                  }
-              },
-              {
-                  text: 'Ausloggen',
-                  handler: () => {
-                      console.log('Logout erfolgreich');
-                      this.performLogout();
-                  }
-              }
-          ]
-      });
-      confirm.present();
-  }
+    /**
+     * Ask for logout confirmation
+     */
+    logout() {
+        const confirm = this.alertCtrl.create({
+            title: 'Wollen Sie sich wirklich ausloggen?',
+            buttons: [
+                {
+                    text: 'Abbrechen',
+                    handler: () => {
+                        console.log('Logout abgebrochen');
+                    }
+                },
+                {
+                    text: 'Ausloggen',
+                    handler: () => {
+                        console.log('Logout erfolgreich');
+                        this.performLogout();
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
 
-  //TODO: set comments. For Example look at the ocrPage!
-  performLogout() {
-      this.navCtrl.setRoot(LoginPage);
-      this.navCtrl.popToRoot();
-      this.storage.clear();
-      let logoutConf = this.toastCtrl.create({
-          message: 'Sie wurden erfolgreich ausgeloggt.',
-          duration: 2000,
-          position: 'top',
-          showCloseButton: true,
-          closeButtonText: 'X'
-      });
-      logoutConf.onDidDismiss(() => {
-          console.log('Dismissed toast');
-      });
-      logoutConf.present();
-  }
+    /**
+     * Perform logout and clear the local storage
+     */
+    performLogout() {
+        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.popToRoot();
+        this.storage.clear();
+        let logoutConf = this.toastCtrl.create({
+            message: 'Sie wurden erfolgreich ausgeloggt',
+            duration: 2000,
+            position: 'top',
+            showCloseButton: true,
+            closeButtonText: 'x'
+        });
+        logoutConf.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+        logoutConf.present();
+    }
 }

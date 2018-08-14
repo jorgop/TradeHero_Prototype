@@ -139,10 +139,14 @@ export class PreviewPage {
     this.navCtrl.push(HomePage);
   }
 
-    showPreviewPhoto(myImg) {
-        const imageViewer = this.imageViewerCtrl.create(myImg);
-        imageViewer.present(myImg);
-    }
+    /**
+     * Thumbnail of scanned image is enlarged to full screen
+     * @param myImg
+     */
+  showPreviewPhoto(myImg) {
+      const imageViewer = this.imageViewerCtrl.create(myImg);
+      imageViewer.present(myImg);
+  }
 
   /**
    * View a toast message
