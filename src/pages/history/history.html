@@ -46,10 +46,11 @@
         <div>
           Erstellt am: {{historyHeader.submitDate}}
         </div>
-        <div *ngIf="historyHeader.endDate == null;else still_open">
-          Abgeschlossen am: noch offen
+        <div>
+        <!--<div *ngIf="historyHeader.endDate == null;else still_open">-->
+          Abgeschlossen am: {{historyHeader.endDate}}
         </div>
-        <ng-template #still_open>Abgeschlossen am: {{historyHeader.endDate}}</ng-template>
+        <!--<ng-template #still_open>Abgeschlossen am: {{historyHeader.endDate}}</ng-template>-->
         <div>
           Rechungsbetrag: {{historyHeader.refund | number: '1.2-2': 'de' }} €
         </div>
@@ -78,12 +79,13 @@
               {{ticket1.body}}
             </div>
             <div>
-              Start: {{ticket1.startDate}}
+              Beginn: {{ticket1.startDate}}
             </div>
-            <div *ngIf="ticket1.endDate == null;else t1still_open">
-              Abgeschlossen am: noch offen
+            <div>
+            <!--<div *ngIf="ticket1.endDate == null;else t1still_open">-->
+              Abschluss: {{ticket1.endDate}}
             </div>
-            <ng-template #t1still_open>Abgeschlossen am: {{ticket1.endDate}}</ng-template>
+            <!--<ng-template #t1still_open>Abgeschlossen am: {{ticket1.endDate}}</ng-template>-->
           </div>
         </div>
       </div>
@@ -97,12 +99,13 @@
               {{ticket2.body}}
             </div>
             <div>
-              Start: {{ticket2.startDate}}
+              Beginn: {{ticket2.startDate}}
             </div>
-            <div *ngIf="ticket2.endDate == null;else t2still_open">
-              Abgeschlossen am: noch offen
+            <div>
+            <!--<div *ngIf="ticket2.endDate == null;else t2still_open">-->
+              Abschluss: {{ticket2.endDate}}
             </div>
-            <ng-template #t2still_open>Abgeschlossen am: {{ticket2.endDate}}</ng-template>
+            <!--<ng-template #t2still_open>Abgeschlossen am: {{ticket2.endDate}}</ng-template>-->
           </div>
         </div>
       </div>
@@ -116,12 +119,13 @@
               {{ticket3.body}}
             </div>
             <div>
-              Start: {{ticket3.startDate}}
+              Beginn: {{ticket3.startDate}}
             </div>
-            <div *ngIf="ticket3.endDate == null;else t3still_open">
-              Abgeschlossen am: noch offen
+            <div>
+            <!--<div *ngIf="ticket3.endDate == null;else t3still_open">-->
+              Abschluss: {{ticket3.endDate}}
             </div>
-            <ng-template #t3still_open>Abgeschlossen am: {{ticket3.endDate}}</ng-template>
+            <!--<ng-template #t3still_open>Abgeschlossen am: {{ticket3.endDate}}</ng-template>-->
           </div>
         </div>
       </div>

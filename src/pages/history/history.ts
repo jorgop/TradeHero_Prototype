@@ -169,7 +169,7 @@ export class HistoryPage {
                 for (let j in currentObject['history']) {
                     let currentHistory = currentObject['history'][j];
                     var subDate;
-                    var endDate = currentObject['endDate'];
+                    var endDate;
                     var ticketStartDate;
                     var ticketEndDate;
                     var imgFile;
@@ -180,7 +180,11 @@ export class HistoryPage {
                     var subDateArray = currentObject['startDate'].split("-");
                     var endDateArray = currentObject['endDate'].split("-");
                     subDate = subDateArray[2] + "." + subDateArray[1]+ "." + subDateArray[0];
-                    endDate = endDateArray[2] + "." + endDateArray[1]+ "." + endDateArray[0];
+                    if(endDateArray[0] != 2018){
+                        endDate = "noch offen";
+                    }else{
+                        endDate = endDateArray[2] + "." + endDateArray[1]+ "." + endDateArray[0];
+                    }
                     imgFile = currentObject['imgFile'];
                     refund = currentObject['refund'];
                     if(currentObject['invoiceID'] == ""){
@@ -188,6 +192,7 @@ export class HistoryPage {
                     }else{
                         invID = currentObject['invoiceID'];
                     }
+
 
                     counter += 1;
 
@@ -199,6 +204,11 @@ export class HistoryPage {
                     var ticketEndDateArray = currentHistory['endDate'].split("-");
                     ticketStartDate = ticketStartDateArray[2] + "." + ticketStartDateArray[1]+ "." + ticketStartDateArray[0];
                     ticketEndDate = ticketEndDateArray[2] + "." + ticketEndDateArray[1]+ "." + ticketEndDateArray[0];
+                    if(ticketEndDateArray[0] != 2018){
+                        ticketEndDate = "noch offen";
+                    }else{
+                        ticketEndDate = ticketEndDateArray[2] + "." + ticketEndDateArray[1]+ "." + ticketEndDateArray[0];
+                    }
 
                     if (currentHistory['stateStatus'] == 0) {
 
