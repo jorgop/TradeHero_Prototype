@@ -24,6 +24,7 @@
         <string>need photo library access to save pictures there</string>
     </edit-config>
     <preference name="ScrollEnabled" value="false" />
+    <preference name="orientation" value="portrait" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
@@ -88,6 +89,9 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
+    <engine name="ios" spec="4.5.4" />
+    <engine name="android" spec="7.1.0" />
+    <engine name="browser" spec="5.0.3" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
@@ -110,7 +114,4 @@
         <variable name="LICENSE" value="TRIAL" />
     </plugin>
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
-    <engine name="ios" spec="4.5.4" />
-    <engine name="android" spec="7.1.0" />
-    <engine name="browser" spec="5.0.3" />
 </widget>
