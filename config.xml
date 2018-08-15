@@ -89,9 +89,6 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <engine name="ios" spec="4.5.4" />
-    <engine name="android" spec="7.1.0" />
-    <engine name="browser" spec="5.0.3" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
@@ -106,7 +103,6 @@
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="^2.3.2" />
     <plugin name="mx.ferreyra.callnumber" spec="0.0.2" />
-    <plugin name="call-number" spec="^1.0.1" />
     <plugin name="cordova-plugin-camera-preview" spec="^0.9.0" />
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.17" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
@@ -114,4 +110,8 @@
         <variable name="LICENSE" value="TRIAL" />
     </plugin>
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
+    <engine name="ios" spec="4.5.4" />
+    <engine name="browser" spec="5.0.3" />
+    <engine name="android" spec="~7.1.0" />
+    <plugin name="call-number" spec="^1.0.1" />
 </widget>
